@@ -1,18 +1,27 @@
 import Link from 'next/link';
+import type { Locale } from '@/data/i18n';
+import { dictionaries } from '@/data/i18n';
 
-export default function Footer() {
+interface FooterProps {
+  lang?: Locale;
+}
+
+export default function Footer({ lang = 'es' }: FooterProps) {
+  const t = dictionaries[lang];
+  
   const quickLinks = [
-    { name: 'Inicio', href: '/' },
-    { name: 'Nosotros', href: '/nosotros' },
-    { name: 'Servicios', href: '/servicios' },
-    { name: 'Qué hacemos', href: '/que-hacemos' },
-    { name: 'Soluciones', href: '/soluciones' },
-    { name: 'Contacto', href: '/contacto' },
+    { name: t.nav.inicio, href: `/${lang}` },
+    { name: t.nav.nosotros, href: `/${lang}/nosotros` },
+    { name: t.nav.servicios, href: `/${lang}/servicios` },
+    { name: t.nav.queHacemos, href: `/${lang}/que-hacemos` },
+    { name: t.nav.soluciones, href: `/${lang}/soluciones` },
+    { name: t.nav.casos, href: `/${lang}/casos` },
+    { name: t.nav.contacto, href: `/${lang}/contacto` },
   ];
 
   const offices = [
     {
-      country: 'Argentina',
+      country: lang === 'en' ? 'Argentina' : 'Argentina',
       address: 'Av. Perú 1841, Mendoza, Argentina',
     },
     {
@@ -20,17 +29,15 @@ export default function Footer() {
       address: 'General del Canto 421, piso 6, Providencia, Santiago de Chile',
     },
     {
-      country: 'USA',
+      country: lang === 'en' ? 'United States' : 'Estados Unidos',
       address: '651 North Broad Street, Middletown, DE 19709, USA',
     },
   ];
 
-  const services = [
-    { name: 'Productos de Datos', href: '/servicios#productos' },
-    { name: 'Proyectos de Datos', href: '/servicios#proyectos' },
-    { name: 'Staffing de Datos', href: '/servicios#staffing' },
-    { name: 'Capacitaciones', href: '/servicios#capacitaciones' },
-  ];
+  const services = t.servicesSection.items.map(s => ({
+    name: s.title,
+    href: `/${lang}/servicios#${s.id}`
+  }));
 
   return (
     <footer className="bg-slate-900 text-slate-300 border-t border-slate-800" aria-label="Pie de página corporativo">
@@ -39,19 +46,19 @@ export default function Footer() {
 
           {/* Columna 1: Marca y Propuesta de Valor */}
           <div className="space-y-4">
-            <h2 className="text-white text-lg font-bold tracking-tight">ITIERS</h2>
+            <h2 className="text-white text-lg font-bold tracking-tight">ITIERS DATA SENSE</h2>
             <p className="text-sm text-slate-400">
-              Transformamos datos en decisiones inteligentes. Convertimos datos complejos en una ventaja competitiva para tu negocio.
+              {t.footer.tagline}
             </p>
             <div className="pt-2 border-t border-slate-800">
-              <span className="text-xs text-slate-500 block">Socio Tecnológico</span>
-              <span className="text-sm font-semibold text-blue-400">IBM Watsonx Partner</span>
+              <span className="text-xs text-slate-500 block">Socio Tecnológico / Tech Partner</span>
+              <span className="text-sm font-semibold text-blue-400">IBM Watsonx Global Partner</span>
             </div>
           </div>
 
           {/* Columna 2: Enlaces Rápidos */}
           <div>
-            <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">Navegación</h3>
+            <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">{t.footer.quickLinks}</h3>
             <ul role="list" className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -68,7 +75,7 @@ export default function Footer() {
 
           {/* Columna 3: Servicios Principales */}
           <div>
-            <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">Servicios</h3>
+            <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">{t.footer.servicesTitle}</h3>
             <ul role="list" className="space-y-2">
               {services.map((service) => (
                 <li key={service.name}>
@@ -85,7 +92,7 @@ export default function Footer() {
 
           {/* Columna 4: Sedes de Itiers */}
           <div>
-            <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">Nuestras Oficinas</h3>
+            <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">{t.footer.headquarters}</h3>
             <div className="space-y-4">
               {offices.map((office) => (
                 <div key={office.country} className="text-xs text-slate-400 leading-relaxed">
@@ -101,11 +108,11 @@ export default function Footer() {
         {/* Sección de contacto rápido e íconos sociales */}
         <div className="mt-8 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
-            <a href="mailto:hola@itiers.com" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
-              📩 hola@itiers.com
+            <a href="mailto:contacto@itiers.com" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
+              📩 contacto@itiers.com
             </a>
-            <a href="tel:+5492614171612" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
-              📞 +54 9 261 417-1612
+            <a href="tel:+5492610000000" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
+              📞 +54 9 261 000-0000 (Mendoza, Argentina)
             </a>
           </div>
 
@@ -120,31 +127,13 @@ export default function Footer() {
             >
               LinkedIn
             </a>
-            <a
-              href="https://www.instagram.com/itiersds/"
-              className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Itiers en Instagram"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://www.youtube.com/channel/UCrWeQoKi3bM8JtVYVG-44VA"
-              className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Itiers en YouTube"
-            >
-              YouTube
-            </a>
           </div>
         </div>
 
         {/* Copyright */}
         <div className="mt-8 border-t border-slate-800/50 pt-8 text-center md:text-left flex justify-between flex-col md:flex-row text-xs text-slate-500">
-          <p>Copyright © 2026 Itiers - Todos los derechos reservados.</p>
-          <p className="mt-2 md:mt-0">Proyecto de Prácticas de Desarrollo Web</p>
+          <p>Copyright © 2026 Itiers Data Sense - {t.footer.rights}</p>
+          <p className="mt-2 md:mt-0">{t.footer.locationMendoza}</p>
         </div>
 
       </div>
