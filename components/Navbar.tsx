@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Locale } from '@/data/i18n';
 import { dictionaries } from '@/data/i18n';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -25,21 +26,25 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur-md">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
         aria-label={t.ariaNav}
       >
-        {/* Logotipo */}
+        {/* Logotipo original itiers.png con Next.js <Image /> */}
         <div className="flex lg:flex-1">
           <Link 
             href={`/${lang}`} 
             className="-m-1.5 p-1.5 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-md"
           >
-            <span className="sr-only">Itiers Data Sense</span>
-            <div className="h-8 w-auto font-bold text-xl tracking-tight text-slate-900 flex items-center">
-              ITIERS <span className="text-blue-600 ml-1">DATA SENSE</span>
-            </div>
+            <Image
+              src="/itiers.png"
+              alt={lang === 'es' ? "Logotipo oficial de Itiers Data Sense" : "Official Itiers Data Sense Logo"}
+              width={160}
+              height={45}
+              className="h-9 w-auto object-contain"
+              priority
+            />
           </Link>
         </div>
 
@@ -72,7 +77,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 focus:rounded-sm px-2 py-1"
+              className="text-sm font-semibold leading-6 text-slate-800 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 focus:rounded-sm px-2 py-1"
             >
               {link.name}
             </Link>

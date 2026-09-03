@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Locale } from '@/data/i18n';
 import { dictionaries } from '@/data/i18n';
 
@@ -21,7 +22,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
 
   const offices = [
     {
-      country: lang === 'en' ? 'Argentina' : 'Argentina',
+      country: 'Argentina',
       address: 'Av. Perú 1841, Mendoza, Argentina',
     },
     {
@@ -46,7 +47,15 @@ export default function Footer({ lang = 'es' }: FooterProps) {
 
           {/* Columna 1: Marca y Propuesta de Valor */}
           <div className="space-y-4">
-            <h2 className="text-white text-lg font-bold tracking-tight">ITIERS DATA SENSE</h2>
+            <Link href={`/${lang}`} className="inline-block bg-white/10 p-2 rounded-lg backdrop-blur-sm">
+              <Image
+                src="/itiers.png"
+                alt={lang === 'es' ? "Logotipo corporativo oficial de Itiers Data Sense" : "Official Corporate Itiers Data Sense Logo"}
+                width={160}
+                height={45}
+                className="h-9 w-auto object-contain brightness-0 invert"
+              />
+            </Link>
             <p className="text-sm text-slate-400">
               {t.footer.tagline}
             </p>
