@@ -2,22 +2,22 @@
 
 ¡Bienvenido al repositorio oficial del proyecto de desarrollo de la nueva página web corporativa de **Itiers**! 
 
-Itiers es una consultora tecnológica especializada con 20 años de trayectoria, dedicada a transformar información cruda en inteligencia estratégica [1]. Nos posicionamos como el puente entre estructuras de datos complejas y la gestión organizacional efectiva, sirviendo a clientes en toda América (con oficinas físicas en Argentina, Chile y Estados Unidos) a través de un modelo de servicio integral que abarca desde productos de datos a medida, gestión de proyectos y staffing profesional, hasta capacitación especializada en tecnologías avanzadas e Inteligencia Artificial Generativa con IBM Watsonx [1].
+Itiers es una consultora tecnológica especializada con 20 años de trayectoria, dedicada a transformar información cruda en inteligencia estratégica. Nos posicionamos como el puente entre estructuras de datos complejas y la gestión organizacional efectiva, sirviendo a clientes en toda América (con oficinas físicas en Argentina, Chile y Estados Unidos) a través de un modelo de servicio integral que abarca desde productos de datos a medida, gestión de proyectos y staffing profesional, hasta capacitación especializada en tecnologías avanzadas e Inteligencia Artificial Generativa con IBM Watsonx.
 
-Este proyecto web está diseñado e implementado por nuestro equipo de 3 practicantes a lo largo de un programa de entrenamiento e integración estructurado de 10 semanas (del 18 de agosto al 27 de octubre de 2026) [2], combinando desarrollo moderno de alto rendimiento, diseño responsivo y optimizaciones de vanguardia para motores de búsqueda tradicionales y basados en IA.
+Este proyecto web está diseñado e implementado por nuestro equipo de 3 practicantes a lo largo de un programa de entrenamiento e integración estructurado de 10 semanas (del 18 de agosto al 27 de octubre de 2026), combinando desarrollo moderno de alto rendimiento, diseño responsivo y optimizaciones de vanguardia para motores de búsqueda tradicionales y basados en IA.
 
 ---
 
 ## 👥 Estructura del Equipo y Roles
 
-El desarrollo del proyecto se divide en tres áreas de especialidad que colaboran de manera estrecha [2]:
+El desarrollo del proyecto se divide en tres áreas de especialidad que colaboran de manera estrecha:
 
 1. **Practicante 1 — Contenido, SEO & GEO**: **Martín Tomás**  
-   * *Responsabilidad:* Arquitectura de la información, redacción técnica y comercial bajo el enfoque *"answer-first"*, y optimización tanto para motores de búsqueda tradicionales (SEO) como para generadores de respuesta y agentes de IA (Generative Engine Optimization - GEO) [2].
+   * *Responsabilidad:* Arquitectura de la información, redacción técnica y comercial bajo el enfoque *"answer-first"*, y optimización tanto para motores de búsqueda tradicionales (SEO) como para generadores de respuesta y agentes de IA (Generative Engine Optimization - GEO).
 2. **Practicante 2 — Desarrollo Web & UX/UI**: **Enzo Patrassi**  
-   * *Responsabilidad:* Implementación del código frontend interactivo, diseño UX/UI accesible (WCAG AA), responsividad multidispositivo, optimización del rendimiento web (Core Web Vitals) y automatización del pipeline de despliegue continuo [2].
+   * *Responsabilidad:* Implementación del código frontend interactivo, diseño UX/UI accesible (WCAG AA), responsividad multidispositivo, optimización del rendimiento web (Core Web Vitals) y automatización del pipeline de despliegue continuo.
 3. **Practicante 3 — Harness & AI Engineering**: **Stefano Ferro**  
-   * *Responsabilidad:* Diseño y desarrollo de los agentes inteligentes que interactúan con la web o aportan valor a los procesos de Itiers bajo la premisa "Agente = Modelo + Harness" [2].
+   * *Responsabilidad:* Diseño y desarrollo de los agentes inteligentes que interactúan con la web o aportan valor a los procesos de Itiers bajo la premisa "Agente = Modelo + Harness".
 
 ---
 
@@ -113,8 +113,8 @@ Para alinearnos con los estrictos estándares de Itiers, todos los componentes i
 
 ---
 
-## 🗓️ Cronograma de Entregas y Objetivos Generales [2]
+## 🗓️ Cronograma de Entregas y Objetivos Generales
 
-* **Semanas 1-3 — Fundamentos y Diagnóstico**: Alineación de equipo, definición de stack técnico, creación de este repositorio, maquetación de la arquitectura completa y despliegue del pipeline inicial en Vercel [2].
-* **Semanas 4-8 — Desarrollo Aplicado**: Construcción iterativa de vistas detalladas, optimizaciones y desarrollo de integraciones para los agentes inteligentes del Practicante 3 [2].
-* **Semanas 9-10 — Ajustes Finales y Producción**: Auditorías completas de velocidad y accesibilidad, refinamiento definitivo de contenidos SEO/GEO y entrega oficial del sitio en internet [2].
+* **Semanas 1-3 — Fundamentos y Diagnóstico**: Alineación de equipo, definición de stack técnico, creación de este repositorio, maquetación de la arquitectura completa y despliegue del pipeline inicial en Vercel.
+* **Semanas 4-8 — Desarrollo Aplicado**: Construcción iterativa de vistas detalladas, optimizaciones y desarrollo de integraciones para los agentes inteligentes del Practicante 3.
+* **Semanas 9-10 — Ajustes Finales y Producción**: Auditorías completas de velocidad y accesibilidad, refinamiento definitivo de contenidos SEO/GEO y entrega oficial del sitio en internet.
