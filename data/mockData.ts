@@ -42,7 +42,7 @@ export const INFO_ITIERS: InfoCorporativa = {
   lema: "Refinamos información compleja en inteligencia estratégica para organizaciones.",
   alianzaAI: "Socio Tecnológico Global de IBM Watsonx",
   whatsapp: "+54 9 261 000-0000",
-  email: "contacto@itiers.com",
+  email: "spiderman07052000@gmail.com",
   sedes: [
     {
       pais: "Argentina",
