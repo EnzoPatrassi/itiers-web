@@ -1,3 +1,4 @@
+// src/components/Footer.tsx
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Locale } from '@/data/i18n';
@@ -59,7 +60,21 @@ export default function Footer({ lang = 'es' }: FooterProps) {
             <p className="text-sm text-slate-400">
               {t.footer.tagline}
             </p>
-            <div className="pt-2 border-t border-slate-800">
+            
+            {/* Identidad e Ingeniería de IA */}
+            <div className="pt-2 border-t border-slate-800 space-y-1">
+              <span className="text-xs text-slate-500 block">
+                {lang === 'es' ? 'Identidad Corporativa' : 'Corporate Identity'}
+              </span>
+              <p className="text-xs text-slate-300">
+                {lang === 'es' 
+                  ? 'Expertos en Data Analytics e Ingeniería de Inteligencia Artificial.' 
+                  : 'Experts in Data Analytics and Artificial Intelligence Engineering.'}
+              </p>
+            </div>
+
+            {/* Alianza IBM Watsonx */}
+            <div>
               <span className="text-xs text-slate-500 block">Socio Tecnológico / Tech Partner</span>
               <span className="text-sm font-semibold text-blue-400">IBM Watsonx Global Partner</span>
             </div>
@@ -117,16 +132,16 @@ export default function Footer({ lang = 'es' }: FooterProps) {
         {/* Sección de contacto rápido e íconos sociales */}
         <div className="mt-8 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
-            <a href="mailto:contacto@itiers.com" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
-              📩 contacto@itiers.com
+            <a href="mailto:hola@itiers.com" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
+              📩 hola@itiers.com
             </a>
-            <a href="tel:+5492610000000" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
-              📞 +54 9 261 000-0000 (Mendoza, Argentina)
+            <a href="tel:+5492614171612" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
+              📞 +54 9 261 417-1612 (Mendoza, Argentina)
             </a>
           </div>
 
-          {/* Enlaces a Redes Sociales */}
-          <div className="flex space-x-6">
+          {/* Enlaces a Redes Sociales Oficiales */}
+          <div className="flex space-x-6 text-sm">
             <a
               href="https://ar.linkedin.com/company/itiers"
               className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
@@ -136,12 +151,30 @@ export default function Footer({ lang = 'es' }: FooterProps) {
             >
               LinkedIn
             </a>
+            <a
+              href="https://www.instagram.com/itiersds/"
+              className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Itiers en Instagram"
+            >
+              Instagram
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UCrWeQoKi3bM8JtVYVG-44VA"
+              className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Itiers en YouTube"
+            >
+              YouTube
+            </a>
           </div>
         </div>
 
         {/* Copyright */}
         <div className="mt-8 border-t border-slate-800/50 pt-8 text-center md:text-left flex justify-between flex-col md:flex-row text-xs text-slate-500">
-          <p>Copyright © 2026 Itiers Data Sense - {t.footer.rights}</p>
+          <p>Copyright © 2026 Itiers – Data Sense. {t.footer.rights}</p>
           <p className="mt-2 md:mt-0">{t.footer.locationMendoza}</p>
         </div>
 

@@ -14,52 +14,155 @@ export default async function NosotrosPage({
     <div className="bg-slate-50 min-h-screen py-16 px-6 sm:px-12">
       <div className="max-w-7xl mx-auto space-y-16">
         
+        {/* 1. CABECERA INSTITUCIONAL */}
         <header className="text-center max-w-3xl mx-auto">
           <span className="text-blue-600 font-semibold tracking-wider uppercase text-sm bg-blue-50 px-3.5 py-1 rounded-full border border-blue-100">
-            {t.nav.nosotros} | 20 {lang === 'es' ? 'Años de Trayectoria' : 'Years Experience'}
+            {t.nav.nosotros} | 20 {lang === 'es' ? 'Años de Trayectoria' : 'Years of History'}
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mt-4 tracking-tight">
-            {lang === 'es' ? 'Pioneros en Analítica e Inteligencia Artificial' : 'Pioneers in Data Analytics & Artificial Intelligence'}
+            {lang === 'es' ? 'De la Analítica al Harness Engineering' : 'From Analytics to Harness Engineering'}
           </h1>
-          <p className="mt-4 text-lg text-slate-600">
+          <p className="mt-4 text-lg text-slate-600 leading-relaxed">
             {lang === 'es'
-              ? 'Desde Mendoza, Argentina, acompañamos a las empresas líderes a transformar información en ventajas competitivas duraderas.'
-              : 'From Mendoza, Argentina, we empower market leaders to turn complex information into lasting competitive advantages.'}
+              ? 'La confianza humana es el núcleo de la automatización. Entendemos que la IA requiere un "Arnés" —un ecosistema de herramientas, memoria y validación— para ser dirigida con precisión quirúrgica.'
+              : 'Human trust is the core of automation. We understand that AI requires a "Harness"—an ecosystem of tools, memory, and validation—to be directed with surgical precision.'}
           </p>
         </header>
 
-        {/* Misión y Visión */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">
-              🎯 {lang === 'es' ? 'Nuestra Misión' : 'Our Mission'}
+        {/* 2. TRAYECTORIA Y MISIÓN */}
+        <div className="bg-white p-8 sm:p-12 rounded-2xl shadow-sm border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8 space-y-4">
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
+              {lang === 'es' ? 'Evolución Técnica' : 'Technical Evolution'}
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-950">
+              {lang === 'es' ? 'Construyendo los entornos donde la IA produce' : 'Building environments where AI produces'}
             </h2>
-            <p className="text-slate-600 leading-relaxed">
+            <p className="text-slate-700 leading-relaxed font-normal">
               {lang === 'es'
-                ? 'Facilitar la adopción de analítica avanzada e IA generativa en las organizaciones, democratizando el acceso a hallazgos estratégicos precisos para la toma de decisiones.'
-                : 'Accelerate the adoption of advanced analytics and generative AI across organizations, democratizing access to precise strategic insights for decision-making.'}
+                ? 'Con 20 años de historia, hemos evolucionado para dominar la Ingeniería de Arneses. Nuestra misión es construir los entornos que permiten a la IA dejar de ser una interfaz de chat para convertirse en un agente que produce. En un mundo de resultados no determinísticos, Itiers ofrece arquitecturas robustas y resilientes que garantizan la calidad del software y la integridad de los datos.'
+                : 'With 20 years of history, we have evolved to master Harness Engineering. Our mission is to build the environments that allow AI to move from being a chat interface to becoming a producing agent. In a world of non-deterministic results, Itiers offers robust and resilient architectures that guarantee software quality and data integrity.'}
             </p>
           </div>
-
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">
-              🚀 {lang === 'es' ? 'Nuestra Visión' : 'Our Vision'}
-            </h2>
-            <p className="text-slate-600 leading-relaxed">
-              {lang === 'es'
-                ? 'Ser el referente regional y global en consultoría de datos e integración de Agentes de Inteligencia Artificial para el sector corporativo.'
-                : 'To be the regional and global benchmark in data consulting and AI Agent integration for enterprise organizations.'}
+          <div className="lg:col-span-4 bg-slate-900 text-white p-6 rounded-xl space-y-3 shadow-md">
+            <div className="text-xs uppercase tracking-wider text-blue-400 font-semibold">Itiers Core Focus</div>
+            <div className="text-lg font-bold">Deterministic AI Agents</div>
+            <p className="text-xs text-slate-300">
+              {lang === 'es' ? 'Correcteza y trazabilidad en cada ciclo de negocio.' : 'Correctness and traceability in every business cycle.'}
             </p>
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="text-center pt-8">
+        {/* 3. METODOLOGÍA DE TRABAJO: EL HUMANO EN EL BUCLE */}
+        <section className="space-y-8" aria-labelledby="methodology-title">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">
+              {lang === 'es' ? 'Metodología Spec-Driven (SDD)' : 'Spec-Driven Methodology (SDD)'}
+            </span>
+            <h2 id="methodology-title" className="text-3xl font-bold text-slate-900 mt-3">
+              {lang === 'es' ? 'El Humano en el Bucle' : 'The Human in the Loop'}
+            </h2>
+            <p className="text-slate-600 mt-2 text-sm sm:text-base">
+              {lang === 'es'
+                ? 'Garantizamos resultados predecibles mediante un flujo de trabajo inspirado en el desarrollo guiado por especificaciones (SDD), donde el humano actúa como tomador de decisiones.'
+                : 'We guarantee predictable results through a workflow inspired by spec-driven development (SDD), where the human acts as a decision maker.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            {/* 1. Leader/Orchestrator */}
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <span className="text-blue-600 font-black text-2xl block mb-2">01</span>
+                <h3 className="text-base font-bold text-slate-950 mb-2">Leader / Orchestrator</h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  {lang === 'es'
+                    ? 'El ente estratégico que define el flujo y supervisa la orquestación global del proyecto.'
+                    : 'The strategic entity that defines the workflow and oversees global project orchestration.'}
+                </p>
+              </div>
+            </div>
+
+            {/* 2. Spec-Author */}
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <span className="text-blue-600 font-black text-2xl block mb-2">02</span>
+                <h3 className="text-base font-bold text-slate-950 mb-2">Spec-Author</h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  {lang === 'es'
+                    ? 'Formalizamos sus requerimientos en especificaciones técnicas ejecutables y claras.'
+                    : 'We formalize your requirements into clear, executable technical specifications.'}
+                </p>
+              </div>
+            </div>
+
+            {/* 3. Implementer */}
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <span className="text-blue-600 font-black text-2xl block mb-2">03</span>
+                <h3 className="text-base font-bold text-slate-950 mb-2">Implementer</h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  {lang === 'es'
+                    ? 'La IA genera código basado estrictamente en la "fuente de verdad" de la especificación, eliminando improvisaciones.'
+                    : 'AI generates code based strictly on the "source of truth" of the specification, eliminating improvisations.'}
+                </p>
+              </div>
+            </div>
+
+            {/* 4. Reviewer */}
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <span className="text-blue-600 font-black text-2xl block mb-2">04</span>
+                <h3 className="text-base font-bold text-slate-950 mb-2">Reviewer</h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  {lang === 'es'
+                    ? 'Un agente especializado que valida la trazabilidad, la arquitectura y el cumplimiento de los tests antes de cualquier entrega.'
+                    : 'A specialized agent that validates traceability, architecture, and test compliance before any delivery.'}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* 4. SEDES GLOBALES */}
+        <section className="space-y-6 pt-4">
+          <div className="text-center max-w-xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+              {lang === 'es' ? 'Nuestra Presencia Internacional' : 'Our International Presence'}
+            </h2>
+            <p className="text-slate-600 mt-2 text-sm">
+              {lang === 'es' ? 'Soporte localizado y cumplimiento normativo internacional (GDPR y regulaciones locales).' : 'Localized support and international regulatory compliance (GDPR and local regulations).'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+              <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">Argentina</span>
+              <h3 className="text-xl font-bold text-slate-950 mt-1 mb-2">Mendoza</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">Av. Perú 1841, Ciudad de Mendoza, Argentina</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+              <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">Chile</span>
+              <h3 className="text-xl font-bold text-slate-950 mt-1 mb-2">Santiago</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">General del Canto 421, piso 6, Providencia, Santiago de Chile</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+              <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">USA</span>
+              <h3 className="text-xl font-bold text-slate-950 mt-1 mb-2">Delaware</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">651 North Broad Street, Middletown, DE 19709, USA</p>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA FINAL */}
+        <div className="text-center pt-4">
           <Link
             href={`/${lang}/contacto`}
             className="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
           >
-            {t.hero.secondaryCta}
+            {lang === 'es' ? 'Agenda una consultoría técnica' : 'Schedule a Technical Consultation'}
           </Link>
         </div>
 

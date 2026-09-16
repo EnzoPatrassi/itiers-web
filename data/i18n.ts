@@ -65,8 +65,10 @@ export interface TranslationDictionary {
     locationMendoza: string;
   };
   meta: {
-    title: string;
-    description: string;
+    inicio: { title: string; description: string };
+    servicios: { title: string; description: string };
+    nosotros: { title: string; description: string };
+    contacto: { title: string; description: string };
   };
 }
 
@@ -86,10 +88,10 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
     },
     hero: {
       badge: '20 años de experiencia | Data Sense & AI Consulting',
-      title: 'Transformamos Datos en Decisiones Inteligentes',
-      subtitle: 'Ayudamos a las organizaciones a estructurar, analizar e integrar soluciones avanzadas de analítica e IA para generar ventajas competitivas medibles.',
-      primaryCta: 'Explorar Servicios',
-      secondaryCta: 'Contactar a un Consultor',
+      title: '20 años de maestría en datos evolucionados hacia la Ingeniería de Arneses.',
+      subtitle: 'Transformamos el potencial de su organización mediante el análisis estratégico y la orquestación de agentes de IA. No construimos chatbots que hablan; diseñamos agentes que producen resultados determinísticos.',
+      primaryCta: 'Descubre nuestra metodología SDD',
+      secondaryCta: 'Agenda una consultoría técnica',
     },
     geoBlock: {
       badge: 'Resumen Ejecutivo | Answer-First',
@@ -98,44 +100,52 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
     },
     servicesSection: {
       badge: 'Nuestras Especialidades',
-      title: 'Servicios de Analítica e Inteligencia Artificial',
-      subtitle: 'Soluciones integrales de datos e IA diseñadas para potenciar el valor operativo y estratégico de tu empresa.',
+      title: 'Consultoría de Datos y Data Products',
+      subtitle: 'Ingeniería avanzada: RAG con Embeddings, MCP y Data Products para escala global.',
       ctaButton: 'Consultar por este servicio →',
       items: [
         {
-          id: 'analitica-avanzada',
-          title: 'Analítica Avanzada & BI',
-          description: 'Diseño e implementación de tableros ejecutivos de autoservicio, modelos predictivos y arquitecturas de Business Intelligence para visualización estratégica.',
-          icon: '📊',
+          id: 'productos',
+          title: 'Productos de Datos',
+          description: 'Data Products by Itiers son activos analíticos integrales que transforman datos crudos fragmentados en inteligencia de negocio organizada, accionable y lista para la planeación de gestión competitiva.',
+          icon: '📦',
           features: [
-            'Dashboards interactivos en tiempo real',
-            'Modelos predictivos de comportamiento de negocio',
-            'Visualización de KPIs estratégicos',
-            'Analítica descriptiva y prescriptiva'
+            'Automatización del ciclo de vida del dato',
+            'Diferencial competitivo mediante interpretación directa',
+            'Anticipación proactiva a las demandas del mercado'
           ]
         },
         {
-          id: 'ingenieria-datos',
-          title: 'Ingeniería de Datos & Cloud',
-          description: 'Arquitecturas de datos escalables, pipelines ETL/ELT automatizados y soluciones Cloud Data Warehouse diseñadas para soportar grandes volúmenes de información.',
-          icon: '☁️',
+          id: 'proyectos',
+          title: 'Proyectos de Datos',
+          description: 'Data Projects son implementaciones de ingeniería avanzada que integran arquitecturas RAG con Embeddings y el protocolo MCP (Model Context Protocol) para que la IA interactúe de forma segura con sus herramientas locales y bases de datos corporativas.',
+          icon: '⚙️',
           features: [
-            'Pipelines ETL/ELT robustos y automatizados',
-            'Arquitecturas Cloud Data Lake / Data Warehouse',
-            'Gobierno y calidad de datos empresariales',
-            'Integración de fuentes multi-sistema'
+            'Reducción de errores mediante MCP',
+            'Arquitecturas robustas sin degradación de contexto',
+            'Implementación de modelos líderes (IBM Watsonx, OpenAI)'
           ]
         },
         {
-          id: 'ia-agentes',
-          title: 'Implementación de IA & Agentes',
-          description: 'Despliegue de agentes inteligentes autónomos, modelos de IA Generativa y LLMs personalizados integrados en los procesos corporativos clave.',
-          icon: '🤖',
+          id: 'staffing',
+          title: 'Staffing de Datos',
+          description: 'Data Staffing es el suministro de talento técnico especializado en ingeniería de datos e IA, capaz de integrar capacidades de automatización directamente en los equipos internos de su organización.',
+          icon: '👥',
           features: [
-            'Desarrollo de Agentes Inteligentes autónomos',
-            'Integración de LLMs y RAG (Retrieval-Augmented Generation)',
-            'Automatización de procesos cognitivos complejos',
-            'Socio Tecnológico Global en ecosistemas de IA'
+            'Gestión de ciclos de vida de datos',
+            'Escalabilidad técnica sin fricción operativa',
+            'Células ágiles de trabajo en IA'
+          ]
+        },
+        {
+          id: 'capacitaciones',
+          title: 'Capacitaciones',
+          description: 'Capacitaciones Itiers son programas de formación profesional diseñados para eliminar el "VibeCoding" mediante la enseñanza de metodologías rigurosas como Spec-Driven Development (SDD) y el bucle RPL (Read-Eval-Print-Loop).',
+          icon: '🎓',
+          features: [
+            'Dominio técnico de ventana de contexto',
+            'Flujos TDD asistidos por IA',
+            'Formación en Loop Engineering'
           ]
         }
       ]
@@ -189,8 +199,22 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
       locationMendoza: 'Mendoza, Argentina',
     },
     meta: {
-      title: 'Itiers | Data Sense - Consultora de Analítica de Datos e Inteligencia Artificial',
-      description: 'Itiers es una consultora especializada en analítica de datos e inteligencia artificial en Mendoza, Argentina. Estructuramos e integramos soluciones de IA para la toma de decisiones estratégicas.',
+      inicio: { 
+        title: 'Itiers: IA Generativa e IBM Watsonx', 
+        description: 'Liderando la ingeniería de datos y la IA Generativa con 20 años de maestría técnica.' 
+      },
+      servicios: { 
+        title: 'Consultoría de Datos y Data Products', 
+        description: 'Ingeniería avanzada: RAG con Embeddings, MCP y Data Products para escala global.' 
+      },
+      nosotros: { 
+        title: 'Expertos en Harness Engineering', 
+        description: 'De consultoría tradicional a Ingeniería de Arneses: liderando la era de agentes de IA.' 
+      },
+      contacto: { 
+        title: 'Sedes Globales y Consultoría Técnica', 
+        description: 'Contacto estratégico en Argentina, Chile y USA. Cumplimiento normativo internacional.' 
+      }
     }
   },
   en: {
@@ -207,11 +231,11 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
       ariaLangSwitch: 'Switch language',
     },
     hero: {
-      badge: '20 Years of Experience | Data Sense & AI Consulting',
-      title: 'We Transform Data into Intelligent Decisions',
-      subtitle: 'We help organizations structure, analyze, and integrate advanced analytics and AI solutions to generate measurable competitive advantages.',
-      primaryCta: 'Explore Services',
-      secondaryCta: 'Contact a Consultant',
+      badge: '20 Years of Experience | Data Sense & AI Consulting', // <- Traducido al inglés
+      title: '20 Years of Data Mastery Meets the Future of Harness Engineering.', // <- Traducido al inglés[cite: 11]
+      subtitle: 'We transform your organization’s potential through strategic analysis and AI agent orchestration. We don’t build chatbots that talk; we design agents that deliver deterministic results.', // <- Traducido al inglés[cite: 11]
+      primaryCta: 'Explore our SDD Methodology',
+      secondaryCta: 'Schedule a Technical Consultation',
     },
     geoBlock: {
       badge: 'Executive Summary | Answer-First',
@@ -220,44 +244,52 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
     },
     servicesSection: {
       badge: 'Our Specialties',
-      title: 'Data & Artificial Intelligence Services',
-      subtitle: 'End-to-end data and AI solutions designed to boost your organization’s operational and strategic value.',
+      title: 'Data Consulting and Data Products',
+      subtitle: 'Advanced Engineering: RAG with Embeddings, MCP, and Data Products at scale.',
       ctaButton: 'Inquire about this service →',
       items: [
         {
-          id: 'analitica-avanzada',
-          title: 'Advanced Analytics & BI',
-          description: 'Design and implementation of self-service executive dashboards, predictive models, and Business Intelligence architectures for strategic visualization.',
-          icon: '📊',
+          id: 'productos',
+          title: 'Data Products',
+          description: 'Data Products by Itiers are comprehensive analytical assets that transform fragmented raw data into organized, actionable business intelligence ready for competitive management planning.',
+          icon: '📦',
           features: [
-            'Real-time interactive dashboards',
-            'Predictive business behavior models',
-            'Strategic KPI visualization',
-            'Descriptive and prescriptive analytics'
+            'Automation of the data lifecycle',
+            'Competitive advantage through direct interpretation',
+            'Proactive anticipation of market demands'
           ]
         },
         {
-          id: 'ingenieria-datos',
-          title: 'Data Engineering & Cloud',
-          description: 'Scalable data architectures, automated ETL/ELT pipelines, and Cloud Data Warehouse solutions designed to handle large enterprise data volumes.',
-          icon: '☁️',
+          id: 'proyectos',
+          title: 'Data Projects',
+          description: 'Data Projects are advanced engineering implementations that integrate RAG architectures with Embeddings and the MCP (Model Context Protocol) so AI can securely interact with your local tools and corporate databases.',
+          icon: '⚙️',
           features: [
-            'Robust, automated ETL/ELT pipelines',
-            'Cloud Data Lake / Data Warehouse architectures',
-            'Enterprise data governance and quality',
-            'Multi-system data integration'
+            'Error reduction through MCP',
+            'Robust architectures without context degradation',
+            'Implementation of leading models (IBM Watsonx, OpenAI)'
           ]
         },
         {
-          id: 'ia-agentes',
-          title: 'AI Implementation & Agents',
-          description: 'Deployment of autonomous intelligent agents, Generative AI models, and customized LLMs integrated into key business processes.',
-          icon: '🤖',
+          id: 'staffing',
+          title: 'Data Staffing',
+          description: 'Data Staffing is the provision of specialized technical talent in data engineering and AI, capable of integrating automation capabilities directly into your organization\'s internal teams.',
+          icon: '👥',
           features: [
-            'Autonomous AI Agent development',
-            'LLM & RAG (Retrieval-Augmented Generation) integration',
-            'Automation of complex cognitive processes',
-            'Global Technology Partner in AI ecosystems'
+            'Data lifecycle management',
+            'Technical scalability without operational friction',
+            'Agile AI work cells'
+          ]
+        },
+        {
+          id: 'capacitaciones',
+          title: 'Training',
+          description: 'Itiers Training are professional programs designed to eliminate "VibeCoding" by teaching rigorous methodologies such as Spec-Driven Development (SDD) and the RPL (Read-Eval-Print-Loop).',
+          icon: '🎓',
+          features: [
+            'Technical mastery of context windows',
+            'AI-assisted TDD workflows',
+            'Loop Engineering training'
           ]
         }
       ]
@@ -311,8 +343,22 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
       locationMendoza: 'Mendoza, Argentina',
     },
     meta: {
-      title: 'Itiers | Data Sense - Data Analytics & Artificial Intelligence Consulting',
-      description: 'Itiers is a consulting firm specializing in data analytics and artificial intelligence based in Mendoza, Argentina. We structure and deploy AI solutions for strategic decision-making.',
+      inicio: { 
+        title: 'Itiers: Generative AI & IBM Watsonx', 
+        description: 'Leading Data Engineering and GenAI with 20 years of technical mastery.' 
+      },
+      servicios: { 
+        title: 'Data Consulting and Data Products', 
+        description: 'Advanced Engineering: RAG with Embeddings, MCP, and Data Products at scale.' 
+      },
+      nosotros: { 
+        title: 'Harness Engineering Experts', 
+        description: 'From traditional consulting to Harness Engineering: leading the AI agent era.' 
+      },
+      contacto: { 
+        title: 'Global Offices & Technical Consulting', 
+        description: 'Strategic contact in Argentina, Chile, and USA. International compliance.' 
+      }
     }
   }
 };

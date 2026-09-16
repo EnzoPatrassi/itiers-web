@@ -19,49 +19,62 @@ export default async function QueHacemosPage({
             {t.nav.queHacemos}
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mt-4 tracking-tight">
-            {lang === 'es' ? 'Metodología y Procesos de Inteligencia' : 'Methodology & Intelligence Processes'}
+            {lang === 'es' ? 'Metodología: El Humano en el Bucle' : 'Methodology: Human-in-the-Loop'}
           </h1>
           <p className="mt-4 text-lg text-slate-600">
             {lang === 'es'
-              ? 'Conoce cómo convertimos datos desestructurados en activos estratégicos accionables.'
-              : 'Discover how we turn unstructured data into actionable strategic assets.'}
+              ? 'Garantizamos resultados predecibles mediante un flujo de trabajo inspirado en el desarrollo guiado por especificaciones (SDD).'
+              : 'We guarantee predictable results through a workflow inspired by Spec-Driven Development (SDD).'}
           </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Fases de Metodología (El Humano en el Bucle) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <div className="text-blue-600 text-3xl font-black mb-4">01</div>
-            <h2 className="text-xl font-bold text-slate-900 mb-2">
-              {lang === 'es' ? 'Diagnóstico & Arquitectura' : 'Discovery & Architecture'}
+            <div className="text-blue-600 text-2xl font-black mb-3">01</div>
+            <h2 className="text-lg font-bold text-slate-900 mb-2">
+              {lang === 'es' ? 'Leader / Orchestrator' : 'Leader / Orchestrator'}
             </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
               {lang === 'es'
-                ? 'Analizamos el estado actual de las fuentes de información y diseñamos la arquitectura ideal en la nube.'
-                : 'We evaluate existing data sources and design the optimal cloud architecture for your needs.'}
+                ? 'El ente estratégico que define el flujo y supervisa la orquestación global del proyecto.'
+                : 'The strategic entity that defines the workflow and oversees global project orchestration.'}
             </p>
           </div>
 
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <div className="text-blue-600 text-3xl font-black mb-4">02</div>
-            <h2 className="text-xl font-bold text-slate-900 mb-2">
-              {lang === 'es' ? 'Integración de Agentes e IA' : 'AI & Agent Integration'}
+            <div className="text-blue-600 text-2xl font-black mb-3">02</div>
+            <h2 className="text-lg font-bold text-slate-900 mb-2">
+              {lang === 'es' ? 'Spec-Author' : 'Spec-Author'}
             </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
               {lang === 'es'
-                ? 'Desplegamos modelos avanzados de IA y pipelines de datos para automatización de respuestas.'
-                : 'We deploy state-of-the-art AI models and data pipelines for automated decision assistance.'}
+                ? 'Formalizamos sus requerimientos en especificaciones técnicas ejecutables y claras.'
+                : 'We formalize your requirements into clear, executable technical specifications.'}
             </p>
           </div>
 
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <div className="text-blue-600 text-3xl font-black mb-4">03</div>
-            <h2 className="text-xl font-bold text-slate-900 mb-2">
-              {lang === 'es' ? 'Optimización Continua' : 'Continuous Optimization'}
+            <div className="text-blue-600 text-2xl font-black mb-3">03</div>
+            <h2 className="text-lg font-bold text-slate-900 mb-2">
+              {lang === 'es' ? 'Implementer' : 'Implementer'}
             </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
               {lang === 'es'
-                ? 'Supervisamos el rendimiento analítico para garantizar el máximo retorno de inversión.'
-                : 'We monitor analytics performance to ensure maximum return on investment and compliance.'}
+                ? 'La IA genera soluciones basadas estrictamente en la "fuente de verdad" de la especificación.'
+                : 'AI generates solutions based strictly on the "source of truth" of the specification.'}
+            </p>
+          </div>
+
+          <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+            <div className="text-blue-600 text-2xl font-black mb-3">04</div>
+            <h2 className="text-lg font-bold text-slate-900 mb-2">
+              {lang === 'es' ? 'Reviewer' : 'Reviewer'}
+            </h2>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              {lang === 'es'
+                ? 'Un agente especializado que valida la trazabilidad, la arquitectura y el cumplimiento de los tests.'
+                : 'A specialized agent that validates traceability, architecture, and test compliance.'}
             </p>
           </div>
         </div>
@@ -71,7 +84,7 @@ export default async function QueHacemosPage({
             href={`/${lang}/contacto`}
             className="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
           >
-            {t.hero.secondaryCta}
+            {lang === 'es' ? 'Agenda una consultoría técnica' : 'Schedule a Technical Consultation'}
           </Link>
         </div>
 

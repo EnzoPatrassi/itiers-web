@@ -1,14 +1,118 @@
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import { dictionaries, Locale } from "@/data/i18n";
 
-export default async function ContactoPage({
+interface FormState {
+  nombre: string;
+  email: string;
+  telefono: string;
+  servicio: string;
+  mensaje: string;
+}
+
+interface FormErrors {
+  nombre?: string;
+  email?: string;
+  servicio?: string;
+  mensaje?: string;
+}
+
+export default function ContactoPage({
   params,
 }: {
   params: Promise<{ lang: string }>;
 }) {
-  const resolvedParams = await params;
-  const lang: Locale = resolvedParams.lang === 'en' ? 'en' : 'es';
+  // Resolver los parámetros de la ruta de manera segura para Next.js App Router
+  const [lang, setLang] = useState<Locale>('es');
+
+  React.useEffect(() => {
+    params.then((resolved) => {
+      if (resolved.lang === 'en') {
+        setLang('en');
+      } else {
+        setLang('es');
+      }
+    });
+  }, [params]);
+
   const t = dictionaries[lang];
+
+  const [formData, setFormData] = useState<FormState>({
+    nombre: "",
+    email: "",
+    telefono: "",
+    servicio: "",
+    mensaje: "",
+  });
+
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState<boolean | null>(null);
+
+  const validarFormulario = (): boolean => {
+    const nuevosErrores: FormErrors = {};
+    if (!formData.nombre.trim()) {
+      nuevosErrores.nombre = lang === 'es' ? "El nombre completo es obligatorio." : "Full name is required.";
+    }
+    if (!formData.email.trim()) {
+      nuevosErrores.email = lang === 'es' ? "El correo electrónico es obligatorio." : "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      nuevosErrores.email = lang === 'es' ? "Por favor, introduce un correo válido." : "Please enter a valid email.";
+    }
+    if (!formData.mensaje.trim()) {
+      nuevosErrores.mensaje = lang === 'es' ? "El mensaje no puede estar vacío." : "Message cannot be empty.";
+    }
+    setErrors(nuevosErrores);
+    return Object.keys(nuevosErrores).length === 0;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validarFormulario()) return;
+
+    setIsSubmitting(true);
+    setSubmitSuccess(null);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "f07c21f7-e7ba-4b72-a7f4-d5f0b8d23456", 
+          name: formData.nombre,
+          email: formData.email,
+          phone: formData.telefono,
+          subject: `Consulta Web Itiers: Interés general`,
+          message: formData.mensaje,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitSuccess(true);
+        setFormData({ nombre: "", email: "", telefono: "", servicio: "", mensaje: "" });
+      } else {
+        setSubmitSuccess(false);
+      }
+    } catch (error) {
+      setSubmitSuccess(false);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="bg-slate-50 min-h-screen py-16 px-6 sm:px-12">
@@ -42,7 +146,7 @@ export default async function ContactoPage({
                 <span className="text-xl">📍</span>
                 <div>
                   <span className="font-bold text-white block">{lang === 'es' ? 'Sede Mendoza, Argentina:' : 'Mendoza HQ, Argentina:'}</span>
-                  <p>Av. Belgrano 1234, Ciudad de Mendoza, Argentina</p>
+                  <p>Av. Perú 1841, Ciudad de Mendoza, Argentina</p>
                 </div>
               </div>
 
@@ -50,7 +154,7 @@ export default async function ContactoPage({
                 <span className="text-xl">📩</span>
                 <div>
                   <span className="font-bold text-white block">Email:</span>
-                  <p>contacto@itiers.com</p>
+                  <p>hola@itiers.com</p>
                 </div>
               </div>
 
@@ -58,12 +162,11 @@ export default async function ContactoPage({
                 <span className="text-xl">📞</span>
                 <div>
                   <span className="font-bold text-white block">WhatsApp / {lang === 'es' ? 'Teléfono:' : 'Phone:'}</span>
-                  <p>+54 9 261 000-0000</p>
+                  <p>+54 9 261 417-1612</p>
                 </div>
               </div>
             </div>
 
-            {/* Imagen Accesible Next.js */}
             <div className="relative w-full h-48 rounded-xl overflow-hidden bg-slate-800 border border-slate-700">
               <Image
                 src="/globe.svg"
@@ -74,55 +177,73 @@ export default async function ContactoPage({
             </div>
           </div>
 
-          {/* Formularios de Contacto */}
-          <form className="bg-white rounded-2xl p-8 sm:p-10 shadow-md border border-slate-200 space-y-6">
+          {/* Formulario de Contacto */}
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 sm:p-10 shadow-md border border-slate-200 space-y-6" noValidate>
+            {submitSuccess === true && (
+              <div className="p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg text-sm">
+                <span className="font-bold">{lang === 'es' ? '¡Mensaje enviado con éxito!' : 'Message sent successfully!'}</span> {lang === 'es' ? 'Nos pondremos en contacto a la brevedad.' : 'We will get in touch shortly.'}
+              </div>
+            )}
+            {submitSuccess === false && (
+              <div className="p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg text-sm">
+                {lang === 'es' ? 'Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.' : 'There was an error sending the message. Please try again.'}
+              </div>
+            )}
+
             <div>
               <label htmlFor="nombre" className="block text-sm font-semibold text-slate-900 mb-2">
-                {lang === 'es' ? 'Nombre Completo' : 'Full Name'}
+                {lang === 'es' ? 'Nombre Completo *' : 'Full Name *'}
               </label>
               <input
                 type="text"
                 id="nombre"
                 name="nombre"
-                required
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition"
+                value={formData.nombre}
+                onChange={handleChange}
+                className={`w-full px-4 py-3 rounded-lg border outline-none transition ${errors.nombre ? "border-red-500" : "border-slate-300 focus:ring-2 focus:ring-blue-600"}`}
                 placeholder={lang === 'es' ? 'Ej. Juan Pérez' : 'E.g. John Smith'}
               />
+              {errors.nombre && <p className="text-xs text-red-600 mt-1">{errors.nombre}</p>}
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-slate-900 mb-2">
-                {lang === 'es' ? 'Correo Electrónico Corporativo' : 'Corporate Email'}
+                {lang === 'es' ? 'Correo Electrónico Corporativo *' : 'Corporate Email *'}
               </label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                required
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition"
+                value={formData.email}
+                onChange={handleChange}
+                className={`w-full px-4 py-3 rounded-lg border outline-none transition ${errors.email ? "border-red-500" : "border-slate-300 focus:ring-2 focus:ring-blue-600"}`}
                 placeholder="ejemplo@empresa.com"
               />
+              {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
             </div>
 
             <div>
               <label htmlFor="mensaje" className="block text-sm font-semibold text-slate-900 mb-2">
-                {lang === 'es' ? 'Mensaje o Consulta' : 'Message or Inquiry'}
+                {lang === 'es' ? 'Mensaje o Consulta *' : 'Message or Inquiry *'}
               </label>
               <textarea
                 id="mensaje"
                 name="mensaje"
                 rows={4}
-                required
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition"
+                value={formData.mensaje}
+                onChange={handleChange}
+                className={`w-full px-4 py-3 rounded-lg border outline-none transition ${errors.mensaje ? "border-red-500" : "border-slate-300 focus:ring-2 focus:ring-blue-600"}`}
                 placeholder={lang === 'es' ? 'Cuéntanos sobre los objetivos de tu empresa...' : 'Tell us about your organization goals...'}
               ></textarea>
+              {errors.mensaje && <p className="text-xs text-red-600 mt-1">{errors.mensaje}</p>}
             </div>
 
             <button
               type="submit"
-              className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-600"
+              disabled={isSubmitting}
+              className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:opacity-50"
             >
-              {lang === 'es' ? 'Enviar Mensaje' : 'Send Message'}
+              {isSubmitting ? (lang === 'es' ? 'Enviando...' : 'Sending...') : (lang === 'es' ? 'Enviar Mensaje' : 'Send Message')}
             </button>
           </form>
 
