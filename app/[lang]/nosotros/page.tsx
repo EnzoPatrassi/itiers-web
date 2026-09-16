@@ -45,8 +45,12 @@ export default async function NosotrosPage({
             </p>
           </div>
           <div className="lg:col-span-4 bg-slate-900 text-white p-6 rounded-xl space-y-3 shadow-md">
-            <div className="text-xs uppercase tracking-wider text-blue-400 font-semibold">Itiers Core Focus</div>
-            <div className="text-lg font-bold">Deterministic AI Agents</div>
+            <div className="text-xs uppercase tracking-wider text-blue-400 font-semibold">
+              {lang === 'es' ? 'Enfoque Central de Itiers' : 'Itiers Core Focus'}
+            </div>
+            <div className="text-lg font-bold">
+              {lang === 'es' ? 'Agentes de IA Determinísticos' : 'Deterministic AI Agents'}
+            </div>
             <p className="text-xs text-slate-300">
               {lang === 'es' ? 'Correcteza y trazabilidad en cada ciclo de negocio.' : 'Correctness and traceability in every business cycle.'}
             </p>
@@ -75,7 +79,9 @@ export default async function NosotrosPage({
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
               <div>
                 <span className="text-blue-600 font-black text-2xl block mb-2">01</span>
-                <h3 className="text-base font-bold text-slate-950 mb-2">Leader / Orchestrator</h3>
+                <h3 className="text-base font-bold text-slate-950 mb-2">
+                  {lang === 'es' ? 'Líder / Orquestador' : 'Leader / Orchestrator'}
+                </h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                   {lang === 'es'
                     ? 'El ente estratégico que define el flujo y supervisa la orquestación global del proyecto.'
@@ -88,7 +94,9 @@ export default async function NosotrosPage({
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
               <div>
                 <span className="text-blue-600 font-black text-2xl block mb-2">02</span>
-                <h3 className="text-base font-bold text-slate-950 mb-2">Spec-Author</h3>
+                <h3 className="text-base font-bold text-slate-950 mb-2">
+                  {lang === 'es' ? 'Autor de Especificaciones' : 'Spec-Author'}
+                </h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                   {lang === 'es'
                     ? 'Formalizamos sus requerimientos en especificaciones técnicas ejecutables y claras.'
@@ -101,7 +109,9 @@ export default async function NosotrosPage({
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
               <div>
                 <span className="text-blue-600 font-black text-2xl block mb-2">03</span>
-                <h3 className="text-base font-bold text-slate-950 mb-2">Implementer</h3>
+                <h3 className="text-base font-bold text-slate-950 mb-2">
+                  {lang === 'es' ? 'Agente Implementador' : 'Implementer Agent'}
+                </h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                   {lang === 'es'
                     ? 'La IA genera código basado estrictamente en la "fuente de verdad" de la especificación, eliminando improvisaciones.'
@@ -114,7 +124,9 @@ export default async function NosotrosPage({
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
               <div>
                 <span className="text-blue-600 font-black text-2xl block mb-2">04</span>
-                <h3 className="text-base font-bold text-slate-950 mb-2">Reviewer</h3>
+                <h3 className="text-base font-bold text-slate-950 mb-2">
+                  {lang === 'es' ? 'Agente Revisor' : 'Reviewer Agent'}
+                </h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                   {lang === 'es'
                     ? 'Un agente especializado que valida la trazabilidad, la arquitectura y el cumplimiento de los tests antes de cualquier entrega.'

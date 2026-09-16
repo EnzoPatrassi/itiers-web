@@ -33,7 +33,7 @@ export default async function QueHacemosPage({
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
             <div className="text-blue-600 text-2xl font-black mb-3">01</div>
             <h2 className="text-lg font-bold text-slate-900 mb-2">
-              {lang === 'es' ? 'Leader / Orchestrator' : 'Leader / Orchestrator'}
+              {lang === 'es' ? 'Líder / Orquestador' : 'Leader / Orchestrator'}
             </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
               {lang === 'es'
@@ -45,7 +45,7 @@ export default async function QueHacemosPage({
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
             <div className="text-blue-600 text-2xl font-black mb-3">02</div>
             <h2 className="text-lg font-bold text-slate-900 mb-2">
-              {lang === 'es' ? 'Spec-Author' : 'Spec-Author'}
+              {lang === 'es' ? 'Autor de Especificaciones' : 'Spec-Author'}
             </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
               {lang === 'es'
@@ -57,7 +57,7 @@ export default async function QueHacemosPage({
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
             <div className="text-blue-600 text-2xl font-black mb-3">03</div>
             <h2 className="text-lg font-bold text-slate-900 mb-2">
-              {lang === 'es' ? 'Implementer' : 'Implementer'}
+              {lang === 'es' ? 'Agente Implementador' : 'Implementer Agent'}
             </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
               {lang === 'es'
@@ -69,7 +69,7 @@ export default async function QueHacemosPage({
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
             <div className="text-blue-600 text-2xl font-black mb-3">04</div>
             <h2 className="text-lg font-bold text-slate-900 mb-2">
-              {lang === 'es' ? 'Reviewer' : 'Reviewer'}
+              {lang === 'es' ? 'Agente Revisor' : 'Reviewer Agent'}
             </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
               {lang === 'es'

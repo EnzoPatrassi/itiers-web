@@ -19,7 +19,6 @@ export default function LanguageSwitcher({ currentLang }: LanguageSwitcherProps)
       return;
     }
 
-    // Replace locale prefix in pathname
     const segments = pathname.split('/');
     if (segments[1] === 'es' || segments[1] === 'en') {
       segments[1] = newLang;
@@ -31,35 +30,37 @@ export default function LanguageSwitcher({ currentLang }: LanguageSwitcherProps)
 
   return (
     <div 
-      className="inline-flex items-center rounded-lg bg-slate-100 p-1 border border-slate-200"
+      className="inline-flex items-center gap-1 rounded-lg bg-slate-100 p-1 border border-slate-200"
       role="group"
       aria-label="Selección de idioma / Language selection"
     >
       <button
         type="button"
-        onClick={() = className="focus:outline-none focus:ring-2 focus:ring-blue-600"> switchLanguage('es')}
-        className={`px-2.5 py-1 text-xs font-bold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
+        onClick={() => switchLanguage('es')}
+        className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
           currentLang === 'es'
             ? 'bg-blue-600 text-white shadow-sm'
             : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
         }`}
         aria-pressed={currentLang === 'es'}
-        aria-label="Español (es-AR)"
+        aria-label="Español"
       >
-        ES
+        <span className="text-sm leading-none">🇪🇸</span>
+        <span>ES</span>
       </button>
       <button
         type="button"
-        onClick={() = className="focus:outline-none focus:ring-2 focus:ring-blue-600"> switchLanguage('en')}
-        className={`px-2.5 py-1 text-xs font-bold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
+        onClick={() => switchLanguage('en')}
+        className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
           currentLang === 'en'
             ? 'bg-blue-600 text-white shadow-sm'
             : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
         }`}
         aria-pressed={currentLang === 'en'}
-        aria-label="English (en-US)"
+        aria-label="English"
       >
-        EN
+        <span className="text-sm leading-none">🇺🇸</span>
+        <span>EN</span>
       </button>
     </div>
   );
