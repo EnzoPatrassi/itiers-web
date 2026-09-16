@@ -54,7 +54,7 @@ export default async function LandingPage({
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href={`/${lang}/que-hacemos`}
-              className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
+              className="focus:outline-none focus:ring-2 focus:ring-blue-600 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2"
             >
               <span>{t.hero.primaryCta}</span>
               <span>→</span>
@@ -62,7 +62,7 @@ export default async function LandingPage({
 
             <Link
               href={`/${lang}/contacto`}
-              className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-medium rounded-lg shadow-md transition-all inline-flex items-center justify-center"
+              className="focus:outline-none focus:ring-2 focus:ring-blue-600 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-medium rounded-lg shadow-md transition-all inline-flex items-center justify-center"
             >
               <span>{t.hero.secondaryCta}</span>
             </Link>
@@ -94,7 +94,7 @@ export default async function LandingPage({
             <div className="pt-2">
               <Link
                 href={`/${lang}/contacto?asunto=IBM_Watsonx`}
-                className="inline-flex items-center gap-2 font-semibold text-sm text-cyan-300 hover:text-cyan-200 transition-colors"
+                className="focus:outline-none focus:ring-2 focus:ring-blue-600 inline-flex items-center gap-2 font-semibold text-sm text-cyan-300 hover:text-cyan-200 transition-colors"
               >
                 <span>{lang === 'es' ? 'Conoce más sobre la alianza con IBM Watsonx' : 'Learn more about the IBM Watsonx partnership'}</span>
                 <span>→</span>
@@ -135,7 +135,7 @@ export default async function LandingPage({
             <div className="pt-2">
               <Link
                 href={`/${lang}/que-hacemos`}
-                className="text-blue-600 hover:text-blue-800 font-semibold text-sm inline-flex items-center gap-1.5"
+                className="focus:outline-none focus:ring-2 focus:ring-blue-600 text-blue-600 hover:text-blue-800 font-semibold text-sm inline-flex items-center gap-1.5"
               >
                 <span>{lang === 'es' ? 'Ver más sobre nuestra metodología' : 'Learn more about our methodology'}</span>
                 <span>→</span>
@@ -167,7 +167,7 @@ export default async function LandingPage({
           </div>
           <Link
             href={`/${lang}/servicios`}
-            className="text-sm font-semibold text-blue-600 hover:underline"
+            className="focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm font-semibold text-blue-600 hover:underline"
           >
             {lang === 'es' ? 'Ver todos los servicios →' : 'View all services →'}
           </Link>
@@ -191,7 +191,7 @@ export default async function LandingPage({
 
               <Link
                 href={`/${lang}/contacto?servicio=${encodeURIComponent(servicio.title)}`}
-                className="text-blue-600 hover:text-blue-800 font-semibold text-xs inline-flex items-center gap-1 pt-4 border-t border-slate-100"
+                className="focus:outline-none focus:ring-2 focus:ring-blue-600 text-blue-600 hover:text-blue-800 font-semibold text-xs inline-flex items-center gap-1 pt-4 border-t border-slate-100"
               >
                 <span>{t.servicesSection.ctaButton}</span>
               </Link>
@@ -214,7 +214,7 @@ export default async function LandingPage({
             </div>
             <Link
               href={`/${lang}/casos`}
-              className="text-xs font-semibold text-blue-400 hover:text-blue-300"
+              className="focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs font-semibold text-blue-400 hover:text-blue-300"
             >
               {t.casesSection.ctaButton} →
             </Link>

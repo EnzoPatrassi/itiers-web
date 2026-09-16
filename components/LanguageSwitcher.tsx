@@ -37,7 +37,7 @@ export default function LanguageSwitcher({ currentLang }: LanguageSwitcherProps)
     >
       <button
         type="button"
-        onClick={() => switchLanguage('es')}
+        onClick={() = className="focus:outline-none focus:ring-2 focus:ring-blue-600"> switchLanguage('es')}
         className={`px-2.5 py-1 text-xs font-bold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
           currentLang === 'es'
             ? 'bg-blue-600 text-white shadow-sm'
@@ -50,7 +50,7 @@ export default function LanguageSwitcher({ currentLang }: LanguageSwitcherProps)
       </button>
       <button
         type="button"
-        onClick={() => switchLanguage('en')}
+        onClick={() = className="focus:outline-none focus:ring-2 focus:ring-blue-600"> switchLanguage('en')}
         className={`px-2.5 py-1 text-xs font-bold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
           currentLang === 'en'
             ? 'bg-blue-600 text-white shadow-sm'

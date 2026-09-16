@@ -40,7 +40,7 @@ export default async function SolucionesPage({
             </p>
             <Link
               href={`/${lang}/contacto?solucion=finanzas`}
-              className="text-blue-600 font-semibold text-sm hover:underline"
+              className="focus:outline-none focus:ring-2 focus:ring-blue-600 text-blue-600 font-semibold text-sm hover:underline"
             >
               {t.servicesSection.ctaButton}
             </Link>
@@ -57,7 +57,7 @@ export default async function SolucionesPage({
             </p>
             <Link
               href={`/${lang}/contacto?solucion=retail`}
-              className="text-blue-600 font-semibold text-sm hover:underline"
+              className="focus:outline-none focus:ring-2 focus:ring-blue-600 text-blue-600 font-semibold text-sm hover:underline"
             >
               {t.servicesSection.ctaButton}
             </Link>
@@ -67,7 +67,7 @@ export default async function SolucionesPage({
         <div className="text-center">
           <Link
             href={`/${lang}/contacto`}
-            className="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
+            className="focus:outline-none focus:ring-2 focus:ring-blue-600 inline-block px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
           >
             {t.hero.secondaryCta}
           </Link>

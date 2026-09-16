@@ -81,7 +81,7 @@ export default async function CasosPage({
               <div className="mt-8 pt-4 border-t border-slate-100">
                 <Link
                   href={`/${lang}/contacto?caso=${encodeURIComponent(caso.title)}`}
-                  className="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1"
+                  className="focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1"
                 >
                   <span>{t.hero.secondaryCta}</span>
                   <span>→</span>

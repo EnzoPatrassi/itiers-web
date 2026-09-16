@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "python sdd_harness.py && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "harness:qa": "python harness_qa.py",
+    "harness:sdd": "python sdd_harness.py",
+    "harness:recommender": "python recommender_harness.py"
   },
   "dependencies": {
     "next": "16.3.4",

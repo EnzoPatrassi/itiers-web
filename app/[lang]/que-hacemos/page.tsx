@@ -82,7 +82,7 @@ export default async function QueHacemosPage({
         <div className="text-center">
           <Link
             href={`/${lang}/contacto`}
-            className="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
+            className="focus:outline-none focus:ring-2 focus:ring-blue-600 inline-block px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
           >
             {lang === 'es' ? 'Agenda una consultoría técnica' : 'Schedule a Technical Consultation'}
           </Link>

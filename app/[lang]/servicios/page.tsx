@@ -87,7 +87,7 @@ export default async function ServiciosPage({
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                 <Link
                   href={`/${lang}/contacto?servicio=${encodeURIComponent(servicio.title)}`}
-                  className="text-blue-600 hover:text-blue-800 font-semibold text-sm inline-flex items-center gap-1 group/link"
+                  className="focus:outline-none focus:ring-2 focus:ring-blue-600 text-blue-600 hover:text-blue-800 font-semibold text-sm inline-flex items-center gap-1 group/link"
                 >
                   <span>{t.servicesSection.ctaButton}</span>
                   <span className="transform group-hover/link:translate-x-1 transition-transform" aria-hidden="true">→</span>

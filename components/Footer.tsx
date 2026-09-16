@@ -48,7 +48,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
 
           {/* Columna 1: Marca y Propuesta de Valor */}
           <div className="space-y-4">
-            <Link href={`/${lang}`} className="inline-block bg-white/10 p-2 rounded-lg backdrop-blur-sm">
+            <Link href={`/${lang}`} className="focus:outline-none focus:ring-2 focus:ring-blue-600 inline-block bg-white/10 p-2 rounded-lg backdrop-blur-sm">
               <Image
                 src="/itiers.png"
                 alt={lang === 'es' ? "Logotipo corporativo oficial de Itiers Data Sense" : "Official Corporate Itiers Data Sense Logo"}
