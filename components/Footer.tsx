@@ -1,4 +1,6 @@
 // src/components/Footer.tsx
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Locale } from '@/data/i18n';
@@ -11,6 +13,10 @@ interface FooterProps {
 export default function Footer({ lang = 'es' }: FooterProps) {
   const t = dictionaries[lang];
   
+  const handleNavClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const quickLinks = [
     { name: t.nav.inicio, href: `/${lang}` },
     { name: t.nav.nosotros, href: `/${lang}/nosotros` },
@@ -48,7 +54,11 @@ export default function Footer({ lang = 'es' }: FooterProps) {
 
           {/* Columna 1: Marca y Propuesta de Valor */}
           <div className="space-y-4">
-            <Link href={`/${lang}`} className="focus:outline-none focus:ring-2 focus:ring-blue-600 inline-block bg-white/10 p-2 rounded-lg backdrop-blur-sm">
+            <Link 
+              href={`/${lang}`} 
+              onClick={handleNavClick}
+              className="focus:outline-none focus:ring-2 focus:ring-blue-600 inline-block bg-white/10 p-2 rounded-lg backdrop-blur-sm"
+            >
               <Image
                 src="/itiers.png"
                 alt={lang === 'es' ? "Logotipo corporativo oficial de Itiers Data Sense" : "Official Corporate Itiers Data Sense Logo"}
@@ -88,6 +98,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
                 <li key={link.name}>
                   <Link
                     href={link.href}
+                    onClick={handleNavClick}
                     className="text-sm text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1"
                   >
                     {link.name}
@@ -105,6 +116,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
                 <li key={service.name}>
                   <Link
                     href={service.href}
+                    onClick={handleNavClick}
                     className="text-sm text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1"
                   >
                     {service.name}

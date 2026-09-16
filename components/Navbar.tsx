@@ -15,6 +15,11 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const t = dictionaries[lang].nav;
 
+  const handleNavClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsOpen(false);
+  };
+
   const navLinks = [
     { name: t.inicio, href: `/${lang}` },
     { name: t.nosotros, href: `/${lang}/nosotros` },
@@ -35,6 +40,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
         <div className="flex lg:flex-1">
           <Link 
             href={`/${lang}`} 
+            onClick={handleNavClick}
             className="-m-1.5 p-1.5 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-md"
           >
             <Image
@@ -77,6 +83,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
             <Link
               key={link.name}
               href={link.href}
+              onClick={handleNavClick}
               className="text-sm font-semibold leading-6 text-slate-800 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 focus:rounded-sm px-2 py-1"
             >
               {link.name}
@@ -89,6 +96,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
           <LanguageSwitcher currentLang={lang} />
           <Link
             href={`/${lang}/contacto`}
+            onClick={handleNavClick}
             className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
           >
             {t.ctaButton}
@@ -109,7 +117,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
               key={link.name}
               href={link.href}
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600"
-              onClick={() => setIsOpen(false)}
+              onClick={handleNavClick}
             >
               {link.name}
             </Link>
@@ -118,7 +126,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
             <Link
               href={`/${lang}/contacto`}
               className="block w-full text-center rounded-md bg-blue-600 px-4 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
-              onClick={() => setIsOpen(false)}
+              onClick={handleNavClick}
             >
               {t.ctaButton}
             </Link>
