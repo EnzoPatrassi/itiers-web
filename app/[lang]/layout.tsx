@@ -12,7 +12,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const resolvedParams = await params;
   const lang: Locale = (resolvedParams.lang === 'en' ? 'en' : 'es');
-  const t = dictionaries[lang].meta;
+  const t = dictionaries[lang].meta.inicio;
   const baseUrl = "https://itiers.com";
 
   return {
