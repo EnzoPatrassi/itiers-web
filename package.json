@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "python sdd_harness.py && next build",
+    "build": "python sdd_harness.py --strict && next build",
     "start": "next start",
     "lint": "eslint",
     "harness:qa": "python harness_qa.py",

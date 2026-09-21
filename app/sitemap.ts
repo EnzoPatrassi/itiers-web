@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://itiers-web.vercel.app';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://itiers-web.vercel.app';
   const routes = ['', '/servicios', '/casos', '/contacto', '/nosotros', '/que-hacemos', '/soluciones'];
   const locales = ['es', 'en'];
 

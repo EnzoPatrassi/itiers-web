@@ -132,9 +132,14 @@ def run_sdd_harness():
     design = parse_markdown_file(design_path)
     tasks = parse_markdown_file(tasks_path)
 
+    is_strict = "--strict" in sys.argv or "-s" in sys.argv
+    cli_args = [a for a in sys.argv[1:] if a not in ["--strict", "-s"]]
+
     if not reqs or not design or not tasks:
         print("❌ ERROR: No se encontraron los 3 archivos en la carpeta 'specs/'.")
         print("   Asegúrate de tener specs/requirements.md, specs/design.md y specs/tasks.md")
+        if is_strict:
+            sys.exit(1)
         return
 
     print("✅ Archivos de especificación cargados correctamente.")
@@ -150,8 +155,8 @@ def run_sdd_harness():
 
     # Determine files to audit
     files_to_audit = []
-    if len(sys.argv) > 1 and sys.argv[1] not in ['--all', 'all']:
-        files_to_audit = [sys.argv[1]]
+    if cli_args and cli_args[0] not in ['--all', 'all']:
+        files_to_audit = [cli_args[0]]
     else:
         files_to_audit = get_all_project_files()
 
@@ -179,6 +184,10 @@ def run_sdd_harness():
     print("\n" + "="*50)
     print(f"📊 RESUMEN SDD FINAL: {total_approved}/{len(files_to_audit)} Aprobados | {total_rejected} Rechazados")
     print("="*50)
+
+    if is_strict and total_rejected > 0:
+        print(f"\n❌ BUILD ABORTADO: Se detectaron {total_rejected} componentes rechazados en modo estricto.")
+        sys.exit(1)
 
 if __name__ == "__main__":
     run_sdd_harness()

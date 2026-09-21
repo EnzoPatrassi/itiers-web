@@ -84,19 +84,18 @@ export default function ContactoPage({
     setSubmitSuccess(null);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "f07c21f7-e7ba-4b72-a7f4-d5f0b8d23456", 
-          name: formData.nombre,
+          nombre: formData.nombre,
           email: formData.email,
-          phone: formData.telefono,
-          subject: `Consulta Web Itiers: Interés general`,
-          message: formData.mensaje,
+          telefono: formData.telefono,
+          servicio: formData.servicio,
+          mensaje: formData.mensaje,
         }),
       });
 

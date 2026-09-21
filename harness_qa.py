@@ -98,6 +98,51 @@ Reescribe el componente reemplazando los contenedores interactivos por etiquetas
 """
     return report
 
+import json
+import urllib.request
+
+def evaluate_component(code, file_path=""):
+    """
+    Evaluación Dual: intenta usar Gemini o OpenAI si la API Key está configurada.
+    Si no hay API Key o la llamada falla, recurre a local_eval_engine como fallback.
+    """
+    gemini_key = os.getenv("GEMINI_API_KEY")
+    openai_key = os.getenv("OPENAI_API_KEY")
+
+    if gemini_key:
+        try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
+            prompt = f"{SYSTEM_PROMPT}\n\nAnaliza el siguiente componente de Next.js (`{file_path}`):\n\n```tsx\n{code}\n```\nIndica en tu respuesta claramente [ESTADO]: APROBADO o [ESTADO]: RECHAZADO con los fallos detectados."
+            payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode('utf-8')
+            req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read().decode('utf-8'))
+                return data['candidates'][0]['content']['parts'][0]['text']
+        except Exception as e:
+            print(f"  ⚠️ Error de red/API Gemini: {e}. Ejecutando motor de evaluación local...")
+
+    elif openai_key:
+        try:
+            url = "https://api.openai.com/v1/chat/completions"
+            payload = json.dumps({
+                "model": "gpt-4o-mini",
+                "messages": [
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": f"Analiza el componente `{file_path}`:\n\n```tsx\n{code}\n```"}
+                ]
+            }).encode('utf-8')
+            req = urllib.request.Request(url, data=payload, headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {openai_key}"
+            })
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read().decode('utf-8'))
+                return data['choices'][0]['message']['content']
+        except Exception as e:
+            print(f"  ⚠️ Error de red/API OpenAI: {e}. Ejecutando motor de evaluación local...")
+
+    return local_eval_engine(code)
+
 def get_all_project_files():
     """Busca automáticamente todos los componentes y páginas (.tsx, .jsx) del proyecto"""
     target_dirs = ['components', 'app']
@@ -172,7 +217,7 @@ def audit_entire_project(should_fix=False):
         if code is None:
             continue
         
-        report = local_eval_engine(code)
+        report = evaluate_component(code, file_path)
         is_approved = "APROBADO" in report
         
         if is_approved:
@@ -234,7 +279,7 @@ def run_harness():
         if file_path:
             code = read_component(file_path)
             if code:
-                report = local_eval_engine(code)
+                report = evaluate_component(code, file_path)
                 print("\n================== REPORTE GENERADO ==================")
                 print(report)
                 print("======================================================")
