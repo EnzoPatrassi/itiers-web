@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { dictionaries, Locale } from "@/data/i18n";
+import ChatAgent from "@/components/ChatAgent";
+
 
 export default async function ServiciosPage({
   params,
@@ -97,6 +99,17 @@ export default async function ServiciosPage({
           ))}
         </div>
 
+
+        {/* Aquí agregamos el Agente Recomendador visual */}
+        <section className="mt-16 mb-16">
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
+            {lang === 'es' ? '¿No estás seguro de qué necesitas?' : 'Not sure what you need?'}
+          </h2>
+          <p className="text-center text-gray-600 mb-8">
+            {lang === 'es' ? 'Habla con nuestro asesor de Inteligencia Artificial para perfilar tu caso.' : 'Talk to our AI advisor to profile your case.'}
+          </p>
+          <ChatAgent />
+        </section>
       </div>
     </div>
   );
