@@ -38,7 +38,7 @@ export default function JsonLd({ lang = 'es' }: JsonLdProps) {
           'AI Agents',
           'Generative AI',
           'Machine Learning',
-          'Harness Engineering'
+          'Data Science & AI'
         ],
         'contactPoint': {
           '@type': 'ContactPoint',

@@ -20,12 +20,12 @@ export default async function NosotrosPage({
             {t.nav.nosotros} | 20 {lang === 'es' ? 'Años de Trayectoria' : 'Years of History'}
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mt-4 tracking-tight">
-            {lang === 'es' ? 'De la Analítica al Harness Engineering' : 'From Analytics to Harness Engineering'}
+            {lang === 'es' ? 'De la Analítica a la Inteligencia Artificial' : 'From Analytics to Artificial Intelligence'}
           </h1>
           <p className="mt-4 text-lg text-slate-600 leading-relaxed">
             {lang === 'es'
-              ? 'La confianza humana es el núcleo de la automatización. Entendemos que la IA requiere un "Arnés" —un ecosistema de herramientas, memoria y validación— para ser dirigida con precisión quirúrgica.'
-              : 'Human trust is the core of automation. We understand that AI requires a "Harness"—an ecosystem of tools, memory, and validation—to be directed with surgical precision.'}
+              ? 'La confianza humana es el núcleo de la automatización. Transformamos información cruda en inteligencia estratégica y productos de datos de alto valor.'
+              : 'Human trust is the core of automation. We refine raw information into strategic intelligence and high-value data products.'}
           </p>
         </header>
 
@@ -40,8 +40,8 @@ export default async function NosotrosPage({
             </h2>
             <p className="text-slate-700 leading-relaxed font-normal">
               {lang === 'es'
-                ? 'Con 20 años de historia, hemos evolucionado para dominar la Ingeniería de Arneses. Nuestra misión es construir los entornos que permiten a la IA dejar de ser una interfaz de chat para convertirse en un agente que produce. En un mundo de resultados no determinísticos, Itiers ofrece arquitecturas robustas y resilientes que garantizan la calidad del software y la integridad de los datos.'
-                : 'With 20 years of history, we have evolved to master Harness Engineering. Our mission is to build the environments that allow AI to move from being a chat interface to becoming a producing agent. In a world of non-deterministic results, Itiers offers robust and resilient architectures that guarantee software quality and data integrity.'}
+                ? 'Con 20 años de historia, hemos evolucionado para dominar la Ingeniería de Datos y la IA Generativa. Nuestra misión es ser el puente entre estructuras de datos complejas y la gestión organizacional efectiva. Ofrecemos arquitecturas robustas y resilientes que garantizan la calidad del software y la integridad de los datos.'
+                : 'With 20 years of history, we have evolved to master Data Engineering and Generative AI. Our mission is to bridge complex data structures and effective organizational management with robust, resilient architectures.'}
             </p>
           </div>
           <div className="lg:col-span-4 bg-slate-900 text-white p-6 rounded-xl space-y-3 shadow-md">

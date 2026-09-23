@@ -17,7 +17,7 @@ export default async function ServiciosPage({
         {/* Cabecera de la Sección */}
         <header className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-blue-600 font-semibold tracking-wider uppercase text-sm bg-blue-50 px-3.5 py-1 rounded-full border border-blue-100">
-            {t.servicesSection.badge} | Harness Engineering
+            {t.servicesSection.badge} | Data Sense & AI
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mt-4">
             {t.servicesSection.title}

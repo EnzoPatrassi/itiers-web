@@ -32,14 +32,14 @@ export default async function LandingPage({
               <>
                 20 años de maestría en datos evolucionados hacia la <br className="hidden sm:inline" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400">
-                  Ingeniería de Arneses.
+                  Inteligencia Artificial y Productos de Datos.
                 </span>
               </>
             ) : (
               <>
                 20 Years of Data Mastery Meets the Future of <br className="hidden sm:inline" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400">
-                  Harness Engineering.
+                  Data Products & Generative AI.
                 </span>
               </>
             )}
@@ -146,7 +146,7 @@ export default async function LandingPage({
           <div className="lg:col-span-4 flex justify-center">
             <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden bg-slate-900 p-6 flex flex-col justify-between text-white shadow-md">
               <div className="text-xs uppercase tracking-widest text-blue-400 font-semibold">Itiers Data Sense</div>
-              <div className="text-lg font-bold">Harness Engineering</div>
+              <div className="text-lg font-bold">Data Sense & Analytics</div>
               <div className="text-xs text-slate-400">Mendoza 🇦🇷 | Chile 🇨🇱 | USA 🇺🇸</div>
             </div>
           </div>

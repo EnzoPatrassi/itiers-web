@@ -208,8 +208,8 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
         description: 'Ingeniería avanzada: RAG con Embeddings, MCP y Data Products para escala global.' 
       },
       nosotros: { 
-        title: 'Expertos en Harness Engineering', 
-        description: 'De consultoría tradicional a Ingeniería de Arneses: liderando la era de agentes de IA.' 
+        title: 'Expertos en Productos de Datos e IA', 
+        description: 'De la consultoría tradicional a la analítica avanzada e IA Generativa: liderando la transformación de datos.' 
       },
       contacto: { 
         title: 'Sedes Globales y Consultoría Técnica', 
@@ -232,7 +232,7 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
     },
     hero: {
       badge: '20 Years of Experience | Data Sense & AI Consulting', // <- Traducido al inglés
-      title: '20 Years of Data Mastery Meets the Future of Harness Engineering.', // <- Traducido al inglés[cite: 11]
+      title: '20 Years of Data Mastery Meets the Future of AI & Data Engineering.', // <- Traducido al inglés
       subtitle: 'We transform your organization’s potential through strategic analysis and AI agent orchestration. We don’t build chatbots that talk; we design agents that deliver deterministic results.', // <- Traducido al inglés[cite: 11]
       primaryCta: 'Explore our SDD Methodology',
       secondaryCta: 'Schedule a Technical Consultation',
@@ -352,8 +352,8 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
         description: 'Advanced Engineering: RAG with Embeddings, MCP, and Data Products at scale.' 
       },
       nosotros: { 
-        title: 'Harness Engineering Experts', 
-        description: 'From traditional consulting to Harness Engineering: leading the AI agent era.' 
+        title: 'Data & AI Engineering Experts', 
+        description: 'From traditional consulting to Data Engineering and AI: leading data-driven transformation.' 
       },
       contacto: { 
         title: 'Global Offices & Technical Consulting', 
