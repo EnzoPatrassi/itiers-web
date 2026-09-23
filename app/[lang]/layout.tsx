@@ -44,6 +44,18 @@ export async function generateMetadata({
       siteName: "Itiers Data Sense",
       locale: lang === 'en' ? 'en_US' : 'es_AR',
       type: "website",
+      images: [
+        {
+          url: `${baseUrl}/itiers.png`,
+          alt: "Itiers Data Sense Logo",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t.title,
+      description: t.description,
+      images: [`${baseUrl}/itiers.png`],
     },
     robots: {
       index: true,
