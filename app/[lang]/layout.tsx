@@ -76,7 +76,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={lang === 'en' ? 'en-US' : 'es-AR'}>
-      <body className="antialiased bg-slate-50 text-slate-900 flex flex-col min-h-screen">
+      <body className="antialiased bg-white text-stone-900 flex flex-col min-h-screen">
         <JsonLd lang={lang} />
         {/* Persistent Header / Navbar */}
         <Navbar lang={lang} />

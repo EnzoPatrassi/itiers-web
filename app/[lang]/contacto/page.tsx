@@ -106,7 +106,7 @@ export default function ContactoPage({
       } else {
         setSubmitSuccess(false);
       }
-    } catch (error) {
+    } catch {
       setSubmitSuccess(false);
     } finally {
       setIsSubmitting(false);
@@ -114,17 +114,17 @@ export default function ContactoPage({
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen py-16 px-6 sm:px-12">
+    <div className="bg-white min-h-screen py-16 px-6 sm:px-12">
       <div className="max-w-7xl mx-auto">
         
         <header className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-blue-600 font-semibold tracking-wider uppercase text-sm bg-blue-50 px-3.5 py-1 rounded-full border border-blue-100">
+          <span className="text-[#ff4f00] font-semibold tracking-wider uppercase text-sm bg-[#fafafa] px-3.5 py-1 rounded-full border border-[#b2b2b2]">
             {t.nav.contacto} | Mendoza, Argentina
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mt-4 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-medium text-[#1c1917] mt-4 tracking-tight">
             {lang === 'es' ? 'Hablemos de tus Datos e Inteligencia Artificial' : 'Let’s Talk About Your Data & Artificial Intelligence'}
           </h1>
-          <p className="mt-4 text-lg text-slate-600">
+          <p className="mt-4 text-lg text-stone-700">
             {lang === 'es' 
               ? 'Ponte en contacto con nuestro equipo de consultores especialistas para diseñar la estrategia ideal para tu organización.'
               : 'Get in touch with our team of expert consultants to design the ideal strategy for your organization.'}
@@ -134,13 +134,13 @@ export default function ContactoPage({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           
           {/* Información de Contacto */}
-          <div className="bg-slate-900 text-white rounded-2xl p-8 sm:p-10 shadow-xl space-y-8">
+          <div className="bg-[#1f1f1f] text-white rounded-[16px] p-8 sm:p-10 border border-[#333333] space-y-8">
             <div>
               <h2 className="text-2xl font-bold mb-2">Itiers Data Sense</h2>
-              <p className="text-slate-400 text-sm">{t.footer.tagline}</p>
+              <p className="text-[#f2f2f2] text-sm">{t.footer.tagline}</p>
             </div>
 
-            <div className="space-y-4 text-sm text-slate-300">
+            <div className="space-y-4 text-sm text-[#f2f2f2]">
               <div className="flex items-start gap-3">
                 <span className="text-xl">📍</span>
                 <div>
@@ -166,7 +166,7 @@ export default function ContactoPage({
               </div>
             </div>
 
-            <div className="relative w-full h-48 rounded-xl overflow-hidden bg-slate-800 border border-slate-700">
+            <div className="relative w-full h-48 rounded-[12px] overflow-hidden bg-[#333333] border border-[#b2b2b2]">
               <Image
                 src="/globe.svg"
                 alt={lang === 'es' ? 'Ubicación global de Itiers Data Sense' : 'Global presence of Itiers Data Sense'}
@@ -177,20 +177,20 @@ export default function ContactoPage({
           </div>
 
           {/* Formulario de Contacto */}
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 sm:p-10 shadow-md border border-slate-200 space-y-6" noValidate>
+          <form onSubmit={handleSubmit} className="bg-[#fafafa] rounded-[16px] p-8 sm:p-10 border border-[#b2b2b2] space-y-6" noValidate>
             {submitSuccess === true && (
-              <div className="p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg text-sm">
+              <div className="p-4 bg-white border border-[#0b6e4f] text-[#0b6e4f] rounded-[12px] text-sm">
                 <span className="font-bold">{lang === 'es' ? '¡Mensaje enviado con éxito!' : 'Message sent successfully!'}</span> {lang === 'es' ? 'Nos pondremos en contacto a la brevedad.' : 'We will get in touch shortly.'}
               </div>
             )}
             {submitSuccess === false && (
-              <div className="p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg text-sm">
+              <div className="p-4 bg-white border border-[#a6192e] text-[#a6192e] rounded-[12px] text-sm">
                 {lang === 'es' ? 'Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.' : 'There was an error sending the message. Please try again.'}
               </div>
             )}
 
             <div>
-              <label htmlFor="nombre" className="block text-sm font-semibold text-slate-900 mb-2">
+              <label htmlFor="nombre" className="block text-sm font-semibold text-[#1c1917] mb-2">
                 {lang === 'es' ? 'Nombre Completo *' : 'Full Name *'}
               </label>
               <input
@@ -199,14 +199,14 @@ export default function ContactoPage({
                 name="nombre"
                 value={formData.nombre}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 rounded-lg border outline-none transition ${errors.nombre ? "border-red-500" : "border-slate-300 focus:ring-2 focus:ring-blue-600"}`}
+                className={`w-full px-4 py-3 rounded-[12px] border border-[#b2b2b2] outline-none transition focus:ring-2 focus:ring-[#ff4f00] ${errors.nombre ? "border-[#a6192e]" : ""}`}
                 placeholder={lang === 'es' ? 'Ej. Juan Pérez' : 'E.g. John Smith'}
               />
-              {errors.nombre && <p className="text-xs text-red-600 mt-1">{errors.nombre}</p>}
+              {errors.nombre && <p className="text-xs text-[#a6192e] mt-1">{errors.nombre}</p>}
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-slate-900 mb-2">
+              <label htmlFor="email" className="block text-sm font-semibold text-[#1c1917] mb-2">
                 {lang === 'es' ? 'Correo Electrónico Corporativo *' : 'Corporate Email *'}
               </label>
               <input
@@ -215,14 +215,14 @@ export default function ContactoPage({
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 rounded-lg border outline-none transition ${errors.email ? "border-red-500" : "border-slate-300 focus:ring-2 focus:ring-blue-600"}`}
+                className={`w-full px-4 py-3 rounded-[12px] border border-[#b2b2b2] outline-none transition focus:ring-2 focus:ring-[#ff4f00] ${errors.email ? "border-[#a6192e]" : ""}`}
                 placeholder="ejemplo@empresa.com"
               />
-              {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
+              {errors.email && <p className="text-xs text-[#a6192e] mt-1">{errors.email}</p>}
             </div>
 
             <div>
-              <label htmlFor="mensaje" className="block text-sm font-semibold text-slate-900 mb-2">
+              <label htmlFor="mensaje" className="block text-sm font-semibold text-[#1c1917] mb-2">
                 {lang === 'es' ? 'Mensaje o Consulta *' : 'Message or Inquiry *'}
               </label>
               <textarea
@@ -231,16 +231,16 @@ export default function ContactoPage({
                 rows={4}
                 value={formData.mensaje}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 rounded-lg border outline-none transition ${errors.mensaje ? "border-red-500" : "border-slate-300 focus:ring-2 focus:ring-blue-600"}`}
+                className={`w-full px-4 py-3 rounded-[12px] border border-[#b2b2b2] outline-none transition focus:ring-2 focus:ring-[#ff4f00] ${errors.mensaje ? "border-[#a6192e]" : ""}`}
                 placeholder={lang === 'es' ? 'Cuéntanos sobre los objetivos de tu empresa...' : 'Tell us about your organization goals...'}
               ></textarea>
-              {errors.mensaje && <p className="text-xs text-red-600 mt-1">{errors.mensaje}</p>}
+              {errors.mensaje && <p className="text-xs text-[#a6192e] mt-1">{errors.mensaje}</p>}
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:opacity-50"
+              className="w-full py-4 bg-[#ff4f00] hover:bg-[#d94300] text-white font-bold rounded-[12px] transition-all focus:outline-none focus:ring-2 focus:ring-[#ff4f00] disabled:opacity-50"
             >
               {isSubmitting ? (lang === 'es' ? 'Enviando...' : 'Sending...') : (lang === 'es' ? 'Enviar Mensaje' : 'Send Message')}
             </button>

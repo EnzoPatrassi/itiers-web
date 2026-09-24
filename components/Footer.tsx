@@ -48,7 +48,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
   }));
 
   return (
-    <footer className="bg-slate-900 text-slate-300 border-t border-slate-800" aria-label="Pie de página corporativo">
+    <footer className="bg-[#1f1f1f] text-[#f2f2f2] border-t border-[#333333]" aria-label="Pie de página corporativo">
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
@@ -57,26 +57,26 @@ export default function Footer({ lang = 'es' }: FooterProps) {
             <Link 
               href={`/${lang}`} 
               onClick={handleNavClick}
-              className="focus:outline-none focus:ring-2 focus:ring-blue-600 inline-block bg-white/10 p-2 rounded-lg backdrop-blur-sm"
+              className="focus:outline-none focus:ring-2 focus:ring-[#ff4f00] inline-block p-2 rounded-[12px]"
             >
               <Image
                 src="/itiers.png"
                 alt={lang === 'es' ? "Logotipo corporativo oficial de Itiers Data Sense" : "Official Corporate Itiers Data Sense Logo"}
                 width={160}
                 height={45}
-                className="h-9 w-auto object-contain brightness-0 invert"
+                className="h-9 w-auto object-contain"
               />
             </Link>
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-[#f2f2f2]">
               {t.footer.tagline}
             </p>
             
             {/* Identidad e Ingeniería de IA */}
-            <div className="pt-2 border-t border-slate-800 space-y-1">
-              <span className="text-xs text-slate-500 block">
+            <div className="pt-2 border-t border-[#333333] space-y-1">
+              <span className="text-xs text-[#b2b2b2] block">
                 {lang === 'es' ? 'Identidad Corporativa' : 'Corporate Identity'}
               </span>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-[#f2f2f2]">
                 {lang === 'es' 
                   ? 'Expertos en Data Analytics e Ingeniería de Inteligencia Artificial.' 
                   : 'Experts in Data Analytics and Artificial Intelligence Engineering.'}
@@ -85,8 +85,8 @@ export default function Footer({ lang = 'es' }: FooterProps) {
 
             {/* Alianza IBM Watsonx */}
             <div>
-              <span className="text-xs text-slate-500 block">Socio Tecnológico / Tech Partner</span>
-              <span className="text-sm font-semibold text-blue-400">IBM Watsonx Global Partner</span>
+              <span className="text-xs text-[#b2b2b2] block">Socio Tecnológico / Tech Partner</span>
+              <span className="text-sm font-semibold text-[#ff4f00]">IBM Watsonx Global Partner</span>
             </div>
           </div>
 
@@ -99,7 +99,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
                   <Link
                     href={link.href}
                     onClick={handleNavClick}
-                    className="text-sm text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1"
+                    className="text-sm text-[#b2b2b2] hover:text-[#ff4f00] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] rounded px-1"
                   >
                     {link.name}
                   </Link>
@@ -117,7 +117,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
                   <Link
                     href={service.href}
                     onClick={handleNavClick}
-                    className="text-sm text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1"
+                    className="text-sm text-[#b2b2b2] hover:text-[#ff4f00] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] rounded px-1"
                   >
                     {service.name}
                   </Link>
@@ -131,8 +131,8 @@ export default function Footer({ lang = 'es' }: FooterProps) {
             <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">{t.footer.headquarters}</h3>
             <div className="space-y-4">
               {offices.map((office) => (
-                <div key={office.country} className="text-xs text-slate-400 leading-relaxed">
-                  <span className="font-bold text-slate-300 block mb-0.5">{office.country}</span>
+                <div key={office.country} className="text-xs text-[#b2b2b2] leading-relaxed">
+                  <span className="font-bold text-[#f2f2f2] block mb-0.5">{office.country}</span>
                   {office.address}
                 </div>
               ))}
@@ -142,12 +142,12 @@ export default function Footer({ lang = 'es' }: FooterProps) {
         </div>
 
         {/* Sección de contacto rápido e íconos sociales */}
-        <div className="mt-8 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
-            <a href="mailto:hola@itiers.com" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
+        <div className="mt-8 pt-8 border-t border-[#333333] flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#b2b2b2]">
+            <a href="mailto:hola@itiers.com" className="hover:text-[#ff4f00] focus:outline-none focus:ring-2 focus:ring-[#ff4f00] px-1 rounded">
               📩 hola@itiers.com
             </a>
-            <a href="tel:+5492614171612" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
+            <a href="tel:+5492614171612" className="hover:text-[#ff4f00] focus:outline-none focus:ring-2 focus:ring-[#ff4f00] px-1 rounded">
               📞 +54 9 261 417-1612 (Mendoza, Argentina)
             </a>
           </div>
@@ -156,7 +156,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
           <div className="flex space-x-6 text-sm">
             <a
               href="https://ar.linkedin.com/company/itiers"
-              className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
+              className="text-[#b2b2b2] hover:text-[#ff4f00] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] p-1 rounded"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Itiers en LinkedIn"
@@ -165,7 +165,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
             </a>
             <a
               href="https://www.instagram.com/itiersds/"
-              className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
+              className="text-[#b2b2b2] hover:text-[#ff4f00] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] p-1 rounded"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Itiers en Instagram"
@@ -174,7 +174,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
             </a>
             <a
               href="https://www.youtube.com/channel/UCrWeQoKi3bM8JtVYVG-44VA"
-              className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
+              className="text-[#b2b2b2] hover:text-[#ff4f00] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] p-1 rounded"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Itiers en YouTube"
@@ -185,7 +185,7 @@ export default function Footer({ lang = 'es' }: FooterProps) {
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 border-t border-slate-800/50 pt-8 text-center md:text-left flex justify-between flex-col md:flex-row text-xs text-slate-500">
+        <div className="mt-8 border-t border-[#333333] pt-8 text-center md:text-left flex justify-between flex-col md:flex-row text-xs text-[#b2b2b2]">
           <p>Copyright © 2026 Itiers – Data Sense. {t.footer.rights}</p>
           <p className="mt-2 md:mt-0">{t.footer.locationMendoza}</p>
         </div>

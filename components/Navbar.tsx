@@ -31,7 +31,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-[#b2b2b2] bg-white">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
         aria-label={t.ariaNav}
@@ -41,7 +41,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
           <Link 
             href={`/${lang}`} 
             onClick={handleNavClick}
-            className="-m-1.5 p-1.5 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-md"
+            className="-m-1.5 p-1.5 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] rounded-md"
           >
             <Image
               src="/itiers.png"
@@ -59,7 +59,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
           <LanguageSwitcher currentLang={lang} />
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-stone-900 hover:bg-[#fafafa] focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
             onClick={() => setIsOpen(!isOpen)}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
@@ -84,7 +84,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
               key={link.name}
               href={link.href}
               onClick={handleNavClick}
-              className="text-sm font-semibold leading-6 text-slate-800 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 focus:rounded-sm px-2 py-1"
+              className="text-sm font-semibold leading-6 text-stone-900 hover:text-[#ff4f00] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:rounded-sm px-2 py-1"
             >
               {link.name}
             </Link>
@@ -97,7 +97,7 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
           <Link
             href={`/${lang}/contacto`}
             onClick={handleNavClick}
-            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            className="rounded-[12px] bg-[#ff4f00] px-4 py-2 text-sm font-semibold text-white hover:bg-[#d94300] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff4f00]"
           >
             {t.ctaButton}
           </Link>
@@ -111,21 +111,21 @@ export default function Navbar({ lang = 'es' }: NavbarProps) {
         role="region"
         aria-label="Menú de navegación móvil"
       >
-        <div className="space-y-1 px-4 pb-4 pt-2 border-t border-gray-100 bg-white">
+        <div className="space-y-1 px-4 pb-4 pt-2 border-t border-[#b2b2b2] bg-white">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="block rounded-md px-3 py-2 text-base font-medium text-stone-900 hover:bg-[#fafafa] hover:text-[#ff4f00] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
               onClick={handleNavClick}
             >
               {link.name}
             </Link>
           ))}
-          <div className="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-3">
+          <div className="mt-4 pt-4 border-t border-[#b2b2b2] flex flex-col gap-3">
             <Link
               href={`/${lang}/contacto`}
-              className="block w-full text-center rounded-md bg-blue-600 px-4 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="block w-full text-center rounded-[12px] bg-[#ff4f00] px-4 py-2.5 text-base font-semibold text-white hover:bg-[#d94300] focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
               onClick={handleNavClick}
             >
               {t.ctaButton}
