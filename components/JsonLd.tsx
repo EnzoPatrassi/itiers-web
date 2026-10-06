@@ -1,73 +1,25 @@
-import type { Locale } from '@/data/i18n';
+import React from 'react';
+import { OFFICIAL_ITIERS_JSON_LD, validateJsonLdStructure } from '@/lib/harness/guardrails';
 
-interface JsonLdProps {
-  lang?: Locale;
+export interface JsonLdProps {
+  data?: Record<string, unknown>;
 }
 
-export default function JsonLd({ lang = 'es' }: JsonLdProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://itiers.com';
-
-  const schemaData = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': `${baseUrl}/#organization`,
-        'name': 'Itiers Data Sense',
-        'alternateName': 'Itiers',
-        'url': baseUrl,
-        'logo': `${baseUrl}/logo.png`,
-        'description':
-          lang === 'en'
-            ? 'Itiers is a consulting firm specializing in data analytics, cloud architecture, and artificial intelligence based in Mendoza, Argentina.'
-            : 'Itiers es una consultora especializada en analítica de datos, arquitectura cloud e inteligencia artificial con sede en Mendoza, Argentina.',
-        'address': {
-          '@type': 'PostalAddress',
-          'addressLocality': 'Mendoza',
-          'addressRegion': 'Mendoza',
-          'addressCountry': 'AR',
-          'streetAddress': 'Av. Belgrano 1234, Ciudad de Mendoza'
-        },
-        'areaServed': ['Argentina', 'Chile', 'United States', 'Latin America'],
-        'knowsAbout': [
-          'Data Analytics',
-          'Artificial Intelligence',
-          'Business Intelligence',
-          'Data Engineering',
-          'Cloud Computing',
-          'AI Agents',
-          'Generative AI',
-          'Machine Learning',
-          'Data Science & AI'
-        ],
-        'contactPoint': {
-          '@type': 'ContactPoint',
-          'email': 'contacto@itiers.com',
-          'telephone': '+54-9-261-000-0000',
-          'contactType': 'customer service',
-          'availableLanguage': ['Spanish', 'English']
-        },
-        'sameAs': [
-          'https://linkedin.com/company/itiers'
-        ]
-      },
-      {
-        '@type': 'WebSite',
-        '@id': `${baseUrl}/#website`,
-        'url': baseUrl,
-        'name': 'Itiers',
-        'publisher': {
-          '@id': `${baseUrl}/#organization`
-        },
-        'inLanguage': ['es', 'en']
-      }
-    ]
-  };
+export const JsonLd: React.FC<JsonLdProps> = ({ data = OFFICIAL_ITIERS_JSON_LD }) => {
+  // Validar esquema mediante Guardrails Zod
+  const validation = validateJsonLdStructure(data);
+  if (!validation.success) {
+    console.warn('⚠️ [JsonLd Guardrail Warning] Estructura Schema.org inválida:', validation.error);
+  }
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data)
+      }}
     />
   );
-}
+};
+
+export default JsonLd;

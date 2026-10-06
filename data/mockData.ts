@@ -31,6 +31,7 @@ export interface InfoCorporativa {
   alianzaAI: string;
   whatsapp: string;
   email: string;
+  googleFormWorkWithUs?: string;
   sedes: Sede[];
 }
 
@@ -41,23 +42,24 @@ export const INFO_ITIERS: InfoCorporativa = {
   trayectoria: "20 años",
   lema: "Refinamos información compleja en inteligencia estratégica para organizaciones.",
   alianzaAI: "Socio Tecnológico Global de IBM Watsonx",
-  whatsapp: "+54 9 261 000-0000",
-  email: "spiderman07052000@gmail.com",
+  whatsapp: "+5492614171612",
+  email: "hola@itiers.com",
+  googleFormWorkWithUs: "https://docs.google.com/forms/d/e/1FAIpQLSfN5I8_vgDeYfihh_3rPSb1tOVSbf3yUgNWgGD-77aLlLWKbA/viewform?pli=1",
   sedes: [
     {
       pais: "Argentina",
       ciudad: "Mendoza",
-      direccion: "Av. Belgrano 1234, Ciudad de Mendoza"
+      direccion: "Mendoza, Argentina"
     },
     {
       pais: "Chile",
       ciudad: "Santiago",
-      direccion: "Av. Providencia 567, Providencia"
+      direccion: "Providencia, Santiago de Chile"
     },
     {
       pais: "Estados Unidos",
       ciudad: "Delaware",
-      direccion: "1209 North Orange St, Wilmington"
+      direccion: "Delaware, USA"
     }
   ]
 };

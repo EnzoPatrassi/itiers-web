@@ -1,12 +1,26 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://itiers-web.vercel.app';
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/api/', '/_next/'],
+      },
+      {
+        userAgent: [
+          'GPTBot',
+          'ClaudeBot',
+          'PerplexityBot',
+          'Google-Extended',
+          'CCBot',
+          'Applebot-Extended'
+        ],
+        allow: '/',
+      },
+    ],
+    sitemap: 'https://www.itiers.com/sitemap.xml',
+    host: 'https://www.itiers.com',
   };
 }

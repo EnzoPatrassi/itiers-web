@@ -1,196 +1,144 @@
-// src/components/Footer.tsx
 'use client';
 
-import Link from 'next/link';
+import React from 'react';
 import Image from 'next/image';
-import type { Locale } from '@/data/i18n';
-import { dictionaries } from '@/data/i18n';
+import { Locale, dictionaries } from '@/data/i18n';
+import { INFO_ITIERS } from '@/data/mockData';
 
 interface FooterProps {
-  lang?: Locale;
+  currentLang: Locale;
+  onLanguageChange: (lang: Locale) => void;
 }
 
-export default function Footer({ lang = 'es' }: FooterProps) {
-  const t = dictionaries[lang];
-  
-  const handleNavClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange }) => {
+  const t = dictionaries[currentLang].footer;
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const quickLinks = [
-    { name: t.nav.inicio, href: `/${lang}` },
-    { name: t.nav.nosotros, href: `/${lang}/nosotros` },
-    { name: t.nav.servicios, href: `/${lang}/servicios` },
-    { name: t.nav.queHacemos, href: `/${lang}/que-hacemos` },
-    { name: t.nav.soluciones, href: `/${lang}/soluciones` },
-    { name: t.nav.casos, href: `/${lang}/casos` },
-    { name: t.nav.contacto, href: `/${lang}/contacto` },
-  ];
-
-  const offices = [
-    {
-      country: 'Argentina',
-      address: 'Av. Perú 1841, Mendoza, Argentina',
-    },
-    {
-      country: 'Chile',
-      address: 'General del Canto 421, piso 6, Providencia, Santiago de Chile',
-    },
-    {
-      country: lang === 'en' ? 'United States' : 'Estados Unidos',
-      address: '651 North Broad Street, Middletown, DE 19709, USA',
-    },
-  ];
-
-  const services = t.servicesSection.items.map(s => ({
-    name: s.title,
-    href: `/${lang}/servicios#${s.id}`
-  }));
-
   return (
-    <footer className="bg-slate-900 text-slate-300 border-t border-slate-800" aria-label="Pie de página corporativo">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-          {/* Columna 1: Marca y Propuesta de Valor */}
-          <div className="space-y-4">
-            <Link 
-              href={`/${lang}`} 
-              onClick={handleNavClick}
-              className="focus:outline-none focus:ring-2 focus:ring-blue-600 inline-block bg-white/10 p-2 rounded-lg backdrop-blur-sm"
-            >
+    <footer className="bg-[#1F1F1F] text-white border-t border-[#333333] pt-16 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+          {/* Col 1: Logo & Tagline */}
+          <div className="space-y-4 md:col-span-1">
+            <div className="relative w-36 h-12">
               <Image
                 src="/itiers.png"
-                alt={lang === 'es' ? "Logotipo corporativo oficial de Itiers Data Sense" : "Official Corporate Itiers Data Sense Logo"}
-                width={160}
-                height={45}
-                className="h-9 w-auto object-contain brightness-0 invert"
+                alt="Itiers Data Sense"
+                fill
+                className="object-contain"
               />
-            </Link>
-            <p className="text-sm text-slate-400">
-              {t.footer.tagline}
+            </div>
+            <p className="text-gray-400 text-xs leading-relaxed">
+              {t.tagline}
             </p>
-            
-            {/* Identidad e Ingeniería de IA */}
-            <div className="pt-2 border-t border-slate-800 space-y-1">
-              <span className="text-xs text-slate-500 block">
-                {lang === 'es' ? 'Identidad Corporativa' : 'Corporate Identity'}
-              </span>
-              <p className="text-xs text-slate-300">
-                {lang === 'es' 
-                  ? 'Expertos en Data Analytics e Ingeniería de Inteligencia Artificial.' 
-                  : 'Experts in Data Analytics and Artificial Intelligence Engineering.'}
-              </p>
-            </div>
-
-            {/* Alianza IBM Watsonx */}
-            <div>
-              <span className="text-xs text-slate-500 block">Socio Tecnológico / Tech Partner</span>
-              <span className="text-sm font-semibold text-blue-400">IBM Watsonx Global Partner</span>
+            <div className="text-xs text-[#ff4f00] font-mono font-bold">
+              {INFO_ITIERS.trayectoria} de maestría analítica
             </div>
           </div>
 
-          {/* Columna 2: Enlaces Rápidos */}
+          {/* Col 2: Navigation */}
           <div>
-            <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">{t.footer.quickLinks}</h3>
-            <ul role="list" className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    onClick={handleNavClick}
-                    className="text-sm text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#ff4f00] mb-4">
+              {t.quickLinks}
+            </h4>
+            <ul className="space-y-2 text-xs text-gray-300">
+              <li>
+                <a href="#inicio" onClick={(e) => handleScroll(e, '#inicio')} className="hover:text-[#ff4f00] transition-colors">
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a href="#servicios" onClick={(e) => handleScroll(e, '#servicios')} className="hover:text-[#ff4f00] transition-colors">
+                  Servicios
+                </a>
+              </li>
+              <li>
+                <a href="#data-ai" onClick={(e) => handleScroll(e, '#data-ai')} className="hover:text-[#ff4f00] transition-colors">
+                  Data & AI
+                </a>
+              </li>
+              <li>
+                <a href="#tecnologia" onClick={(e) => handleScroll(e, '#tecnologia')} className="hover:text-[#ff4f00] transition-colors">
+                  Tecnología
+                </a>
+              </li>
+              <li>
+                <a href="#equipo" onClick={(e) => handleScroll(e, '#equipo')} className="hover:text-[#ff4f00] transition-colors">
+                  Equipo
+                </a>
+              </li>
+              <li>
+                <a href="#contacto" onClick={(e) => handleScroll(e, '#contacto')} className="hover:text-[#ff4f00] transition-colors">
+                  Contacto
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Columna 3: Servicios Principales */}
+          {/* Col 3: Contact */}
           <div>
-            <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">{t.footer.servicesTitle}</h3>
-            <ul role="list" className="space-y-2">
-              {services.map((service) => (
-                <li key={service.name}>
-                  <Link
-                    href={service.href}
-                    onClick={handleNavClick}
-                    className="text-sm text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1"
-                  >
-                    {service.name}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#ff4f00] mb-4">
+              {t.contactTitle}
+            </h4>
+            <ul className="space-y-2 text-xs text-gray-300">
+              <li>Email: <a href={`mailto:${INFO_ITIERS.email}`} className="text-white hover:text-[#ff4f00]">{INFO_ITIERS.email}</a></li>
+              <li>WhatsApp: <a href={`https://wa.me/${INFO_ITIERS.whatsapp.replace('+', '')}`} target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#ff4f00]">{INFO_ITIERS.whatsapp}</a></li>
+              <li className="pt-2 text-gray-400">
+                Sedes: Mendoza (AR), Santiago (CL), Delaware (USA)
+              </li>
             </ul>
           </div>
 
-          {/* Columna 4: Sedes de Itiers */}
+          {/* Col 4: Language & Career */}
           <div>
-            <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">{t.footer.headquarters}</h3>
-            <div className="space-y-4">
-              {offices.map((office) => (
-                <div key={office.country} className="text-xs text-slate-400 leading-relaxed">
-                  <span className="font-bold text-slate-300 block mb-0.5">{office.country}</span>
-                  {office.address}
-                </div>
-              ))}
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#ff4f00] mb-4">
+              Idioma / Language
+            </h4>
+            <div className="flex items-center space-x-2 mb-6">
+              <button
+                type="button"
+                onClick={() => onLanguageChange('es')}
+                className={`px-3 py-1 rounded-lg text-xs font-semibold ${
+                  currentLang === 'es' ? 'bg-[#ff4f00] text-white' : 'bg-[#0F0F0F] text-gray-400'
+                }`}
+              >
+                Español
+              </button>
+              <button
+                type="button"
+                onClick={() => onLanguageChange('en')}
+                className={`px-3 py-1 rounded-lg text-xs font-semibold ${
+                  currentLang === 'en' ? 'bg-[#ff4f00] text-white' : 'bg-[#0F0F0F] text-gray-400'
+                }`}
+              >
+                English
+              </button>
             </div>
-          </div>
 
-        </div>
-
-        {/* Sección de contacto rápido e íconos sociales */}
-        <div className="mt-8 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
-            <a href="mailto:hola@itiers.com" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
-              📩 hola@itiers.com
-            </a>
-            <a href="tel:+5492614171612" className="hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 px-1 rounded">
-              📞 +54 9 261 417-1612 (Mendoza, Argentina)
-            </a>
-          </div>
-
-          {/* Enlaces a Redes Sociales Oficiales */}
-          <div className="flex space-x-6 text-sm">
-            <a
-              href="https://ar.linkedin.com/company/itiers"
-              className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Itiers en LinkedIn"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://www.instagram.com/itiersds/"
-              className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Itiers en Instagram"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://www.youtube.com/channel/UCrWeQoKi3bM8JtVYVG-44VA"
-              className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Itiers en YouTube"
-            >
-              YouTube
-            </a>
+            {INFO_ITIERS.googleFormWorkWithUs && (
+              <a
+                href={INFO_ITIERS.googleFormWorkWithUs}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-xs font-bold text-[#ff4f00] hover:underline"
+              >
+                Postulaciones de Empleo ↗
+              </a>
+            )}
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-8 border-t border-slate-800/50 pt-8 text-center md:text-left flex justify-between flex-col md:flex-row text-xs text-slate-500">
-          <p>Copyright © 2026 Itiers – Data Sense. {t.footer.rights}</p>
-          <p className="mt-2 md:mt-0">{t.footer.locationMendoza}</p>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-[#333333] flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400">
+          <div>© {new Date().getFullYear()} Itiers Data Sense. Todos los derechos reservados.</div>
+          <div className="mt-2 sm:mt-0 font-mono text-[#ff4f00]">Data · AI · Technology</div>
         </div>
-
       </div>
     </footer>
   );
-}
+};

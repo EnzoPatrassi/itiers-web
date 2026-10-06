@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import './globals.css';
 
 // Metadatos globales y de la página de inicio (Definidos por Martín - SEO)
 export const metadata: Metadata = {
@@ -11,5 +12,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <html lang="es">
+      <body>
+        {children}
+      </body>
+    </html>
+  );
 }

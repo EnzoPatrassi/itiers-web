@@ -1,38 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  /* Registro de animaciones personalizadas */
-  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-fade-in: fade-in 0.5s ease-out forwards;
-  --animate-float: float 6s ease-in-out infinite;
+    /* Colores de marca y superficies */
+    --color-primary: #ff4f00;
+    --color-secondary: #b2b2b2;
+    --color-accent: #1F1F1F;
+    --color-background: #FFFFFF;
+    --color-surface: #FAFAFA;
+    --color-brand-gray: #4d4d4d;
+    --color-border: #b2b2b2;
 
-  /* Declaración de Keyframes */
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(24px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+    /* Tipografía[cite: 4] */
+    --font-heading: "Arista Pro Trial Light", "Comfortaa", sans-serif;
+    --font-body: "Arial Rounded MT", "Nunito", sans-serif;
+    --font-mono: "Geist Mono", monospace;
 
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
+    /* Espaciado y Radios[cite: 4] */
+    --spacing-base: 8px;
+    --radius-sm: 12px;
+    --radius-none: 0px;
+    --radius-md: 16px;
+    --radius-full: 9999px;
 }

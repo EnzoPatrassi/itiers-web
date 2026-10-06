@@ -1,28 +1,45 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://itiers-web.vercel.app';
-  const routes = ['', '/servicios', '/casos', '/contacto', '/nosotros', '/que-hacemos', '/soluciones'];
-  const locales = ['es', 'en'];
+  const baseUrl = 'https://www.itiers.com';
+  const currentDate = new Date();
 
-  const sitemapEntries: MetadataRoute.Sitemap = [];
-
-  routes.forEach((route) => {
-    locales.forEach((locale) => {
-      sitemapEntries.push({
-        url: `${baseUrl}/${locale}${route}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: route === '' ? 1.0 : 0.8,
-        alternates: {
-          languages: {
-            'es-AR': `${baseUrl}/es${route}`,
-            'en-US': `${baseUrl}/en${route}`,
-          },
-        },
-      });
-    });
-  });
-
-  return sitemapEntries;
+  return [
+    {
+      url: `${baseUrl}/`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/es`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/en`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/servicios`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/es/servicios`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/en/servicios`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+  ];
 }
