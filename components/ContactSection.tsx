@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Locale } from '@/data/i18n';
 import { INFO_ITIERS } from '@/data/mockData';
 
@@ -155,12 +156,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
                 {content.headquarters}
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {INFO_ITIERS.sedes.map((sede, idx) => (
-                  <div key={idx} className="p-3 rounded-xl bg-[#1F1F1F]/50 border border-[#333333]/60 text-xs">
-                    <div className="font-bold text-white">{sede.pais}</div>
-                    <div className="text-gray-400">{sede.ciudad}</div>
-                  </div>
-                ))}
+                {INFO_ITIERS.sedes.map((sede, idx) => {
+                  let flagImg = '/bandera-arg.png';
+                  if (sede.pais.includes('Chile')) flagImg = '/bandera-chile.png';
+                  if (sede.pais.includes('USA') || sede.pais.includes('Estados Unidos')) flagImg = '/bandera-usa.png';
+                  return (
+                    <div key={idx} className="flex items-center space-x-2.5 p-3 rounded-xl bg-[#1F1F1F]/50 border border-[#333333]/60 text-xs">
+                      <Image src={flagImg} alt={sede.pais} width={24} height={16} className="w-6 h-4 object-cover rounded-xs" />
+                      <div>
+                        <div className="font-bold text-white">{sede.pais}</div>
+                        <div className="text-gray-400">{sede.ciudad}</div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

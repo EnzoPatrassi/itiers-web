@@ -130,7 +130,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => onLanguageChange('es')}
-                className={`px-3 py-1 rounded-full font-bold transition-all duration-200 ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold transition-all duration-200 ${
                   currentLang === 'es'
                     ? 'bg-[#ff4f00] text-white shadow-sm'
                     : isDark
@@ -139,12 +139,13 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
                 aria-label="Cambiar a Español"
               >
-                ES
+                <Image src="/bandera-espana.svg" alt="España" width={16} height={12} className="w-4 h-3 object-cover rounded-xs" />
+                <span>ES</span>
               </button>
               <button
                 type="button"
                 onClick={() => onLanguageChange('en')}
-                className={`px-3 py-1 rounded-full font-bold transition-all duration-200 ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold transition-all duration-200 ${
                   currentLang === 'en'
                     ? 'bg-[#ff4f00] text-white shadow-sm'
                     : isDark
@@ -153,7 +154,8 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
                 aria-label="Switch to English"
               >
-                EN
+                <Image src="/bandera-usa.png" alt="USA" width={16} height={12} className="w-4 h-3 object-cover rounded-xs" />
+                <span>EN</span>
               </button>
             </div>
 
@@ -191,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => onLanguageChange('es')}
-                className={`px-2 py-0.5 rounded-full font-bold ${
+                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-bold ${
                   currentLang === 'es'
                     ? 'bg-[#ff4f00] text-white'
                     : isDark
@@ -199,12 +201,13 @@ export const Header: React.FC<HeaderProps> = ({
                     : 'text-[#4d4d4d]'
                 }`}
               >
-                ES
+                <Image src="/bandera-espana.svg" alt="España" width={14} height={10} className="w-3.5 h-2.5 object-cover rounded-xs" />
+                <span>ES</span>
               </button>
               <button
                 type="button"
                 onClick={() => onLanguageChange('en')}
-                className={`px-2 py-0.5 rounded-full font-bold ${
+                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-bold ${
                   currentLang === 'en'
                     ? 'bg-[#ff4f00] text-white'
                     : isDark
@@ -212,7 +215,8 @@ export const Header: React.FC<HeaderProps> = ({
                     : 'text-[#4d4d4d]'
                 }`}
               >
-                EN
+                <Image src="/bandera-usa.png" alt="USA" width={14} height={10} className="w-3.5 h-2.5 object-cover rounded-xs" />
+                <span>EN</span>
               </button>
             </div>
 

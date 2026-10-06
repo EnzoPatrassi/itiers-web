@@ -88,8 +88,13 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange })
             <ul className="space-y-2 text-xs text-gray-300">
               <li>Email: <a href={`mailto:${INFO_ITIERS.email}`} className="text-white hover:text-[#ff4f00]">{INFO_ITIERS.email}</a></li>
               <li>WhatsApp: <a href={`https://wa.me/${INFO_ITIERS.whatsapp.replace('+', '')}`} target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#ff4f00]">{INFO_ITIERS.whatsapp}</a></li>
-              <li className="pt-2 text-gray-400">
-                Sedes: Mendoza (AR), Santiago (CL), Delaware (USA)
+              <li className="pt-2 text-gray-400 flex items-center space-x-2">
+                <span>Sedes:</span>
+                <span className="inline-flex items-center gap-1"><Image src="/bandera-arg.png" alt="AR" width={16} height={10} className="w-4 h-2.5 object-cover rounded-xs" /> AR</span>
+                <span>•</span>
+                <span className="inline-flex items-center gap-1"><Image src="/bandera-chile.png" alt="CL" width={16} height={10} className="w-4 h-2.5 object-cover rounded-xs" /> CL</span>
+                <span>•</span>
+                <span className="inline-flex items-center gap-1"><Image src="/bandera-usa.png" alt="USA" width={16} height={10} className="w-4 h-2.5 object-cover rounded-xs" /> USA</span>
               </li>
             </ul>
           </div>
@@ -103,20 +108,22 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange })
               <button
                 type="button"
                 onClick={() => onLanguageChange('es')}
-                className={`px-3 py-1 rounded-lg text-xs font-semibold ${
-                  currentLang === 'es' ? 'bg-[#ff4f00] text-white' : 'bg-[#0F0F0F] text-gray-400'
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                  currentLang === 'es' ? 'bg-[#ff4f00] text-white' : 'bg-[#0F0F0F] text-gray-400 hover:text-white'
                 }`}
               >
-                Español
+                <Image src="/bandera-espana.svg" alt="España" width={16} height={12} className="w-4 h-3 object-cover rounded-xs" />
+                <span>Español</span>
               </button>
               <button
                 type="button"
                 onClick={() => onLanguageChange('en')}
-                className={`px-3 py-1 rounded-lg text-xs font-semibold ${
-                  currentLang === 'en' ? 'bg-[#ff4f00] text-white' : 'bg-[#0F0F0F] text-gray-400'
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                  currentLang === 'en' ? 'bg-[#ff4f00] text-white' : 'bg-[#0F0F0F] text-gray-400 hover:text-white'
                 }`}
               >
-                English
+                <Image src="/bandera-usa.png" alt="USA" width={16} height={12} className="w-4 h-3 object-cover rounded-xs" />
+                <span>English</span>
               </button>
             </div>
 
