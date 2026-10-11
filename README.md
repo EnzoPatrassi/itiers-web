@@ -1,3 +1,41 @@
+<<<<<<< HEAD
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+=======
 # Itiers — Nueva Página Web Corporativa 🚀
 
 ¡Bienvenido al repositorio oficial del proyecto de desarrollo de la nueva página web corporativa de **Itiers**! 
@@ -118,3 +156,4 @@ Para alinearnos con los estrictos estándares de Itiers, todos los componentes i
 * **Semanas 1-3 — Fundamentos y Diagnóstico**: Alineación de equipo, definición de stack técnico, creación de este repositorio, maquetación de la arquitectura completa y despliegue del pipeline inicial en Vercel [2].
 * **Semanas 4-8 — Desarrollo Aplicado**: Construcción iterativa de vistas detalladas, optimizaciones y desarrollo de integraciones para los agentes inteligentes del Practicante 3 [2].
 * **Semanas 9-10 — Ajustes Finales y Producción**: Auditorías completas de velocidad y accesibilidad, refinamiento definitivo de contenidos SEO/GEO y entrega oficial del sitio en internet [2].
+>>>>>>> 43a872c6d3c0e14e087d6fd48e93bf69e7571add

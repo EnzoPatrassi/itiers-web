@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Colores de Marca */
+  --color-brand-primary: #ff4f00;
+  --color-brand-secondary: #b2b2b2;
+  --color-brand-accent: #1F1F1F;
+  --color-brand-gray: #4d4d4d;
+
+  /* Colores de Superficie */
+  --color-surface-background: #FFFFFF;
+  --color-surface-card: #FAFAFA;
+
+  /* Colores Semánticos / UI */
+  --color-semantic-text: #1C1917;
+  --color-semantic-border: #b2b2b2;
+  --color-semantic-error: #A6192E;
+  --color-semantic-success: #0B6E4F;
+  --color-semantic-warning: #8A6A14;
+
+  /* Tipografías */
+  --font-heading: var(--font-comfortaa), sans-serif;
+  --font-body: var(--font-nunito), 'Arial Rounded MT', sans-serif;
+
+  /* Radios de borde (Border Radius) */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-full: 9999px;
+  --radius-none: 0px;
+}
+
+/* 
+  Soporte para modo oscuro (si lo necesitan más adelante).
+  Los colores en oscuro están definidos en el DESIGN.md
+*/
+@media (prefers-color-scheme: dark) {
+  @theme inline {
+    --color-brand-accent: #F2F2F2;
+    --color-brand-gray: #898a8d;
+    --color-surface-background: #0F0F0F;
+    --color-surface-card: #1A1A1A;
+    --color-semantic-text: #b2b2b2;
+    --color-semantic-border: #333333;
+    --color-semantic-error: #F2626E;
+    --color-semantic-success: #3FBF95;
+    --color-semantic-warning: #D9A62A;
+  }
+}
+
+body {
+  /* Aplicamos el fondo y el color de texto por defecto definidos en el manual */
+  background-color: var(--color-surface-background);
+  color: var(--color-semantic-text);
+  font-family: var(--font-body);
+}
+
+/* 
+  Utilidad extra para animaciones sutiles (microinteracciones) 
+  que pide el documento "Landing_Itiers.docx"
+*/
+@layer utilities {
+  .animate-breath {
+    animation: breath 3s ease-in-out infinite;
+  }
+}
+
+@keyframes breath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
