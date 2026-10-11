@@ -1,18 +1,12 @@
 <!-- BEGIN:nextjs-agent-rules -->
 
-<<<<<<< HEAD
-## This is NOT the Next.js you know
-=======
 # This is NOT the Next.js you know
->>>>>>> 43a872c6d3c0e14e087d6fd48e93bf69e7571add
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
-<<<<<<< HEAD
-=======
 
 # Reglas de Comportamiento Estricto para Agentes (AGENTS.md)
 
@@ -22,4 +16,3 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 4. **Accesibilidad WCAG AA Obligatoria**: Todo componente interactivo debe incluir `tabIndex`, etiquetas semánticas HTML5 (`<main>`, `<article>`, `<section>`, `<nav>`), contrastes adecuados y foco visual claro (`focus:ring-2`).
 5. **Validación con Guardrails Zod**: Todo formulario, canalización a WhatsApp y marcado JSON-LD Schema.org debe validarse mediante los esquemas en `lib/harness/guardrails.ts`.
 6. **Compilación Limpia**: No se aceptan cambios que rompan el chequeo de tipos de TypeScript (`npx tsc --noEmit`) o la compilación en producción (`npm run build`).
->>>>>>> 43a872c6d3c0e14e087d6fd48e93bf69e7571add

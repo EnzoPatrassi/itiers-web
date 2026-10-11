@@ -28,8 +28,7 @@ export const ContactFormSchema = z.object({
   email: z.string().email({ message: "Debe ingresar una dirección de correo electrónico válida." }),
   company: z.string().optional(),
   serviceOfInterest: z.enum([
-    "productos",
-    "proyectos",
+    "ingenieria",
     "staffing",
     "capacitaciones",
     "general"
@@ -69,7 +68,7 @@ export const JsonLdProfessionalServiceSchema = z.object({
     message: "Debe registrar las 3 sedes corporativas obligatorias (Mendoza, Santiago de Chile, Delaware USA)."
   }),
   knowsAbout: z.array(z.string()).min(3, {
-    message: "Debe listar las áreas de especialización principales (IA Generativa, IBM Watsonx, Ingeniería de Datos)."
+    message: "Debe listar al menos tres áreas de servicio documentadas."
   })
 });
 
@@ -86,7 +85,7 @@ export const OFFICIAL_ITIERS_JSON_LD: JsonLdProfessionalService = {
   name: 'Itiers Data Sense',
   url: 'https://www.itiers.com',
   logo: 'https://www.itiers.com/logo.png',
-  description: 'Convertimos datos complejos en decisiones estratégicas inteligentes. 20 años de experiencia en Ingeniería de Datos, IA Generativa y Alianza IBM Watsonx.',
+  description: 'En Itiers Data Sense convertimos el caos de datos en decisiones estratégicas con un enfoque personalizado.',
   telephone: '+5492614171612',
   email: 'hola@itiers.com',
   address: [
@@ -113,11 +112,10 @@ export const OFFICIAL_ITIERS_JSON_LD: JsonLdProfessionalService = {
     }
   ],
   knowsAbout: [
-    'Artificial Intelligence',
-    'Generative AI',
-    'IBM Watsonx',
     'Data Engineering',
-    'Modern Data Warehouse',
+    'Data Analytics',
+    'Business Intelligence',
+    'Training',
     'Data Staffing'
   ]
 };

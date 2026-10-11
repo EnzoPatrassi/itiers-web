@@ -82,7 +82,7 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
       soluciones: 'Soluciones',
       casos: 'Casos de Éxito',
       contacto: 'Contacto',
-      ctaButton: 'Contáctanos',
+      ctaButton: 'Hablemos',
       ariaNav: 'Navegación principal de Itiers',
       ariaLangSwitch: 'Cambiar idioma',
     },
@@ -190,7 +190,7 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
       ]
     },
     footer: {
-      tagline: 'Refinamos información compleja en inteligencia estratégica para organizaciones con visión de futuro.',
+      tagline: 'Convertimos el caos de datos en decisiones estratégicas con un enfoque personalizado.',
       quickLinks: 'Navegación',
       servicesTitle: 'Servicios Principales',
       contactTitle: 'Contacto Corporativo',
@@ -200,20 +200,20 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
     },
     meta: {
       inicio: { 
-        title: 'Itiers: IA Generativa e IBM Watsonx', 
-        description: 'Liderando la ingeniería de datos y la IA Generativa con 20 años de maestría técnica.' 
+        title: 'Itiers Data Sense | Decisiones estratégicas con datos',
+        description: 'Convertimos el caos de datos en decisiones estratégicas con un enfoque personalizado.'
       },
       servicios: { 
-        title: 'Consultoría de Datos y Data Products', 
-        description: 'Ingeniería avanzada: RAG con Embeddings, MCP y Data Products para escala global.' 
+        title: 'Servicios de datos | Itiers Data Sense',
+        description: 'Ingeniería de Datos, capacitaciones y staffing para organizaciones.'
       },
       nosotros: { 
-        title: 'Expertos en Harness Engineering', 
-        description: 'De consultoría tradicional a Ingeniería de Arneses: liderando la era de agentes de IA.' 
+        title: 'Nosotros | Itiers Data Sense',
+        description: 'Acompañamos a organizaciones a desbloquear el valor de sus datos con un enfoque personalizado.'
       },
       contacto: { 
-        title: 'Sedes Globales y Consultoría Técnica', 
-        description: 'Contacto estratégico en Argentina, Chile y USA. Cumplimiento normativo internacional.' 
+        title: 'Contacto por WhatsApp | Itiers Data Sense',
+        description: 'Contactá a Itiers Data Sense para consultas sobre Ingeniería de Datos, capacitaciones y staffing.'
       }
     }
   },
@@ -226,7 +226,7 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
       soluciones: 'Solutions',
       casos: 'Case Studies',
       contacto: 'Contact',
-      ctaButton: 'Contact Us',
+      ctaButton: 'Let\'s talk',
       ariaNav: 'Main navigation for Itiers',
       ariaLangSwitch: 'Switch language',
     },
@@ -334,7 +334,7 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
       ]
     },
     footer: {
-      tagline: 'We refine complex information into strategic intelligence for forward-thinking organizations.',
+      tagline: 'We turn data chaos into strategic decisions through a tailored approach.',
       quickLinks: 'Navigation',
       servicesTitle: 'Core Services',
       contactTitle: 'Corporate Contact',
@@ -344,20 +344,20 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
     },
     meta: {
       inicio: { 
-        title: 'Itiers: Generative AI & IBM Watsonx', 
-        description: 'Leading Data Engineering and GenAI with 20 years of technical mastery.' 
+        title: 'Itiers Data Sense | Strategic decisions with data',
+        description: 'We turn data chaos into strategic decisions through a tailored approach.'
       },
       servicios: { 
-        title: 'Data Consulting and Data Products', 
-        description: 'Advanced Engineering: RAG with Embeddings, MCP, and Data Products at scale.' 
+        title: 'Data services | Itiers Data Sense',
+        description: 'Data Engineering, training, and staffing for organizations.'
       },
       nosotros: { 
-        title: 'Harness Engineering Experts', 
-        description: 'From traditional consulting to Harness Engineering: leading the AI agent era.' 
+        title: 'About | Itiers Data Sense',
+        description: 'We help organizations unlock the value of their data through a tailored approach.'
       },
       contacto: { 
-        title: 'Global Offices & Technical Consulting', 
-        description: 'Strategic contact in Argentina, Chile, and USA. International compliance.' 
+        title: 'Contact on WhatsApp | Itiers Data Sense',
+        description: 'Contact Itiers Data Sense about Data Engineering, training, and staffing.'
       }
     }
   }

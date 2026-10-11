@@ -2,10 +2,17 @@
 
 export interface Servicio {
   id: string;
-  titulo: string;
-  descripcion: string;
   icono: string;
-  detalles: string[];
+  es: {
+    titulo: string;
+    descripcion: string;
+    detalles: string[];
+  };
+  en: {
+    titulo: string;
+    descripcion: string;
+    detalles: string[];
+  };
 }
 
 export interface CasoExito {
@@ -40,7 +47,7 @@ export interface InfoCorporativa {
 export const INFO_ITIERS: InfoCorporativa = {
   nombre: "Itiers | Data Sense",
   trayectoria: "20 años",
-  lema: "Refinamos información compleja en inteligencia estratégica para organizaciones.",
+  lema: "En Itiers Data Sense convertimos el caos de datos en decisiones estratégicas. Acompañamos a organizaciones líderes a desbloquear el valor de su información con un enfoque 100% personalizado.",
   alianzaAI: "Socio Tecnológico Global de IBM Watsonx",
   whatsapp: "+5492614171612",
   email: "hola@itiers.com",
@@ -66,52 +73,70 @@ export const INFO_ITIERS: InfoCorporativa = {
 
 export const SERVICIOS_ITIERS: Servicio[] = [
   {
-    id: "productos",
-    titulo: "Productos de Datos",
-    descripcion: "Creación y desarrollo de soluciones y productos analíticos a medida de las necesidades específicas de tu organización.",
-    icono: "📦",
-    detalles: [
-      "Desarrollo de Dashboards Inteligentes y de auto-servicio",
-      "Herramientas de visualización personalizadas",
-      "Modelos predictivos para decisiones de negocio",
-      "Estructuración de KPIs clave alineados a objetivos comerciales"
-    ]
-  },
-  {
-    id: "proyectos",
-    titulo: "Proyectos de Datos",
-    descripcion: "Gestión estratégica integral de tus datos, desde la recolección inicial y depuración hasta su transformación en ventajas competitivas.",
-    icono: "⚙️",
-    detalles: [
-      "Ingeniería de datos, pipelines y arquitecturas ETL robustas",
-      "Modelado de datos y bases de datos estructuradas",
-      "Ciencia de Datos avanzada aplicada a problemas complejos",
-      "Gobierno y control de calidad de la información empresarial"
-    ]
-  },
-  {
-    id: "staffing",
-    titulo: "Staffing de Datos",
-    descripcion: "Fortalece tus capacidades integrando talento especializado de alto rendimiento directamente en los equipos internos de tu compañía.",
-    icono: "👥",
-    detalles: [
-      "Ingenieros de Datos experimentados",
-      "Analistas de Business Intelligence (BI) estratégicos",
-      "Científicos de datos y especialistas en Machine Learning",
-      "Garantía de adaptación técnica y cultural inmediata"
-    ]
+    id: "ingenieria-datos",
+    icono: "⌁",
+    es: {
+      titulo: "Ingeniería de Datos",
+      descripcion: "Diseñamos e implementamos la arquitectura que convierte tus datos dispersos en activos estratégicos.",
+      detalles: [
+        "Big Data & Data Engineering: Construcción de pipelines y flujos de datos automatizados, limpios y seguros.",
+        "Modern Data Warehouse & Lakes: Centralización y gobierno de datos en la nube para una única fuente de verdad.",
+        "Modelos de IA & Analítica Avanzada: Integración de inteligencia artificial predictiva y generativa para potenciar la toma de decisiones.",
+        "Evolución & Mantenimiento de BI: Optimización continua y desarrollo de tableros de control ejecutivos y operativos."
+      ]
+    },
+    en: {
+      titulo: "Data Engineering",
+      descripcion: "We design and implement the architecture that turns your scattered data into strategic assets.",
+      detalles: [
+        "Big Data & Data Engineering: Building automated, clean, and secure data pipelines and flows.",
+        "Modern Data Warehouse & Lakes: Centralizing and governing cloud data to create a single source of truth.",
+        "AI Models & Advanced Analytics: Integrating predictive and generative AI to support decision-making.",
+        "BI Evolution & Maintenance: Ongoing optimization and development of executive and operational dashboards."
+      ]
+    }
   },
   {
     id: "capacitaciones",
-    titulo: "Capacitaciones Especializadas",
-    descripcion: "Programas de entrenamiento y workshops a la medida de tu equipo para cerrar brechas analíticas y adoptar una cultura guiada por datos.",
-    icono: "🎓",
-    detalles: [
-      "Capacitación en uso estratégico de IA Generativa",
-      "Workshops de visualización y modelado de datos modernos",
-      "Alfabetización de datos (Data Literacy) para líderes de negocio",
-      "Entrenamientos técnicos adaptados al nivel actual de tu equipo"
-    ]
+    icono: "◎",
+    es: {
+      titulo: "Capacitaciones",
+      descripcion: "Nuestros servicios de capacitación están diseñados para fortalecer las habilidades de tu equipo y brindarles las herramientas necesarias para enfrentar los desafíos en el mundo de los datos.",
+      detalles: [
+        "Formación en Análisis de Datos: Capacitación práctica en herramientas de BI, interpretación de métricas e historia con datos (Data Storytelling).",
+        "Adopción de IA para Equipos: Programas de alfabetización digital y uso responsable de IA aplicada a la productividad del negocio."
+      ]
+    },
+    en: {
+      titulo: "Training",
+      descripcion: "Our training services strengthen your team's skills and give them the tools to face challenges in the world of data.",
+      detalles: [
+        "Data Analytics Training: Practical training in BI tools, metric interpretation, and Data Storytelling.",
+        "AI Adoption for Teams: Digital literacy programs and responsible use of AI for business productivity."
+      ]
+    }
+  },
+  {
+    id: "staffing",
+    icono: "＋",
+    es: {
+      titulo: "Staffing de Datos",
+      descripcion: "El Staffing de Datos te permite incorporar especialistas calificados y experimentados a tu equipo para acompañar proyectos de datos y alcanzar tus objetivos empresariales.",
+      detalles: [
+        "Perfiles On-Demand: Data Engineers, Data Analysts, Data Scientists y especialistas en BI o IA.",
+        "Integración Ágil: Talento senior listo para sumar valor desde el día uno en la modalidad que tu operación requiera.",
+        "Flexibilidad Operativa: Cobertura de trabajo, proyectos específicos o células de desarrollo dedicadas."
+      ]
+    },
+    en: {
+      titulo: "Data Staffing",
+      descripcion: "Data Staffing lets you add qualified, experienced data specialists to your team to support data projects and help achieve your business goals.",
+      detalles: [
+        "On-Demand Profiles: Data Engineers, Data Analysts, Data Scientists, and BI or AI specialists.",
+        "Agile Integration: Senior talent ready to contribute from day one in the model your operations require.",
+        "Operational Flexibility: Ongoing coverage, specific projects, or dedicated development teams."
+      ]
+    }
   }
 ];
 

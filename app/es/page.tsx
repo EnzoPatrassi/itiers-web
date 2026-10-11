@@ -8,9 +8,6 @@ import { ValueProposition } from '@/components/ValueProposition';
 import { TeamSection } from '@/components/TeamSection';
 import { DataAISection } from '@/components/DataAISection';
 import { Services } from '@/components/Services';
-import { TechnologySection } from '@/components/TechnologySection';
-import { ImpactCounters } from '@/components/ImpactCounters';
-import { Testimonials } from '@/components/Testimonials';
 import { ContactSection } from '@/components/ContactSection';
 import { CareersSection } from '@/components/CareersSection';
 import { Chatbot } from '@/components/Chatbot';
@@ -50,16 +47,7 @@ export default function LandingPage() {
         {/* 5. Cards de Servicios: Data Eng, Capacitaciones, Staffing, Soluciones IA */}
         <Services currentLang={currentLang} theme={theme} />
 
-        {/* 6. Tech Stack & Alianzas: Logos Monocromáticos */}
-        <TechnologySection currentLang={currentLang} theme={theme} />
-
-        {/* 7. Cifras de Impacto: Contadores Numéricos Animados */}
-        <ImpactCounters currentLang={currentLang} />
-
-        {/* 8. Testimonios de Clientes: Social Proof */}
-        <Testimonials currentLang={currentLang} />
-
-        {/* 9. Canales de Conversión: Chatbot / Formulario a Email */}
+        {/* Contacto y postulaciones */}
         <ContactSection currentLang={currentLang} />
         <CareersSection currentLang={currentLang} />
       </main>

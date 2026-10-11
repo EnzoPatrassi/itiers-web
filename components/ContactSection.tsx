@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { Locale } from '@/data/i18n';
 import { INFO_ITIERS } from '@/data/mockData';
+import { ContactFormSchema, validateWhatsAppConfig } from '@/lib/harness/guardrails';
 
 interface ContactSectionProps {
   currentLang: Locale;
@@ -16,18 +16,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
     email: '',
     empresa: '',
     telefono: '',
-    necesidad: 'productos',
+    necesidad: 'ingenieria',
     mensaje: '',
   });
 
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
   const content = {
     es: {
-      badge: 'Contacto Comercial',
-      title: 'Transformemos tus desafíos de datos en soluciones de negocio',
-      subtitle: 'Déjanos tus datos o contáctanos directamente. Un especialista técnico se pondrá en contacto en menos de 24 horas.',
+      badge: 'Contacto',
+      title: 'Hablemos de tus datos',
+      subtitle: 'Elegí el tema de tu consulta y continuá la conversación con Itiers por WhatsApp.',
       nameLabel: 'Nombre',
       lastNameLabel: 'Apellido',
       emailLabel: 'Email corporativo',
@@ -35,23 +35,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
       phoneLabel: 'Teléfono',
       needLabel: 'Tipo de solución',
       messageLabel: 'Mensaje / Detalles de la necesidad',
-      submitBtn: 'Enviar consulta comercial',
-      submittingBtn: 'Enviando consulta...',
-      successTitle: '¡Consulta recibida con éxito!',
-      successDesc: 'Gracias por ponerte en contacto. Nuestro equipo revisará tu mensaje y responderá a la brevedad.',
-      errorTitle: 'Por favor completa todos los campos requeridos.',
+      submitBtn: 'Continuar por WhatsApp',
+      successTitle: 'WhatsApp está listo',
+      successDesc: 'Se abrió WhatsApp con tu consulta. Revisá el mensaje y envialo desde allí.',
+      errorTitle: 'Revisá los datos ingresados antes de continuar.',
       options: [
-        { value: 'productos', label: 'Productos de Datos (Dashboards & Predictivo)' },
-        { value: 'proyectos', label: 'Proyectos de Datos (ETL & Arquitectura)' },
-        { value: 'staffing', label: 'Staffing de Talentos de Datos' },
-        { value: 'capacitaciones', label: 'Capacitación en IA & Data' },
+        { value: 'ingenieria', label: 'Ingeniería de Datos' },
+        { value: 'capacitaciones', label: 'Capacitaciones' },
+        { value: 'staffing', label: 'Staffing de Datos' },
       ],
+      directMessage: 'Hola, quiero realizar una consulta sobre los servicios de Itiers.',
       headquarters: 'Sedes Internacionales:',
     },
     en: {
-      badge: 'Commercial Contact',
-      title: 'Let\'s turn your data challenges into scalable business solutions',
-      subtitle: 'Fill out the form or reach out directly. A technical specialist will contact you within 24 hours.',
+      badge: 'Contact',
+      title: 'Let\'s talk about your data',
+      subtitle: 'Choose a topic for your inquiry and continue the conversation with Itiers on WhatsApp.',
       nameLabel: 'First Name',
       lastNameLabel: 'Last Name',
       emailLabel: 'Corporate Email',
@@ -59,17 +58,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
       phoneLabel: 'Phone Number',
       needLabel: 'Solution Required',
       messageLabel: 'Message / Project Context',
-      submitBtn: 'Submit Commercial Inquiry',
-      submittingBtn: 'Sending inquiry...',
-      successTitle: 'Inquiry received successfully!',
-      successDesc: 'Thank you for reaching out. Our technical team will review your message and respond promptly.',
-      errorTitle: 'Please fill out all required fields correctly.',
+      submitBtn: 'Continue on WhatsApp',
+      successTitle: 'WhatsApp is ready',
+      successDesc: 'WhatsApp opened with your inquiry. Review the message and send it there.',
+      errorTitle: 'Check the information entered before continuing.',
       options: [
-        { value: 'productos', label: 'Data Products (Dashboards & Predictive)' },
-        { value: 'proyectos', label: 'Data Projects (ETL & Architecture)' },
-        { value: 'staffing', label: 'Data Talent Staffing' },
-        { value: 'capacitaciones', label: 'AI & Data Executive Training' },
+        { value: 'ingenieria', label: 'Data Engineering' },
+        { value: 'capacitaciones', label: 'Training' },
+        { value: 'staffing', label: 'Data Staffing' },
       ],
+      directMessage: 'Hello, I would like to ask about Itiers services.',
       headquarters: 'Global Offices:',
     },
   }[currentLang];
@@ -77,29 +75,50 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
+    const parsedContact = ContactFormSchema.safeParse({
+      name: `${formData.nombre} ${formData.apellido}`.trim(),
+      email: formData.email,
+      company: formData.empresa,
+      serviceOfInterest: formData.necesidad,
+      message: formData.mensaje,
+    });
 
-    if (!formData.nombre || !formData.email || !formData.empresa || !formData.mensaje) {
+    if (!parsedContact.success) {
+      setErrorMessage(parsedContact.error.issues.map((issue) => issue.message).join(' '));
+      setStatus('error');
+      return;
+    }
+
+    const selectedService = content.options.find((option) => option.value === parsedContact.data.serviceOfInterest);
+    if (!selectedService) {
       setErrorMessage(content.errorTitle);
       setStatus('error');
       return;
     }
 
-    setStatus('loading');
+    const message = [
+      `Nombre: ${parsedContact.data.name}`,
+      `Email: ${parsedContact.data.email}`,
+      `Empresa: ${parsedContact.data.company || 'No indicada'}`,
+      `Servicio: ${selectedService.label}`,
+      `Consulta: ${parsedContact.data.message}`,
+    ].join('\n');
+    const channel = validateWhatsAppConfig(INFO_ITIERS.whatsapp, message);
 
-    // Simulate backend sending delay
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({
-        nombre: '',
-        apellido: '',
-        email: '',
-        empresa: '',
-        telefono: '',
-        necesidad: 'productos',
-        mensaje: '',
-      });
-    }, 1200);
+    if (!channel.success || !channel.url) {
+      setErrorMessage(channel.error || content.errorTitle);
+      setStatus('error');
+      return;
+    }
+
+    window.open(channel.url, '_blank', 'noopener,noreferrer');
+    setStatus('success');
   };
+
+  const directChannel = validateWhatsAppConfig(INFO_ITIERS.whatsapp, content.directMessage);
+  if (!directChannel.success || !directChannel.url) {
+    throw new Error(directChannel.error || 'La configuración del canal de WhatsApp no es válida.');
+  }
 
   return (
     <section id="contacto" className="py-24 bg-[#0F0F0F] text-white border-t border-[#333333]/60 relative">
@@ -119,59 +138,24 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
               </p>
             </div>
 
-            {/* Direct Contact Cards */}
+            {/* Direct WhatsApp Channel */}
             <div className="space-y-4">
               <a
-                href={`mailto:${INFO_ITIERS.email}`}
-                className="flex items-center space-x-4 p-4 rounded-2xl bg-[#1F1F1F] border border-[#333333] hover:border-[#ff4f00]/50 transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-[#ff4f00]/10 flex items-center justify-center text-[#ff4f00] group-hover:scale-110 transition-transform">
-                  ✉
-                </div>
-                <div>
-                  <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Email Directo</div>
-                  <div className="text-base font-bold text-white group-hover:text-[#ff4f00] transition-colors">{INFO_ITIERS.email}</div>
-                </div>
-              </a>
-
-              <a
-                href={`https://wa.me/${INFO_ITIERS.whatsapp.replace('+', '')}`}
+                href={directChannel.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-4 p-4 rounded-2xl bg-[#1F1F1F] border border-[#333333] hover:border-green-500/50 transition-colors group"
               >
-                <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-[#ff4f00]/10 flex items-center justify-center text-[#ff4f00] group-hover:scale-110 transition-transform">
                   💬
                 </div>
                 <div>
                   <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">WhatsApp Corporativo</div>
-                  <div className="text-base font-bold text-white group-hover:text-green-400 transition-colors">{INFO_ITIERS.whatsapp}</div>
+                  <div className="text-base font-bold text-white group-hover:text-[#ff4f00] transition-colors">{INFO_ITIERS.whatsapp}</div>
                 </div>
               </a>
             </div>
 
-            {/* Offices List */}
-            <div className="pt-4 border-t border-[#333333]">
-              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
-                {content.headquarters}
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {INFO_ITIERS.sedes.map((sede, idx) => {
-                  let flagImg = '/bandera-arg.png';
-                  if (sede.pais.includes('Chile')) flagImg = '/bandera-chile.png';
-                  if (sede.pais.includes('USA') || sede.pais.includes('Estados Unidos')) flagImg = '/bandera-usa.png';
-                  return (
-                    <div key={idx} className="flex items-center space-x-2.5 p-3 rounded-xl bg-[#1F1F1F]/50 border border-[#333333]/60 text-xs">
-                      <Image src={flagImg} alt={sede.pais} width={24} height={16} className="w-6 h-4 object-cover rounded-xs" />
-                      <div>
-                        <div className="font-bold text-white">{sede.pais}</div>
-                        <div className="text-gray-400">{sede.ciudad}</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
           </div>
 
           {/* Right Column - Validated Form */}
@@ -201,11 +185,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                    <label htmlFor="contact-name" className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                       {content.nameLabel} *
                     </label>
                     <input
                       type="text"
+                      id="contact-name"
                       required
                       value={formData.nombre}
                       onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
@@ -214,11 +199,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                    <label htmlFor="contact-lastname" className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                       {content.lastNameLabel}
                     </label>
                     <input
                       type="text"
+                      id="contact-lastname"
                       value={formData.apellido}
                       onChange={(e) => setFormData({ ...formData, apellido: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-[#0F0F0F] border border-[#333333] text-white focus:border-[#ff4f00] focus:ring-1 focus:ring-[#ff4f00] outline-none text-sm transition-colors"
@@ -229,11 +215,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                    <label htmlFor="contact-email" className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                       {content.emailLabel} *
                     </label>
                     <input
                       type="email"
+                      id="contact-email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -242,11 +229,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                    <label htmlFor="contact-company" className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                       {content.companyLabel} *
                     </label>
                     <input
                       type="text"
+                      id="contact-company"
                       required
                       value={formData.empresa}
                       onChange={(e) => setFormData({ ...formData, empresa: e.target.value })}
@@ -258,11 +246,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                    <label htmlFor="contact-phone" className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                       {content.phoneLabel}
                     </label>
                     <input
                       type="tel"
+                      id="contact-phone"
                       value={formData.telefono}
                       onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-[#0F0F0F] border border-[#333333] text-white focus:border-[#ff4f00] focus:ring-1 focus:ring-[#ff4f00] outline-none text-sm transition-colors"
@@ -270,10 +259,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                    <label htmlFor="contact-service" className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                       {content.needLabel}
                     </label>
                     <select
+                      id="contact-service"
                       value={formData.necesidad}
                       onChange={(e) => setFormData({ ...formData, necesidad: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-[#0F0F0F] border border-[#333333] text-white focus:border-[#ff4f00] focus:ring-1 focus:ring-[#ff4f00] outline-none text-sm transition-colors"
@@ -288,10 +278,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                  <label htmlFor="contact-message" className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
                     {content.messageLabel} *
                   </label>
                   <textarea
+                    id="contact-message"
                     rows={4}
                     required
                     value={formData.mensaje}
@@ -303,10 +294,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang }) =
 
                 <button
                   type="submit"
-                  disabled={status === 'loading'}
-                  className="w-full bg-[#ff4f00] hover:bg-[#e04500] text-white font-bold text-base py-4 rounded-xl shadow-xl shadow-[#ff4f00]/20 hover:shadow-[#ff4f00]/40 transition-all disabled:opacity-50"
+                  className="w-full bg-[#ff4f00] hover:bg-[#e04500] text-white font-bold text-base py-4 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
                 >
-                  {status === 'loading' ? content.submittingBtn : `${content.submitBtn} →`}
+                  {`${content.submitBtn} →`}
                 </button>
               </form>
             )}
