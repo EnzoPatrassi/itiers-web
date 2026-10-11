@@ -1,28 +1,37 @@
-# Requerimientos de la Sección de Servicios - ITIERS
+# Requerimientos de contenido y comportamiento - ITIERS
 
-Este documento define el comportamiento esperado de la sección de servicios en la nueva web corporativa, alineado con la trayectoria de 20 años de ITIERS en la toma de decisiones inteligentes.
+El contenido corporativo de esta versión se toma de la hoja `Arbol` del archivo de auditoría web compartido por el equipo. No se deben completar secciones con cifras, clientes, herramientas, testimonios o perfiles de equipo que no estén documentados.
 
-## Requerimientos del Sistema (Notación EARS)
+## Contenido requerido
 
-### 1. Visualización de Servicios (Ubicuidad)
+### Identidad
 
-- **Requerimiento**: El sistema debe renderizar de forma predeterminada cuatro tarjetas principales que representen las áreas de especialidad de la empresa:
-  1. Productos de Datos
-  2. Proyectos de Datos
-  3. Staffing de Datos
-  4. Capacitaciones
+- Presentar a Itiers Data Sense como una empresa que convierte el caos de datos en decisiones estratégicas.
+- Comunicar el acompañamiento personalizado para desbloquear el valor de la información.
+- Mostrar los pilares: Confianza, Colaboración, Alegría, Resiliencia y Eficiencia.
+- Usar el propósito: entrenar, transformar, guiar y globalizar los datos de las organizaciones.
 
-### 2. Interactividad y Navegación (Event-driven)
+### Servicios
 
-- **Requerimiento**: Cuando el usuario haga clic en la tarjeta de "Staffing de Datos", el sistema debe redirigir al usuario al formulario de reclutamiento o contacto de Itiers.
-- **Requerimiento**: Cuando el usuario haga clic en la tarjeta de "Capacitaciones", el sistema debe mostrar el catálogo de entrenamiento técnico en tecnologías como IA Generativa e IBM Watsonx.
+Mostrar tres líneas de servicio:
 
-### 3. Accesibilidad de Interfaz (State-driven)
+1. **Ingeniería de Datos**: arquitectura de datos; Big Data y Data Engineering; Modern Data Warehouse y Lakes; modelos de IA y analítica avanzada; evolución y mantenimiento de BI.
+2. **Capacitaciones**: formación práctica en herramientas de BI, interpretación de métricas y Data Storytelling; alfabetización digital y adopción responsable de IA.
+3. **Staffing**: perfiles on-demand de Data Engineering, Data Analysis, Data Science, BI e IA; integración ágil; modalidades flexibles de trabajo, proyectos o células dedicadas.
 
-- **Requerimiento**: Mientras el usuario navegue por la página utilizando la tecla "Tab", el sistema debe resaltar visualmente el borde de la tarjeta activa utilizando un anillo de foco claro de Tailwind CSS.
+### Contacto y postulaciones
 
-### 4. Optimizaciones SEO y GEO (Generative Engine Optimization)
+- Las consultas comerciales deben poder continuar por WhatsApp.
+- La sección “Trabajá con nosotros” debe enlazar al formulario externo suministrado en `data/mockData.ts`.
 
-- **Requerimiento (SEO)**: El sistema debe incluir la estructura de datos enriquecidos Schema.org (`JsonLd`) y metadatos Next.js (`title`, `description`, `openGraph`, `canonical`) en cada página.
-- **Requerimiento (GEO)**: El sistema debe incorporar bloques informativos estructurados en formato *Answer-First* (Resumen Ejecutivo) e incluir entidades de marca principales (*Itiers Data Sense*, *IBM Watsonx*, *Ingeniería de Arneses / Harness Engineering*, ubicación *Mendoza / Chile / USA*) para garantizar la citabilidad y respuesta directa en motores de búsqueda de IA (ChatGPT, Gemini, Perplexity).
+## Secciones sin información suficiente
 
+La hoja menciona “Herramientas”, “Cifras” y “Testimonios”, pero no aporta nombres, métricas ni citas. También menciona fotos de equipos, pero no contiene fotografías de personas. No mostrar contenido inventado en esas secciones; incorporarlo cuando el equipo proporcione los datos y recursos correspondientes.
+
+## Interfaz y accesibilidad
+
+- Mantener el sitio bilingüe español/inglés con paridad de contenido.
+- Mantener navegación principal reducida a un máximo de cinco opciones.
+- Presentar los tres servicios en tarjetas legibles, sin párrafos de relleno.
+- Usar HTML semántico y controles navegables por teclado con foco visible.
+- Validar los enlaces de canalización a WhatsApp con `WhatsAppChannelSchema`.

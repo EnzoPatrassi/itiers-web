@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Locale, dictionaries } from '@/data/i18n';
 import { INFO_ITIERS } from '@/data/mockData';
+import { validateWhatsAppConfig } from '@/lib/harness/guardrails';
 
 interface FooterProps {
   currentLang: Locale;
@@ -12,6 +13,13 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange }) => {
   const t = dictionaries[currentLang].footer;
+  const whatsappMessage = currentLang === 'es'
+    ? 'Hola, quiero realizar una consulta sobre los servicios de Itiers.'
+    : 'Hello, I would like to ask about Itiers services.';
+  const whatsappChannel = validateWhatsAppConfig(INFO_ITIERS.whatsapp, whatsappMessage);
+  if (!whatsappChannel.success || !whatsappChannel.url) {
+    throw new Error(whatsappChannel.error || 'La configuración del canal de WhatsApp no es válida.');
+  }
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -36,9 +44,6 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange })
             <p className="text-gray-400 text-xs leading-relaxed">
               {t.tagline}
             </p>
-            <div className="text-xs text-[#ff4f00] font-mono font-bold">
-              {INFO_ITIERS.trayectoria} de maestría analítica
-            </div>
           </div>
 
           {/* Col 2: Navigation */}
@@ -58,18 +63,18 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange })
                 </a>
               </li>
               <li>
-                <a href="#data-ai" onClick={(e) => handleScroll(e, '#data-ai')} className="hover:text-[#ff4f00] transition-colors">
-                  Data & AI
-                </a>
-              </li>
-              <li>
-                <a href="#tecnologia" onClick={(e) => handleScroll(e, '#tecnologia')} className="hover:text-[#ff4f00] transition-colors">
-                  Tecnología
-                </a>
-              </li>
-              <li>
                 <a href="#equipo" onClick={(e) => handleScroll(e, '#equipo')} className="hover:text-[#ff4f00] transition-colors">
-                  Equipo
+                  {currentLang === 'es' ? 'Nosotros' : 'About us'}
+                </a>
+              </li>
+              <li>
+                <a href="#data-ai" onClick={(e) => handleScroll(e, '#data-ai')} className="hover:text-[#ff4f00] transition-colors">
+                  {currentLang === 'es' ? 'Qué hacemos' : 'What we do'}
+                </a>
+              </li>
+              <li>
+                <a href="#servicios" onClick={(e) => handleScroll(e, '#servicios')} className="hover:text-[#ff4f00] transition-colors">
+                  Servicios
                 </a>
               </li>
               <li>
@@ -86,16 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange })
               {t.contactTitle}
             </h4>
             <ul className="space-y-2 text-xs text-gray-300">
-              <li>Email: <a href={`mailto:${INFO_ITIERS.email}`} className="text-white hover:text-[#ff4f00]">{INFO_ITIERS.email}</a></li>
-              <li>WhatsApp: <a href={`https://wa.me/${INFO_ITIERS.whatsapp.replace('+', '')}`} target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#ff4f00]">{INFO_ITIERS.whatsapp}</a></li>
-              <li className="pt-2 text-gray-400 flex items-center space-x-2">
-                <span>Sedes:</span>
-                <span className="inline-flex items-center gap-1"><Image src="/bandera-arg.png" alt="AR" width={16} height={10} className="w-4 h-2.5 object-cover rounded-xs" /> AR</span>
-                <span>•</span>
-                <span className="inline-flex items-center gap-1"><Image src="/bandera-chile.png" alt="CL" width={16} height={10} className="w-4 h-2.5 object-cover rounded-xs" /> CL</span>
-                <span>•</span>
-                <span className="inline-flex items-center gap-1"><Image src="/bandera-usa.png" alt="USA" width={16} height={10} className="w-4 h-2.5 object-cover rounded-xs" /> USA</span>
-              </li>
+              <li>WhatsApp: <a href={whatsappChannel.url} target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#ff4f00] focus:outline-none focus:ring-2 focus:ring-[#ff4f00]">{INFO_ITIERS.whatsapp}</a></li>
             </ul>
           </div>
 
@@ -108,7 +104,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange })
               <button
                 type="button"
                 onClick={() => onLanguageChange('es')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] ${
                   currentLang === 'es' ? 'bg-[#ff4f00] text-white' : 'bg-[#0F0F0F] text-gray-400 hover:text-white'
                 }`}
               >
@@ -118,7 +114,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange })
               <button
                 type="button"
                 onClick={() => onLanguageChange('en')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] ${
                   currentLang === 'en' ? 'bg-[#ff4f00] text-white' : 'bg-[#0F0F0F] text-gray-400 hover:text-white'
                 }`}
               >
@@ -132,9 +128,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange })
                 href={INFO_ITIERS.googleFormWorkWithUs}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-xs font-bold text-[#ff4f00] hover:underline"
+                className="inline-block text-xs font-bold text-[#ff4f00] hover:underline focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
               >
-                Postulaciones de Empleo ↗
+                {currentLang === 'es' ? 'Trabajá con nosotros ↗' : 'Work with us ↗'}
               </a>
             )}
           </div>

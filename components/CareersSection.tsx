@@ -11,20 +11,23 @@ interface CareersSectionProps {
 export const CareersSection: React.FC<CareersSectionProps> = ({ currentLang }) => {
   const content = {
     es: {
-      badge: 'Unite a Itiers',
+      badge: 'Postulaciones',
       title: 'Trabajá con nosotros',
-      desc: 'Buscamos ingenieros de datos, analistas y entusiastas de la Inteligencia Artificial con pasión por resolver problemas de alto nivel.',
-      cta: 'Ver oportunidades & Postularse',
+      desc: 'Completá el formulario de postulación para trabajar con Itiers.',
+      cta: 'Completar formulario',
     },
     en: {
       badge: 'Join Itiers',
       title: 'Work with us',
-      desc: 'We are constantly seeking passionate data engineers, scientists, and AI architects looking to tackle enterprise challenges.',
-      cta: 'View Opportunities & Apply',
+      desc: 'Complete the application form to work with Itiers.',
+      cta: 'Complete application',
     },
   }[currentLang];
 
-  const googleFormUrl = INFO_ITIERS.googleFormWorkWithUs || '#';
+  const googleFormUrl = INFO_ITIERS.googleFormWorkWithUs;
+  if (!googleFormUrl) {
+    throw new Error('Falta configurar el formulario de postulaciones.');
+  }
 
   return (
     <section className="py-16 bg-[#0F0F0F] text-white border-t border-[#333333]/50">
@@ -41,7 +44,7 @@ export const CareersSection: React.FC<CareersSectionProps> = ({ currentLang }) =
             href={googleFormUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center bg-[#1F1F1F] hover:bg-[#ff4f00] text-[#ff4f00] hover:text-white border border-[#ff4f00] font-semibold text-sm px-6 py-3 rounded-xl transition-all shadow-md"
+            className="inline-flex items-center bg-[#1F1F1F] hover:bg-[#ff4f00] text-[#ff4f00] hover:text-white border border-[#ff4f00] font-semibold text-sm px-6 py-3 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
           >
             {content.cta} ↗
           </a>

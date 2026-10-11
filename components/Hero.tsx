@@ -15,30 +15,20 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, theme }) => {
 
   const content = {
     es: {
-      eyebrow: 'DATA · AI · TECHNOLOGY',
-      title: 'Transformamos datos y tecnología en decisiones, eficiencia y resultados de alto impacto.',
-      subtitle: 'Ayudamos a empresas a resolver desafíos complejos combinando análisis estratégico, ingeniería de datos y orquestación avanzada de Inteligencia Artificial.',
-      primaryCta: 'Hablemos',
-      secondaryCta: 'Conocé nuestras soluciones',
-      metric1: '20+ años',
-      metric1Label: 'de experiencia estratégica',
-      metric2: 'IBM Watsonx',
-      metric2Label: 'Global Tech Partner',
-      metric3: '100%',
-      metric3Label: 'orientados a ROI',
+      eyebrow: 'ITIERS DATA SENSE',
+      title: 'Convertimos el caos de datos en decisiones estratégicas.',
+      subtitle: 'Acompañamos a organizaciones líderes a desbloquear el valor de su información con un enfoque 100% personalizado.',
+      primaryCta: 'Hablemos por WhatsApp',
+      secondaryCta: 'Conocé qué hacemos',
+      values: ['Confianza', 'Colaboración', 'Alegría', 'Resiliencia', 'Eficiencia'],
     },
     en: {
-      eyebrow: 'DATA · AI · TECHNOLOGY',
-      title: 'Transforming data and technology into decisions, efficiency, and high-impact results.',
-      subtitle: 'We help enterprises solve complex business challenges by combining strategic analytics, data engineering, and advanced AI orchestration.',
+      eyebrow: 'ITIERS DATA SENSE',
+      title: 'We turn data chaos into strategic decisions.',
+      subtitle: 'We help leading organizations unlock the value of their information through a fully tailored approach.',
       primaryCta: 'Let\'s talk',
-      secondaryCta: 'Explore solutions',
-      metric1: '20+ years',
-      metric1Label: 'strategic expertise',
-      metric2: 'IBM Watsonx',
-      metric2Label: 'Global Tech Partner',
-      metric3: '100%',
-      metric3Label: 'ROI driven',
+      secondaryCta: 'What we do',
+      values: ['Trust', 'Collaboration', 'Joy', 'Resilience', 'Efficiency'],
     },
   }[currentLang];
 
@@ -72,11 +62,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, theme }) => {
             isDark ? 'text-white' : 'text-[#1C1917]'
           }`}
         >
-          {content.title.split('decisiones, eficiencia y resultados')[0]}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff4f00] to-[#e04500]">
-            decisiones, eficiencia y resultados
-          </span>
-          {content.title.split('decisiones, eficiencia y resultados')[1]}
+          {content.title}
         </h1>
 
         {/* Subheadline */}
@@ -110,44 +96,14 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, theme }) => {
           </button>
         </div>
 
-        {/* Key Metrics strip */}
-        <div
-          className={`mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto border-t pt-8 ${
-            isDark ? 'border-[#333333]/80' : 'border-[#b2b2b2]/30'
-          }`}
-        >
-          <div
-            className={`p-5 rounded-2xl border shadow-sm ${
-              isDark ? 'bg-[#1F1F1F]/60 border-[#333333]' : 'bg-[#FAFAFA] border-[#b2b2b2]/40'
-            }`}
-          >
-            <div className="text-2xl sm:text-3xl font-black text-[#ff4f00]">{content.metric1}</div>
-            <div className={`text-xs font-semibold mt-1 ${isDark ? 'text-gray-400' : 'text-[#4d4d4d]'}`}>
-              {content.metric1Label}
-            </div>
-          </div>
-          <div
-            className={`p-5 rounded-2xl border shadow-sm ${
-              isDark ? 'bg-[#1F1F1F]/60 border-[#333333]' : 'bg-[#FAFAFA] border-[#b2b2b2]/40'
-            }`}
-          >
-            <div className={`text-2xl sm:text-3xl font-black ${isDark ? 'text-white' : 'text-[#1F1F1F]'}`}>
-              {content.metric2}
-            </div>
-            <div className={`text-xs font-semibold mt-1 ${isDark ? 'text-gray-400' : 'text-[#4d4d4d]'}`}>
-              {content.metric2Label}
-            </div>
-          </div>
-          <div
-            className={`p-5 rounded-2xl border shadow-sm ${
-              isDark ? 'bg-[#1F1F1F]/60 border-[#333333]' : 'bg-[#FAFAFA] border-[#b2b2b2]/40'
-            }`}
-          >
-            <div className="text-2xl sm:text-3xl font-black text-[#ff4f00]">{content.metric3}</div>
-            <div className={`text-xs font-semibold mt-1 ${isDark ? 'text-gray-400' : 'text-[#4d4d4d]'}`}>
-              {content.metric3Label}
-            </div>
-          </div>
+        <div className="mt-14 flex flex-wrap justify-center gap-3" aria-label={currentLang === 'es' ? 'Pilares de Itiers' : 'Itiers values'}>
+          {content.values.map((value) => (
+            <span key={value} className={`rounded-full border px-4 py-2 text-sm ${
+              isDark ? 'border-[#333333] bg-[#1A1A1A] text-[#f2f2f2]' : 'border-[#b2b2b2] bg-[#FAFAFA] text-[#1C1917]'
+            }`}>
+              {value}
+            </span>
+          ))}
         </div>
       </div>
     </section>

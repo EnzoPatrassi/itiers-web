@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Locale } from '@/data/i18n';
-import { TeamCarousel } from './TeamCarousel';
 import { ThemeMode } from './Header';
 
 interface TeamSectionProps {
@@ -15,24 +14,14 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ currentLang, theme }) 
 
   const content = {
     es: {
-      badge: 'Quiénes Somos',
-      title: 'Maestría técnica en datos e Inteligencia Artificial',
-      subtitle: 'Somos una consultora de ingeniería de datos y orquestación de IA con más de 20 años de trayectoria. Transformamos la información de organizaciones exigentes en ventajas competitivas determinísticas.',
-      highlights: [
-        { title: '+20 Años', desc: 'Liderando soluciones de datos en la región' },
-        { title: 'Talento Senior', desc: 'Ingenieros, científicos y arquitectos dedicados' },
-        { title: 'Enfoque B2B', desc: 'Soluciones a producción orientadas a ROI' },
-      ],
+      badge: 'Nosotros',
+      title: 'Datos ordenados para decidir mejor',
+      subtitle: 'En Itiers Data Sense convertimos el caos de datos en decisiones estratégicas. Acompañamos a organizaciones líderes a desbloquear el valor de su información con un enfoque 100% personalizado.',
     },
     en: {
       badge: 'About Us',
-      title: 'Data engineering & Artificial Intelligence mastery',
-      subtitle: 'We are a specialized data engineering & AI consulting firm with over 20 years of expertise. We turn enterprise information into deterministic competitive advantages.',
-      highlights: [
-        { title: '+20 Years', desc: 'Leading data architectures across the region' },
-        { title: 'Senior Talent', desc: 'Dedicated data engineers & AI scientists' },
-        { title: 'B2B Focus', desc: 'Production-ready solutions tied to financial ROI' },
-      ],
+      title: 'Organized data for better decisions',
+      subtitle: 'At Itiers Data Sense, we turn data chaos into strategic decisions. We help leading organizations unlock the value of their information through a fully tailored approach.',
     },
   }[currentLang];
 
@@ -56,23 +45,6 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ currentLang, theme }) 
           </p>
         </div>
 
-        {/* 3 Quick Quiénes Somos highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto">
-          {content.highlights.map((item, idx) => (
-            <div
-              key={idx}
-              className={`p-6 rounded-2xl border text-center ${
-                isDark ? 'bg-[#1F1F1F]/60 border-[#333333]' : 'bg-[#FAFAFA] border-[#b2b2b2]/40'
-              }`}
-            >
-              <div className="text-2xl font-black text-[#ff4f00]">{item.title}</div>
-              <div className={`text-xs mt-1 ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>{item.desc}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Carrusel de Equipo */}
-        <TeamCarousel theme={theme} />
       </div>
     </section>
   );

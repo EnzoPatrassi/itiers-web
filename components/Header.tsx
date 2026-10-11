@@ -39,10 +39,9 @@ export const Header: React.FC<HeaderProps> = ({
 
   const navLinks = [
     { href: '#inicio', label: t.inicio },
+    { href: '#equipo', label: t.nosotros },
+    { href: '#data-ai', label: t.queHacemos },
     { href: '#servicios', label: t.servicios },
-    { href: '#data-ai', label: 'Data & AI' },
-    { href: '#tecnologia', label: 'Tecnología' },
-    { href: '#equipo', label: 'Equipo' },
     { href: '#contacto', label: t.contacto },
   ];
 
@@ -91,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className={`text-sm font-semibold transition-colors duration-200 focus:outline-none ${
+                className={`text-sm font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] rounded-sm ${
                   isDark
                     ? 'text-gray-300 hover:text-[#ff4f00]'
                     : 'text-[#1C1917] hover:text-[#ff4f00]'
@@ -108,7 +107,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={() => onThemeChange(isDark ? 'light' : 'dark')}
-              className={`p-2 rounded-full border transition-all duration-200 text-sm ${
+              className={`p-2 rounded-full border transition-all duration-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff4f00] ${
                 isDark
                   ? 'bg-[#1F1F1F] border-[#333333] text-yellow-400 hover:bg-[#2A2A2A]'
                   : 'bg-[#FAFAFA] border-[#b2b2b2]/50 text-[#1F1F1F] hover:bg-gray-200'
@@ -130,7 +129,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => onLanguageChange('es')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold transition-all duration-200 ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] ${
                   currentLang === 'es'
                     ? 'bg-[#ff4f00] text-white shadow-sm'
                     : isDark
@@ -145,7 +144,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => onLanguageChange('en')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold transition-all duration-200 ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-bold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] ${
                   currentLang === 'en'
                     ? 'bg-[#ff4f00] text-white shadow-sm'
                     : isDark
@@ -163,7 +162,7 @@ export const Header: React.FC<HeaderProps> = ({
             <a
               href="#contacto"
               onClick={(e) => handleLinkClick(e, '#contacto')}
-              className="bg-[#ff4f00] hover:bg-[#e04500] text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-md shadow-[#ff4f00]/20 hover:shadow-[#ff4f00]/40 focus:ring-2 focus:ring-[#ff4f00]"
+              className="bg-[#ff4f00] hover:bg-[#e04500] text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
             >
               {t.ctaButton}
             </a>
@@ -175,6 +174,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={() => onThemeChange(isDark ? 'light' : 'dark')}
+              aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
               className={`p-1.5 rounded-full border text-xs ${
                 isDark
                   ? 'bg-[#1F1F1F] border-[#333333] text-yellow-400'
@@ -193,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => onLanguageChange('es')}
-                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-bold ${
+                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-bold focus:outline-none focus:ring-2 focus:ring-[#ff4f00] ${
                   currentLang === 'es'
                     ? 'bg-[#ff4f00] text-white'
                     : isDark
@@ -207,7 +207,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => onLanguageChange('en')}
-                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-bold ${
+                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-bold focus:outline-none focus:ring-2 focus:ring-[#ff4f00] ${
                   currentLang === 'en'
                     ? 'bg-[#ff4f00] text-white'
                     : isDark
@@ -223,7 +223,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`p-2 rounded-lg focus:outline-none ${
+              className={`p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff4f00] ${
                 isDark ? 'text-gray-300 hover:bg-[#1F1F1F]' : 'text-[#1C1917] hover:bg-gray-100'
               }`}
               aria-expanded={mobileMenuOpen}
@@ -255,7 +255,7 @@ export const Header: React.FC<HeaderProps> = ({
               key={link.href}
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
-              className={`block text-base font-semibold py-2 transition-colors ${
+              className={`block text-base font-semibold py-2 transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] ${
                 isDark
                   ? 'text-gray-300 hover:text-[#ff4f00]'
                   : 'text-[#1C1917] hover:text-[#ff4f00]'
@@ -267,7 +267,7 @@ export const Header: React.FC<HeaderProps> = ({
           <a
             href="#contacto"
             onClick={(e) => handleLinkClick(e, '#contacto')}
-            className="block text-center bg-[#ff4f00] hover:bg-[#e04500] text-white text-base font-bold px-4 py-3 rounded-xl transition-all shadow-md mt-4"
+            className="block text-center bg-[#ff4f00] hover:bg-[#e04500] text-white text-base font-bold px-4 py-3 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-[#ff4f00] mt-4"
           >
             {t.ctaButton}
           </a>
