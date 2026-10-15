@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Locale } from '@/data/i18n';
-import { INFO_ITIERS } from '@/data/mockData';
 
 interface CareersSectionProps {
   currentLang: Locale;
@@ -12,22 +11,20 @@ export const CareersSection: React.FC<CareersSectionProps> = ({ currentLang }) =
   const content = {
     es: {
       badge: 'Postulaciones',
-      title: 'Trabajá con nosotros',
-      desc: 'Completá el formulario de postulación para trabajar con Itiers.',
+      title: 'Trabaja con nosotros',
+      desc: 'Súmate a nuestro equipo. Completá el formulario de postulación.',
       cta: 'Completar formulario',
     },
     en: {
-      badge: 'Join Itiers',
+      badge: 'Join Us',
       title: 'Work with us',
-      desc: 'Complete the application form to work with Itiers.',
+      desc: 'Join our team. Complete the application form.',
       cta: 'Complete application',
     },
   }[currentLang];
 
-  const googleFormUrl = INFO_ITIERS.googleFormWorkWithUs;
-  if (!googleFormUrl) {
-    throw new Error('Falta configurar el formulario de postulaciones.');
-  }
+  // Enlace obtenido del Excel
+  const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfN5I8_vgDeYfihh_3rPSb1tOVSbf3yUgNWgGD-77aLlLWKbA/viewform?pli=1";
 
   return (
     <section className="py-16 bg-[#0F0F0F] text-white border-t border-[#333333]/50">

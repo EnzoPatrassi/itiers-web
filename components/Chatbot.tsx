@@ -47,7 +47,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang }) => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      {/* Floating Toggle Button */}
+      {/* Botón flotante para abrir/cerrar */}
       {!isOpen && (
         <button
           type="button"
@@ -68,10 +68,10 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang }) => {
         </button>
       )}
 
-      {/* Floating Chat Window Panel */}
+      {/* Panel flotante de la ventana de chat */}
       {isOpen && (
         <section id="whatsapp-contact-panel" aria-label={content.botName} className="w-[calc(100vw-2rem)] max-w-[380px] bg-[#1F1F1F] border border-[#ff4f00]/40 rounded-[16px] shadow-2xl overflow-hidden flex flex-col transition-all duration-300 animate-in fade-in slide-in-from-bottom-5">
-          {/* Header */}
+          {/* Encabezado */}
           <div className="bg-[#0F0F0F] p-4 border-b border-[#333333] flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-9 h-9 rounded-full bg-[#ff4f00] flex items-center justify-center text-white font-bold text-xs">
@@ -92,7 +92,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang }) => {
             </button>
           </div>
 
-          {/* Body */}
+          {/* Cuerpo */}
           <div className="p-5 max-h-[min(70vh,420px)] overflow-y-auto space-y-4 text-xs">
             <div className="bg-[#0F0F0F] border border-[#333333] p-3.5 rounded-2xl rounded-tl-none text-gray-200 leading-relaxed">
               {content.intro}

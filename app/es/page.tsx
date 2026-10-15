@@ -8,6 +8,7 @@ import { ValueProposition } from '@/components/ValueProposition';
 import { TeamSection } from '@/components/TeamSection';
 import { DataAISection } from '@/components/DataAISection';
 import { Services } from '@/components/Services';
+import { Testimonials } from '@/components/Testimonials';
 import { ContactSection } from '@/components/ContactSection';
 import { CareersSection } from '@/components/CareersSection';
 import { Chatbot } from '@/components/Chatbot';
@@ -25,7 +26,6 @@ export default function LandingPage() {
         isDark ? 'bg-[#0F0F0F] text-white' : 'bg-white text-[#1C1917]'
       }`}
     >
-      {/* 1. Header / Navbar Fijo con Selector de Tema & Idioma */}
       <Header
         currentLang={currentLang}
         onLanguageChange={setCurrentLang}
@@ -34,28 +34,20 @@ export default function LandingPage() {
       />
 
       <main>
-        {/* 2. Hero Section: Value Proposition & Pilares Compactos */}
         <Hero currentLang={currentLang} theme={theme} />
         <ValueProposition currentLang={currentLang} theme={theme} />
-
-        {/* 3. Sección Quiénes Somos & Carrusel de Equipo */}
         <TeamSection currentLang={currentLang} theme={theme} />
-
-        {/* 4. Sección Qué Hacemos: Workflow Interactivo de Datos & IA */}
         <DataAISection currentLang={currentLang} theme={theme} />
-
-        {/* 5. Cards de Servicios: Data Eng, Capacitaciones, Staffing, Soluciones IA */}
         <Services currentLang={currentLang} theme={theme} />
+        
+        {/* Agregamos la sección de Testimonios aquí */}
+        <Testimonials currentLang={currentLang} />
 
-        {/* Contacto y postulaciones */}
         <ContactSection currentLang={currentLang} />
         <CareersSection currentLang={currentLang} />
       </main>
 
-      {/* Chatbot Flotante */}
       <Chatbot currentLang={currentLang} />
-
-      {/* 10. Footer: Legal, i18n & Trabaja con Nosotros */}
       <Footer currentLang={currentLang} onLanguageChange={setCurrentLang} />
     </div>
   );

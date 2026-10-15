@@ -15,15 +15,15 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
 
   const headerText = {
     es: {
-      badge: 'Qué hacemos',
-      title: 'Entrenamos, transformamos, guiamos y globalizamos tus datos',
-      subtitle: 'Diseñamos e implementamos soluciones de datos de manera eficiente y efectiva.',
+      badge: 'Soluciones',
+      title: '¿Por qué contratar Itiers?',
+      subtitle: 'Descubre nuestros pilares de servicio diseñados para transformar tu organización.',
       ctaText: 'Consultanos por WhatsApp',
     },
     en: {
-      badge: 'What we do',
-      title: 'We train, transform, guide, and globalize your data',
-      subtitle: 'We design and implement data solutions efficiently and effectively.',
+      badge: 'Solutions',
+      title: 'Why hire Itiers?',
+      subtitle: 'Discover our service pillars designed to transform your organization.',
       ctaText: 'Contact us on WhatsApp',
     },
   }[currentLang];
@@ -48,7 +48,8 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Grid de Servicios */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {SERVICIOS_ITIERS.map((servicio, index) => {
             const copy = servicio[currentLang];
 
@@ -56,9 +57,7 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
               <article
                 key={servicio.id}
                 className={`flex flex-col rounded-[16px] p-6 border transition-colors ${
-                  isDark
-                    ? 'bg-[#1A1A1A] border-[#333333] hover:border-[#ff4f00]'
-                    : 'bg-[#FAFAFA] border-[#b2b2b2] hover:border-[#ff4f00]'
+                  isDark ? 'bg-[#1A1A1A] border-[#333333] hover:border-[#ff4f00]' : 'bg-[#FAFAFA] border-[#b2b2b2] hover:border-[#ff4f00]'
                 }`}
               >
                 <div className="flex items-start justify-between mb-6">
@@ -72,9 +71,7 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
                       <span className="text-xs font-bold text-[#ff4f00] uppercase tracking-wider">
                         0{index + 1} · {currentLang === 'es' ? 'Servicio' : 'Service'}
                       </span>
-                      <h3 className={`text-xl font-bold ${
-                        isDark ? 'text-white' : 'text-[#1C1917]'
-                      }`}>
+                      <h3 className={`text-xl font-bold mt-1 ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>
                         {copy.titulo}
                       </h3>
                     </div>
@@ -89,18 +86,8 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
                   <ul className="space-y-3">
                     {copy.detalles.map((detalle) => (
                       <li key={detalle} className={`flex items-start text-sm ${isDark ? 'text-gray-300' : 'text-[#1C1917]'}`}>
-                        <svg
-                          className="w-4 h-4 text-[#ff4f00] mr-2.5 mt-0.5 shrink-0"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2.5}
-                            d="M5 13l4 4L19 7"
-                          />
+                        <svg className="w-4 h-4 text-[#ff4f00] mr-2.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                         </svg>
                         <span>{detalle}</span>
                       </li>
@@ -111,7 +98,7 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
                 <div className="pt-5 mt-5 border-t border-[#b2b2b2]">
                   <a
                     href="#contacto"
-                    className="inline-flex items-center text-sm font-bold text-[#ff4f00] hover:text-[#e04500] focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
+                    className="inline-flex items-center text-sm font-bold text-[#ff4f00] hover:text-[#e04500] focus:outline-none"
                   >
                     {headerText.ctaText} →
                   </a>

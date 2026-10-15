@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Locale } from '@/data/i18n';
-import { CASOS_ITIERS } from '@/data/mockData';
+import { TESTIMONIOS_ITIERS } from '@/data/mockData';
 
 interface TestimonialsProps {
   currentLang: Locale;
@@ -11,13 +11,13 @@ interface TestimonialsProps {
 export const Testimonials: React.FC<TestimonialsProps> = ({ currentLang }) => {
   const content = {
     es: {
-      badge: 'Social Proof & Casos de Éxito',
-      title: 'Confianza demostrada en proyectos críticos de la industria',
+      badge: 'Testimonios',
+      title: 'Lo que dicen nuestros clientes',
       subtitle: 'Así transformamos la complejidad de datos en ventajas competitivas reales para nuestros clientes.',
     },
     en: {
-      badge: 'Social Proof & Case Studies',
-      title: 'Proven enterprise trust in mission-critical deployments',
+      badge: 'Testimonials',
+      title: 'What our clients say',
       subtitle: 'Here is how we turn data complexity into real competitive advantages for our partners.',
     },
   }[currentLang];
@@ -37,37 +37,20 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ currentLang }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {CASOS_ITIERS.map((caso) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {TESTIMONIOS_ITIERS.map((testimonio) => (
             <div
-              key={caso.id}
+              key={testimonio.id}
               className="p-8 rounded-3xl bg-[#1F1F1F]/70 border border-[#333333] hover:border-[#ff4f00]/50 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group flex flex-col justify-between"
             >
-              <div className="flex items-start justify-between mb-6">
-                <div className="flex items-center space-x-4">
-                  <span className="text-3xl p-3 bg-[#0F0F0F] border border-[#333333] rounded-2xl">
-                    {caso.icono}
-                  </span>
-                  <div>
-                    <span className="text-xs font-bold text-[#ff4f00] uppercase tracking-wider">
-                      {caso.cliente}
-                    </span>
-                    <h3 className="text-xl font-bold text-white group-hover:text-[#ff4f00] transition-colors">
-                      {caso.titulo}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-gray-300 text-sm leading-relaxed mb-6">
-                "{caso.descripcion}"
+              <p className="text-gray-300 text-sm leading-relaxed mb-6 italic">
+                "{testimonio.cita}"
               </p>
 
-              <div className="p-4 rounded-2xl bg-[#0F0F0F] border border-[#333333] flex items-center space-x-3">
-                <span className="text-[#ff4f00] font-bold text-lg">📈</span>
+              <div className="p-4 rounded-2xl bg-[#0F0F0F] border border-[#333333] flex items-center space-x-3 mt-auto">
                 <div>
-                  <div className="text-xs text-gray-400 font-bold uppercase tracking-wider">Impacto Obtenido:</div>
-                  <div className="text-xs font-semibold text-white mt-0.5">{caso.impacto}</div>
+                  <div className="text-sm font-semibold text-white">{testimonio.autor}</div>
+                  <div className="text-xs text-[#ff4f00] font-bold uppercase tracking-wider">{testimonio.empresa}</div>
                 </div>
               </div>
             </div>

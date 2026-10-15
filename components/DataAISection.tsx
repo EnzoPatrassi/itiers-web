@@ -16,15 +16,15 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
   const content = {
     es: {
       badge: 'Qué hacemos',
-      title: 'Del análisis de datos al Data-Driven Business',
-      subtitle: 'Un recorrido que abarca el análisis descriptivo, el diagnóstico, la predicción y la prescripción.',
+      title: 'Entrenar, Transformar, Guiar y Globalizar',
+      subtitle: 'Itiers Data Sense tiene como propósito ENTRENAR, TRANSFORMAR, GUIAR y GLOBALIZAR los datos de tu organización de manera eficiente y efectiva.',
       stages: ['Descriptiva', 'Diagnóstico', 'Predictiva', 'Prescriptiva', 'Data-Driven Business'],
       imageAlt: 'Flujo de datos: Descriptiva, Diagnóstico, Predictiva, Prescriptiva y Data-Driven Business.',
     },
     en: {
       badge: 'What we do',
-      title: 'From data analysis to a data-driven business',
-      subtitle: 'A journey through descriptive analysis, diagnosis, prediction, and prescription.',
+      title: 'Train, Transform, Guide, and Globalize',
+      subtitle: 'Itiers Data Sense aims to TRAIN, TRANSFORM, GUIDE, and GLOBALIZE your organizations data efficiently and effectively.',
       stages: ['Descriptive', 'Diagnosis', 'Predictive', 'Prescriptive', 'Data-Driven Business'],
       imageAlt: 'Data flow: Descriptive, Diagnosis, Predictive, Prescriptive, and Data-Driven Business.',
     },
@@ -34,20 +34,18 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
     <section
       id="data-ai"
       className={`py-24 border-t relative overflow-hidden transition-colors duration-300 ${
-        isDark
-          ? 'bg-[#0F0F0F] text-white border-[#333333]/60'
-          : 'bg-[#FAFAFA] text-[#1C1917] border-[#b2b2b2]/30'
+        isDark ? 'bg-[#0F0F0F] text-white border-[#333333]/60' : 'bg-[#FAFAFA] text-[#1C1917] border-[#b2b2b2]/30'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-16">
           <span className="text-[#ff4f00] font-semibold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full">
             {content.badge}
           </span>
           <h2 className={`mt-4 text-3xl sm:text-5xl font-extrabold tracking-tight ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>
             {content.title}
           </h2>
-          <p className={`mt-4 text-base sm:text-lg ${isDark ? 'text-gray-400' : 'text-[#4d4d4d]'}`}>
+          <p className={`mt-4 text-base sm:text-lg font-medium ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
             {content.subtitle}
           </p>
         </div>
@@ -63,11 +61,8 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
               height={302}
               className="mx-auto h-auto w-full max-w-[906px]"
             />
-            <figcaption className={`mt-6 text-center text-sm ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
-              {content.subtitle}
-            </figcaption>
           </figure>
-          <ol className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          <ol className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             {content.stages.map((stage, index) => (
               <li key={stage} className={`border-t-2 border-[#ff4f00] pt-3 text-sm font-semibold ${
                 isDark ? 'text-white' : 'text-[#1C1917]'
