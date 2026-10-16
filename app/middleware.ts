@@ -13,12 +13,16 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Opcional: si quieres asegurar que la cookie de idioma exista por defecto
   const response = NextResponse.next();
-  if (!request.cookies.has('itiers_lang')) {
-    const acceptLanguage = request.headers.get('accept-language');
-    const defaultLang = acceptLanguage && acceptLanguage.toLowerCase().startsWith('es') ? 'es' : 'en';
-    response.cookies.set('itiers_lang', defaultLang);
+
+  // Detectar el idioma del navegador mediante la cabecera 'accept-language'
+  const acceptLanguage = request.headers.get('accept-language');
+  const browserLang = acceptLanguage && acceptLanguage.toLowerCase().includes('en') ? 'en' : 'es';
+
+  // Si no hay cookie o la cookie no coincide con la preferencia actual del navegador, la actualizamos
+  const currentCookie = request.cookies.get('itiers_lang')?.value;
+  if (!currentCookie) {
+    response.cookies.set('itiers_lang', browserLang, { path: '/', maxAge: 31536000 });
   }
 
   return response;
