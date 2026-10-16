@@ -10,16 +10,24 @@
     --color-brand-gray: #4d4d4d;
     --color-border: #b2b2b2;
 
+    /* Superficies oscuras institucionales (Referencia de capturas) */
+    --color-dark-bg: #0F0F0F;
+    --color-dark-surface: #141414;
+    --color-dark-card: #1A1A1A;
+    --color-dark-border: #333333;
+
     /* Tipografía */
     --font-heading: "Arista Pro Trial Light", "Comfortaa", sans-serif;
     --font-body: "Arial Rounded MT", "Nunito", sans-serif;
     --font-mono: "Geist Mono", monospace;
 
-    /* Espaciado y Radios */
+    /* Espaciado y Radios unificados con las referencias */
     --spacing-base: 8px;
     --radius-sm: 12px;
-    --radius-none: 0px;
     --radius-md: 16px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px; /* Equivale exactamente a rounded-[2rem] */
+    --radius-3xl: 40px;
     --radius-full: 9999px;
 }
 
@@ -39,4 +47,16 @@
     animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
   }
+}
+
+/* Estilos base globales para transiciones suaves de tema */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-accent);
+  overflow-x: hidden;
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Locale } from '@/data/i18n';
 import { Header, ThemeMode } from '@/components/Header';
 import { Hero } from '@/components/Hero';
@@ -21,11 +21,33 @@ export default function LandingPage() {
   const [currentLang, setCurrentLang] = useState<Locale>('es');
   const [theme, setTheme] = useState<ThemeMode>('light');
 
+  // Detectar automáticamente el idioma del navegador/región al cargar por primera vez
+  useEffect(() => {
+    const savedLang = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('itiers_lang='))
+      ?.split('=')[1] as Locale;
+
+    if (savedLang && (savedLang === 'es' || savedLang === 'en')) {
+      setCurrentLang(savedLang);
+    } else {
+      const browserLang = navigator.language || (navigator as any).languages[0];
+      const detectedLang: Locale = browserLang && browserLang.toLowerCase().startsWith('es') ? 'es' : 'en';
+      setCurrentLang(detectedLang);
+    }
+  }, []);
+
+  // Función para cambiar el idioma manualmente y guardarlo en una cookie
+  const handleLanguageChange = (newLang: Locale) => {
+    setCurrentLang(newLang);
+    document.cookie = `itiers_lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
+  };
+
   const isDark = theme === 'dark';
 
   return (
     <div className={`min-h-screen font-sans antialiased overflow-x-hidden selection:bg-[#ff4f00] selection:text-white transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] text-white' : 'bg-white text-[#1C1917]'}`}>
-      <Header currentLang={currentLang} onLanguageChange={setCurrentLang} theme={theme} onThemeChange={setTheme} />
+      <Header currentLang={currentLang} onLanguageChange={handleLanguageChange} theme={theme} onThemeChange={setTheme} />
 
       <main>
         <Hero currentLang={currentLang} theme={theme} />
@@ -33,7 +55,7 @@ export default function LandingPage() {
         <TeamSection currentLang={currentLang} theme={theme} />
         <DataAISection currentLang={currentLang} theme={theme} />
         <Services currentLang={currentLang} theme={theme} />
-        <TechnologySection /> {/* Ya no usa theme porque siempre es blanco */}
+        <TechnologySection theme={theme}/>
         <ImpactCounters currentLang={currentLang} theme={theme} /> 
         <Testimonials currentLang={currentLang} theme={theme} />
         <ClientLogos currentLang={currentLang} theme={theme} />
@@ -42,7 +64,7 @@ export default function LandingPage() {
       </main>
 
       <Chatbot currentLang={currentLang} />
-      <Footer currentLang={currentLang} theme={theme} onLanguageChange={setCurrentLang} />
+      <Footer currentLang={currentLang} theme={theme} />
     </div>
   );
 }
