@@ -70,20 +70,49 @@ export const ImpactCounters: React.FC<ImpactCountersProps> = ({ currentLang, the
   }[currentLang];
 
   return (
-    <section className={`py-20 border-t transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] border-[#333333]/50' : 'bg-[#FAFAFA] border-[#b2b2b2]/30'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="text-[#ff4f00] font-semibold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full inline-block">
+    <section className={`py-24 relative border-t overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] border-[#333333]' : 'bg-[#FAFAFA] border-[#b2b2b2]/30'}`}>
+      
+      {/* Trama corporativa de fondo */}
+      <div className={`absolute inset-0 opacity-[0.03] pointer-events-none z-0 ${isDark ? 'text-white' : 'text-black'}`}>
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="impact-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <circle cx="20" cy="20" r="3" fill="currentColor" />
+              <circle cx="80" cy="40" r="5" fill="currentColor" />
+              <circle cx="40" cy="80" r="2" fill="currentColor" />
+              <path d="M20,20 L80,40 L40,80 Z" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.5" />
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#impact-pattern)" />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16 animate-fade-in-up">
+          <span className="text-[#ff4f00] font-bold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full inline-block">
             {content.badge}
           </span>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
-          {content.stats.map((stat) => (
-            <div key={stat.id} className={`text-center flex flex-col items-center p-6 rounded-3xl border transition-all duration-300 hover:-translate-y-1 ${isDark ? 'bg-[#1A1A1A] border-[#333333] hover:border-[#ff4f00]/50' : 'bg-white border-[#b2b2b2]/40 hover:border-[#ff4f00]/50 shadow-sm'}`}>
-              <div className={`text-5xl md:text-6xl font-extrabold tracking-tight mb-3 ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {content.stats.map((stat, index) => (
+            <div 
+              key={stat.id} 
+              className={`relative overflow-hidden text-center flex flex-col items-center justify-center p-8 rounded-[2rem] border transition-all duration-300 hover:-translate-y-1 backdrop-blur-xl animate-fade-in-up ${
+                isDark ? 'bg-[#1A1A1A]/80 border-[#333333] hover:border-[#ff4f00]/50 hover:shadow-2xl' : 'bg-white/80 border-[#b2b2b2]/40 hover:border-[#ff4f00]/50 hover:shadow-xl'
+              }`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              {/* Marca geométrica sutil de fondo */}
+              <div className="absolute top-0 right-0 w-32 h-32 opacity-[0.03] pointer-events-none text-current">
+                <svg viewBox="0 0 100 100" fill="currentColor">
+                  <path d="M0,0 L100,0 L100,100 Z" />
+                </svg>
+              </div>
+
+              <div className="relative z-10 text-5xl md:text-6xl font-black tracking-tight mb-3 text-[#ff4f00] drop-shadow-sm">
                 <AnimatedNumber end={stat.end} prefix={stat.prefix} suffix={stat.suffix} />
               </div>
-              <div className="text-xs md:text-sm font-bold tracking-widest uppercase text-[#ff4f00]">
+              <div className={`relative z-10 text-xs md:text-sm font-bold tracking-widest uppercase mt-2 ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
                 {stat.label}
               </div>
             </div>

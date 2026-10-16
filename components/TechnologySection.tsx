@@ -2,6 +2,11 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { ThemeMode } from './Header';
+
+interface TechnologySectionProps {
+  theme?: ThemeMode; 
+}
 
 const TECH_LOGOS = [
   { src: '/Logo-n8n.png', alt: 'n8n' },
@@ -20,9 +25,11 @@ const TECH_LOGOS = [
   { src: '/Logo-power-bi.png', alt: 'Microsoft Power BI' },
 ];
 
-export const TechnologySection: React.FC = () => {
+export const TechnologySection: React.FC<TechnologySectionProps> = ({ theme = 'light' }) => {
+  const isDark = theme === 'dark';
+
   return (
-    <section className="py-6 border-t overflow-hidden bg-white border-[#b2b2b2]/30">
+    <section className={`py-12 border-y relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#141414] border-[#333333]' : 'bg-white border-[#b2b2b2]/30'}`}>
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes marquee {
           0% { transform: translateX(0); }
@@ -32,14 +39,22 @@ export const TechnologySection: React.FC = () => {
         .animate-marquee:hover { animation-play-state: paused; }
       `}} />
 
-      <div className="relative w-full flex overflow-hidden group">
-        <div className="absolute top-0 left-0 w-24 md:w-36 h-full z-10 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
-        <div className="absolute top-0 right-0 w-24 md:w-36 h-full z-10 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+      <div className="relative w-full flex overflow-hidden group z-10">
+        {/* Degradés laterales adaptados al tema */}
+        <div className={`absolute top-0 left-0 w-24 md:w-40 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-[#141414] to-transparent' : 'bg-gradient-to-r from-white to-transparent'}`}></div>
+        <div className={`absolute top-0 right-0 w-24 md:w-40 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-l from-[#141414] to-transparent' : 'bg-gradient-to-l from-white to-transparent'}`}></div>
 
-        <div className="animate-marquee flex items-center gap-6 md:gap-10 px-6">
+        <div className="animate-marquee flex items-center gap-10 md:gap-16 px-10">
           {[...TECH_LOGOS, ...TECH_LOGOS].map((tech, index) => (
-            <div key={index} className="flex-shrink-0 w-48 h-20 md:w-64 md:h-28 relative hover:scale-105 transition-all duration-300 opacity-80 hover:opacity-100">
-              <Image src={tech.src} alt={tech.alt} fill className="object-contain" sizes="(max-width: 768px) 192px, 256px" />
+            <div 
+              key={index} 
+              className={`flex-shrink-0 w-40 h-16 md:w-56 md:h-24 relative hover:scale-105 transition-all duration-300 ${
+                isDark 
+                  ? 'opacity-50 hover:opacity-100 brightness-0 invert'
+                  : 'opacity-60 hover:opacity-100 grayscale hover:grayscale-0'
+              }`}
+            >
+              <Image src={tech.src} alt={tech.alt} fill className="object-contain" sizes="(max-width: 768px) 160px, 224px" />
             </div>
           ))}
         </div>

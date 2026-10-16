@@ -30,21 +30,40 @@ export const CareersSection: React.FC<CareersSectionProps> = ({ currentLang, the
   const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfN5I8_vgDeYfihh_3rPSb1tOVSbf3yUgNWgGD-77aLlLWKbA/viewform?pli=1";
 
   return (
-    <section className={`py-16 border-t transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] text-white border-[#333333]/50' : 'bg-[#FAFAFA] text-[#1C1917] border-[#b2b2b2]/30'}`}>
-      <div className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center border rounded-3xl p-8 sm:p-10 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#1F1F1F]/60 border-[#333333]' : 'bg-white border-[#b2b2b2]/40 shadow-sm'}`}>
-        <span className="text-[#ff4f00] font-semibold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-3.5 py-1 rounded-full">
+    <section className={`py-24 border-t relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] text-white border-[#333333]' : 'bg-[#FAFAFA] text-[#1C1917] border-[#b2b2b2]/30'}`}>
+      
+      {/* Trama corporativa de fondo */}
+      <div className={`absolute inset-0 opacity-[0.03] pointer-events-none z-0 ${isDark ? 'text-white' : 'text-black'}`}>
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="careers-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <circle cx="20" cy="20" r="3" fill="currentColor" />
+              <circle cx="80" cy="40" r="5" fill="currentColor" />
+              <circle cx="40" cy="80" r="2" fill="currentColor" />
+              <path d="M20,20 L80,40 L40,80 Z" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.5" />
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#careers-pattern)" />
+        </svg>
+      </div>
+
+      {/* NUEVO: Contenedor con efecto Glassmorphism (backdrop-blur-xl y fondos semitransparentes) */}
+      <div className={`max-w-4xl mx-auto px-4 sm:px-8 lg:px-10 text-center border rounded-[2rem] p-10 sm:p-14 relative z-10 overflow-hidden transition-colors duration-300 shadow-xl hover:shadow-2xl backdrop-blur-xl ${
+        isDark ? 'bg-[#1A1A1A]/80 border-[#333333]' : 'bg-white/80 border-[#b2b2b2]/40'
+      }`}>
+        <span className="text-[#ff4f00] font-bold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full">
           {content.badge}
         </span>
-        <h2 className={`mt-4 text-3xl font-bold ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>{content.title}</h2>
-        <p className={`mt-3 text-base max-w-xl mx-auto ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
+        <h2 className={`mt-6 text-3xl sm:text-4xl font-extrabold tracking-tight ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>{content.title}</h2>
+        <p className={`mt-4 text-base sm:text-lg max-w-xl mx-auto ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
           {content.desc}
         </p>
-        <div className="mt-6">
+        <div className="mt-8">
           <a
             href={googleFormUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center font-semibold text-sm px-6 py-3 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-[#ff4f00] border border-[#ff4f00] ${isDark ? 'bg-[#1F1F1F] hover:bg-[#ff4f00] text-[#ff4f00] hover:text-white' : 'bg-white hover:bg-[#ff4f00] text-[#ff4f00] hover:text-white'}`}
+            className="inline-flex items-center font-bold text-sm md:text-base px-8 py-4 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-[#ff4f00] bg-[#ff4f00] hover:bg-[#e04500] text-white shadow-lg shadow-[#ff4f00]/20 hover:-translate-y-1"
           >
             {content.cta} ↗
           </a>
