@@ -15,7 +15,6 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({
   currentLang,
-  onLanguageChange,
   theme,
   onThemeChange,
 }) => {
@@ -64,7 +63,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </a>
 
-          {/* Navegación Centrada (Exacto a la captura de referencia) */}
+          {/* Navegación de Escritorio */}
           <nav className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
               <a
@@ -80,28 +79,71 @@ export const Header: React.FC<HeaderProps> = ({
             ))}
           </nav>
 
-          {/* Controles de la derecha (Tema + Botón Llamada a la acción naranja) */}
-          <div className="flex items-center space-x-4">
+          {/* Controles de la derecha: Tema + CTA "Hablemos" + Botón Hamburguesa */}
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            {/* Botón de Tema (Visible siempre) */}
             <button
               type="button"
               onClick={() => onThemeChange(isDark ? 'light' : 'dark')}
               className={`p-2 rounded-full border transition-colors ${
                 isDark ? 'bg-[#1A1A1A] border-[#333333] text-yellow-400' : 'bg-gray-100 border-gray-200 text-gray-800'
               }`}
+              aria-label="Cambiar tema"
             >
               {isDark ? '☀️' : '🌙'}
             </button>
 
+            {/* Botón Hablemos (Visible siempre) */}
             <a
               href="#contacto"
-              className="bg-[#ff4f00] hover:bg-[#e04500] text-white font-bold text-sm px-6 py-2.5 rounded-full transition-all shadow-md hover:scale-105"
+              className="bg-[#ff4f00] hover:bg-[#e04500] text-white font-bold text-xs sm:text-sm px-4 sm:px-6 py-2.5 rounded-full transition-all shadow-md hover:scale-105"
             >
               {currentLang === 'es' ? 'Hablemos' : 'Let\'s talk'}
             </a>
+
+            {/* Botón Menú Hamburguesa (Sólo en móvil) */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`md:hidden p-2 rounded-xl border transition-colors ${
+                isDark ? 'bg-[#1A1A1A] border-[#333333] text-gray-200' : 'bg-gray-100 border-gray-200 text-gray-800'
+              }`}
+              aria-label="Abrir menú"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
 
         </div>
       </div>
+
+      {/* Menú Desplegable para Móviles */}
+      {mobileMenuOpen && (
+        <div className={`md:hidden border-b transition-colors ${
+          isDark ? 'bg-[#0F0F0F] border-[#333333]' : 'bg-white border-gray-200'
+        }`}>
+          <nav className="flex flex-col px-6 py-6 space-y-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleLinkClick(e, link.href)}
+                className={`text-base font-semibold py-2 transition-colors ${
+                  isDark ? 'text-gray-200 hover:text-[#ff4f00]' : 'text-gray-800 hover:text-[#ff4f00]'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
