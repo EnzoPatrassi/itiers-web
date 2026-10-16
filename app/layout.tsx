@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
-// Metadatos globales y de la página de inicio (Definidos por Martín - SEO)
+// Metadatos globales y de la página de inicio
 export const metadata: Metadata = {
   title: 'Itiers Data Sense | Decisiones estratégicas con datos',
   description: 'Convertimos el caos de datos en decisiones estratégicas con un enfoque personalizado.',

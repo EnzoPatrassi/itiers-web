@@ -1,4 +1,3 @@
-// 1. Interfaces para asegurar un tipado estricto (TypeScript)
 
 export interface Servicio {
   id: string;
@@ -49,8 +48,6 @@ export interface InfoCorporativa {
   sedes: Sede[];
 }
 
-// 2. Base de Datos Centralizada de Itiers
-
 export const INFO_ITIERS: InfoCorporativa = {
   nombre: "Itiers | Data Sense",
   trayectoria: "20 años",
@@ -66,7 +63,6 @@ export const INFO_ITIERS: InfoCorporativa = {
   ]
 };
 
-// --- AQUÍ ESTÁN LOS 4 SERVICIOS EXACTOS DEL EXCEL ---
 export const SERVICIOS_ITIERS: Servicio[] = [
   {
     id: "ingenieria-datos",

@@ -53,7 +53,6 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ theme = 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Grid lines
       ctx.strokeStyle = isDark ? 'rgba(255, 79, 0, 0.03)' : 'rgba(255, 79, 0, 0.05)';
       ctx.lineWidth = 1;
       const gridSize = 60;
@@ -70,7 +69,6 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ theme = 
         ctx.stroke();
       }
 
-      // Draw particles & lines
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.x += p.vx;

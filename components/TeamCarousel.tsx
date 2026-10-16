@@ -7,7 +7,6 @@ interface TeamCarouselProps {
   theme?: ThemeMode;
 }
 
-// Simulamos las imágenes del equipo. REEMPLAZA ESTAS URLs CON LAS REALES
 const TEAM_IMAGES = [
   '/equipo-1.jpg',
   '/equipo-2.jpg',

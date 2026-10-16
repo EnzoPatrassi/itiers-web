@@ -15,26 +15,23 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
 
   const headerText = {
     es: {
-      badge: 'Soluciones',
+      badge: 'Servicios',
       title: '¿Por qué contratar Itiers?',
       subtitle: 'Descubre nuestros pilares de servicio diseñados para transformar tu organización.',
       ctaText: 'Consultanos por WhatsApp',
+      serviceLabel: 'Servicio',
     },
     en: {
-      badge: 'Solutions',
+      badge: 'Services',
       title: 'Why hire Itiers?',
       subtitle: 'Discover our service pillars designed to transform your organization.',
       ctaText: 'Contact us on WhatsApp',
+      serviceLabel: 'Service',
     },
   }[currentLang];
 
   return (
-    <section
-      id="servicios"
-      className={`py-24 relative transition-colors duration-300 ${
-        isDark ? 'bg-[#0F0F0F] text-white' : 'bg-white text-[#1C1917]'
-      }`}
-    >
+    <section id="servicios-cards" className={`py-24 relative transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] text-white' : 'bg-white text-[#1C1917]'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-[#ff4f00] font-semibold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full">
@@ -48,40 +45,27 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
           </p>
         </div>
 
-        {/* Grid de Servicios */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {SERVICIOS_ITIERS.map((servicio, index) => {
-            const copy = servicio[currentLang];
 
+            const copy = currentLang === 'es' ? servicio.es : servicio.en;
+            
             return (
-              <article
-                key={servicio.id}
-                className={`flex flex-col rounded-[16px] p-6 border transition-colors ${
-                  isDark ? 'bg-[#1A1A1A] border-[#333333] hover:border-[#ff4f00]' : 'bg-[#FAFAFA] border-[#b2b2b2] hover:border-[#ff4f00]'
-                }`}
-              >
+              <article key={servicio.id} className={`flex flex-col rounded-[16px] p-6 border transition-colors ${isDark ? 'bg-[#1A1A1A] border-[#333333] hover:border-[#ff4f00]' : 'bg-[#FAFAFA] border-[#b2b2b2] hover:border-[#ff4f00]'}`}>
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center space-x-4">
-                    <span className={`text-2xl font-semibold p-3 border rounded-[12px] ${
-                      isDark ? 'bg-[#0F0F0F] border-[#333333]' : 'bg-white border-[#b2b2b2]'
-                    }`} aria-hidden="true">
+                    <span className={`text-2xl font-semibold p-3 border rounded-[12px] ${isDark ? 'bg-[#0F0F0F] border-[#333333]' : 'bg-white border-[#b2b2b2]'}`} aria-hidden="true">
                       {servicio.icono}
                     </span>
                     <div>
                       <span className="text-xs font-bold text-[#ff4f00] uppercase tracking-wider">
-                        0{index + 1} · {currentLang === 'es' ? 'Servicio' : 'Service'}
+                        0{index + 1} · {headerText.serviceLabel}
                       </span>
-                      <h3 className={`text-xl font-bold mt-1 ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>
-                        {copy.titulo}
-                      </h3>
+                      <h3 className={`text-xl font-bold mt-1 ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>{copy.titulo}</h3>
                     </div>
                   </div>
                 </div>
-
-                <p className={`text-base leading-relaxed mb-6 ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
-                  {copy.descripcion}
-                </p>
-
+                <p className={`text-base leading-relaxed mb-6 ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>{copy.descripcion}</p>
                 <div className={`border-t pt-5 mt-auto ${isDark ? 'border-[#333333]' : 'border-[#b2b2b2]'}`}>
                   <ul className="space-y-3">
                     {copy.detalles.map((detalle) => (
@@ -94,12 +78,8 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
                     ))}
                   </ul>
                 </div>
-
                 <div className="pt-5 mt-5 border-t border-[#b2b2b2]">
-                  <a
-                    href="#contacto"
-                    className="inline-flex items-center text-sm font-bold text-[#ff4f00] hover:text-[#e04500] focus:outline-none"
-                  >
+                  <a href="#contacto" className="inline-flex items-center text-sm font-bold text-[#ff4f00] hover:text-[#e04500]">
                     {headerText.ctaText} →
                   </a>
                 </div>
