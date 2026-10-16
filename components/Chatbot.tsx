@@ -18,6 +18,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang }) => {
       intro: 'Elegí el tema de tu consulta para continuar en WhatsApp.',
       options: [
         { label: 'Ingeniería de Datos', message: 'Hola, quiero consultar por Ingeniería de Datos.' },
+        { label: 'IA y Automatizaciones', message: 'Hola, quiero consultar por IA y Automatizaciones.' },
         { label: 'Capacitaciones', message: 'Hola, quiero consultar por las capacitaciones.' },
         { label: 'Staffing de Datos', message: 'Hola, quiero consultar por Staffing de Datos.' },
       ],
@@ -29,6 +30,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang }) => {
       intro: 'Choose a topic to continue your inquiry on WhatsApp.',
       options: [
         { label: 'Data Engineering', message: 'Hello, I have a question about Data Engineering.' },
+        { label: 'AI and Automations', message: 'Hello, I have a question about AI and Automations.' },
         { label: 'Training', message: 'Hello, I have a question about training.' },
         { label: 'Data Staffing', message: 'Hello, I have a question about Data Staffing.' },
       ],
@@ -47,76 +49,57 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang }) => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      {/* Floating Toggle Button */}
       {!isOpen && (
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="relative group bg-[#ff4f00] hover:bg-[#e04500] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
+          className="relative group bg-[#ff4f00] hover:bg-[#e04500] text-white p-4 rounded-full shadow-[0_0_20px_rgba(255,79,0,0.4)] hover:shadow-[0_0_30px_rgba(255,79,0,0.6)] hover:scale-110 transition-all duration-300 flex items-center justify-center focus:outline-none"
           aria-label={currentLang === 'es' ? 'Abrir opciones de contacto por WhatsApp' : 'Open WhatsApp contact options'}
           aria-expanded={isOpen}
-          aria-controls="whatsapp-contact-panel"
         >
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-            />
+          <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
           </svg>
         </button>
       )}
 
-      {/* Floating Chat Window Panel */}
       {isOpen && (
-        <section id="whatsapp-contact-panel" aria-label={content.botName} className="w-[calc(100vw-2rem)] max-w-[380px] bg-[#1F1F1F] border border-[#ff4f00]/40 rounded-[16px] shadow-2xl overflow-hidden flex flex-col transition-all duration-300 animate-in fade-in slide-in-from-bottom-5">
-          {/* Header */}
-          <div className="bg-[#0F0F0F] p-4 border-b border-[#333333] flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-9 h-9 rounded-full bg-[#ff4f00] flex items-center justify-center text-white font-bold text-xs">
-                IT
-              </div>
+        <section id="whatsapp-contact-panel" aria-label={content.botName} className="w-[calc(100vw-2rem)] max-w-[380px] border border-[#333333] rounded-[2rem] shadow-2xl overflow-hidden flex flex-col transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 backdrop-blur-xl bg-[#1F1F1F]/95">
+          <div className="bg-[#141414]/90 p-5 border-b border-[#333333] flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="w-10 h-10 rounded-xl bg-[#ff4f00] flex items-center justify-center text-white font-black text-sm shadow-inner">IT</div>
               <div>
                 <h2 className="text-sm font-bold text-white">{content.botName}</h2>
-                <p className="text-xs text-gray-400">{INFO_ITIERS.whatsapp}</p>
+                <p className="text-xs text-gray-400 font-medium mt-0.5">{INFO_ITIERS.whatsapp}</p>
               </div>
             </div>
-            <button
-              type="button"
-              onClick={() => setIsOpen(false)}
-              className="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-[#1F1F1F] focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
-              aria-label="Cerrar chat"
-            >
-              ✕
-            </button>
+            <button type="button" onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white p-2 rounded-xl hover:bg-[#333333] transition-colors focus:outline-none">✕</button>
           </div>
 
-          {/* Body */}
-          <div className="p-5 max-h-[min(70vh,420px)] overflow-y-auto space-y-4 text-xs">
-            <div className="bg-[#0F0F0F] border border-[#333333] p-3.5 rounded-2xl rounded-tl-none text-gray-200 leading-relaxed">
+          <div className="p-6 max-h-[min(70vh,420px)] overflow-y-auto space-y-5 text-sm">
+            <div className="bg-[#141414] border border-[#333333] p-4 rounded-2xl rounded-tl-none text-gray-300 leading-relaxed font-medium">
               {content.intro}
             </div>
 
-            <nav aria-label={currentLang === 'es' ? 'Temas de consulta' : 'Inquiry topics'} className="space-y-2 pt-2">
+            <nav aria-label={currentLang === 'es' ? 'Temas de consulta' : 'Inquiry topics'} className="space-y-3 pt-2">
               {content.options.map((option) => (
                 <a
                   key={option.label}
                   href={getWhatsAppUrl(option.message)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full text-left p-3 rounded-[12px] bg-[#0F0F0F] border border-[#333333] hover:border-[#ff4f00] text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
+                  className="block w-full text-left p-4 rounded-xl bg-[#141414] border border-[#333333] hover:border-[#ff4f00] text-gray-200 hover:text-white transition-all focus:outline-none font-semibold hover:-translate-y-0.5"
                 >
-                  {option.label} →
+                  {option.label} <span className="float-right text-[#ff4f00]">→</span>
                 </a>
               ))}
               <a
                 href={getWhatsAppUrl(content.otherMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full text-left p-3 rounded-[12px] border border-[#ff4f00] text-[#ff4f00] hover:bg-[#ff4f00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00]"
+                className="block w-full text-left p-4 rounded-xl border border-[#ff4f00] bg-[#ff4f00]/10 text-[#ff4f00] hover:bg-[#ff4f00] hover:text-white transition-all focus:outline-none font-bold hover:-translate-y-0.5"
               >
-                {content.other} →
+                {content.other} <span className="float-right">→</span>
               </a>
             </nav>
           </div>

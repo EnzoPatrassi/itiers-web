@@ -231,9 +231,9 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
       ariaLangSwitch: 'Switch language',
     },
     hero: {
-      badge: '20 Years of Experience | Data Sense & AI Consulting', // <- Traducido al inglés
-      title: '20 Years of Data Mastery Meets the Future of Harness Engineering.', // <- Traducido al inglés[cite: 11]
-      subtitle: 'We transform your organization’s potential through strategic analysis and AI agent orchestration. We don’t build chatbots that talk; we design agents that deliver deterministic results.', // <- Traducido al inglés[cite: 11]
+      badge: '20 Years of Experience | Data Sense & AI Consulting',
+      title: '20 Years of Data Mastery Meets the Future of Harness Engineering.',
+      subtitle: 'We transform your organization’s potential through strategic analysis and AI agent orchestration. We don’t build chatbots that talk; we design agents that deliver deterministic results.',
       primaryCta: 'Explore our SDD Methodology',
       secondaryCta: 'Schedule a Technical Consultation',
     },
