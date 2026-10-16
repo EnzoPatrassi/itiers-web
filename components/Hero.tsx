@@ -35,60 +35,74 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, theme }) => {
   }[currentLang];
 
   return (
-    <section id="inicio" className={`relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden transition-colors duration-300 animate-fade-in-up ${isDark ? 'bg-[#0F0F0F]' : 'bg-[#FAFAFA]'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left">
-            
-            {/* Etiquetas Superiores (Experiencia + Partner) */}
-            <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center lg:justify-start gap-3 mb-8">
-              <span className="inline-flex items-center gap-2 text-[#ff4f00] font-bold text-[10px] sm:text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full">
-                {content.badge}
-              </span>
-              <span className={`inline-flex items-center gap-2 font-bold text-[10px] sm:text-xs tracking-wider uppercase px-4 py-1.5 rounded-full shadow-sm border ${isDark ? 'bg-[#1A1A1A] text-white border-[#333333]' : 'bg-white text-[#1C1917] border-[#b2b2b2]/40'}`}>
-                {/* Puntito azul palpitante (simulando tecnología/conexión) */}
-                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-                {content.partnerBadge}
-              </span>
-            </div>
+    <section id="inicio" className="relative w-full flex items-center justify-center min-h-[80vh] lg:min-h-[100vh] pt-32 pb-20 overflow-hidden">
+      
+      {/* --- IMAGEN DE FONDO --- */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/hero-banner-itiers.jpg"
+          alt="Itiers Data Sense Hero Banner"
+          fill
+          priority
+          className="object-cover object-center sm:object-center"
+          sizes="100vw"
+        />
+        {/* Capa superpuesta (Overlay) para asegurar que el texto se lea bien */}
+        <div className={`absolute inset-0 transition-colors duration-300 ${
+          isDark ? 'bg-[#0F0F0F]/80' : 'bg-white/85'
+        }`}></div>
+        
+        {/* Gradiente inferior para una transición impecable a la siguiente sección */}
+        <div className={`absolute inset-x-0 bottom-0 h-32 md:h-40 bg-gradient-to-t transition-colors duration-300 ${
+          isDark ? 'from-[#0F0F0F]' : 'from-[#FAFAFA]'
+        } to-transparent`}></div>
+      </div>
 
-            {/* Título de Alto Impacto (Estilo Rockborne) */}
-            <h1 className={`text-4xl sm:text-5xl lg:text-[4.5rem] font-extrabold tracking-tight leading-[1.1] mb-6 ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>
-              {content.titleFirstPart} <br className="hidden sm:block" />
-              <span className="text-[#ff4f00] relative inline-block group">
-                {content.titleHighlight}
-                {/* Subrayado de arco que se ilumina al pasar el mouse */}
-                <svg className="absolute w-full h-3 -bottom-1 left-0 text-[#ff4f00]/30 group-hover:text-[#ff4f00]/70 transition-colors duration-300" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="transparent" />
-                </svg>
-              </span>
-            </h1>
-
-            <p className={`text-lg sm:text-xl mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
-              {content.subtitle}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a href="#contacto" className="inline-flex justify-center items-center px-8 py-3.5 text-base font-bold text-white bg-[#ff4f00] hover:bg-[#e04500] rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#ff4f00]/20">
-                {content.primaryCta}
-              </a>
-              <a href="#servicios-cards" className={`inline-flex justify-center items-center px-8 py-3.5 text-base font-bold border rounded-xl transition-all ${isDark ? 'text-white border-[#333333] hover:bg-[#1A1A1A]' : 'text-[#1C1917] border-[#b2b2b2] hover:bg-white shadow-sm'}`}>
-                {content.secondaryCta}
-              </a>
-            </div>
-          </div>
+      {/* --- CONTENIDO DE TEXTO --- */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mt-4 md:mt-10">
+        <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
           
-          <div className="relative w-full rounded-3xl overflow-hidden shadow-2xl border border-[#333333]/30 group animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <Image
-              src="/hero-banner-itiers.jpg"
-              alt="Itiers Data Sense Hero Banner"
-              width={2400}
-              height={1235}
-              priority
-              className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+          {/* Etiquetas Superiores (Experiencia + Partner) */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
+            <span className="inline-flex items-center gap-2 text-[#ff4f00] font-bold text-[10px] sm:text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full backdrop-blur-sm">
+              {content.badge}
+            </span>
+            <span className={`inline-flex items-center gap-2 font-bold text-[10px] sm:text-xs tracking-wider uppercase px-4 py-1.5 rounded-full shadow-sm border backdrop-blur-sm ${
+              isDark ? 'bg-[#1A1A1A]/80 text-white border-[#333333]' : 'bg-white/80 text-[#1C1917] border-[#b2b2b2]/40'
+            }`}>
+              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+              {content.partnerBadge}
+            </span>
           </div>
+
+          {/* Título Centrado de Alto Impacto */}
+          <h1 className={`text-4xl sm:text-5xl lg:text-[5rem] font-extrabold tracking-tight leading-[1.1] mb-6 ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>
+            {content.titleFirstPart} <br className="hidden sm:block" />
+            <span className="text-[#ff4f00] relative inline-block group mt-2">
+              {content.titleHighlight}
+              {/* Subrayado de arco */}
+              <svg className="absolute w-full h-3 -bottom-1 left-0 text-[#ff4f00]/30 group-hover:text-[#ff4f00]/70 transition-colors duration-300" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="transparent" />
+              </svg>
+            </span>
+          </h1>
+
+          <p className={`text-lg sm:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
+            {content.subtitle}
+          </p>
+          
+          {/* Botones */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#contacto" className="inline-flex justify-center items-center px-8 py-3.5 text-base font-bold text-white bg-[#ff4f00] hover:bg-[#e04500] rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#ff4f00]/20">
+              {content.primaryCta}
+            </a>
+            <a href="#servicios-cards" className={`inline-flex justify-center items-center px-8 py-3.5 text-base font-bold border rounded-xl transition-all ${
+              isDark ? 'text-white border-[#333333] hover:bg-[#1A1A1A]/80' : 'text-[#1C1917] border-[#b2b2b2] hover:bg-white/80 shadow-sm'
+            }`}>
+              {content.secondaryCta}
+            </a>
+          </div>
+
         </div>
       </div>
     </section>

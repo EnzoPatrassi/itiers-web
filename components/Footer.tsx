@@ -36,25 +36,33 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, t
     es: {
       inicio: 'Inicio',
       nosotros: 'Nosotros',
-      queHacemos: 'Qué hacemos',
       servicios: 'Servicios',
       contacto: 'Contacto',
+      ubicacion: 'Ubicación',
     },
     en: {
       inicio: 'Home',
       nosotros: 'About Us',
-      queHacemos: 'What we do',
       servicios: 'Services',
       contacto: 'Contact',
+      ubicacion: 'Locations',
     }
   }[currentLang];
+
+  // Datos de las sedes
+  const locations = [
+    { flag: '/bandera-arg.png', text: 'Av. Perú 1841, Mendoza, Argentina', alt: 'Argentina' },
+    { flag: '/bandera-chile.png', text: 'General del Canto 421, piso 6, Providencia, Santiago de Chile', alt: 'Chile' },
+    { flag: '/bandera-usa.png', text: '651 North Broad Street, Middletown, DE 19709, USA', alt: 'USA' },
+  ];
 
   return (
     <footer className={`pt-16 pb-12 border-t transition-colors duration-300 ${isDark ? 'bg-[#1F1F1F] text-white border-[#333333]' : 'bg-[#FAFAFA] text-[#1C1917] border-[#b2b2b2]/30'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+          
           {/* Col 1: Logo & Tagline */}
-          <div className="space-y-4 md:col-span-1">
+          <div className="space-y-4 lg:col-span-2">
             <div className="relative w-36 h-12">
               <Image
                 src="/itiers.png"
@@ -63,7 +71,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, t
                 className="object-contain"
               />
             </div>
-            <p className={`text-xs leading-relaxed ${isDark ? 'text-gray-400' : 'text-[#4d4d4d]'}`}>
+            <p className={`text-xs leading-relaxed max-w-sm ${isDark ? 'text-gray-400' : 'text-[#4d4d4d]'}`}>
               {t.tagline}
             </p>
           </div>
@@ -74,42 +82,30 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, t
               {t.quickLinks}
             </h4>
             <ul className={`space-y-2 text-xs ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
-              <li>
-                <a href="#inicio" onClick={(e) => handleScroll(e, '#inicio')} className="hover:text-[#ff4f00] transition-colors">
-                  {footerNav.inicio}
-                </a>
-              </li>
-              <li>
-                <a href="#nosotros" onClick={(e) => handleScroll(e, '#nosotros')} className="hover:text-[#ff4f00] transition-colors">
-                  {footerNav.nosotros}
-                </a>
-              </li>
-              <li>
-                <a href="#data-ai" onClick={(e) => handleScroll(e, '#data-ai')} className="hover:text-[#ff4f00] transition-colors">
-                  {footerNav.queHacemos}
-                </a>
-              </li>
-              <li>
-                <a href="#servicios-cards" onClick={(e) => handleScroll(e, '#servicios-cards')} className="hover:text-[#ff4f00] transition-colors">
-                  {footerNav.servicios}
-                </a>
-              </li>
-              <li>
-                <a href="#contacto" onClick={(e) => handleScroll(e, '#contacto')} className="hover:text-[#ff4f00] transition-colors">
-                  {footerNav.contacto}
-                </a>
-              </li>
+              <li><a href="#inicio" onClick={(e) => handleScroll(e, '#inicio')} className="hover:text-[#ff4f00] transition-colors">{footerNav.inicio}</a></li>
+              <li><a href="#nosotros" onClick={(e) => handleScroll(e, '#nosotros')} className="hover:text-[#ff4f00] transition-colors">{footerNav.nosotros}</a></li>
+              <li><a href="#servicios-cards" onClick={(e) => handleScroll(e, '#servicios-cards')} className="hover:text-[#ff4f00] transition-colors">{footerNav.servicios}</a></li>
+              <li><a href="#contacto" onClick={(e) => handleScroll(e, '#contacto')} className="hover:text-[#ff4f00] transition-colors">{footerNav.contacto}</a></li>
             </ul>
           </div>
 
-          {/* Col 3: Contact */}
+          {/* Col 3: Ubicación y Contacto */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#ff4f00] mb-4">
-              {t.contactTitle}
+              {/* Aquí aplicamos la corrección para que traduzca ambas palabras */}
+              {footerNav.ubicacion} & {footerNav.contacto}
             </h4>
-            <ul className={`space-y-2 text-xs ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
-              <li>WhatsApp: <a href={whatsappChannel.url} target="_blank" rel="noopener noreferrer" className={`hover:text-[#ff4f00] focus:outline-none focus:ring-2 focus:ring-[#ff4f00] transition-colors ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>{INFO_ITIERS.whatsapp}</a></li>
+            <ul className={`space-y-3 text-xs mb-4 ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
+              {locations.map((loc, index) => (
+                <li key={index} className="flex items-start gap-2 leading-tight">
+                  <Image src={loc.flag} alt={loc.alt} width={16} height={12} className="w-4 h-3 object-cover rounded-xs mt-0.5 shrink-0" />
+                  <span>{loc.text}</span>
+                </li>
+              ))}
             </ul>
+            <div className={`text-xs ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
+              WhatsApp: <a href={whatsappChannel.url} target="_blank" rel="noopener noreferrer" className={`hover:text-[#ff4f00] font-semibold transition-colors ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>{INFO_ITIERS.whatsapp}</a>
+            </div>
           </div>
 
           {/* Col 4: Language & Career */}
@@ -117,11 +113,11 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, t
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#ff4f00] mb-4">
               Idioma / Language
             </h4>
-            <div className="flex items-center space-x-2 mb-6">
+            <div className="flex flex-col space-y-2 mb-6">
               <button
                 type="button"
                 onClick={() => onLanguageChange('es')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] border ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors focus:outline-none w-max border ${
                   currentLang === 'es' 
                     ? 'bg-[#ff4f00] text-white border-[#ff4f00]' 
                     : isDark ? 'bg-[#0F0F0F] text-gray-400 border-[#333333] hover:text-white' : 'bg-white text-[#4d4d4d] border-[#b2b2b2] hover:text-[#1C1917]'
@@ -133,7 +129,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, t
               <button
                 type="button"
                 onClick={() => onLanguageChange('en')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff4f00] border ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors focus:outline-none w-max border ${
                   currentLang === 'en' 
                     ? 'bg-[#ff4f00] text-white border-[#ff4f00]' 
                     : isDark ? 'bg-[#0F0F0F] text-gray-400 border-[#333333] hover:text-white' : 'bg-white text-[#4d4d4d] border-[#b2b2b2] hover:text-[#1C1917]'
