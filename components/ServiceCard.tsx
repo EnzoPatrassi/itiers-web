@@ -22,19 +22,6 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       tabIndex={0}
       className="group relative p-8 bg-surface border border-border rounded-[2rem] shadow-sm hover:shadow-2xl hover:border-[#ff4f00]/50 hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex flex-col justify-between overflow-hidden backdrop-blur-xl"
     >
-      {/* Gráfico Dashboard Analítico (Fondo SVG revelado en Hover) */}
-      <div className="absolute top-10 right-0 w-64 h-64 opacity-0 pointer-events-none group-hover:opacity-[0.08] transition-opacity duration-500 z-0 text-foreground">
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="20" y="100" width="30" height="80" rx="4" fill="currentColor" opacity="0.3"/>
-          <rect x="70" y="60" width="30" height="120" rx="4" fill="currentColor" opacity="0.6"/>
-          <rect x="120" y="20" width="30" height="160" rx="4" fill="#ff4f00"/>
-          <path d="M35 80 L85 40 L135 10" stroke="#ff4f00" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-          <circle cx="35" cy="80" r="6" fill="#ff4f00"/>
-          <circle cx="85" cy="40" r="6" fill="#ff4f00"/>
-          <circle cx="135" cy="10" r="6" fill="#ff4f00"/>
-        </svg>
-      </div>
-
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-8">
           <div className="w-14 h-14 rounded-[1rem] bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform shadow-inner">

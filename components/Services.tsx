@@ -39,7 +39,7 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
           </svg>
         );
-      case 1: // IA & Automatizaciones (Reemplaza al 🤖)
+      case 1: // IA & Automatizaciones
         return (
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -100,22 +100,8 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
             return (
               <article key={servicio.id} className={`group relative overflow-hidden flex flex-col rounded-[2rem] p-8 sm:p-10 border transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-[#ff4f00]/50 ${isDark ? 'bg-[#1A1A1A] border-[#333333]' : 'bg-white border-[#b2b2b2]/40'}`}>
                 
-                {/* Gráfico Dashboard Analítico (Fondo SVG revelado en Hover) */}
-                <div className="absolute top-10 right-0 w-64 h-64 opacity-5 pointer-events-none group-hover:opacity-[0.15] transition-opacity duration-500 z-0">
-                  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className={isDark ? 'text-white' : 'text-black'}>
-                    <rect x="20" y="100" width="30" height="80" rx="4" fill="currentColor" opacity="0.3"/>
-                    <rect x="70" y="60" width="30" height="120" rx="4" fill="currentColor" opacity="0.6"/>
-                    <rect x="120" y="20" width="30" height="160" rx="4" fill="#ff4f00"/>
-                    <path d="M35 80 L85 40 L135 10" stroke="#ff4f00" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-                    <circle cx="35" cy="80" r="6" fill="#ff4f00"/>
-                    <circle cx="85" cy="40" r="6" fill="#ff4f00"/>
-                    <circle cx="135" cy="10" r="6" fill="#ff4f00"/>
-                  </svg>
-                </div>
-
                 <div className="flex items-start justify-between mb-8 relative z-10">
                   <div className="flex items-center space-x-5">
-                    {/* Contenedor de ícono con estilo geométrico corporativo reemplazando el emoji */}
                     <span className={`flex items-center justify-center w-14 h-14 text-2xl font-semibold rounded-[1rem] transition-colors duration-300 ${isDark ? 'bg-[#141414] border border-[#333333] text-[#ff4f00] group-hover:border-[#ff4f00]/50' : 'bg-white border border-[#b2b2b2]/30 text-[#ff4f00] shadow-sm group-hover:border-[#ff4f00]/50'}`} aria-hidden="true">
                       {renderCorporateIcon(servicio.icono || '', index)}
                     </span>
