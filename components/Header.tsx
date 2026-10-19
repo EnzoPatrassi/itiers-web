@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Logo */}
           <a href="#inicio" className="flex items-center gap-2 group">
             <div className="relative w-36 h-10">
-              <Image src="/itiers.png" alt="Itiers Data Sense" fill className="object-contain object-left" priority />
+              <Image src="/itiers.png" alt="Itiers Data Sense" fill sizes="200px" className="object-contain object-left" priority />
             </div>
           </a>
 

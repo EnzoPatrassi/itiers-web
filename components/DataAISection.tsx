@@ -70,12 +70,12 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
           isDark ? 'bg-[#1A1A1A]/80 border-[#333333]' : 'bg-white/80 border-[#b2b2b2]/40'
         }`}>
           <figure className="rounded-[1rem] overflow-hidden border border-[#b2b2b2]/20 mb-12">
-            <Image
-              src="/flujo-de-datos.jpg"
-              alt={content.imageAlt}
-              width={907}
-              height={302}
-              className="mx-auto h-auto w-full max-w-[906px]"
+            <Image 
+              src="/flujo-de-datos.jpg" 
+              alt="Flujo de datos" 
+              width={800} 
+              height={600} 
+              className="w-full h-auto object-cover rounded-2xl" 
             />
           </figure>
           

@@ -82,7 +82,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, theme = 'light' }) 
           
           <div className="space-y-6">
             <div className="relative w-40 h-14">
-              <Image src="/itiers.png" alt="Itiers Data Sense" fill className="object-contain object-left" />
+              <Image src="/itiers.png" alt="Itiers Data Sense" fill sizes="200px" className="object-contain object-left" priority />
             </div>
             <p className={`text-sm leading-relaxed max-w-sm font-medium ${isDark ? 'text-gray-400' : 'text-[#4d4d4d]'}`}>
               {t.tagline}
