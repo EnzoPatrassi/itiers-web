@@ -55,43 +55,23 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, theme = 'light' }) 
   ];
 
   return (
-    <footer className={`relative pt-20 pb-12 border-t overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#141414] text-white border-[#333333]' : 'bg-[#FAFAFA] text-[#1C1917] border-[#b2b2b2]/30'}`}>
+    <footer className={`relative pt-20 pb-12 border-t overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#141414] text-white border-[#333333]' : 'bg-white text-[#1C1917] border-gray-200'}`}>
       
-      {/* Trama corporativa de fondo en el Footer */}
-      <div className={`absolute inset-0 opacity-[0.03] pointer-events-none z-0 ${isDark ? 'text-white' : 'text-black'}`}>
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="footer-pattern" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
-              <circle cx="30" cy="30" r="4" fill="currentColor" />
-              <circle cx="90" cy="60" r="6" fill="currentColor" />
-              <circle cx="50" cy="100" r="3" fill="currentColor" />
-              <path d="M30,30 L90,60 L50,100 Z" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.5" />
-            </pattern>
-          </defs>
-          <rect x="0" y="0" width="100%" height="100%" fill="url(#footer-pattern)" />
-        </svg>
-      </div>
-
-      {/* Marca de Agua Tipográfica Editorial Gigante */}
-      <div className={`absolute -bottom-16 -right-12 text-[18rem] font-black pointer-events-none z-0 select-none leading-none tracking-tighter ${isDark ? 'text-[#ff4f00] opacity-[0.03]' : 'text-[#ff4f00] opacity-[0.04]'}`}>
-        IT
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
           
           <div className="space-y-6">
             <div className="relative w-40 h-14">
-              <Image src="/itiers.png" alt="Itiers Data Sense" fill sizes="200px" className="object-contain object-left" priority />
+              <Image src="/itiers.png" alt="Itiers Data Sense" fill sizes="200px" className="object-contain object-left" />
             </div>
-            <p className={`text-sm leading-relaxed max-w-sm font-medium ${isDark ? 'text-gray-400' : 'text-[#4d4d4d]'}`}>
+            <p className={`text-sm leading-relaxed max-w-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               {t.tagline}
             </p>
           </div>
 
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#ff4f00] mb-6">{t.quickLinks}</h4>
-            <ul className={`space-y-3 text-sm font-medium ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
+            <ul className={`space-y-3 text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               <li><a href="#inicio" onClick={(e) => handleScroll(e, '#inicio')} className="hover:text-[#ff4f00] transition-colors">{footerNav.inicio}</a></li>
               <li><a href="#nosotros" onClick={(e) => handleScroll(e, '#nosotros')} className="hover:text-[#ff4f00] transition-colors">{footerNav.nosotros}</a></li>
               <li><a href="#servicios-cards" onClick={(e) => handleScroll(e, '#servicios-cards')} className="hover:text-[#ff4f00] transition-colors">{footerNav.servicios}</a></li>
@@ -103,7 +83,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, theme = 'light' }) 
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#ff4f00] mb-6">
               {footerNav.ubicacion} & {footerNav.contacto}
             </h4>
-            <ul className={`space-y-4 text-sm font-medium mb-6 ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
+            <ul className={`space-y-4 text-sm font-medium mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               {locations.map((loc, index) => (
                 <li key={index} className="flex items-start gap-3 leading-snug">
                   <Image src={loc.flag} alt={loc.alt} width={18} height={14} className="w-4.5 h-3.5 object-cover rounded-sm mt-0.5 shrink-0" />
@@ -111,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, theme = 'light' }) 
                 </li>
               ))}
             </ul>
-            <div className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
+            <div className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               WhatsApp: <a href={whatsappChannel.url} target="_blank" rel="noopener noreferrer" className={`hover:text-[#ff4f00] font-bold transition-colors block mt-1 ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>{INFO_ITIERS.whatsapp}</a>
             </div>
           </div>
@@ -129,7 +109,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, theme = 'light' }) 
 
         </div>
 
-        <div className={`pt-8 border-t flex flex-col sm:flex-row items-center justify-between text-xs font-medium ${isDark ? 'border-[#333333] text-gray-500' : 'border-[#b2b2b2]/40 text-[#898a8d]'}`}>
+        <div className={`pt-8 border-t flex flex-col sm:flex-row items-center justify-between text-xs font-medium ${isDark ? 'border-[#333333] text-gray-500' : 'border-gray-300 text-gray-500'}`}>
           <div>© {new Date().getFullYear()} Itiers Data Sense. {currentLang === 'es' ? 'Todos los derechos reservados.' : 'All rights reserved.'}</div>
         </div>
       </div>
