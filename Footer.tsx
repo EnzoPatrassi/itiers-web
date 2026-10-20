@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Locale, dictionaries } from '@/data/i18n';
 import { INFO_ITIERS } from '@/data/mockData';
 import { validateWhatsAppConfig } from '@/lib/harness/guardrails';
-import { ThemeMode } from './Header';
+import { ThemeMode } from '@/components/Header';
 
 interface FooterProps {
   currentLang: Locale;
