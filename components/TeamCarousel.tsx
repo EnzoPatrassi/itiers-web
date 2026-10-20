@@ -8,47 +8,75 @@ interface TeamCarouselProps {
 }
 
 const TEAM_IMAGES = [
-  { src: '/Pablo Rizzo.jpg', name: 'Pablo Rizzo' },
-  { src: '/Matías García.jpg', name: 'Matías García' },
-  { src: '/Juan Pablo Moldero.jpg', name: 'Juan Pablo Moldero' },
-  { src: '/Evelina Valentini.jpg', name: 'Evelina Valentini' },
+  { src: '/Fotos itiers y equipo para web 2026-01.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-02.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-03.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-04.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-05.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-06.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-07.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-08.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-09.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-10.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-11.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-12.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-13.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-14.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-15.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-16.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-17.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-18.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-19.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-20.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-21.jpg', size: 'large' },
+  { src: '/Fotos itiers y equipo para web 2026-22.jpg', size: 'small' },
+  { src: '/Fotos itiers y equipo para web 2026-23.jpg', size: 'large' },
 ];
 
 export const TeamCarousel: React.FC<TeamCarouselProps> = ({ theme = 'light' }) => {
   const isDark = theme === 'dark';
+  
+  const baseTrack = [...TEAM_IMAGES, ...TEAM_IMAGES];
 
   return (
-    <div className={`relative w-full max-w-[100vw] mx-auto overflow-hidden py-10 transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F]' : 'bg-white'}`}>
+    <div className={`relative w-full overflow-hidden py-16 sm:py-24 transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F]' : 'bg-white'}`}>
       
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes scrollTeam {
+        @keyframes scrollTeamInf {
           0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-350px * 4)); }
+          100% { transform: translateX(-50%); }
         }
-        .animate-scroll-team {
+        .animate-scroll-team-inf {
           display: flex;
           width: max-content;
-          animation: scrollTeam 30s linear infinite;
+          animation: scrollTeamInf 400s linear infinite;
+          align-items: center;
         }
       `}} />
 
-      {/* Degradés laterales adaptados al tema claro/oscuro */}
-      <div className={`absolute top-0 left-0 w-32 md:w-64 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-[#0F0F0F] to-transparent' : 'bg-gradient-to-r from-white to-transparent'}`}></div>
-      <div className={`absolute top-0 right-0 w-32 md:w-64 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-l from-[#0F0F0F] to-transparent' : 'bg-gradient-to-l from-white to-transparent'}`}></div>
+      <div className="relative w-full overflow-hidden flex z-0">
+        <div className="animate-scroll-team-inf gap-6 sm:gap-10 px-4">
+          {[...baseTrack, ...baseTrack].map((member, index) => {
+            const isLarge = member.size === 'large';
+            return (
+              <div 
+                key={index} 
+                className={`flex-shrink-0 
+                  ${isLarge ? 'w-[280px] sm:w-[400px] h-[380px] sm:h-[550px]' : 'w-[220px] sm:w-[300px] h-[300px] sm:h-[400px]'}
+                `}
+              >
 
-      <div className="animate-scroll-team gap-4 md:gap-6 px-4">
-        {[...TEAM_IMAGES, ...TEAM_IMAGES, ...TEAM_IMAGES].map((member, index) => (
-          <div key={index} className="w-[260px] sm:w-[350px] h-[320px] sm:h-[450px] flex-shrink-0">
-             <div className="w-full h-full rounded-2xl md:rounded-[2rem] overflow-hidden relative shadow-2xl">
-                <img 
-                  src={member.src} 
-                  alt={member.name} 
-                  className={`object-cover w-full h-full transition-all duration-500 hover:opacity-100 ${isDark ? 'opacity-40' : 'opacity-80'}`} 
-                  onError={(e) => { e.currentTarget.style.display = 'none'; }} 
-                />
-             </div>
-          </div>
-        ))}
+                 <div className={`w-full h-full rounded-2xl sm:rounded-[2rem] overflow-hidden relative shadow-xl bg-black ${isDark ? 'border border-[#333333]' : 'border border-gray-200'}`}>
+                    <img 
+                      src={member.src}
+                      className="object-cover w-full h-full opacity-75 brightness-90" 
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }} 
+                    />
+                 </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

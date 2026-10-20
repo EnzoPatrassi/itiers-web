@@ -29,10 +29,8 @@ export const CTASection: React.FC<CTASectionProps> = ({ currentLang }) => {
   return (
     <section className="py-24 bg-[#141414] text-white border-y border-[#333333] relative overflow-hidden">
 
-      {/* Orbe de Luz IA (Efecto de resplandor tecnológico) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-[#ff4f00] rounded-full blur-[140px] opacity-20 pointer-events-none z-0"></div>
 
-      {/* Acento naranja corporativo */}
       <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-[#ff4f00] to-transparent opacity-50"></div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">

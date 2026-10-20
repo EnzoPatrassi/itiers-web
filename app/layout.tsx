@@ -17,8 +17,10 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: 'Itiers Data Sense | Decisiones estratégicas con datos',
-  description: 'Convertimos el caos de datos en decisiones estratégicas con un enfoque personalizado.',
+  title: 'Itiers Data Sense',
+  icons: {
+    icon: '/Icono.ico',
+  },
 };
 
 export default function RootLayout({

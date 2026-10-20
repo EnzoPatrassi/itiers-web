@@ -35,12 +35,11 @@ export const TechnologySection: React.FC<TechnologySectionProps> = ({ theme = 'l
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        .animate-marquee { display: flex; width: max-content; animation: marquee 40s linear infinite; }
-        .animate-marquee:hover { animation-play-state: paused; }
+        .animate-marquee { display: flex; width: max-content; animation: marquee 60s linear infinite; }
       `}} />
 
       <div className="relative w-full flex overflow-hidden group z-10">
-        {/* Degradés laterales adaptados al tema */}
+
         <div className={`absolute top-0 left-0 w-24 md:w-40 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-[#141414] to-transparent' : 'bg-gradient-to-r from-white to-transparent'}`}></div>
         <div className={`absolute top-0 right-0 w-24 md:w-40 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-l from-[#141414] to-transparent' : 'bg-gradient-to-l from-white to-transparent'}`}></div>
 

@@ -12,6 +12,7 @@ import { TechnologySection } from '@/components/TechnologySection';
 import { ImpactCounters } from '@/components/ImpactCounters';
 import { Testimonials } from '@/components/Testimonials';
 import { ClientLogos } from '@/components/ClientLogos';
+import { CtaBanner } from '@/components/CtaBanner';
 import { ContactSection } from '@/components/ContactSection';
 import { CareersSection } from '@/components/CareersSection';
 import { Chatbot } from '@/components/Chatbot';
@@ -21,7 +22,6 @@ export default function LandingPage() {
   const [currentLang, setCurrentLang] = useState<Locale>('es');
   const [theme, setTheme] = useState<ThemeMode>('light');
 
-  // Detectar automáticamente el idioma del navegador/región al cargar por primera vez
   useEffect(() => {
     const savedLang = document.cookie
       .split('; ')
@@ -37,7 +37,6 @@ export default function LandingPage() {
     }
   }, []);
 
-  // Función para cambiar el idioma manualmente y guardarlo en una cookie
   const handleLanguageChange = (newLang: Locale) => {
     setCurrentLang(newLang);
     document.cookie = `itiers_lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
@@ -58,6 +57,7 @@ export default function LandingPage() {
         <TechnologySection theme={theme}/>
         <ImpactCounters currentLang={currentLang} theme={theme} /> 
         <Testimonials currentLang={currentLang} theme={theme} />
+        <CtaBanner currentLang={currentLang} />
         <ClientLogos currentLang={currentLang} theme={theme} />
         <ContactSection currentLang={currentLang} theme={theme} />
         <CareersSection currentLang={currentLang} theme={theme} />

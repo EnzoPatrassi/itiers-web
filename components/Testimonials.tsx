@@ -51,15 +51,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ currentLang, theme =
               }`}
               style={{ animationDelay: `${index * 0.15}s` }}
             >
-              {/* Marca de agua editorial gigante */}
-              <div className={`absolute -bottom-10 -right-6 text-[12rem] font-serif font-black leading-none pointer-events-none select-none z-0 transition-colors duration-300 ${isDark ? 'text-[#ff4f00] opacity-5 group-hover:opacity-10' : 'text-[#ff4f00] opacity-[0.03] group-hover:opacity-[0.08]'}`}>
-                "
-              </div>
-
               <div className="mb-8 relative z-10">
-                <svg className={`w-8 h-8 mb-6 opacity-40 transition-colors duration-300 group-hover:opacity-100 ${isDark ? 'text-white group-hover:text-[#ff4f00]' : 'text-[#ff4f00]'}`} fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
                 <p className={`text-base leading-relaxed italic font-medium ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
                   "{testimonio.cita}"
                 </p>

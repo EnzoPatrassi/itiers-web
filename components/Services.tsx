@@ -62,7 +62,7 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
   };
 
   return (
-    // Cambié bg-[#FAFAFA] por bg-white para que sea blanco puro
+
     <section id="servicios-cards" className={`py-24 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] text-white' : 'bg-white text-[#1C1917]'}`}>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Locale, dictionaries } from '@/data/i18n';
 
@@ -18,18 +18,9 @@ export const Header: React.FC<HeaderProps> = ({
   theme,
   onThemeChange,
 }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = dictionaries[currentLang].nav;
   const isDark = theme === 'dark';
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navLinks = [
     { href: '#inicio', label: t.inicio || 'Servicios' },
@@ -48,22 +39,20 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isDark 
-        ? 'bg-[#0F0F0F]/90 backdrop-blur-md border-b border-[#333333]' 
-        : 'bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm'
+        ? 'bg-[#0F0F0F] border-b border-[#333333]' 
+        : 'bg-white border-b border-gray-200 shadow-sm'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Logo */}
           <a href="#inicio" className="flex items-center gap-2 group">
             <div className="relative w-36 h-10">
               <Image src="/itiers.png" alt="Itiers Data Sense" fill sizes="200px" className="object-contain object-left" priority />
             </div>
           </a>
 
-          {/* Navegación de Escritorio */}
           <nav className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
               <a
@@ -71,7 +60,7 @@ export const Header: React.FC<HeaderProps> = ({
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
                 className={`text-sm font-semibold transition-colors ${
-                  isDark ? 'text-gray-200 hover:text-white' : 'text-gray-700 hover:text-black'
+                  isDark ? 'text-gray-200 hover:text-white' : 'text-gray-700 hover:text-[#ff4f00]'
                 }`}
               >
                 {link.label}
@@ -79,13 +68,12 @@ export const Header: React.FC<HeaderProps> = ({
             ))}
           </nav>
 
-          {/* Controles de la derecha: Tema + CTA "Hablemos" + Botón Hamburguesa */}
           <div className="flex items-center space-x-3 sm:space-x-4">
-            {/* Botón de Tema (Visible siempre) */}
+            
             <button
               type="button"
               onClick={() => onThemeChange(isDark ? 'light' : 'dark')}
-              className={`p-2 rounded-full border transition-colors ${
+              className={`p-2 rounded-full border transition-all ${
                 isDark ? 'bg-[#1A1A1A] border-[#333333] text-yellow-400' : 'bg-gray-100 border-gray-200 text-gray-800'
               }`}
               aria-label="Cambiar tema"
@@ -93,7 +81,6 @@ export const Header: React.FC<HeaderProps> = ({
               {isDark ? '☀️' : '🌙'}
             </button>
 
-            {/* Botón Hablemos (Visible siempre) */}
             <a
               href="#contacto"
               className="bg-[#ff4f00] hover:bg-[#e04500] text-white font-bold text-xs sm:text-sm px-4 sm:px-6 py-2.5 rounded-full transition-all shadow-md hover:scale-105"
@@ -101,11 +88,10 @@ export const Header: React.FC<HeaderProps> = ({
               {currentLang === 'es' ? 'Hablemos' : 'Let\'s talk'}
             </a>
 
-            {/* Botón Menú Hamburguesa (Sólo en móvil) */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`md:hidden p-2 rounded-xl border transition-colors ${
+              className={`md:hidden p-2 rounded-xl border transition-all ${
                 isDark ? 'bg-[#1A1A1A] border-[#333333] text-gray-200' : 'bg-gray-100 border-gray-200 text-gray-800'
               }`}
               aria-label="Abrir menú"
@@ -123,7 +109,6 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Menú Desplegable para Móviles */}
       {mobileMenuOpen && (
         <div className={`md:hidden border-b transition-colors ${
           isDark ? 'bg-[#0F0F0F] border-[#333333]' : 'bg-white border-gray-200'

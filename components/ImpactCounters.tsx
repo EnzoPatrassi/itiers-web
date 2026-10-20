@@ -9,7 +9,6 @@ interface ImpactCountersProps {
   theme?: ThemeMode;
 }
 
-// Componente interno para animar el número
 const AnimatedNumber = ({ end, prefix = '', suffix = '' }: { end: number, prefix?: string, suffix?: string }) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -42,7 +41,7 @@ const AnimatedNumber = ({ end, prefix = '', suffix = '' }: { end: number, prefix
     requestAnimationFrame(animate);
   }, [isVisible, end]);
 
-  return <div ref={ref}>{prefix}{count}{suffix}</div>;
+  return <div ref={ref} className="flex items-center">{prefix}{count}{suffix}</div>;
 };
 
 export const ImpactCounters: React.FC<ImpactCountersProps> = ({ currentLang, theme = 'light' }) => {
@@ -70,35 +69,34 @@ export const ImpactCounters: React.FC<ImpactCountersProps> = ({ currentLang, the
   }[currentLang];
 
   return (
-    <section className={`py-24 relative border-t overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] border-[#333333]' : 'bg-[#FAFAFA] border-[#b2b2b2]/30'}`}>
+    <section className={`py-24 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F]' : 'bg-white'}`}>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16 animate-fade-in-up">
+        <div className="text-center mb-12 animate-fade-in-up">
           <span className="text-[#ff4f00] font-bold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full inline-block">
             {content.badge}
           </span>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {content.stats.map((stat, index) => (
             <div 
               key={stat.id} 
-              className={`relative overflow-hidden text-center flex flex-col items-center justify-center p-8 rounded-[2rem] border transition-all duration-300 hover:-translate-y-1 backdrop-blur-xl animate-fade-in-up ${
-                isDark ? 'bg-[#1A1A1A]/80 border-[#333333] hover:border-[#ff4f00]/50 hover:shadow-2xl' : 'bg-white/80 border-[#b2b2b2]/40 hover:border-[#ff4f00]/50 hover:shadow-xl'
-              }`}
+              className={`group flex flex-col justify-between items-start text-left p-8 h-64 sm:h-72 rounded-[2rem] transition-all duration-500 cursor-default animate-fade-in-up
+                ${isDark ? 'bg-[#1A1A1A] border border-[#333333]' : 'bg-[#FAFAFA] border border-gray-200'}
+                hover:bg-[#ff4f00] hover:border-[#ff4f00] hover:-translate-y-2 hover:shadow-2xl
+              `}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Marca geométrica sutil de fondo */}
-              <div className="absolute top-0 right-0 w-32 h-32 opacity-[0.03] pointer-events-none text-current">
-                <svg viewBox="0 0 100 100" fill="currentColor">
-                  <path d="M0,0 L100,0 L100,100 Z" />
-                </svg>
+
+              <div className={`text-sm sm:text-base font-medium leading-snug transition-colors duration-500 group-hover:text-white w-3/4
+                ${isDark ? 'text-gray-400' : 'text-gray-500'}
+              `}>
+                {stat.label}
               </div>
 
-              <div className="relative z-10 text-5xl md:text-6xl font-black tracking-tight mb-3 text-[#ff4f00] drop-shadow-sm">
+              <div className="text-5xl md:text-6xl font-light tracking-tight transition-colors duration-500 group-hover:text-white text-[#ff4f00]">
                 <AnimatedNumber end={stat.end} prefix={stat.prefix} suffix={stat.suffix} />
-              </div>
-              <div className={`relative z-10 text-xs md:text-sm font-bold tracking-widest uppercase mt-2 ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
-                {stat.label}
               </div>
             </div>
           ))}

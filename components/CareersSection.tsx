@@ -32,7 +32,6 @@ export const CareersSection: React.FC<CareersSectionProps> = ({ currentLang, the
   return (
     <section className={`py-24 border-t relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] text-white border-[#333333]' : 'bg-[#FAFAFA] text-[#1C1917] border-[#b2b2b2]/30'}`}>
 
-      {/* NUEVO: Contenedor con efecto Glassmorphism (backdrop-blur-xl y fondos semitransparentes) */}
       <div className={`max-w-4xl mx-auto px-4 sm:px-8 lg:px-10 text-center border rounded-[2rem] p-10 sm:p-14 relative z-10 overflow-hidden transition-colors duration-300 shadow-xl hover:shadow-2xl backdrop-blur-xl ${
         isDark ? 'bg-[#1A1A1A]/80 border-[#333333]' : 'bg-white/80 border-[#b2b2b2]/40'
       }`}>

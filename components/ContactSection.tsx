@@ -14,9 +14,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, the
 
   const content = {
     es: {
-      badge: 'Contacto',
-      title: 'Hablemos de tus datos',
-      subtitle: 'Completá el formulario o contactanos por WhatsApp para empezar a diseñar tu solución.',
+      titleLine1: 'Cuéntanos cómo',
+      titleLine2: 'podemos ayudarte',
       form: {
         name: 'Nombre y Apellido',
         company: 'Empresa',
@@ -33,9 +32,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, the
       }
     },
     en: {
-      badge: 'Contact',
-      title: 'Let\'s talk about your data',
-      subtitle: 'Fill out the form or contact us via WhatsApp to start designing your solution.',
+      titleLine1: 'Tell us how',
+      titleLine2: 'we can help you',
       form: {
         name: 'Full Name',
         company: 'Company',
@@ -54,66 +52,64 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, the
   }[currentLang];
 
   return (
-    <section id="contacto" className={`py-24 border-t relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] border-[#333333]' : 'bg-[#FAFAFA] border-[#b2b2b2]/30'}`}>
+    <section id="contacto" className={`py-24 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#050505]' : 'bg-[#111111]'}`}>
+      
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-20 w-[30rem] h-[30rem] bg-[#ff4f00] rounded-full blur-[180px] opacity-20"></div>
+        <div className="absolute bottom-0 right-0 w-[40rem] h-[40rem] bg-[#ff4f00] rounded-full blur-[200px] opacity-10"></div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Estructura inspirada en la referencia de banner de contacto (Split Layout) */}
-        <div className={`rounded-[2.5rem] border overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12 transition-colors duration-300 backdrop-blur-xl ${
-          isDark ? 'bg-[#1A1A1A]/80 border-[#333333]' : 'bg-white/90 border-[#b2b2b2]/40'
-        }`}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Columna Izquierda: Impacto visual oscuro con tipografía de referencia */}
-          <div className="lg:col-span-5 bg-[#141414] text-white p-10 sm:p-14 flex flex-col justify-between relative overflow-hidden">
-            {/* Orbe de luz de fondo */}
-            <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-[#ff4f00] rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
-
-            <div className="relative z-10">
-              <span className="text-[#ff4f00] font-bold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full inline-block mb-6">
-                {content.badge}
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight mb-6">
-                {content.title}
-              </h2>
-              <div className="w-16 h-1 bg-[#ff4f00] rounded-full mb-6"></div>
-            </div>
-
-            <div className="relative z-10 mt-8">
-              <p className="text-gray-400 text-base leading-relaxed">
-                {content.subtitle}
-              </p>
-            </div>
+          {/* Columna Izquierda: Título Grande y Línea Naranja */}
+          <div className="lg:col-span-5 text-left pt-10 lg:pt-0">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-white mb-6">
+              {content.titleLine1} <br />
+              {content.titleLine2}
+            </h2>
+            <div className="w-24 h-1 bg-[#ff4f00]"></div>
           </div>
 
-          {/* Columna Derecha: Formulario limpio y moderno */}
-          <div className="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center">
+          {/* Columna Derecha: Tarjeta de Formulario Blanca/Clara */}
+          <div className={`lg:col-span-7 rounded-lg p-8 sm:p-12 shadow-2xl transition-colors duration-300 ${isDark ? 'bg-[#141414] border border-[#333333]' : 'bg-white'}`}>
             <form className="space-y-6">
+              
+              {/* Fila 1: Nombre y Empresa */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-gray-300' : 'text-[#1C1917]'}`}>{content.form.name}</label>
-                  <input type="text" className={`w-full px-5 py-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] transition-shadow ${isDark ? 'bg-[#0F0F0F]/50 border-[#333333] text-white' : 'bg-[#FAFAFA] border-[#b2b2b2]/50 text-[#1C1917]'}`} />
+                  <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{content.form.name}</label>
+                  <input type="text" className={`w-full px-4 py-3 rounded border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm ${isDark ? 'bg-[#0F0F0F] border-[#333333] text-white' : 'bg-[#FAFAFA] border-gray-300 text-gray-800'}`} />
                 </div>
                 <div>
-                  <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-gray-300' : 'text-[#1C1917]'}`}>{content.form.company}</label>
-                  <input type="text" className={`w-full px-5 py-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] transition-shadow ${isDark ? 'bg-[#0F0F0F]/50 border-[#333333] text-white' : 'bg-[#FAFAFA] border-[#b2b2b2]/50 text-[#1C1917]'}`} />
+                  <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{content.form.company}</label>
+                  <input type="text" className={`w-full px-4 py-3 rounded border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm ${isDark ? 'bg-[#0F0F0F] border-[#333333] text-white' : 'bg-[#FAFAFA] border-gray-300 text-gray-800'}`} />
                 </div>
               </div>
 
+              {/* Fila 2: Tipo de Solución */}
               <div>
-                <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-gray-300' : 'text-[#1C1917]'}`}>{content.form.service}</label>
-                <select className={`w-full px-5 py-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] transition-shadow appearance-none ${isDark ? 'bg-[#0F0F0F]/50 border-[#333333] text-white' : 'bg-[#FAFAFA] border-[#b2b2b2]/50 text-[#1C1917]'}`}>
-                  {content.form.options.map((opt, i) => <option key={i} value={i === 0 ? '' : opt} className={isDark ? 'bg-[#1A1A1A] text-white' : 'bg-white text-[#1C1917]'}>{opt}</option>)}
+                <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{content.form.service}</label>
+                <select className={`w-full px-4 py-3 rounded border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm appearance-none ${isDark ? 'bg-[#0F0F0F] border-[#333333] text-gray-300' : 'bg-[#FAFAFA] border-gray-300 text-gray-800'}`}>
+                  {content.form.options.map((opt, i) => (
+                    <option key={i} value={i === 0 ? '' : opt}>{opt}</option>
+                  ))}
                 </select>
               </div>
 
+              {/* Fila 3: Mensaje */}
               <div>
-                <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-gray-300' : 'text-[#1C1917]'}`}>{content.form.message}</label>
-                <textarea rows={4} className={`w-full px-5 py-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] transition-shadow resize-none ${isDark ? 'bg-[#0F0F0F]/50 border-[#333333] text-white' : 'bg-[#FAFAFA] border-[#b2b2b2]/50 text-[#1C1917]'}`}></textarea>
+                <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{content.form.message}</label>
+                <textarea rows={4} className={`w-full px-4 py-3 rounded border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm resize-none ${isDark ? 'bg-[#0F0F0F] border-[#333333] text-white' : 'bg-[#FAFAFA] border-gray-300 text-gray-800'}`}></textarea>
               </div>
 
-              <button type="button" className="w-full bg-[#ff4f00] hover:bg-[#e04500] text-white font-bold text-base py-4 rounded-xl transition-all hover:scale-[1.01] shadow-lg shadow-[#ff4f00]/20">
-                {content.form.submit}
-              </button>
+              {/* Fila 4: Botón Enviar */}
+              <div className="pt-4">
+                <button type="button" className="bg-[#ff4f00] hover:bg-[#e04500] text-white text-sm font-bold px-8 py-4 rounded uppercase tracking-wider transition-all w-full sm:w-auto shadow-lg shadow-[#ff4f00]/20">
+                  {content.form.submit}
+                </button>
+              </div>
+
             </form>
           </div>
 
