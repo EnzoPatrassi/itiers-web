@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Locale, dictionaries } from '@/data/i18n';
 import { INFO_ITIERS } from '@/data/mockData';
 import { validateWhatsAppConfig } from '@/lib/harness/guardrails';
-import { ThemeMode } from './Header';
+import { ThemeMode } from '@/components/Header';
 
 interface FooterProps {
   currentLang: Locale;
@@ -16,10 +16,8 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, theme = 'light' }) 
   const isDark = theme === 'dark';
   const t = dictionaries[currentLang].footer;
   
-  const whatsappMessage = currentLang === 'es'
-    ? 'Hola, quiero realizar una consulta sobre los servicios de Itiers.'
-    : 'Hello, I would like to ask about Itiers services.';
-  const whatsappChannel = validateWhatsAppConfig(INFO_ITIERS.whatsapp, whatsappMessage);
+  // Usamos un saludo corto que cumple con el mínimo de 5 caracteres requerido por el validador
+  const whatsappChannel = validateWhatsAppConfig(INFO_ITIERS.whatsapp, 'Hola!');
   
   if (!whatsappChannel.success || !whatsappChannel.url) {
     throw new Error(whatsappChannel.error || 'La configuración del canal de WhatsApp no es válida.');
@@ -81,9 +79,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, theme = 'light' }) 
 
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#ff4f00] mb-6">
-              {footerNav.ubicacion} & {footerNav.contacto}
+              {footerNav.ubicacion}
             </h4>
-            <ul className={`space-y-4 text-sm font-medium mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            <ul className={`space-y-4 text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               {locations.map((loc, index) => (
                 <li key={index} className="flex items-start gap-3 leading-snug">
                   <Image src={loc.flag} alt={loc.alt} width={18} height={14} className="w-4.5 h-3.5 object-cover rounded-sm mt-0.5 shrink-0" />
@@ -91,20 +89,24 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, theme = 'light' }) 
                 </li>
               ))}
             </ul>
-            <div className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-              WhatsApp: <a href={whatsappChannel.url} target="_blank" rel="noopener noreferrer" className={`hover:text-[#ff4f00] font-bold transition-colors block mt-1 ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>{INFO_ITIERS.whatsapp}</a>
-            </div>
           </div>
 
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#ff4f00] mb-6">
-              {currentLang === 'es' ? 'Unite a nuestro equipo' : 'Join our team'}
+              {footerNav.contacto}
             </h4>
-            {INFO_ITIERS.googleFormWorkWithUs && (
-              <a href={INFO_ITIERS.googleFormWorkWithUs} target="_blank" rel="noopener noreferrer" className="inline-block text-sm font-bold text-[#ff4f00] hover:underline focus:outline-none">
-                {currentLang === 'es' ? 'Trabajá con nosotros ↗' : 'Work with us ↗'}
+            
+            <div className="mt-1">
+              <a 
+                href={whatsappChannel.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2.5 text-sm font-bold transition-colors hover:text-[#ff4f00] ${isDark ? 'text-gray-200' : 'text-[#1C1917]'}`}
+              >
+                <span className="w-2 h-2 rounded-full bg-[#ff4f00]"></span>
+                {INFO_ITIERS.whatsapp}
               </a>
-            )}
+            </div>
           </div>
 
         </div>

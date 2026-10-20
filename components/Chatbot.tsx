@@ -64,31 +64,33 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang }) => {
       )}
 
       {isOpen && (
-        <section id="whatsapp-contact-panel" aria-label={content.botName} className="w-[calc(100vw-2rem)] max-w-[380px] border border-[#333333] rounded-[2rem] shadow-2xl overflow-hidden flex flex-col transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 backdrop-blur-xl bg-[#1F1F1F]/95">
-          <div className="bg-[#141414]/90 p-5 border-b border-[#333333] flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 rounded-xl bg-[#ff4f00] flex items-center justify-center text-white font-black text-sm shadow-inner">IT</div>
+        <section id="whatsapp-contact-panel" aria-label={content.botName} className="w-[calc(100vw-2rem)] max-w-[360px] border border-[#333333] rounded-[2rem] shadow-2xl overflow-hidden flex flex-col transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 backdrop-blur-xl bg-[#1F1F1F]/95">
+          
+          {/* Cabecera sin el número de teléfono */}
+          <div className="bg-[#141414]/90 px-4 py-3 border-b border-[#333333] flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 rounded-xl bg-[#ff4f00] flex items-center justify-center text-white font-black text-xs shadow-inner">IT</div>
               <div>
-                <h2 className="text-sm font-bold text-white">{content.botName}</h2>
-                <p className="text-xs text-gray-400 font-medium mt-0.5">{INFO_ITIERS.whatsapp}</p>
+                <h2 className="text-xs font-bold text-white">{content.botName}</h2>
               </div>
             </div>
-            <button type="button" onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white p-2 rounded-xl hover:bg-[#333333] transition-colors focus:outline-none">✕</button>
+            <button type="button" onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-[#333333] transition-colors focus:outline-none">✕</button>
           </div>
 
-          <div className="p-6 max-h-[min(70vh,420px)] overflow-y-auto space-y-5 text-sm">
-            <div className="bg-[#141414] border border-[#333333] p-4 rounded-2xl rounded-tl-none text-gray-300 leading-relaxed font-medium">
+          {/* Cuerpo del chat */}
+          <div className="p-4 space-y-3 text-sm">
+            <div className="bg-[#141414] border border-[#333333] p-3 rounded-2xl rounded-tl-none text-gray-300 text-xs leading-relaxed font-medium">
               {content.intro}
             </div>
 
-            <nav aria-label={currentLang === 'es' ? 'Temas de consulta' : 'Inquiry topics'} className="space-y-3 pt-2">
+            <nav aria-label={currentLang === 'es' ? 'Temas de consulta' : 'Inquiry topics'} className="space-y-2">
               {content.options.map((option) => (
                 <a
                   key={option.label}
                   href={getWhatsAppUrl(option.message)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full text-left p-4 rounded-xl bg-[#141414] border border-[#333333] hover:border-[#ff4f00] text-gray-200 hover:text-white transition-all focus:outline-none font-semibold hover:-translate-y-0.5"
+                  className="block w-full text-left px-3.5 py-2.5 rounded-xl bg-[#141414] border border-[#333333] hover:border-[#ff4f00] text-gray-200 hover:text-white transition-all focus:outline-none text-xs font-semibold hover:-translate-y-0.5"
                 >
                   {option.label} <span className="float-right text-[#ff4f00]">→</span>
                 </a>
@@ -97,12 +99,13 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang }) => {
                 href={getWhatsAppUrl(content.otherMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full text-left p-4 rounded-xl border border-[#ff4f00] bg-[#ff4f00]/10 text-[#ff4f00] hover:bg-[#ff4f00] hover:text-white transition-all focus:outline-none font-bold hover:-translate-y-0.5"
+                className="block w-full text-left px-3.5 py-2.5 rounded-xl border border-[#ff4f00] bg-[#ff4f00]/10 text-[#ff4f00] hover:bg-[#ff4f00] hover:text-white transition-all focus:outline-none text-xs font-bold hover:-translate-y-0.5"
               >
                 {content.other} <span className="float-right">→</span>
               </a>
             </nav>
           </div>
+
         </section>
       )}
     </div>
