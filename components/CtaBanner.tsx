@@ -23,7 +23,7 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ currentLang }) => {
 
   return (
     <section className="relative w-full py-20 overflow-hidden">
-      
+
       <div className="absolute inset-0 bg-gradient-to-r from-[#ff4f00] to-[#6a6969] z-0"></div>
 
       <div className="absolute inset-0 bg-black/10 mix-blend-overlay z-0"></div>
@@ -40,7 +40,7 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ currentLang }) => {
         
         <a 
           href="#contacto" 
-          className="inline-flex justify-center items-center px-8 py-3.5 text-sm font-bold text-[#141414] bg-white hover:bg-gray-100 rounded-full transition-all hover:scale-105 shadow-xl uppercase tracking-widest"
+          className="inline-flex justify-center items-center px-8 py-3.5 text-sm font-bold text-white bg-[#ff4f00] hover:bg-[#e04500] rounded-full transition-all hover:scale-105 shadow-xl uppercase tracking-widest border border-white/20"
         >
           {content.button}
         </a>

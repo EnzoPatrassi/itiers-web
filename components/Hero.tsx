@@ -27,7 +27,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, theme }) => {
   }[currentLang];
 
   return (
-    <section id="inicio" className="relative w-full min-h-[calc(100svh-5rem)] flex items-center justify-start py-16 overflow-hidden bg-black">
+    <section id="inicio" className="relative w-full min-h-[100svh] flex items-center justify-start pt-32 pb-16 overflow-hidden bg-black">
       
       <div className="absolute inset-0 z-0">
         <Image
