@@ -1,24 +1,58 @@
 @import "tailwindcss";
 
 @theme {
-    /* Colores de marca y superficies */
+
     --color-primary: #ff4f00;
-    --color-secondary: #b2b2b2;
-    --color-accent: #1F1F1F;
+    --color-secondary: #898a8d;
+    --color-accent: #4d4d4d;
     --color-background: #FFFFFF;
-    --color-surface: #FAFAFA;
+    --color-surface: #f9f9f9;
     --color-brand-gray: #4d4d4d;
     --color-border: #b2b2b2;
 
-    /* Tipografía[cite: 4] */
+    --color-dark-bg: #1A1A1A;
+    --color-dark-surface: #2A2A2A;
+    --color-dark-card: #2A2A2A;
+    --color-dark-border: #4d4d4d;
+
     --font-heading: "Arista Pro Trial Light", "Comfortaa", sans-serif;
     --font-body: "Arial Rounded MT", "Nunito", sans-serif;
     --font-mono: "Geist Mono", monospace;
 
-    /* Espaciado y Radios[cite: 4] */
     --spacing-base: 8px;
     --radius-sm: 12px;
-    --radius-none: 0px;
     --radius-md: 16px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
+    --radius-3xl: 40px;
     --radius-full: 9999px;
+}
+
+@layer utilities {
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-brand-gray);
+  overflow-x: hidden;
 }

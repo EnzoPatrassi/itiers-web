@@ -2,50 +2,62 @@
 
 import React from 'react';
 import { Locale } from '@/data/i18n';
-import { INFO_ITIERS } from '@/data/mockData';
+import { ThemeMode } from '@/components/Header';
 
 interface CareersSectionProps {
   currentLang: Locale;
+  theme?: ThemeMode;
 }
 
-export const CareersSection: React.FC<CareersSectionProps> = ({ currentLang }) => {
+export const CareersSection: React.FC<CareersSectionProps> = ({ currentLang, theme = 'light' }) => {
+  
   const content = {
     es: {
-      badge: 'Unite a Itiers',
-      title: 'Trabajá con nosotros',
-      desc: 'Buscamos ingenieros de datos, analistas y entusiastas de la Inteligencia Artificial con pasión por resolver problemas de alto nivel.',
-      cta: 'Ver oportunidades & Postularse',
+      badge: 'POSTULACIONES',
+      title: 'Trabaja con nosotros',
+      desc: 'Súmate a nuestro equipo. Completá el formulario de postulación.',
+      cta: 'COMPLETAR FORMULARIO',
     },
     en: {
-      badge: 'Join Itiers',
+      badge: 'APPLICATIONS',
       title: 'Work with us',
-      desc: 'We are constantly seeking passionate data engineers, scientists, and AI architects looking to tackle enterprise challenges.',
-      cta: 'View Opportunities & Apply',
+      desc: 'Join our team. Complete the application form.',
+      cta: 'COMPLETE APPLICATION',
     },
   }[currentLang];
 
-  const googleFormUrl = INFO_ITIERS.googleFormWorkWithUs || '#';
+  const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfN5I8_vgDeYfihh_3rPSb1tOVSbf3yUgNWgGD-77aLlLWKbA/viewform?pli=1";
 
   return (
-    <section className="py-16 bg-[#0F0F0F] text-white border-t border-[#333333]/50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center bg-[#1F1F1F]/60 border border-[#333333] rounded-3xl p-8 sm:p-10 relative overflow-hidden">
-        <span className="text-[#ff4f00] font-semibold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-3.5 py-1 rounded-full">
+    <section className="relative w-full py-20 overflow-hidden">
+
+      <div className="absolute inset-0 bg-gradient-to-r from-[#ff4f00] to-[#6a6969] z-0"></div>
+
+      <div className="absolute inset-0 bg-black/10 mix-blend-overlay z-0"></div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
+        
+        <span className="text-white/90 font-bold text-xs tracking-widest uppercase mb-4">
           {content.badge}
         </span>
-        <h2 className="mt-4 text-3xl font-bold text-white">{content.title}</h2>
-        <p className="mt-3 text-gray-300 text-base max-w-xl mx-auto">
+        
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6 drop-shadow-md">
+          {content.title}
+        </h2>
+        
+        <p className="text-base sm:text-lg text-white/90 max-w-2xl mb-10 font-medium">
           {content.desc}
         </p>
-        <div className="mt-6">
-          <a
-            href={googleFormUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center bg-[#1F1F1F] hover:bg-[#ff4f00] text-[#ff4f00] hover:text-white border border-[#ff4f00] font-semibold text-sm px-6 py-3 rounded-xl transition-all shadow-md"
-          >
-            {content.cta} ↗
-          </a>
-        </div>
+        
+        <a 
+          href={googleFormUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex justify-center items-center px-8 py-3.5 text-sm font-bold text-white bg-transparent hover:bg-white/10 rounded-lg transition-all uppercase tracking-widest border border-white/30"
+        >
+          {content.cta}
+        </a>
+
       </div>
     </section>
   );

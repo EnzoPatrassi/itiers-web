@@ -6,7 +6,7 @@ export interface JsonLdProps {
 }
 
 export const JsonLd: React.FC<JsonLdProps> = ({ data = OFFICIAL_ITIERS_JSON_LD }) => {
-  // Validar esquema mediante Guardrails Zod
+
   const validation = validateJsonLdStructure(data);
   if (!validation.success) {
     console.warn('⚠️ [JsonLd Guardrail Warning] Estructura Schema.org inválida:', validation.error);

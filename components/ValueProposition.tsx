@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Locale } from '@/data/i18n';
-import { ThemeMode } from './Header';
+import { ThemeMode } from '@/components/Header';
 
 interface ValuePropositionProps {
   currentLang: Locale;
@@ -14,160 +14,70 @@ export const ValueProposition: React.FC<ValuePropositionProps> = ({ currentLang,
 
   const content = {
     es: {
-      badge: '¿Por qué Itiers?',
-      title: 'Diferenciación fundada en ingeniería rigurosa e impacto directo',
-      items: [
-        {
-          num: '01',
-          tag: 'DATA',
-          title: 'Información Accionable',
-          desc: 'Transformamos volúmenes de datos dispersos e inestructurados en métricas e insights útiles para la toma de decisiones estratégicas.',
-          icon: (
-            <svg className="w-6 h-6 text-[#ff4f00]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-          ),
-        },
-        {
-          num: '02',
-          tag: 'AI',
-          title: 'IA Aplicada a Negocio',
-          desc: 'Implementamos IA Generativa, modelos predictivos y agentes inteligentes enfocados en resolver cuellos de botella reales.',
-          icon: (
-            <svg className="w-6 h-6 text-[#ff4f00]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          ),
-        },
-        {
-          num: '03',
-          tag: 'TECHNOLOGY',
-          title: 'Soluciones a Producción',
-          desc: 'Construimos arquitecturas robustas y pipelines ETL escalables diseñados para operar de forma contínua y confiable.',
-          icon: (
-            <svg className="w-6 h-6 text-[#ff4f00]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-          ),
-        },
-        {
-          num: '04',
-          tag: 'IMPACT',
-          title: 'Resultados Medibles',
-          desc: 'Medimos el éxito en retornos concretos de inversión (ROI), eficiencia operativa y velocidad de ejecución.',
-          icon: (
-            <svg className="w-6 h-6 text-[#ff4f00]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          ),
-        },
+      p3: 'Trabajamos bajo tres pilares innegociables: integridad, transparencia y confidencialidad. Entendemos que cada dato que custodiamos y analizamos es el activo más valioso de nuestros clientes y la base de la confianza que depositan en nosotros. En Itiers Data Sense, convertimos los datos en la ventaja competitiva de su futuro.',
+      pillars: [
+        { title: 'Confianza', desc: 'Construimos relaciones sólidas asegurando la integridad, privacidad y máxima seguridad en el manejo de cada dato.' },
+        { title: 'Colaboración', desc: 'Trabajamos codo a codo con tu equipo, sumando talentos para alcanzar objetivos comunes y potenciar resultados.' },
+        { title: 'Alegría', desc: 'Disfrutamos lo que hacemos. Fomentamos un ambiente positivo que inspira creatividad y excelencia en cada proyecto.' },
+        { title: 'Resiliencia', desc: 'Nos adaptamos rápidamente a los desafíos tecnológicos, transformando los obstáculos en oportunidades de innovación.' },
+        { title: 'Eficiencia', desc: 'Optimizamos procesos y recursos para entregar soluciones ágiles, precisas y de alto valor estratégico.' }
       ],
     },
     en: {
-      badge: 'Why Itiers?',
-      title: 'Differentiation rooted in rigorous engineering and real business impact',
-      items: [
-        {
-          num: '01',
-          tag: 'DATA',
-          title: 'Actionable Intelligence',
-          desc: 'We transform dispersed, unstructured data into clear metrics and insights for executive decision-making.',
-          icon: (
-            <svg className="w-6 h-6 text-[#ff4f00]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-          ),
-        },
-        {
-          num: '02',
-          tag: 'AI',
-          title: 'Applied Enterprise AI',
-          desc: 'We deploy generative AI, predictive models, and agentic workflows built specifically for your business logic.',
-          icon: (
-            <svg className="w-6 h-6 text-[#ff4f00]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          ),
-        },
-        {
-          num: '03',
-          tag: 'TECHNOLOGY',
-          title: 'Production-Ready Stack',
-          desc: 'We build robust data engineering architectures and pipelines designed for high-availability production.',
-          icon: (
-            <svg className="w-6 h-6 text-[#ff4f00]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-          ),
-        },
-        {
-          num: '04',
-          tag: 'IMPACT',
-          title: 'Measurable Outcomes',
-          desc: 'Our work is benchmarked directly against tangible financial return, process speed, and operational growth.',
-          icon: (
-            <svg className="w-6 h-6 text-[#ff4f00]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          ),
-        },
+      p3: 'We work under three non-negotiable pillars: integrity, transparency, and confidentiality. We understand that every piece of data we guard and analyze is our clients most valuable asset and the foundation of the trust they place in us. At Itiers Data Sense, we turn data into your competitive advantage for the future.',
+      pillars: [
+        { title: 'Trust', desc: 'We build strong relationships by ensuring integrity, privacy, and maximum security in handling every piece of data.' },
+        { title: 'Collaboration', desc: 'We work side-by-side with your team, combining talents to achieve common goals and boost results.' },
+        { title: 'Joy', desc: 'We love what we do. We foster a positive environment that inspires creativity and excellence in every project.' },
+        { title: 'Resilience', desc: 'We adapt quickly to technological challenges, transforming obstacles into opportunities for innovation.' },
+        { title: 'Efficiency', desc: 'We optimize processes and resources to deliver agile, accurate, and highly strategic solutions.' }
       ],
     },
   }[currentLang];
 
   return (
-    <section
-      className={`py-20 border-t transition-colors duration-300 ${
-        isDark
-          ? 'bg-[#0F0F0F] text-white border-[#333333]/50'
-          : 'bg-[#FAFAFA] text-[#1C1917] border-[#b2b2b2]/30'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-[#ff4f00] font-semibold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-3.5 py-1 rounded-full">
-            {content.badge}
-          </span>
-          <h2 className={`mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>
-            {content.title}
-          </h2>
+    <section id="nosotros" className={`py-24 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#141414] border-[#4d4d4d]' : 'bg-white border-[#b2b2b2]'}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <p className={`text-lg sm:text-xl font-semibold leading-relaxed ${isDark ? 'text-white' : 'text-[#4d4d4d]'}`}>
+            {content.p3}
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {content.items.map((item) => (
-            <div
-              key={item.num}
-              className={`group relative p-8 rounded-2xl border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#ff4f00]/10 flex flex-col justify-between ${
-                isDark
-                  ? 'bg-[#1F1F1F]/60 border-[#333333] hover:border-[#ff4f00]/50'
-                  : 'bg-white border-[#b2b2b2]/40 hover:border-[#ff4f00]/60'
-              }`}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-[#ff4f00]/10 border border-[#ff4f00]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    {item.icon}
-                  </div>
-                  <span className={`text-xs font-bold tracking-widest ${isDark ? 'text-gray-500' : 'text-[#4d4d4d]'}`}>
-                    {item.tag}
-                  </span>
-                </div>
-                <h3 className={`text-xl font-bold mb-3 group-hover:text-[#ff4f00] transition-colors ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>
-                  {item.title}
-                </h3>
-                <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-[#4d4d4d]'}`}>
-                  {item.desc}
-                </p>
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 pt-12 border-t ${isDark ? 'border-[#4d4d4d]' : 'border-[#b2b2b2]'}`}>
+          {content.pillars.map((pillar, index) => (
+            <div key={pillar.title} className="flex flex-col items-center text-center group">
+              
+              <div className="w-12 h-12 text-[#ff4f00] mb-5 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110">
+                 {index === 0 && (
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                )}
+                {index === 1 && (
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                )}
+                {index === 2 && (
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                )}
+                {index === 3 && (
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                )}
+                {index === 4 && (
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" /></svg>
+                )}
               </div>
 
-              <div className={`mt-6 pt-4 border-t flex justify-end ${isDark ? 'border-[#333333]/40' : 'border-[#b2b2b2]/20'}`}>
-                <span className="text-2xl font-black text-[#ff4f00]/20 group-hover:text-[#ff4f00]/50 transition-colors">
-                  {item.num}
-                </span>
-              </div>
+              <h3 className={`text-lg font-bold tracking-wide mb-3 ${isDark ? 'text-white' : 'text-[#4d4d4d]'}`}>
+                {pillar.title}
+              </h3>
+              
+              <p className={`text-sm leading-relaxed ${isDark ? 'text-[#b2b2b2]' : 'text-[#898a8d]'}`}>
+                {pillar.desc}
+              </p>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
