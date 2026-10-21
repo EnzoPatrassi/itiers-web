@@ -6,12 +6,10 @@ import { ThemeMode } from '@/components/Header';
 
 interface ContactSectionProps {
   currentLang: Locale;
-  theme: ThemeMode;
+  theme?: ThemeMode;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, theme }) => {
-  const isDark = theme === 'dark';
-
   const content = {
     es: {
       tag: 'CONTACTO',
@@ -56,11 +54,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, the
   }[currentLang];
 
   return (
-    <section id="contacto" className={`py-24 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#1A1A1A]' : 'bg-[#4d4d4d]'}`}>
+    <section id="contacto" className="py-24 relative overflow-hidden bg-[#161616]">
       
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-20 w-[30rem] h-[30rem] bg-[#ff4f00] rounded-full blur-[180px] opacity-20"></div>
-        <div className="absolute bottom-0 right-0 w-[40rem] h-[40rem] bg-[#ff4f00] rounded-full blur-[200px] opacity-10"></div>
+        <div className="absolute top-1/2 -translate-y-1/2 -left-40 w-[45rem] h-[45rem] bg-[#ff4f00] rounded-full blur-[200px] opacity-[0.12]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -74,29 +71,35 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, the
               {content.titleLine1} <br />
               {content.titleLine2}
             </h2>
-            <div className="w-12 h-1 bg-[#ff4f00] mb-6"></div>
+            <div className="w-16 h-1 bg-[#ff4f00] mb-8"></div>
             <p className="text-[#b2b2b2] text-sm sm:text-base max-w-md font-medium leading-relaxed">
               {content.description}
             </p>
           </div>
 
-          <div className={`lg:col-span-7 rounded-2xl p-8 sm:p-12 shadow-xl transition-colors duration-300 ${isDark ? 'bg-[#2A2A2A] border border-[#4d4d4d]' : 'bg-white'}`}>
+          <div className="lg:col-span-7 rounded-none p-8 sm:p-12 shadow-2xl bg-white">
             <form className="space-y-6">
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-[#898a8d]' : 'text-[#898a8d]'}`}>{content.form.name}</label>
-                  <input type="text" className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm ${isDark ? 'bg-[#1A1A1A] border-[#4d4d4d] text-white' : 'bg-[#f9f9f9] border-[#b2b2b2] text-[#4d4d4d]'}`} />
+                  <label className="block text-[11px] font-bold mb-2 uppercase tracking-wider text-slate-500">
+                    {content.form.name}
+                  </label>
+                  <input type="text" className="w-full px-4 py-3.5 rounded-none border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm bg-white text-gray-800" />
                 </div>
                 <div>
-                  <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-[#898a8d]' : 'text-[#898a8d]'}`}>{content.form.company}</label>
-                  <input type="text" className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm ${isDark ? 'bg-[#1A1A1A] border-[#4d4d4d] text-white' : 'bg-[#f9f9f9] border-[#b2b2b2] text-[#4d4d4d]'}`} />
+                  <label className="block text-[11px] font-bold mb-2 uppercase tracking-wider text-slate-500">
+                    {content.form.company}
+                  </label>
+                  <input type="text" className="w-full px-4 py-3.5 rounded-none border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm bg-white text-gray-800" />
                 </div>
               </div>
 
               <div>
-                <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-[#898a8d]' : 'text-[#898a8d]'}`}>{content.form.service}</label>
-                <select className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm appearance-none ${isDark ? 'bg-[#1A1A1A] border-[#4d4d4d] text-[#b2b2b2]' : 'bg-[#f9f9f9] border-[#b2b2b2] text-[#4d4d4d]'}`}>
+                <label className="block text-[11px] font-bold mb-2 uppercase tracking-wider text-slate-500">
+                  {content.form.service}
+                </label>
+                <select className="w-full px-4 py-3.5 rounded-none border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm appearance-none bg-white text-slate-700">
                   {content.form.options.map((opt, i) => (
                     <option key={i} value={i === 0 ? '' : opt}>{opt}</option>
                   ))}
@@ -104,12 +107,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, the
               </div>
 
               <div>
-                <label className={`block text-xs font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-[#898a8d]' : 'text-[#898a8d]'}`}>{content.form.message}</label>
-                <textarea rows={4} className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm resize-none ${isDark ? 'bg-[#1A1A1A] border-[#4d4d4d] text-white' : 'bg-[#f9f9f9] border-[#b2b2b2] text-[#4d4d4d]'}`}></textarea>
+                <label className="block text-[11px] font-bold mb-2 uppercase tracking-wider text-slate-500">
+                  {content.form.message}
+                </label>
+                <textarea rows={4} className="w-full px-4 py-3.5 rounded-none border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm resize-none bg-white text-gray-800"></textarea>
               </div>
 
-              <div className="pt-4">
-                <button type="button" className="bg-[#ff4f00] hover:bg-[#e04500] text-white text-sm font-bold px-8 py-4 rounded-lg uppercase tracking-wider transition-all w-full sm:w-auto">
+              <div className="pt-2">
+                <button type="button" className="bg-[#ff4f00] hover:bg-[#e04500] text-white text-[11px] sm:text-xs font-bold px-8 py-4 rounded-none uppercase tracking-wider transition-all shadow-lg shadow-[#ff4f00]/30 w-full sm:w-auto">
                   {content.form.submit}
                 </button>
               </div>
