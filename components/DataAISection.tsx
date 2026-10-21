@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Locale } from '@/data/i18n';
-import { ThemeMode } from './Header';
+import { ThemeMode } from '@/components/Header';
 
 interface DataAISectionProps {
   currentLang: Locale;
@@ -14,16 +14,28 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
 
   const content = {
     es: {
-      badge: 'Qué hacemos',
       title: 'Entrenar, Transformar, Guiar y Globalizar',
       subtitle: 'Itiers Data Sense tiene como propósito ENTRENAR, TRANSFORMAR, GUIAR y GLOBALIZAR los datos de tu organización de manera eficiente y efectiva.',
-      stages: ['Descriptiva', 'Diagnóstico', 'Predictiva', 'Prescriptiva', 'Data-Driven Business'],
+      stages: [
+        'Analytics & Pipelines', 
+        'Data Insights & Root Cause', 
+        'Predictive & Machine Learning', 
+        'Prescriptive & Optimization', 
+        'Data-Driven Culture',
+        'IA & Automation'
+      ],
     },
     en: {
-      badge: 'What we do',
       title: 'Train, Transform, Guide, and Globalize',
-      subtitle: 'Itiers Data Sense aims to TRAIN, TRANSFORM, GUIDE, and GLOBALIZE your organizations data efficiently and effectively.',
-      stages: ['Descriptive', 'Diagnosis', 'Predictive', 'Prescriptive', 'Data-Driven Business'],
+      subtitle: 'Itiers Data Sense aims to TRAIN, TRANSFORM, GUIDE, and GLOBALIZE your organization\'s data efficiently and effectively.',
+      stages: [
+        'Analytics & Pipelines', 
+        'Data Insights & Root Cause', 
+        'Predictive & Machine Learning', 
+        'Prescriptive & Optimization', 
+        'Data-Driven Culture',
+        'AI & Automation'
+      ],
     },
   }[currentLang];
 
@@ -68,6 +80,12 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
             <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
           </svg>
         );
+      case 5:
+        return (
+          <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+          </svg>
+        );
       default:
         return null;
     }
@@ -77,45 +95,42 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
     <section
       id="data-ai"
       className={`py-24 relative overflow-hidden transition-colors duration-300 ${
-        isDark ? 'bg-[#0F0F0F] border-[#333333]' : 'bg-white border-gray-200'
+        isDark ? 'bg-[#1A1A1A] border-[#4d4d4d]' : 'bg-white border-[#b2b2b2]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="max-w-4xl mx-auto text-center mb-20 animate-fade-in-up">
-          <span className="text-[#ff4f00] font-bold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full inline-block mb-6">
-            {content.badge}
-          </span>
-          <h2 className={`text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-8 ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>
+          <h2 className={`text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tighter leading-[1.1] mb-6 ${isDark ? 'text-white' : 'text-[#4d4d4d]'}`}>
             {content.title}.
           </h2>
-          <p className={`text-lg sm:text-xl font-medium max-w-2xl mx-auto leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+          <p className={`text-base sm:text-lg font-medium max-w-2xl mx-auto leading-relaxed ${isDark ? 'text-[#b2b2b2]' : 'text-[#898a8d]'}`}>
             {content.subtitle}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-6 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6 relative z-10">
           {content.stages.map((stage, index) => (
             <div key={stage} className="flex flex-col relative group animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
               
               <div className="flex items-center w-full mb-6">
-                <span className="text-5xl md:text-6xl font-black text-[#ff4f00] tracking-tighter mr-4">
+                <span className="text-4xl md:text-5xl font-black text-[#ff4f00] tracking-tighter mr-3">
                   0{index + 1}
                 </span>
 
                 <div className={`flex-1 h-[2px] transition-colors duration-300 group-hover:bg-[#ff4f00] ${
-                  isDark ? 'bg-[#333333]' : 'bg-gray-200'
+                  isDark ? 'bg-[#4d4d4d]' : 'bg-[#b2b2b2]'
                 }`}></div>
               </div>
 
-              <div className={`w-12 h-12 rounded-lg border-2 flex items-center justify-center mb-6 transition-all duration-300 group-hover:border-[#ff4f00] group-hover:text-[#ff4f00] group-hover:-translate-y-1 ${
-                isDark ? 'border-[#333333] text-gray-400 bg-[#1A1A1A]' : 'border-gray-200 text-gray-400 bg-[#FAFAFA]'
+              <div className={`w-12 h-12 rounded-lg border-2 flex items-center justify-center mb-5 transition-all duration-300 group-hover:border-[#ff4f00] group-hover:text-[#ff4f00] group-hover:-translate-y-1 ${
+                isDark ? 'border-[#4d4d4d] text-[#b2b2b2] bg-[#1A1A1A]' : 'border-[#b2b2b2] text-[#898a8d] bg-[#f9f9f9]'
               }`}>
                 {renderStepIcon(index)}
               </div>
 
-              <h3 className={`text-lg font-bold tracking-wide transition-colors ${
-                isDark ? 'text-white' : 'text-[#1C1917]'
+              <h3 className={`text-sm sm:text-base font-bold tracking-wide transition-colors leading-snug pr-2 ${
+                isDark ? 'text-white' : 'text-[#4d4d4d]'
               }`}>
                 {stage}
               </h3>

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Locale } from '@/data/i18n';
 import { Header, ThemeMode } from '@/components/Header';
 import { Hero } from '@/components/Hero';
+import { IntroSection } from '@/components/IntroSection';
 import { ValueProposition } from '@/components/ValueProposition';
 import { TeamSection } from '@/components/TeamSection';
 import { DataAISection } from '@/components/DataAISection';
@@ -12,7 +13,6 @@ import { TechnologySection } from '@/components/TechnologySection';
 import { ImpactCounters } from '@/components/ImpactCounters';
 import { Testimonials } from '@/components/Testimonials';
 import { ClientLogos } from '@/components/ClientLogos';
-import { CtaBanner } from '@/components/CtaBanner';
 import { ContactSection } from '@/components/ContactSection';
 import { CareersSection } from '@/components/CareersSection';
 import { Chatbot } from '@/components/Chatbot';
@@ -45,25 +45,50 @@ export default function LandingPage() {
   const isDark = theme === 'dark';
 
   return (
-    <div className={`min-h-screen font-sans antialiased overflow-x-hidden selection:bg-[#ff4f00] selection:text-white transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] text-white' : 'bg-white text-[#1C1917]'}`}>
+    <div className={`min-h-screen font-sans antialiased overflow-x-hidden selection:bg-[#ff4f00] selection:text-white transition-colors duration-300 ${isDark ? 'bg-[#1A1A1A] text-white' : 'bg-[#f9f9f9] text-[#4d4d4d]'}`}>
       <Header currentLang={currentLang} onLanguageChange={handleLanguageChange} theme={theme} onThemeChange={setTheme} />
 
       <main>
+        {/* 1. Hero banner */}
         <Hero currentLang={currentLang} theme={theme} />
-        <ValueProposition currentLang={currentLang} theme={theme} />
-        <TeamSection currentLang={currentLang} theme={theme} />
+        
+        {/* 2. Texto introductorio */}
+        <IntroSection currentLang={currentLang} theme={theme} />
+        
+        {/* 3. Sector Gráfico */}
         <DataAISection currentLang={currentLang} theme={theme} />
+        
+        {/* 4. Servicios */}
         <Services currentLang={currentLang} theme={theme} />
+        
+        {/* 5. Carrusel Tecnologías */}
         <TechnologySection theme={theme}/>
+        
+        {/* 6. Cifras */}
         <ImpactCounters currentLang={currentLang} theme={theme} /> 
+        
+        {/* 7. Testimonios */}
         <Testimonials currentLang={currentLang} theme={theme} />
-        <CtaBanner currentLang={currentLang} />
+        
+        {/* 8. Carrusel de clientes */}
         <ClientLogos currentLang={currentLang} theme={theme} />
+        
+        {/* 9. Nosotros y Pilares */}
+        <ValueProposition currentLang={currentLang} theme={theme} />
+        
+        {/* 10. Carrusel Equipo */}
+        <TeamSection currentLang={currentLang} theme={theme} />
+        
+        {/* 11. Contacto */}
         <ContactSection currentLang={currentLang} theme={theme} />
+        
+        {/* 12. Banner CTA y Trabaja con nosotros (unificados) */}
         <CareersSection currentLang={currentLang} theme={theme} />
       </main>
 
       <Chatbot currentLang={currentLang} />
+      
+      {/* 13. Footer */}
       <Footer currentLang={currentLang} theme={theme} />
     </div>
   );

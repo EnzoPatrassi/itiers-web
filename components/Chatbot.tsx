@@ -66,7 +66,6 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang }) => {
       {isOpen && (
         <section id="whatsapp-contact-panel" aria-label={content.botName} className="w-[calc(100vw-2rem)] max-w-[360px] border border-[#333333] rounded-[2rem] shadow-2xl overflow-hidden flex flex-col transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 backdrop-blur-xl bg-[#1F1F1F]/95">
           
-          {/* Cabecera sin el número de teléfono */}
           <div className="bg-[#141414]/90 px-4 py-3 border-b border-[#333333] flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 rounded-xl bg-[#ff4f00] flex items-center justify-center text-white font-black text-xs shadow-inner">IT</div>
@@ -77,7 +76,6 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang }) => {
             <button type="button" onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-[#333333] transition-colors focus:outline-none">✕</button>
           </div>
 
-          {/* Cuerpo del chat */}
           <div className="p-4 space-y-3 text-sm">
             <div className="bg-[#141414] border border-[#333333] p-3 rounded-2xl rounded-tl-none text-gray-300 text-xs leading-relaxed font-medium">
               {content.intro}

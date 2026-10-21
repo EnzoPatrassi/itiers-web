@@ -3,17 +3,17 @@
 @theme {
 
     --color-primary: #ff4f00;
-    --color-secondary: #b2b2b2;
-    --color-accent: #1F1F1F;
+    --color-secondary: #898a8d;
+    --color-accent: #4d4d4d;
     --color-background: #FFFFFF;
-    --color-surface: #FAFAFA;
+    --color-surface: #f9f9f9;
     --color-brand-gray: #4d4d4d;
     --color-border: #b2b2b2;
 
-    --color-dark-bg: #0F0F0F;
-    --color-dark-surface: #141414;
-    --color-dark-card: #1A1A1A;
-    --color-dark-border: #333333;
+    --color-dark-bg: #1A1A1A;
+    --color-dark-surface: #2A2A2A;
+    --color-dark-card: #2A2A2A;
+    --color-dark-border: #4d4d4d;
 
     --font-heading: "Arista Pro Trial Light", "Comfortaa", sans-serif;
     --font-body: "Arial Rounded MT", "Nunito", sans-serif;
@@ -53,6 +53,6 @@ html {
 body {
   font-family: var(--font-body);
   background-color: var(--color-background);
-  color: var(--color-accent);
+  color: var(--color-brand-gray);
   overflow-x: hidden;
 }

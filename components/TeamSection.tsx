@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Locale } from '@/data/i18n';
-import { ThemeMode } from './Header';
+import { ThemeMode } from '@/components/Header';
 import { TeamCarousel } from './TeamCarousel';
 
 interface TeamSectionProps {
@@ -11,26 +11,27 @@ interface TeamSectionProps {
 }
 
 export const TeamSection: React.FC<TeamSectionProps> = ({ currentLang, theme }) => {
+  const isDark = theme === 'dark';
+
   const content = {
     es: { 
-      titlePrefix: 'Así se vive ',
-      titleHighlight: 'itiers',
+      title: 'Así se vive itiers',
     },
     en: { 
-      titlePrefix: 'This is life at ',
-      titleHighlight: 'itiers',
+      title: 'This is life at itiers',
     },
   }[currentLang];
 
   return (
-    <section id="equipo" className="relative w-full overflow-hidden border-y border-gray-200 dark:border-[#333333] bg-black">
+    <section id="equipo" className={`relative w-full overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#1A1A1A]' : 'bg-[#4d4d4d]'}`}>
       
       <TeamCarousel theme={theme} />
 
+      <div className="absolute inset-0 z-10 bg-black/60 pointer-events-none"></div>
+
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 pointer-events-none">
         <h2 className="text-4xl sm:text-5xl md:text-7xl font-serif text-center drop-shadow-2xl max-w-4xl leading-tight text-white">
-          {content.titlePrefix} 
-          <span className="text-[#ff4f00] font-extrabold">{content.titleHighlight}</span>
+          {content.title}
         </h2>
       </div>
 

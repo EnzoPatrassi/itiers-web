@@ -41,15 +41,22 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isDark 
-        ? 'bg-[#0F0F0F] border-b border-[#333333]' 
-        : 'bg-white border-b border-gray-200 shadow-sm'
+        ? 'bg-[#1A1A1A] border-b border-[#4d4d4d]' 
+        : 'bg-white border-b border-[#b2b2b2]'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
           <a href="#inicio" className="flex items-center gap-2 group">
             <div className="relative w-36 h-10">
-              <Image src="/itiers.png" alt="Itiers Data Sense" fill sizes="200px" className="object-contain object-left" priority />
+              <Image 
+                src={isDark ? "/itiers-blanco.png" : "/itiers.png"} 
+                alt="Itiers Data Sense" 
+                fill 
+                sizes="200px" 
+                className="object-contain object-left" 
+                priority 
+              />
             </div>
           </a>
 
@@ -60,7 +67,7 @@ export const Header: React.FC<HeaderProps> = ({
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
                 className={`text-sm font-semibold transition-colors ${
-                  isDark ? 'text-gray-200 hover:text-white' : 'text-gray-700 hover:text-[#ff4f00]'
+                  isDark ? 'text-[#b2b2b2] hover:text-white' : 'text-[#4d4d4d] hover:text-[#ff4f00]'
                 }`}
               >
                 {link.label}
@@ -74,16 +81,20 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
               onClick={() => onThemeChange(isDark ? 'light' : 'dark')}
               className={`p-2 rounded-full border transition-all ${
-                isDark ? 'bg-[#1A1A1A] border-[#333333] text-yellow-400' : 'bg-gray-100 border-gray-200 text-gray-800'
+                isDark ? 'bg-[#1A1A1A] border-[#4d4d4d] text-[#b2b2b2] hover:text-white' : 'bg-white border-[#b2b2b2] text-[#4d4d4d] hover:text-[#ff4f00]'
               }`}
               aria-label="Cambiar tema"
             >
-              {isDark ? '☀️' : '🌙'}
+              {isDark ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              )}
             </button>
 
             <a
               href="#contacto"
-              className="bg-[#ff4f00] hover:bg-[#e04500] text-white font-bold text-xs sm:text-sm px-4 sm:px-6 py-2.5 rounded-full transition-all shadow-md hover:scale-105"
+              className="bg-[#ff4f00] hover:bg-[#e04500] text-white font-bold text-xs sm:text-sm px-4 sm:px-6 py-2.5 rounded-full transition-all hover:scale-105"
             >
               {currentLang === 'es' ? 'Hablemos' : 'Let\'s talk'}
             </a>
@@ -92,7 +103,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`md:hidden p-2 rounded-xl border transition-all ${
-                isDark ? 'bg-[#1A1A1A] border-[#333333] text-gray-200' : 'bg-gray-100 border-gray-200 text-gray-800'
+                isDark ? 'bg-[#1A1A1A] border-[#4d4d4d] text-[#b2b2b2]' : 'bg-white border-[#b2b2b2] text-[#4d4d4d]'
               }`}
               aria-label="Abrir menú"
             >
@@ -111,7 +122,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {mobileMenuOpen && (
         <div className={`md:hidden border-b transition-colors ${
-          isDark ? 'bg-[#0F0F0F] border-[#333333]' : 'bg-white border-gray-200'
+          isDark ? 'bg-[#1A1A1A] border-[#4d4d4d]' : 'bg-white border-[#b2b2b2]'
         }`}>
           <nav className="flex flex-col px-6 py-6 space-y-4">
             {navLinks.map((link) => (
@@ -120,7 +131,7 @@ export const Header: React.FC<HeaderProps> = ({
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
                 className={`text-base font-semibold py-2 transition-colors ${
-                  isDark ? 'text-gray-200 hover:text-[#ff4f00]' : 'text-gray-800 hover:text-[#ff4f00]'
+                  isDark ? 'text-[#b2b2b2] hover:text-[#ff4f00]' : 'text-[#4d4d4d] hover:text-[#ff4f00]'
                 }`}
               >
                 {link.label}

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Locale } from '@/data/i18n';
-import { ThemeMode } from './Header';
+import { ThemeMode } from '@/components/Header';
 
 interface CareersSectionProps {
   currentLang: Locale;
@@ -10,48 +10,54 @@ interface CareersSectionProps {
 }
 
 export const CareersSection: React.FC<CareersSectionProps> = ({ currentLang, theme = 'light' }) => {
-  const isDark = theme === 'dark';
   
   const content = {
     es: {
-      badge: 'Postulaciones',
+      badge: 'POSTULACIONES',
       title: 'Trabaja con nosotros',
       desc: 'Súmate a nuestro equipo. Completá el formulario de postulación.',
-      cta: 'Completar formulario',
+      cta: 'COMPLETAR FORMULARIO',
     },
     en: {
-      badge: 'Join Us',
+      badge: 'APPLICATIONS',
       title: 'Work with us',
       desc: 'Join our team. Complete the application form.',
-      cta: 'Complete application',
+      cta: 'COMPLETE APPLICATION',
     },
   }[currentLang];
 
   const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfN5I8_vgDeYfihh_3rPSb1tOVSbf3yUgNWgGD-77aLlLWKbA/viewform?pli=1";
 
   return (
-    <section className={`py-24 border-t relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] text-white border-[#333333]' : 'bg-[#FAFAFA] text-[#1C1917] border-[#b2b2b2]/30'}`}>
+    <section className="relative w-full py-20 overflow-hidden">
 
-      <div className={`max-w-4xl mx-auto px-4 sm:px-8 lg:px-10 text-center border rounded-[2rem] p-10 sm:p-14 relative z-10 overflow-hidden transition-colors duration-300 shadow-xl hover:shadow-2xl backdrop-blur-xl ${
-        isDark ? 'bg-[#1A1A1A]/80 border-[#333333]' : 'bg-white/80 border-[#b2b2b2]/40'
-      }`}>
-        <span className="text-[#ff4f00] font-bold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#ff4f00] to-[#6a6969] z-0"></div>
+
+      <div className="absolute inset-0 bg-black/10 mix-blend-overlay z-0"></div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
+        
+        <span className="text-white/90 font-bold text-xs tracking-widest uppercase mb-4">
           {content.badge}
         </span>
-        <h2 className={`mt-6 text-3xl sm:text-4xl font-extrabold tracking-tight ${isDark ? 'text-white' : 'text-[#1C1917]'}`}>{content.title}</h2>
-        <p className={`mt-4 text-base sm:text-lg max-w-xl mx-auto ${isDark ? 'text-gray-300' : 'text-[#4d4d4d]'}`}>
+        
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6 drop-shadow-md">
+          {content.title}
+        </h2>
+        
+        <p className="text-base sm:text-lg text-white/90 max-w-2xl mb-10 font-medium">
           {content.desc}
         </p>
-        <div className="mt-8">
-          <a
-            href={googleFormUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center font-bold text-sm md:text-base px-8 py-4 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-[#ff4f00] bg-[#ff4f00] hover:bg-[#e04500] text-white shadow-lg shadow-[#ff4f00]/20 hover:-translate-y-1"
-          >
-            {content.cta} ↗
-          </a>
-        </div>
+        
+        <a 
+          href={googleFormUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex justify-center items-center px-8 py-3.5 text-sm font-bold text-white bg-transparent hover:bg-white/10 rounded-lg transition-all uppercase tracking-widest border border-white/30"
+        >
+          {content.cta}
+        </a>
+
       </div>
     </section>
   );

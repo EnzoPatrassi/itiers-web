@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Locale } from '@/data/i18n';
-import { ThemeMode } from './Header';
+import { ThemeMode } from '@/components/Header';
 
 interface ImpactCountersProps {
   currentLang: Locale;
@@ -49,54 +49,45 @@ export const ImpactCounters: React.FC<ImpactCountersProps> = ({ currentLang, the
 
   const content = {
     es: {
-      badge: 'Cifras',
       stats: [
         { id: 1, end: 20, prefix: '+', suffix: '', label: 'Años de Trayectoria' },
-        { id: 2, end: 150, prefix: '+', suffix: '', label: 'Proyectos Exitosos' },
-        { id: 3, end: 50, prefix: '+', suffix: 'M', label: 'Registros Procesados diarios' },
-        { id: 4, end: 98, prefix: '', suffix: '%', label: 'Retención de Clientes' },
+        { id: 2, end: 1000, prefix: '+', suffix: '', label: 'Proyectos' },
+        { id: 3, end: 1800, prefix: '+', suffix: '', label: 'Tableros' },
+        { id: 4, end: 700, prefix: '+', suffix: '', label: 'Personas capacitadas en Datos & IA' },
       ]
     },
     en: {
-      badge: 'Figures',
       stats: [
         { id: 1, end: 20, prefix: '+', suffix: '', label: 'Years of Experience' },
-        { id: 2, end: 150, prefix: '+', suffix: '', label: 'Successful Projects' },
-        { id: 3, end: 50, prefix: '+', suffix: 'M', label: 'Daily Processed Records' },
-        { id: 4, end: 98, prefix: '', suffix: '%', label: 'Client Retention' },
+        { id: 2, end: 1000, prefix: '+', suffix: '', label: 'Projects' },
+        { id: 3, end: 1800, prefix: '+', suffix: '', label: 'Dashboards' },
+        { id: 4, end: 700, prefix: '+', suffix: '', label: 'People trained in Data & AI' },
       ]
     }
   }[currentLang];
 
   return (
-    <section className={`py-24 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F]' : 'bg-white'}`}>
+    <section className={`py-24 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#1A1A1A]' : 'bg-[#f9f9f9]'}`}>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12 animate-fade-in-up">
-          <span className="text-[#ff4f00] font-bold text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full inline-block">
-            {content.badge}
-          </span>
-        </div>
-        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {content.stats.map((stat, index) => (
             <div 
               key={stat.id} 
-              className={`group flex flex-col justify-between items-start text-left p-8 h-64 sm:h-72 rounded-[2rem] transition-all duration-500 cursor-default animate-fade-in-up
-                ${isDark ? 'bg-[#1A1A1A] border border-[#333333]' : 'bg-[#FAFAFA] border border-gray-200'}
+              className={`group flex flex-col justify-center items-center text-center p-8 h-64 sm:h-72 rounded-[2rem] transition-all duration-500 cursor-default animate-fade-in-up shadow-sm
+                ${isDark ? 'bg-[#2A2A2A] border border-[#4d4d4d]' : 'bg-white border border-[#b2b2b2]'}
                 hover:bg-[#ff4f00] hover:border-[#ff4f00] hover:-translate-y-2 hover:shadow-2xl
               `}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-
-              <div className={`text-sm sm:text-base font-medium leading-snug transition-colors duration-500 group-hover:text-white w-3/4
-                ${isDark ? 'text-gray-400' : 'text-gray-500'}
-              `}>
-                {stat.label}
+              <div className="text-5xl md:text-6xl font-extrabold tracking-tight transition-colors duration-500 group-hover:text-white text-[#ff4f00] mb-4">
+                <AnimatedNumber end={stat.end} prefix={stat.prefix} suffix={stat.suffix} />
               </div>
 
-              <div className="text-5xl md:text-6xl font-light tracking-tight transition-colors duration-500 group-hover:text-white text-[#ff4f00]">
-                <AnimatedNumber end={stat.end} prefix={stat.prefix} suffix={stat.suffix} />
+              <div className={`text-sm sm:text-base font-semibold leading-snug transition-colors duration-500 group-hover:text-white max-w-[200px]
+                ${isDark ? 'text-[#b2b2b2]' : 'text-[#4d4d4d]'}
+              `}>
+                {stat.label}
               </div>
             </div>
           ))}

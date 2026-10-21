@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Locale } from '@/data/i18n';
-import { ThemeMode } from './Header';
+import { ThemeMode } from '@/components/Header';
 
 interface ClientLogosProps {
   currentLang: Locale;
@@ -59,20 +59,23 @@ const CLIENTES = [
   { src: '/Mesa de trabajo 48Logos clientes itiers.png' },
   { src: '/Mesa de trabajo 49Logos clientes itiers.png' },
   { src: '/Mesa de trabajo 50Logos clientes itiers.png' },
+  { src: '/Mesa de trabajo 51Logos clientes itiers.png' },
+  { src: '/Mesa de trabajo 52Logos clientes itiers.png' },
+  { src: '/Mesa de trabajo 53Logos clientes itiers.png' },
 ];
 
 export const ClientLogos: React.FC<ClientLogosProps> = ({ currentLang, theme = 'light' }) => {
   const isDark = theme === 'dark';
   
   const content = {
-    es: { badge: <><span className="font-black">Confían</span> en nosotros</> },
-    en: { badge: <><span className="font-black">They trust</span> us</> }
+    es: { title: 'Confían en nosotros' },
+    en: { title: 'They trust us' }
   }[currentLang];
 
   const baseTrack = [...CLIENTES, ...CLIENTES];
 
   return (
-    <section className={`py-16 border-y relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] border-[#333333]' : 'bg-white border-gray-200'}`}>
+    <section className={`py-24 border-y relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#1A1A1A] border-[#4d4d4d]' : 'bg-[#f9f9f9] border-[#b2b2b2]'}`}>
       
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes scrollLogos {
@@ -86,14 +89,13 @@ export const ClientLogos: React.FC<ClientLogosProps> = ({ currentLang, theme = '
         }
       `}} />
 
-      <div className={`absolute top-0 left-0 w-24 md:w-48 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-[#0F0F0F] to-transparent' : 'bg-gradient-to-r from-white to-transparent'}`}></div>
-      <div className={`absolute top-0 right-0 w-24 md:w-48 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-l from-[#0F0F0F] to-transparent' : 'bg-gradient-to-l from-white to-transparent'}`}></div>
+      <div className={`absolute top-0 left-0 w-24 md:w-48 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-[#1A1A1A] to-transparent' : 'bg-gradient-to-r from-[#f9f9f9] to-transparent'}`}></div>
+      <div className={`absolute top-0 right-0 w-24 md:w-48 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-l from-[#1A1A1A] to-transparent' : 'bg-gradient-to-l from-[#f9f9f9] to-transparent'}`}></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center relative z-20">
-        {/* Quitamos font-bold del contenedor principal para que sólo aplique al <span> interno */}
-        <div className="text-[#ff4f00] text-xs tracking-wider uppercase bg-[#ff4f00]/10 border border-[#ff4f00]/20 px-4 py-1.5 rounded-full inline-block">
-          {content.badge}
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center relative z-20">
+        <h2 className={`text-3xl sm:text-5xl font-extrabold tracking-tight ${isDark ? 'text-white' : 'text-[#4d4d4d]'}`}>
+          {content.title}
+        </h2>
       </div>
 
       <div className="relative w-full overflow-hidden flex z-0">
@@ -101,14 +103,14 @@ export const ClientLogos: React.FC<ClientLogosProps> = ({ currentLang, theme = '
           {baseTrack.map((cliente, index) => (
             <div 
               key={index} 
-              className="relative w-40 h-16 md:w-56 md:h-24 flex-shrink-0 opacity-60 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0 hover:scale-105 cursor-pointer"
+              className="relative w-32 h-32 md:w-48 md:h-48 flex-shrink-0 opacity-60 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0 hover:scale-105 cursor-pointer"
             >
               <Image 
                 src={cliente.src} 
                 alt="" 
                 fill 
                 className="object-contain" 
-                sizes="(max-width: 768px) 160px, 224px" 
+                sizes="(max-width: 768px) 128px, 192px" 
               />
             </div>
           ))}
