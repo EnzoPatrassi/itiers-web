@@ -93,20 +93,20 @@ export const SERVICIOS_ITIERS: Servicio[] = [
     icono: "🤖",
     es: {
       titulo: "IA & Automatizaciones",
-      descripcion: "Transformamos el potencial de la Inteligencia Artificial y la automatización en soluciones concretas con alto impacto de negocio. Diseñamos e implementamos capacidades tecnológicas orientadas a optimizar operaciones, liberar tiempo operativo y acelerar la toma de decisiones estratégicas.",
+      descripcion: "Acompañamos a tu empresa a adoptar IA con criterio estratégico. Diseñamos tu hoja de ruta y creamos entornos a medida para hacer más eficiente tu organización.",
       detalles: [
-        "Agentes Virtuales & Chatbots de Negocio: Desarrollo de asistentes inteligentes y súper agentes conversacionales capaces de responder consultas, generar resúmenes y analizar datos en lenguaje natural.",
-        "Automatización Inteligente de Procesos: Orquestación de flujos de trabajo e integración de sistemas (n8n, Cloud) para eliminar tareas repetitivas.",
-        "Modelos Predictivos & Analítica Avanzada: Algoritmos de Machine Learning para predicción de demanda, clasificación de clientes y análisis inteligente."
+        "Agentes de IA & chatbots de negocio: Asistentes a medida integrados a tus sistemas para automatizar consultas de clientes o equipos y agilizar el análisis de información.",
+        "Automatización Inteligente de procesos: Integración de sistemas y orquestación de flujos de trabajo para eliminar tareas repetitivas y operar sin fricciones.",
+        "Entornos propios & soluciones de IA a medida: Desarrollo de entornos privados, seguros e integrados a tus datos para que tu organización opere con IA bajando costos y manteniendo el control de su información."
       ]
     },
     en: {
       titulo: "AI & Automations",
-      descripcion: "We transform the potential of Artificial Intelligence and automation into concrete solutions with high business impact. We design and implement technological capabilities to optimize operations and accelerate strategic decisions.",
+      descripcion: "We accompany your company in adopting AI with strategic criteria. We design your roadmap and create custom environments to make your organization more efficient.",
       detalles: [
-        "Virtual Agents & Business Chatbots: Development of intelligent assistants capable of answering business queries and analyzing data in natural language.",
-        "Intelligent Process Automation: Workflow orchestration and system integration to eliminate repetitive tasks.",
-        "Predictive Models & Advanced Analytics: Machine Learning algorithms for demand forecasting and customer classification."
+        "AI Agents & business chatbots: Custom assistants integrated into your systems to automate customer or team queries and streamline information analysis.",
+        "Intelligent process automation: System integration and workflow orchestration to eliminate repetitive tasks and operate seamlessly.",
+        "Proprietary environments & custom AI solutions: Development of private, secure environments integrated with your data so your organization can operate with AI, lowering costs and maintaining control of its information."
       ]
     }
   },
@@ -122,7 +122,7 @@ export const SERVICIOS_ITIERS: Servicio[] = [
       ]
     },
     en: {
-      titulo: "Training",
+      titulo: "Trainings",
       descripcion: "Our training services are designed to strengthen your team's skills and provide them with the necessary tools to face challenges in the data world.",
       detalles: [
         "Data Analysis Training: Practical training in BI tools, metric interpretation, and Data Storytelling.",
@@ -134,7 +134,7 @@ export const SERVICIOS_ITIERS: Servicio[] = [
     id: "staffing",
     icono: "＋",
     es: {
-      titulo: "Staffing - Talento especializado",
+      titulo: "Staffing - Talento especializado para tu equipo",
       descripcion: "El Staffing de Datos es una solución integral que te permite incorporar especialistas en datos calificados y experimentados a tu equipo, brindándote el apoyo y la experiencia que necesitas para alcanzar tus objetivos empresariales.",
       detalles: [
         "Perfiles On-Demand: Data Engineers, Data Analysts, Data Scientists y especialistas en BI o IA.",
@@ -143,8 +143,8 @@ export const SERVICIOS_ITIERS: Servicio[] = [
       ]
     },
     en: {
-      titulo: "Data Staffing",
-      descripcion: "Data Staffing is a comprehensive solution that allows you to incorporate qualified and experienced data specialists into your team.",
+      titulo: "Staffing - Specialized talent for your team",
+      descripcion: "Data Staffing is a comprehensive solution that allows you to incorporate qualified and experienced data specialists into your team, providing you with the support and expertise you need to achieve your business goals.",
       detalles: [
         "On-Demand Profiles: Data Engineers, Data Analysts, Data Scientists, and BI or AI specialists.",
         "Agile Integration: Senior talent ready to add value from day one in whatever capacity your operation requires.",
