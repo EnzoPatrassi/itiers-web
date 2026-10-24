@@ -15,12 +15,12 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ currentLang, theme =
 
   const content = {
     es: {
-      title: 'Lo que dicen nuestros clientes',
+      title: 'Lo que dicen de nosotros',
       subtitle: 'Así transformamos la complejidad de datos en ventajas competitivas reales para nuestros clientes.',
     },
     en: {
-      title: 'What our clients say',
-      subtitle: 'Here is how we turn data complexity into real competitive advantages for our partners.',
+      title: 'What they say about us',
+      subtitle: 'This is how we turn data complexity into real competitive advantages for our clients.',
     },
   }[currentLang];
 

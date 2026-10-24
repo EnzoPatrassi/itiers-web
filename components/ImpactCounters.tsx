@@ -52,16 +52,16 @@ export const ImpactCounters: React.FC<ImpactCountersProps> = ({ currentLang, the
       stats: [
         { id: 1, end: 20, prefix: '+', suffix: '', label: 'Años de Trayectoria' },
         { id: 2, end: 1000, prefix: '+', suffix: '', label: 'Proyectos' },
-        { id: 3, end: 1800, prefix: '+', suffix: '', label: 'Tableros' },
-        { id: 4, end: 700, prefix: '+', suffix: '', label: 'Personas capacitadas en Datos & IA' },
+        { id: 3, end: 5000, prefix: '+', suffix: '', label: 'Tableros' },
+        { id: 4, end: 900, prefix: '+', suffix: '', label: 'Personas capacitadas en Datos & IA' },
       ]
     },
     en: {
       stats: [
         { id: 1, end: 20, prefix: '+', suffix: '', label: 'Years of Experience' },
         { id: 2, end: 1000, prefix: '+', suffix: '', label: 'Projects' },
-        { id: 3, end: 1800, prefix: '+', suffix: '', label: 'Dashboards' },
-        { id: 4, end: 700, prefix: '+', suffix: '', label: 'People trained in Data & AI' },
+        { id: 3, end: 5000, prefix: '+', suffix: '', label: 'Dashboards' },
+        { id: 4, end: 900, prefix: '+', suffix: '', label: 'People trained in Data & AI' },
       ]
     }
   }[currentLang];

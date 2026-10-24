@@ -15,16 +15,18 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ currentLang, theme }) => {
   const content = {
     es: {
-      line1: 'Convertimos el caos de datos en',
-      highlight: 'decisiones estratégicas.',
-      description: 'Acompañamos a organizaciones líderes a desbloquear el valor de su información con un enfoque 100% personalizado.',
-      cta: 'Hablemos por WhatsApp',
+      line1: 'Hacemos que los datos',
+      line2: 'impulsen mejores',
+      highlight: 'decisiones y acciones',
+      description: 'Acompañamos a organizaciones a desbloquear el valor de su información con un enfoque 100% personalizado.',
+      cta: 'Conversemos',
     },
     en: {
-      line1: 'We turn data chaos into',
-      highlight: 'strategic decisions.',
-      description: 'We help leading organizations unlock the value of their information with a 100% personalized approach.',
-      cta: "Let's talk on WhatsApp",
+      line1: 'We make data',
+      line2: 'drive better',
+      highlight: 'decisions and actions',
+      description: 'We help organizations unlock the value of their information with a 100% personalized approach.',
+      cta: "Let's talk",
     },
   }[currentLang];
 
@@ -39,19 +41,20 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, theme }) => {
           alt="Itiers Data Sense Hero Banner"
           fill
           priority
-          className="object-cover object-[75%_center] sm:object-center"
+          className="object-cover object-[75%_center] lg:object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/80 to-black sm:bg-gradient-to-r sm:from-black sm:via-black/70 sm:to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black sm:bg-gradient-to-r sm:from-black/95 sm:via-black/75 sm:to-transparent xl:max-w-[75%]"></div>
       </div>
 
       <div className="w-full px-6 md:px-16 lg:px-24 xl:px-32 2xl:px-40 relative z-10 py-12 sm:py-20">
         
-        <div className="w-full text-left mt-8 sm:mt-0">
+        <div className="w-full max-w-4xl text-left mt-8 sm:mt-0">
           
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-extrabold tracking-tight leading-[1.1] mb-6 text-white">
-            <span className="block md:whitespace-nowrap">{content.line1}</span>
-            <span className="block md:whitespace-nowrap text-[#ff4f00]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] xl:text-[3.6rem] font-extrabold tracking-tight leading-[1.15] mb-6 text-white">
+            <span className="block lg:whitespace-nowrap">{content.line1}</span>
+            <span className="block lg:whitespace-nowrap">{content.line2}</span>
+            <span className="block lg:whitespace-nowrap text-[#ff4f00]">
               {content.highlight}
             </span>
           </h1>

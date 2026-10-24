@@ -35,7 +35,7 @@ export const TechnologySection: React.FC<TechnologySectionProps> = ({ theme = 'l
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        .animate-marquee { display: flex; width: max-content; animation: marquee 120s linear infinite; }
+        .animate-marquee { display: flex; width: max-content; animation: marquee 40s linear infinite; }
       `}} />
 
       <div className="relative w-full flex overflow-hidden group z-10">

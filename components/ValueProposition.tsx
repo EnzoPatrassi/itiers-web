@@ -36,7 +36,7 @@ export const ValueProposition: React.FC<ValuePropositionProps> = ({ currentLang,
   }[currentLang];
 
   return (
-    <section id="nosotros" className={`py-24 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#141414] border-[#4d4d4d]' : 'bg-white border-[#b2b2b2]'}`}>
+    <section className={`py-24 relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#141414] border-[#4d4d4d]' : 'bg-white border-[#b2b2b2]'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="max-w-4xl mx-auto text-center mb-16">

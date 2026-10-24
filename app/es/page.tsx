@@ -86,7 +86,8 @@ export default function LandingPage() {
         <CareersSection currentLang={currentLang} theme={theme} />
       </main>
 
-      <Chatbot currentLang={currentLang} />
+      {/* Chatbot */}
+      <Chatbot currentLang={currentLang} theme={theme} />
       
       {/* 13. Footer */}
       <Footer currentLang={currentLang} theme={theme} />
