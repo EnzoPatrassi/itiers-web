@@ -1,4 +1,3 @@
-
 export interface Servicio {
   id: string;
   icono: string;
@@ -149,6 +148,50 @@ export const SERVICIOS_ITIERS: Servicio[] = [
         "On-Demand Profiles: Data Engineers, Data Analysts, Data Scientists, and BI or AI specialists.",
         "Agile Integration: Senior talent ready to add value from day one in whatever capacity your operation requires.",
         "Operational Flexibility: Work coverage, specific projects, or dedicated development cells."
+      ]
+    }
+  },
+  {
+    id: "gobernanza-datos",
+    icono: "＋",
+    es: {
+      titulo: "Gobernanza de Datos",
+      descripcion: "Diseñamos e implementamos marcos de gobierno de datos que definen políticas, roles, procesos y arquitecturas de seguridad. Mejoramos la calidad, consistencia y trazabilidad de tu información para que tomes decisiones con confianza, reduzcas riesgos y escales con datos preparados para el futuro.",
+      detalles: [
+        "Calidad de Datos: Información limpia, consistente y lista para usar.",
+        "Seguridad y Cumplimiento: Protección avanzada y alineación con normativas vigentes.",
+        "Cultura Data-Driven: Roles, responsabilidades y accesos claramente definidos."
+      ]
+    },
+    en: {
+      titulo: "Data Governance",
+      descripcion: "We design and implement data governance frameworks that define policies, roles, processes, and security architectures. We improve the quality, consistency, and traceability of your information so you can make decisions with confidence, reduce risks, and scale with future-ready data.",
+      detalles: [
+        "Data Quality: Clean, consistent, and ready-to-use information.",
+        "Security and Compliance: Advanced protection and alignment with current regulations.",
+        "Data-Driven Culture: Clearly defined roles, responsibilities, and access."
+      ]
+    }
+  },
+  {
+    id: "diagnostico-consultoria",
+    icono: "＋",
+    es: {
+      titulo: "Diagnóstico y Consultoría",
+      descripcion: "Antes de automatizar, escalar o implementar IA, es necesario saber con precisión en qué punto se encuentra tu organización. Realizamos un diagnóstico integral de tus flujos de procesos, datos y arquitectura para entregar una hoja de ruta clara y priorizada. Analizamos el estado actual de tu información, sistemas y operación. Identificamos brechas y riesgos, y devolvemos un plan de acción concreto que te permite enfocar la inversión donde realmente genera valor.",
+      detalles: [
+        "Diagnóstico integral: Evaluación del estado de tus datos, procesos y sistemas.",
+        "Hoja de ruta estratégica: Plan priorizado según impacto y esfuerzo.",
+        "Enfoque de inversión: Recursos concentrados solo en lo que genera valor real."
+      ]
+    },
+    en: {
+      titulo: "Diagnosis and Consulting",
+      descripcion: "Before automating, scaling, or implementing AI, you need to know exactly where your organization stands. We conduct a comprehensive diagnosis of your process flows, data, and architecture to deliver a clear and prioritized roadmap. We analyze the current state of your information, systems, and operations. We identify gaps and risks, and return a concrete action plan that allows you to focus investment where it truly generates value.",
+      detalles: [
+        "Comprehensive diagnosis: Assessment of the state of your data, processes, and systems.",
+        "Strategic roadmap: Prioritized plan based on impact and effort.",
+        "Investment focus: Resources concentrated only on what generates real value."
       ]
     }
   }
