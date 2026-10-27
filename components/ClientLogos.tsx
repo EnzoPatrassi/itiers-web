@@ -85,12 +85,9 @@ export const ClientLogos: React.FC<ClientLogosProps> = ({ currentLang, theme = '
         .animate-scroll-logos {
           display: flex;
           width: max-content;
-          animation: scrollLogos 250s linear infinite;
+          animation: scrollLogos 140s linear infinite;
         }
       `}} />
-
-      <div className={`absolute top-0 left-0 w-24 md:w-48 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-[#1A1A1A] to-transparent' : 'bg-gradient-to-r from-[#f9f9f9] to-transparent'}`}></div>
-      <div className={`absolute top-0 right-0 w-24 md:w-48 h-full z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-l from-[#1A1A1A] to-transparent' : 'bg-gradient-to-l from-[#f9f9f9] to-transparent'}`}></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center relative z-20">
         <h2 className={`text-3xl sm:text-5xl font-extrabold tracking-tight ${isDark ? 'text-white' : 'text-[#4d4d4d]'}`}>
@@ -98,12 +95,18 @@ export const ClientLogos: React.FC<ClientLogosProps> = ({ currentLang, theme = '
         </h2>
       </div>
 
-      <div className="relative w-full overflow-hidden flex z-0">
+      {/* Franja horizontal blanca con mayor altura interna */}
+      <div className="relative w-full bg-white py-10 md:py-14 shadow-sm overflow-hidden flex z-0">
+        
+        {/* Degradados laterales */}
+        <div className="absolute top-0 left-0 w-24 md:w-48 h-full z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"></div>
+        <div className="absolute top-0 right-0 w-24 md:w-48 h-full z-10 pointer-events-none bg-gradient-to-l from-white to-transparent"></div>
+
         <div className="animate-scroll-logos flex items-center gap-12 md:gap-20 px-6 md:px-10">
           {baseTrack.map((cliente, index) => (
             <div 
               key={index} 
-              className="relative w-32 h-32 md:w-48 md:h-48 flex-shrink-0 opacity-60 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0 hover:scale-105 cursor-pointer"
+              className="relative w-32 h-32 md:w-48 md:h-48 flex-shrink-0 opacity-80 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0 hover:scale-105 cursor-pointer flex items-center justify-center"
             >
               <Image 
                 src={cliente.src} 

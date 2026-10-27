@@ -23,9 +23,9 @@ export const Header: React.FC<HeaderProps> = ({
   const isDark = theme === 'dark';
 
   const navLinks = [
-    { href: '#inicio', label: t.inicio || 'Servicios' },
+    { href: '#inicio', label: t.inicio || 'Inicio' },
     { href: '#nosotros', label: t.nosotros || 'Nosotros' }, 
-    { href: '#servicios-cards', label: t.servicios || 'Casos de Éxito' },
+    { href: '#servicios-cards', label: t.servicios || 'Servicios' },
     { href: '#contacto', label: t.contacto || 'Contacto' }, 
   ];
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><metadata><?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?><x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="XMP Core 6.0.0"><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmpMM:DocumentID="xmp.did:cb9f5498-bb58-4572-8043-8c369e6bfb9b" xmpMM:InstanceID="xmp.iid:cb9f5498-bb58-4572-8043-8c369e6bfb9b" dcterms:provenance="https://cai-manifests.adobe.com/manifests/urn-c2pa-4f4fd744-76c5-4b4d-ac5c-b4d2e8e6197b-adobe"> </rdf:Description></rdf:RDF></x:xmpmeta>
+<?xpacket end="w"?></metadata>
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 6px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill: none;
+        stroke: #999;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .cls-2 {
+        stroke-width: 4px;
+      }
+
+      .cls-3 {
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M240.23,273.07c.06-6.95-2.9-9.19-9.28-9.16-20.95.11-41.91,0-62.86.06-6.74.02-8.53,2.1-8.7,10.1-.33,15.19.88,59.04.72,65.86-.1,4.17,3.19,5.11,6.97,5.1,21.63-.08,43.26-.05,64.89-.03,6.16,0,8.16-2.98,8.28-9.12.21-10.8-.09-52.85-.01-62.8Z"/>
+  <path class="cls-1" d="M240.18,491.86c-.06-5.91-1.9-9.66-8.21-9.05-21.61,2.09-43.27.61-64.89.78-5.8.05-7.21,2-7.17,7.26.18,20.93.03,41.87.09,62.8.03,9.67,1.44,10.85,11.13,11.17,19.96.66,39.87-1.26,59.82-1.01,6.39.08,9.33-2.2,9.29-9.15-.06-9.78.06-52-.05-62.8Z"/>
+  <path class="cls-1" d="M467.18,376.23c-6.26-.1-8.32,2.01-8.23,8.26.3,21.6.28,43.22.01,64.82-.08,6.17,2.47,8.18,8.22,8.15,21.29-.11,42.58-.16,63.87.03,5.33.05,7.22-1.85,7.18-7.17-.19-22.28-.25-44.57.03-66.85.08-6.37-3.03-7.09-8.22-7.19-13.52-.26-56.12.04-62.86-.06Z"/>
+  <path class="cls-2" d="M484.97,457.7c-5.42,13.49-17.65,22.91-29.08,29.89-24.6,15.02-52.51,26.39-81.53,29.87"/>
+  <path class="cls-2" d="M325.23,523.26c-24.98,2.29-80.43,1.39-83.14,1.01"/>
+  <path class="cls-2" d="M325.23,304.47c-24.98-2.29-50.02-.67-75.02-.61-2.71,0-5.41-.78-8.11-.4"/>
+  <path class="cls-2" d="M622.29,416.9c-27.37,0-56.54.16-83.91.16"/>
+  <path class="cls-3" d="M373.61,517.98c.59,7.75-1.48,16.66-9.63,22.78-11.08,8.31-25.29,4.11-32.62-5.38-8.21-10.64-3.3-25.3,5.94-31.53,11.55-7.79,24.24-6.22,32.57,5.2,1.89,2.59,3.63,7.48,3.74,8.92Z"/>
+  <path class="cls-2" d="M421.55,324.73c-14.01-8.77-30.23-11.32-45.62-16.21"/>
+  <path class="cls-2" d="M460.08,343.97c11.24,8.47,24.01,17.49,28.96,31.83"/>
+  <circle class="cls-3" cx="350.92" cy="305.66" r="24.41"/>
+  <circle class="cls-3" cx="440.55" cy="334.66" r="20.58"/>
+  <circle class="cls-1" cx="664.15" cy="416.98" r="40.49"/>
+</svg>

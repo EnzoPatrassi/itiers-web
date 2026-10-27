@@ -8,20 +8,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/`,
       lastModified: currentDate,
-      changeFrequency: 'daily',
+      changeFrequency: 'weekly',
       priority: 1.0,
+      alternates: {
+        languages: {
+          es: `${baseUrl}/es`,
+          'x-default': `${baseUrl}/`,
+        },
+      },
     },
     {
       url: `${baseUrl}/es`,
       lastModified: currentDate,
-      changeFrequency: 'daily',
+      changeFrequency: 'weekly',
       priority: 1.0,
+      alternates: {
+        languages: {
+          es: `${baseUrl}/es`,
+          'x-default': `${baseUrl}/`,
+        },
+      },
     },
     {
       url: `${baseUrl}/servicios`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.9,
+      alternates: {
+        languages: {
+          es: `${baseUrl}/servicios`,
+          'x-default': `${baseUrl}/servicios`,
+        },
+      },
     },
   ];
 }

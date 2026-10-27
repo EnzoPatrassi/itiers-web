@@ -147,6 +147,28 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
             'Flujos TDD asistidos por IA',
             'Formación en Loop Engineering'
           ]
+        },
+        {
+          id: 'gobernanza-datos',
+          title: 'Gobernanza de Datos',
+          description: 'Marcos de gobierno de datos para asegurar la calidad, consistencia y trazabilidad de tu información para escalar de forma segura.',
+          icon: '🛡️',
+          features: [
+            'Calidad de Datos',
+            'Seguridad y Cumplimiento',
+            'Cultura Data-Driven'
+          ]
+        },
+        {
+          id: 'diagnostico-consultoria',
+          title: 'Diagnóstico y Consultoría',
+          description: 'Evaluación integral de flujos de procesos, datos y arquitectura para entregar un plan de acción concreto antes de escalar o implementar IA.',
+          icon: '📊',
+          features: [
+            'Diagnóstico integral',
+            'Hoja de ruta estratégica',
+            'Enfoque de inversión'
+          ]
         }
       ]
     },
@@ -290,6 +312,28 @@ export const dictionaries: Record<Locale, TranslationDictionary> = {
             'Technical mastery of context windows',
             'AI-assisted TDD workflows',
             'Loop Engineering training'
+          ]
+        },
+        {
+          id: 'gobernanza-datos',
+          title: 'Data Governance',
+          description: 'Data governance frameworks to ensure the quality, consistency, and traceability of your information to scale securely.',
+          icon: '🛡️',
+          features: [
+            'Data Quality',
+            'Security and Compliance',
+            'Data-Driven Culture'
+          ]
+        },
+        {
+          id: 'diagnostico-consultoria',
+          title: 'Diagnosis and Consulting',
+          description: 'Comprehensive assessment of process flows, data, and architecture to deliver a concrete action plan before scaling or implementing AI.',
+          icon: '📊',
+          features: [
+            'Comprehensive diagnosis',
+            'Strategic roadmap',
+            'Investment focus'
           ]
         }
       ]

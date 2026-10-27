@@ -9,7 +9,9 @@ interface ContactSectionProps {
   theme?: ThemeMode;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, theme }) => {
+export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, theme = 'light' }) => {
+  const isDark = theme === 'dark';
+
   const content = {
     es: {
       tag: 'CONTACTO',
@@ -25,7 +27,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, the
           'Ingeniería de Datos',
           'IA & Automatizaciones',
           'Capacitaciones',
-          'Staffing de Datos'
+          'Staffing de Datos',
+          'Gobernanza de Datos',
+          'Diagnóstico y Consultoría'
         ],
         message: 'Mensaje',
         submit: 'Enviar Mensaje',
@@ -45,7 +49,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, the
           'Data Engineering',
           'AI & Automations',
           'Training',
-          'Data Staffing'
+          'Data Staffing',
+          'Data Governance',
+          'Diagnosis and Consulting'
         ],
         message: 'Message',
         submit: 'Send Message',
@@ -77,44 +83,70 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ currentLang, the
             </p>
           </div>
 
-          <div className="lg:col-span-7 rounded-none p-8 sm:p-12 shadow-2xl bg-white">
+          <div className={`lg:col-span-7 rounded-none p-8 sm:p-12 shadow-2xl border transition-colors duration-300 ${
+            isDark ? 'bg-[#212121] border-[#333333]' : 'bg-white border-transparent'
+          }`}>
             <form className="space-y-6">
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[11px] font-bold mb-2 uppercase tracking-wider text-slate-500">
+                  <label className={`block text-[11px] font-bold mb-2 uppercase tracking-wider transition-colors ${isDark ? 'text-gray-300' : 'text-slate-500'}`}>
                     {content.form.name}
                   </label>
-                  <input type="text" className="w-full px-4 py-3.5 rounded-none border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm bg-white text-gray-800" />
+                  <input 
+                    type="text" 
+                    className={`w-full px-4 py-3.5 rounded-none border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm ${
+                      isDark ? 'bg-[#161616] border-[#333333] text-white' : 'bg-white border-gray-200 text-gray-800'
+                    }`} 
+                  />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-bold mb-2 uppercase tracking-wider text-slate-500">
+                  <label className={`block text-[11px] font-bold mb-2 uppercase tracking-wider transition-colors ${isDark ? 'text-gray-300' : 'text-slate-500'}`}>
                     {content.form.company}
                   </label>
-                  <input type="text" className="w-full px-4 py-3.5 rounded-none border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm bg-white text-gray-800" />
+                  <input 
+                    type="text" 
+                    className={`w-full px-4 py-3.5 rounded-none border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm ${
+                      isDark ? 'bg-[#161616] border-[#333333] text-white' : 'bg-white border-gray-200 text-gray-800'
+                    }`} 
+                  />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold mb-2 uppercase tracking-wider text-slate-500">
+                <label className={`block text-[11px] font-bold mb-2 uppercase tracking-wider transition-colors ${isDark ? 'text-gray-300' : 'text-slate-500'}`}>
                   {content.form.service}
                 </label>
-                <select className="w-full px-4 py-3.5 rounded-none border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm appearance-none bg-white text-slate-700">
+                <select 
+                  className={`w-full px-4 py-3.5 rounded-none border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm appearance-none ${
+                    isDark ? 'bg-[#161616] border-[#333333] text-white' : 'bg-white border-gray-200 text-slate-700'
+                  }`}
+                >
                   {content.form.options.map((opt, i) => (
-                    <option key={i} value={i === 0 ? '' : opt}>{opt}</option>
+                    <option key={i} value={i === 0 ? '' : opt} className={isDark ? 'bg-[#161616] text-white' : 'bg-white text-gray-800'}>
+                      {opt}
+                    </option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold mb-2 uppercase tracking-wider text-slate-500">
+                <label className={`block text-[11px] font-bold mb-2 uppercase tracking-wider transition-colors ${isDark ? 'text-gray-300' : 'text-slate-500'}`}>
                   {content.form.message}
                 </label>
-                <textarea rows={4} className="w-full px-4 py-3.5 rounded-none border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm resize-none bg-white text-gray-800"></textarea>
+                <textarea 
+                  rows={4} 
+                  className={`w-full px-4 py-3.5 rounded-none border focus:outline-none focus:ring-2 focus:ring-[#ff4f00] focus:border-transparent transition-colors text-sm resize-none ${
+                    isDark ? 'bg-[#161616] border-[#333333] text-white' : 'bg-white border-gray-200 text-gray-800'
+                  }`}
+                ></textarea>
               </div>
 
               <div className="pt-2">
-                <button type="button" className="bg-[#ff4f00] hover:bg-[#e04500] text-white text-[11px] sm:text-xs font-bold px-8 py-4 rounded-none uppercase tracking-wider transition-all shadow-lg shadow-[#ff4f00]/30 w-full sm:w-auto">
+                <button 
+                  type="button" 
+                  className="bg-[#ff4f00] hover:bg-[#e04500] text-white text-[11px] sm:text-xs font-bold px-8 py-4 rounded-none uppercase tracking-wider transition-all w-full sm:w-auto"
+                >
                   {content.form.submit}
                 </button>
               </div>
