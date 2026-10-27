@@ -11,11 +11,15 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: [
           'GPTBot',
+          'ChatGPT-User',
           'ClaudeBot',
           'PerplexityBot',
           'Google-Extended',
           'CCBot',
-          'Applebot-Extended'
+          'Applebot-Extended',
+          'Meta-ExternalAgent',
+          'Bytespider',
+          'cohere-ai'
         ],
         allow: '/',
       },
