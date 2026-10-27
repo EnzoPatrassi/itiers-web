@@ -173,7 +173,7 @@ export const Services: React.FC<ServicesProps> = ({ currentLang, theme }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-fr max-w-7xl mx-auto">
           {SERVICIOS_ITIERS.map((servicio, index) => (
             <ExpandableServiceCard 
               key={servicio.id || index}

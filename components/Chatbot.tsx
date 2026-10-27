@@ -17,7 +17,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang, theme }) => {
 
   const content = {
     es: {
-      botName: 'Consultas por WhatsApp',
+      botName: 'Consultas',
       intro: 'Elegí el tema de tu consulta para continuar en WhatsApp.',
       options: [
         { label: 'Ingeniería de Datos', message: 'Hola, quiero consultar por Ingeniería de Datos.' },
@@ -31,7 +31,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ currentLang, theme }) => {
       otherMessage: 'Hola, quiero realizar una consulta sobre los servicios de Itiers.',
     },
     en: {
-      botName: 'Contact on WhatsApp',
+      botName: 'Contact',
       intro: 'Choose a topic to continue your inquiry on WhatsApp.',
       options: [
         { label: 'Data Engineering', message: 'Hello, I have a question about Data Engineering.' },

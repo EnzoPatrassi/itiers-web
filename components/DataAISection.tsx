@@ -54,7 +54,6 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Encabezado con paleta Itiers */}
         <div className="max-w-4xl mx-auto text-center mb-16 md:mb-20 animate-fade-in-up">
           <h2 className={`text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1] mb-6 ${isDark ? 'text-white' : 'text-[#4d4d4d]'}`}>
             {content.title}
@@ -64,14 +63,11 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
           </p>
         </div>
 
-        {/* Contenedor principal unificado */}
         <div className="relative">
           
-          {/* Grilla de pasos */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-4 relative">
             
-            {/* Línea horizontal (solo PC) ajustada exactamente a la mitad de los círculos (168px) */}
-            <div className="hidden lg:block absolute top-[168px] left-[6%] right-[6%] h-[3px] bg-[#ffd5cc] dark:bg-[#55221a] z-0"></div>
+            <div className="hidden lg:block absolute top-[168px] -translate-y-1/2 left-[8%] right-[8%] h-[3px] bg-[#ff4f00] z-0"></div>
 
             {content.stages.map((stage, index) => (
               <div 
@@ -80,7 +76,6 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 
-                {/* 1. Imagen del gráfico arriba */}
                 <div className="relative w-24 h-24 sm:w-28 sm:h-28 mb-8 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1">
                   <Image
                     src={stage.image}
@@ -91,12 +86,8 @@ export const DataAISection: React.FC<DataAISectionProps> = ({ currentLang, theme
                   />
                 </div>
 
-                {/* 2. Círculo naranja con el número del paso (con borde del mismo color que el fondo para "cortar" la línea) */}
-                <div className="w-12 h-12 rounded-full bg-[#ff4f00] text-white font-black text-base flex items-center justify-center shadow-md mb-6 relative z-10 ring-4 ring-white dark:ring-[#1A1A1A]">
-                  0{index + 1}
-                </div>
+                <div className="w-12 h-12 rounded-full bg-[#ff4f00] shadow-md mb-6 relative z-10"></div>
 
-                {/* 3. Título del paso abajo con paleta Itiers */}
                 <h3 className={`text-xs sm:text-sm font-extrabold tracking-wider uppercase leading-snug max-w-[160px] ${
                   isDark ? 'text-white' : 'text-[#4d4d4d]'
                 }`}>
