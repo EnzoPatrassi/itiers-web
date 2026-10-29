@@ -117,11 +117,6 @@ export const OFFICIAL_ITIERS_JSON_LD: JsonLdProfessionalService = {
     'Business Intelligence',
     'Training',
     'Data Staffing'
-  ],
-  sameAs: [
-    'https://ar.linkedin.com/company/itiers',
-    'https://www.instagram.com/itiersds/',
-    'https://www.youtube.com/channel/UCrWeQoKi3bM8JtVYVG-44VA'
   ]
 };
 

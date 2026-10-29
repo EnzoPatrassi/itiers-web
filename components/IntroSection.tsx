@@ -44,9 +44,9 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ currentLang, theme }
             </div>
           </div>
 
-          <div className="lg:col-span-6 relative w-full h-[300px] sm:h-[400px] lg:h-[480px] rounded-lg overflow-hidden shadow-2xl">
+          <div className="lg:col-span-6 relative w-full aspect-square max-w-[480px] mx-auto rounded-2xl overflow-hidden shadow-2xl">
             <Image
-              src="/hero-banner-itiers.jpg"
+              src="/imagen-2da-seccion.png"
               alt="Itiers Data Sense Overview"
               fill
               className="object-cover"

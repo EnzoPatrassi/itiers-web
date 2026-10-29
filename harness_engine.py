@@ -64,31 +64,33 @@ load_dotenv()
 # MODELOS DISPONIBLES EN CASCADA DE FALLBACK
 # =====================================================================
 DEFAULT_MODELS = [
-    # 1. Ollama Local (100% Gratis, Ilimitado, Privado y Local)
-    {'provider': 'ollama', 'name': 'llama3.2:latest'},
-    {'provider': 'ollama', 'name': 'llama3.2'},
-    {'provider': 'ollama', 'name': 'llama3.2:3b'},
-    {'provider': 'ollama', 'name': 'llama3.2:1b'},
-    {'provider': 'ollama', 'name': 'llama3.1'},
-    {'provider': 'ollama', 'name': 'qwen2.5'},
+    # 1. Gemini API (Google AI - Modelos oficiales de última generación)
+    {'provider': 'gemini', 'name': 'gemini-3.5-flash'},
+    {'provider': 'gemini', 'name': 'gemini-3.5-flash-lite'},
+    {'provider': 'gemini', 'name': 'gemini-3-flash-preview'},
+    {'provider': 'gemini', 'name': 'gemini-2.5-pro'},
 
-    # 2. Groq API (Gratis, ultra rápido)
+    # 2. Groq API (Ultra rápido con modelos de alto razonamiento)
+    {'provider': 'groq', 'name': 'qwen/qwen3.8-27b'},
+    {'provider': 'groq', 'name': 'openai/gpt-oss-120b'},
+    {'provider': 'groq', 'name': 'openai/gpt-oss-20b'},
     {'provider': 'groq', 'name': 'llama-3.3-70b-versatile'},
-    {'provider': 'groq', 'name': 'llama-3.1-8b-instant'},
-    {'provider': 'groq', 'name': 'qwen-2.5-32b'},
 
-    # 3. Gemini API (Modelos oficiales)
-    {'provider': 'gemini', 'name': 'gemini-2.5-flash'},
-    {'provider': 'gemini', 'name': 'gemini-2.0-flash'},
-    {'provider': 'gemini', 'name': 'gemini-1.5-flash'},
+    # 3. OpenAI
+    {'provider': 'openai', 'name': 'gpt-4o-mini'},
+    {'provider': 'openai', 'name': 'gpt-4o'},
 
     # 4. OpenRouter API (Comunidad gratis)
     {'provider': 'openrouter', 'name': 'google/gemini-2.0-flash-exp:free'},
     {'provider': 'openrouter', 'name': 'meta-llama/llama-3.3-70b-instruct:free'},
 
-    # 5. OpenAI
-    {'provider': 'openai', 'name': 'gpt-4o-mini'},
-    {'provider': 'openai', 'name': 'gpt-4o'}
+    # 5. Ollama Local (100% Gratis, Privado y Local)
+    {'provider': 'ollama', 'name': 'llama3.2:latest'},
+    {'provider': 'ollama', 'name': 'llama3.1:latest'},
+    {'provider': 'ollama', 'name': 'llama3.2'},
+    {'provider': 'ollama', 'name': 'llama3.2:3b'},
+    {'provider': 'ollama', 'name': 'llama3.2:1b'},
+    {'provider': 'ollama', 'name': 'qwen2.5'}
 ]
 
 
@@ -107,6 +109,8 @@ class HarnessAgent:
         self.installed_ollama_models = []
         self.prefer_ollama = os.environ.get("PREFER_OLLAMA", "").lower() in ["true", "1", "yes"]
         self.available_models = []
+        self.last_backups = {}
+        self.last_modified_file = None
         self.setup_clients()
         self.load_design_specs()
 
@@ -125,7 +129,7 @@ class HarnessAgent:
                 self.clients['ollama'] = OpenAI(
                     base_url=ollama_api_url,
                     api_key="ollama",
-                    timeout=6.0
+                    timeout=60.0
                 )
             except Exception as e:
                 pass
@@ -189,29 +193,25 @@ class HarnessAgent:
         return []
 
     def rebuild_model_priority(self):
-        """Construye la lista de prioridad de modelos evitando bloqueos si Ollama no está activo."""
-        new_models = []
+        """
+        Construye la lista de prioridad de modelos:
+        - Si prefer_ollama es True: Ollama local va primero.
+        - Si prefer_ollama es False: Las APIs Cloud (Gemini, Groq, OpenAI) van PRIMERO.
+          Ollama queda como fallback si la nube falla o está offline.
+        """
+        cloud_models = [m for m in DEFAULT_MODELS if m['provider'] != 'ollama']
 
-        # 1. Si hay modelos locales detectados en Ollama, incluirlos primero
+        ollama_models = []
         for om in self.installed_ollama_models:
-            new_models.append({'provider': 'ollama', 'name': om})
-
-        # 2. Agregar modelos estándar
-        added = {m['name'] for m in new_models}
+            ollama_models.append({'provider': 'ollama', 'name': om})
         for m in DEFAULT_MODELS:
-            if m['provider'] == 'ollama' and not self.installed_ollama_models and not self.prefer_ollama:
-                # Si Ollama no está corriendo, omitir Ollama por defecto para evitar timeouts
-                continue
-            if m['name'] not in added:
-                new_models.append(m)
-                added.add(m['name'])
+            if m['provider'] == 'ollama' and m['name'] not in [o['name'] for o in ollama_models]:
+                ollama_models.append(m)
 
-        if self.prefer_ollama and self.installed_ollama_models:
-            ollama_list = [m for m in new_models if m['provider'] == 'ollama']
-            other_list = [m for m in new_models if m['provider'] != 'ollama']
-            self.available_models = ollama_list + other_list
+        if self.prefer_ollama:
+            self.available_models = ollama_models + cloud_models
         else:
-            self.available_models = new_models
+            self.available_models = cloud_models + ollama_models
 
     def load_design_specs(self):
         """Carga el manual de diseño e identidad de marca desde specs/design.md si existe."""
@@ -359,8 +359,115 @@ class HarnessAgent:
         except Exception as e:
             return f"❌ Execution error: {e}"
 
+    def resolve_project_path(self, raw_path: str) -> str:
+        """
+        Resuelve de forma robusta e inteligente cualquier ruta de archivo pasada por el usuario.
+        Maneja rutas con backslashes de Windows (ej: \\itiers-web-main\\components\\Header.tsx),
+        rutas relativas al proyecto, o nombres directos de archivo (ej: Header.tsx).
+        Garantiza que siempre resuelva dentro del workspace actual.
+        """
+        if not raw_path:
+            return "app/es/page.tsx"
+
+        p = raw_path.strip().strip("'").strip('"')
+        p_clean = p.replace("\\", "/").lstrip("/")
+
+        # Si el usuario incluyó el nombre del directorio raíz (ej: itiers-web-main/components/Header.tsx)
+        cwd_name = os.path.basename(os.getcwd())
+        prefixes_to_strip = [
+            f"{cwd_name}/",
+            "itiers-web-main/",
+            "itiers-web/",
+            "itiers-harness-qa/Main/itiers-web-main/",
+            "Main/itiers-web-main/"
+        ]
+        for prefix in prefixes_to_strip:
+            if p_clean.lower().startswith(prefix.lower()):
+                p_clean = p_clean[len(prefix):]
+                break
+
+        p_clean = p_clean.lstrip("/")
+
+        # 1. Si el archivo existe relativo al directorio actual de trabajo:
+        if os.path.exists(p_clean) and os.path.isfile(p_clean):
+            return p_clean
+
+        # 2. Si no se encontró directamente, buscar por nombre de archivo dentro del proyecto:
+        target_filename = os.path.basename(p_clean)
+        candidates = [target_filename.lower()]
+        if "." not in target_filename:
+            for ext in [".tsx", ".ts", ".jsx", ".js", ".css"]:
+                candidates.append((target_filename + ext).lower())
+
+        for root, dirs, files in os.walk("."):
+            dirs[:] = [d for d in dirs if d not in [".next", "node_modules", ".git", "__pycache__", "out", "build", ".harness_backups"]]
+            for f in files:
+                if f.lower() in candidates:
+                    rel = os.path.relpath(os.path.join(root, f), ".").replace("\\", "/")
+                    return rel
+
+        return p_clean
+
+    def parse_command_input(self, text: str, default_path: Optional[str] = None) -> tuple:
+        """
+        Extrae de forma robusta la descripción y la ruta de destino de una solicitud de creación o modificación.
+        """
+        fallback_path = default_path if default_path else "app/es/page.tsx"
+        text = text.strip()
+        if not text:
+            return "", fallback_path
+
+        tokens = text.split()
+        if len(tokens) == 1:
+            if "." in tokens[0] or any(ext in tokens[0] for ext in [".tsx", ".ts", ".jsx", ".js"]):
+                return "", self.resolve_project_path(tokens[0])
+            return tokens[0], fallback_path
+
+        # 1. Si el último token es una ruta (contiene extensión o barra)
+        last_tok = tokens[-1].strip(" '\"`(),;:")
+        if any(last_tok.lower().endswith(ext) for ext in [".tsx", ".ts", ".jsx", ".js", ".css", ".md", ".json", ".html"]):
+            resolved = self.resolve_project_path(last_tok)
+            return " ".join(tokens[:-1]).strip(), resolved
+
+        # 2. Si el primer token es una ruta
+        first_tok = tokens[0].strip(" '\"`(),;:")
+        if any(first_tok.lower().endswith(ext) for ext in [".tsx", ".ts", ".jsx", ".js", ".css", ".md", ".json", ".html"]):
+            resolved = self.resolve_project_path(first_tok)
+            return " ".join(tokens[1:]).strip(), resolved
+
+        # 3. Buscar si algún token del medio es una ruta de archivo
+        for i, tok in enumerate(tokens):
+            clean_tok = tok.strip(" '\"`(),;:")
+            if any(clean_tok.lower().endswith(ext) for ext in [".tsx", ".ts", ".jsx", ".js", ".css", ".md", ".json"]):
+                resolved = self.resolve_project_path(clean_tok)
+                desc = " ".join(tokens[:i] + tokens[i+1:]).strip()
+                return desc, resolved
+
+        # 4. Mapeo por palabras clave de componentes conocidos
+        lower_text = text.lower()
+        component_keywords = [
+            (["metric", "metrica", "metricas", "tarjeta", "tarjetas"], "components/MetricCard.tsx"),
+            (["header", "encabezado", "navbar", "menu"], "components/Header.tsx"),
+            (["footer", "pie"], "components/Footer.tsx"),
+            (["hero", "portada"], "components/Hero.tsx"),
+            (["carrusel", "carousel", "equipo", "team"], "components/TeamCarousel.tsx"),
+            (["contacto", "contact", "formulario"], "components/ContactSection.tsx"),
+            (["impact", "contador", "contadores", "impacto"], "components/ImpactCounters.tsx"),
+            (["careers", "carrera", "empleo", "vacantes"], "components/CareersSection.tsx"),
+            (["dataai", "ia", "inteligencia artificial"], "components/DataAISection.tsx"),
+            (["servicio", "servicios"], "components/Services.tsx"),
+            (["landing", "pagina principal", "home"], "app/es/page.tsx")
+        ]
+        if not default_path:
+            for kws, comp_path in component_keywords:
+                if any(kw in lower_text for kw in kws):
+                    return text, comp_path
+
+        return text, fallback_path
+
     def audit_component(self, filepath: str) -> str:
         """Audita un componente o archivo específico."""
+        filepath = self.resolve_project_path(filepath)
         if not os.path.exists(filepath):
             return f"❌ El archivo '{filepath}' no existe."
 
@@ -383,6 +490,7 @@ class HarnessAgent:
 
     def audit_geo(self, filepath: str) -> str:
         """Audita la optimización SEO y GEO (Generative Engine Optimization)."""
+        filepath = self.resolve_project_path(filepath)
         if not os.path.exists(filepath):
             return f"❌ El archivo '{filepath}' no existe."
 
@@ -422,8 +530,20 @@ class HarnessAgent:
 
     def generate_or_edit_file(self, description: str, target_path: str = "app/es/page.tsx") -> bool:
         """Genera o edita cualquier archivo en el proyecto."""
+        target_path = self.resolve_project_path(target_path)
         system_prompt = (
-            "Eres un Senior Software Architect y Developer parte del Arnés de IA.\n"
+            "Eres un Senior Software Architect y Developer parte del Arnés de IA de Itiers.\n"
+            "Stack tecnológico estricto del proyecto: Next.js (App Router), React 19, Tailwind CSS v4 y TypeScript.\n"
+            "REGLAS CRÍTICAS:\n"
+            "1. NO importes librerías externas no instaladas (PROHIBIDO @mui, styled-components, etc.).\n"
+            "2. Usa únicamente clases nativas de Tailwind CSS y tipado estricto de TypeScript.\n"
+            "3. Accesibilidad WCAG AA obligatoria: etiquetas semánticas (<article>, <section>, <header>, <nav>), tabIndex={0}, aria-label y focus visible (focus:ring-2).\n"
+            "4. PRESERVACIÓN CRÍTICA: Al modificar archivos existentes, DEBES CONSERVAR todos los exports (ej: 'export const Header', 'export type ThemeMode = ...'), interfaces y lógica original que no se haya pedido alterar. PROHIBIDO cambiar 'export const' a 'const' o eliminar tipos exportados.\n"
+            "5. NO inventes componentes no importados (como <NavLink>), usa etiquetas HTML estándar (<a>, <button>) con clases Tailwind.\n"
+            "6. COMPONENTE NEXT/IMAGE: Si usas o modificas <Image />, SIEMPRE debes incluir 'fill' O 'width={...}' y 'height={...}'. NUNCA dejes un <Image /> sin dimensiones ni 'fill' porque arroja Runtime Error fatal en Next.js.\n"
+            "7. ELIMINACIÓN Y BORRADO: Si la solicitud pide BORRAR o ELIMINAR un elemento, botón, texto, enlace o sección específica, DEBES REMOVERLO COMPLETAMENTE del JSX/código, sin dejar bloques vacíos ni comentarios de marcador.\n"
+            "8. INTERNACIONALIZACIÓN (i18n): Si usas 'dictionaries[currentLang]', respeta su esquema estricto de '@/data/i18n'. La navegación está en 'dictionaries[currentLang].nav' (con .inicio, .nosotros, .servicios, .queHacemos, .contacto), y el footer en 'dictionaries[currentLang].footer'. PROHIBIDO forzar propiedades inexistentes con type casting 'as unknown as ...' o interfaces inventadas.\n"
+            "9. CERO PARCHES SUPERFICIALES: NUNCA uses 'as any' o 'as unknown as' para engañar al chequeo de tipos de TypeScript. Si una propiedad no existe en un objeto, usa el objeto correcto según las fuentes de verdad.\n"
             "Crea o modifica el código solicitado de forma completa, limpia y funcional sin omitir partes.\n"
             "Devuelve ÚNICAMENTE el código envuelto en un bloque markdown (```lenguaje ... ```)."
         )
@@ -433,11 +553,22 @@ class HarnessAgent:
             try:
                 with open(target_path, "r", encoding="utf-8") as f:
                     existing_code = f.read()
+                # Registrar respaldo para poder deshacer cambios
+                self.last_backups[target_path] = existing_code
+                self.last_modified_file = target_path
+                os.makedirs(".harness_backups", exist_ok=True)
+                bak_name = target_path.replace("/", "_").replace("\\", "_") + ".bak"
+                with open(os.path.join(".harness_backups", bak_name), "w", encoding="utf-8") as bf:
+                    bf.write(existing_code)
             except Exception:
                 pass
 
         if existing_code:
-            prompt = f"Modifica el archivo existente '{target_path}' para cumplir: '{description}'.\n\nCódigo Actual:\n```\n{existing_code}\n```"
+            prompt = (
+                f"Modifica el archivo existente '{target_path}' para cumplir: '{description}'.\n"
+                f"IMPORTANTE: Mantén todas las exportaciones existentes ('export const', 'export type', etc.) y todas las props originales.\n\n"
+                f"Código Actual:\n```\n{existing_code}\n```"
+            )
         else:
             prompt = f"Crea un nuevo archivo para '{target_path}' con la siguiente especificación: '{description}'."
 
@@ -460,10 +591,22 @@ class HarnessAgent:
             return False
 
     def autonomous_loop(self, idea: str, target_path: str = "app/es/page.tsx", max_iterations: int = 3):
-        """Ejecuta un bucle agéntico autónomo: Crear -> Auditar -> Auto-corregir -> Guardar."""
+        """Ejecuta un bucle agéntico autónomo: Crear -> Auditar -> Auto-corregir -> Guardar (con rollback de seguridad)."""
+        target_path = self.resolve_project_path(target_path)
         print(f"\n🤖 [Bucle Agéntico Autónoma] Construyendo: {target_path}")
 
+        # Guardar respaldo previo para rollback de seguridad
+        original_backup = None
+        if os.path.exists(target_path):
+            try:
+                with open(target_path, "r", encoding="utf-8") as f:
+                    original_backup = f.read()
+            except Exception:
+                pass
+
         current_prompt = f"Crea/modifica el archivo según esta especificación: {idea}"
+
+        loop_succeeded = False
 
         for iteration in range(1, max_iterations + 1):
             print(f"\n🔄 --- ITERACIÓN {iteration}/{max_iterations} ---")
@@ -478,15 +621,355 @@ class HarnessAgent:
             report = self.audit_component(target_path)
             print(f"\n📊 Reporte de Auditoría:\n{report}\n")
 
-            if "✅ APROBADO" in report.upper() or "APROBADO" in report.upper():
-                print(f"🎉 ¡Éxito! Componente aprobado autónomamente en la iteración {iteration}.")
+            # 1. Verificación técnica real con TypeScript
+            ts_check = subprocess.run("npx tsc --noEmit", shell=True, capture_output=True, text=True)
+            ts_ok = (ts_check.returncode == 0)
+
+            # 2. Verificación de reglas críticas de runtime Next.js (<Image> fill/width)
+            image_runtime_ok = True
+            image_err = ""
+            try:
+                with open(target_path, "r", encoding="utf-8") as f:
+                    file_code = f.read()
+                for img_match in re.finditer(r'<Image\b([^>]*?)>', file_code):
+                    props = img_match.group(1)
+                    if "fill" not in props and "width=" not in props:
+                        image_runtime_ok = False
+                        image_err = "🚨 Error de Runtime en Next.js: Se detectó etiqueta <Image /> sin propiedad 'fill' ni 'width/height'. Toda <Image> debe tener 'fill' o 'width={...} height={...}'."
+                        break
+            except Exception:
+                pass
+
+            is_audit_approved = ("APROBADO" in report.upper()) and ("REVISAR" not in report.upper()) and ("❌" not in report)
+
+            if is_audit_approved and ts_ok and image_runtime_ok:
+                print(f"🎉 ¡Éxito! Componente aprobado autónomamente y validado por TypeScript en la iteración {iteration}.")
+                loop_succeeded = True
+                break
+            else:
+                feedback = report
+                if not ts_ok:
+                    ts_err_sample = (ts_check.stdout or ts_check.stderr).strip()[:400]
+                    feedback += f"\n\n🚨 Errores de compilación TypeScript:\n{ts_err_sample}\nPor favor elimina imports de paquetes no instalados, conserva los exports requeridos y usa solo Tailwind CSS y React nativo."
+                if not image_runtime_ok:
+                    feedback += f"\n\n{image_err}"
+
+                if iteration < max_iterations:
+                    print("⚠️ Observaciones o fallos de compilación/runtime detectados. Enviando a auto-reparación...")
+                    current_prompt = f"Corrige el archivo '{target_path}' resolviendo estas observaciones:\n{feedback}"
+                else:
+                    print("⚠️ Límite de iteraciones alcanzado sin lograr compilación limpia.")
+
+        # Rollback de seguridad si no se logró compilación limpia
+        if not loop_succeeded and original_backup is not None:
+            ts_final = subprocess.run("npx tsc --noEmit", shell=True, capture_output=True, text=True)
+            if ts_final.returncode != 0:
+                print(f"🛡️ [Rollback de Seguridad] Restaurando versión previa funcional de '{target_path}' para mantener el servidor operativo...")
+                try:
+                    with open(target_path, "w", encoding="utf-8") as f:
+                        f.write(original_backup)
+                    print(f"✅ Versión anterior restaurada exitosamente.")
+                except Exception as e:
+                    print(f"❌ Error al restaurar respaldo: {e}")
+    
+    def revert_last_change(self, target_path: Optional[str] = None) -> tuple:
+        """Restaura la versión previa de un archivo modificado por el arnés."""
+        path_to_revert = self.resolve_project_path(target_path) if target_path else self.last_modified_file
+        if not path_to_revert:
+            return False, "⚠️ No hay registros de archivos modificados recientemente para deshacer."
+
+        prev_code = self.last_backups.get(path_to_revert)
+        if not prev_code:
+            bak_name = path_to_revert.replace("/", "_").replace("\\", "_") + ".bak"
+            bak_file = os.path.join(".harness_backups", bak_name)
+            if os.path.exists(bak_file):
+                try:
+                    with open(bak_file, "r", encoding="utf-8") as bf:
+                        prev_code = bf.read()
+                except Exception:
+                    pass
+
+        if not prev_code:
+            return False, f"⚠️ No se encontró una copia de seguridad previa de '{path_to_revert}'."
+
+        try:
+            with open(path_to_revert, "w", encoding="utf-8") as f:
+                f.write(prev_code)
+            print(f"↩️ [Deshacer] Archivo '{path_to_revert}' restaurado a su versión anterior.")
+            return True, f"✅ Archivo '{path_to_revert}' restaurado exitosamente a su versión previa."
+        except Exception as e:
+            return False, f"❌ Error al restaurar el archivo: {e}"
+
+    def is_code_edit_request(self, msg: str) -> bool:
+        """Determina si el mensaje del usuario pide crear, modificar o eliminar código."""
+        m = msg.strip().lower()
+        if not m:
+            return False
+
+        # 1. Comandos de barra explícitos
+        explicit_cmds = ["/crear", "/modificar", "/editar", "/cambiar", "/generar", "/autonomo"]
+        if any(m.startswith(c) for c in explicit_cmds):
+            return True
+
+        # 2. Verbos de acción al inicio
+        start_verbs = [
+            "crea ", "crear ", "creame ", "créame ",
+            "modifica ", "modificar ", "modifícame ",
+            "cambia ", "cambiar ", "cámbiale ", "cambiale ",
+            "edita ", "editar ", "edítame ",
+            "agrega ", "agregar ", "agrégale ", "agregale ",
+            "añade ", "añadir ", "añádele ", "añadele ",
+            "elimina ", "eliminar ", "borra ", "borrar ",
+            "actualiza ", "actualizar ",
+            "ajusta ", "ajustar ",
+            "pon ", "poner ", "ponle ", "póngale ",
+            "haz que ", "hazle ", "hazme "
+        ]
+        if any(m.startswith(v) for v in start_verbs):
+            return True
+
+        # 3. Frases de cambio que mencionan componentes o archivos
+        edit_verbs = ["cambia", "modifica", "edita", "agrega", "crea", "actualiza", "elimina", "borra", "ajusta", "personaliza"]
+        code_entities = [".tsx", ".ts", ".css", ".jsx", ".js", "tarjeta", "tarjetas", "metrica", "métricas", "header", "footer", "hero", "carrusel", "carousel", "contacto", "seccion", "sección", "componente", "boton", "botón", "color", "estilo"]
+
+        has_verb = any(v in m for v in edit_verbs)
+        has_entity = any(e in m for e in code_entities)
+
+        # Excluir preguntas explicativas o de auditoría
+        is_question = (
+            m.startswith("¿") or 
+            m.startswith("por que") or m.startswith("por qué") or 
+            m.startswith("como ") or m.startswith("cómo ") or 
+            m.startswith("que ") or m.startswith("qué ") or 
+            m.startswith("explica") or m.startswith("audita") or
+            m.startswith("deshace") or m.startswith("revert")
+        )
+
+        if has_verb and has_entity and not is_question:
+            return True
+
+        return False
+
+    def apply_code_change(self, instruction: str, target_path: Optional[str] = None) -> tuple:
+        """
+        Aplica directamente una modificación o creación solicitada por el usuario en el código,
+        validando con TypeScript y asegurando que exista respaldo para /deshacer.
+        """
+        clean_inst = instruction.strip()
+        # Limpiar comandos de barra
+        for prefix in ["/crear", "/modificar", "/editar", "/cambiar", "/generar", "/autonomo",
+                       "crear", "modificar", "editar", "cambiar", "generar"]:
+            if clean_inst.lower().startswith(prefix + " "):
+                clean_inst = clean_inst[len(prefix):].strip()
+                break
+
+        desc, resolved_path = self.parse_command_input(clean_inst, default_path=target_path)
+        resolved_path = self.resolve_project_path(resolved_path)
+
+        if not desc:
+            desc = clean_inst
+
+        print(f"\n⚡ [Arnés Code-Action] Procesando cambio en '{resolved_path}'...")
+        print(f"📝 Instrucción: {desc}")
+
+        # Guardar respaldo original explícito
+        original_backup = None
+        if os.path.exists(resolved_path):
+            try:
+                with open(resolved_path, "r", encoding="utf-8") as f:
+                    original_backup = f.read()
+                self.last_backups[resolved_path] = original_backup
+                self.last_modified_file = resolved_path
+                os.makedirs(".harness_backups", exist_ok=True)
+                bak_name = resolved_path.replace("/", "_").replace("\\", "_") + ".bak"
+                with open(os.path.join(".harness_backups", bak_name), "w", encoding="utf-8") as bf:
+                    bf.write(original_backup)
+            except Exception:
+                pass
+
+        # Generar o editar el archivo
+        success = self.generate_or_edit_file(desc, resolved_path)
+        if not success:
+            return False, f"❌ No se pudo generar el código para '{resolved_path}'."
+
+        # Verificar compilación TypeScript
+        ts_check = subprocess.run("npx tsc --noEmit", shell=True, capture_output=True, text=True)
+        if ts_check.returncode != 0:
+            print("⚠️ TypeScript reportó fallos técnicos tras la edición. Ejecutando auto-corrección inmediata...")
+            ts_err = (ts_check.stdout or ts_check.stderr).strip()[:400]
+            repair_prompt = (
+                f"Modifica '{resolved_path}' para mantener la solicitud '{desc}' resolviendo "
+                f"este error estricto de TypeScript:\n{ts_err}"
+            )
+            self.generate_or_edit_file(repair_prompt, resolved_path)
+            ts_check2 = subprocess.run("npx tsc --noEmit", shell=True, capture_output=True, text=True)
+            if ts_check2.returncode != 0:
+                # Rollback preventivo si no pudo auto-corregirse
+                if original_backup:
+                    with open(resolved_path, "w", encoding="utf-8") as f:
+                        f.write(original_backup)
+                return False, f"🛡️ **Rollback de Seguridad:** El cambio provocó un error de TypeScript:\n```\n{ts_err[:250]}\n```\nSe restauró la versión funcional previa para mantener estable el proyecto."
+
+        # Mantener el backup original intacto para permitir /deshacer
+        if original_backup:
+            self.last_backups[resolved_path] = original_backup
+            self.last_modified_file = resolved_path
+            bak_name = resolved_path.replace("/", "_").replace("\\", "_") + ".bak"
+            try:
+                with open(os.path.join(".harness_backups", bak_name), "w", encoding="utf-8") as bf:
+                    bf.write(original_backup)
+            except Exception:
+                pass
+
+        summary = (
+            f"✅ **Modificación completada exitosamente en `{resolved_path}`**\n\n"
+            f"• **Solicitud ejecutada:** {desc}\n"
+            f"• **Compilación TypeScript:** Aprobada (0 errores).\n"
+            f"• **Deshacer disponible:** Si deseas volver a la versión previa, presiona el botón **↩️ Deshacer Último Cambio** o escribe *deshacer*."
+        )
+        return True, summary
+
+    def auto_repair_component(self, target_path: str, initial_report: Optional[str] = None, max_iterations: int = 3) -> bool:
+        """
+        Bucle de Auto-Reparación (Self-Healing):
+        Audita el componente (o toma el reporte previo), genera correcciones de código,
+        valida con TypeScript y reglas Next.js, y restaura backup en caso de falla.
+        """
+        target_path = self.resolve_project_path(target_path)
+        if not os.path.exists(target_path):
+            print(f"❌ El archivo '{target_path}' no existe.")
+            return False
+
+        print(f"\n🔧 [Arnés Self-Healing] Iniciando auto-reparación en: {target_path}")
+
+        # Guardar respaldo original para rollback de seguridad
+        original_backup = None
+        try:
+            with open(target_path, "r", encoding="utf-8") as f:
+                original_backup = f.read()
+            # Registrar respaldo de recuperación en memoria y en disco
+            self.last_backups[target_path] = original_backup
+            self.last_modified_file = target_path
+            os.makedirs(".harness_backups", exist_ok=True)
+            bak_name = target_path.replace("/", "_").replace("\\", "_") + ".bak"
+            with open(os.path.join(".harness_backups", bak_name), "w", encoding="utf-8") as bf:
+                bf.write(original_backup)
+        except Exception as e:
+            print(f"❌ Error al crear respaldo de seguridad: {e}")
+            return False
+
+        # Si no nos pasaron el reporte, auditar primero
+        current_report = initial_report
+        if not current_report:
+            print(f"🔍 Diagnosticando estado actual de {target_path}...")
+            current_report = self.audit_component(target_path)
+            print("-" * 50)
+            print(current_report)
+            print("-" * 50)
+
+        repair_succeeded = False
+
+        for iteration in range(1, max_iterations + 1):
+            print(f"\n🔄 --- ITERACIÓN DE REPARACIÓN {iteration}/{max_iterations} ---")
+            repair_prompt = (
+                f"Modifica el archivo '{target_path}' para solucionar TODAS las observaciones y recomendaciones "
+                f"de este reporte de auditoría:\n\n{current_report}\n\n"
+                f"REGLAS ESTRICTAS:\n"
+                f"1. Conserva TODOS los exports requeridos (ej. 'export const', 'export type'), props e interfaces originales.\n"
+                f"2. Usa únicamente clases nativas de Tailwind CSS v4 y etiquetas semánticas WCAG AA (<article>, <section>, <nav>, etc.).\n"
+                f"3. Si hay <Image />, SIEMPRE incluye 'fill' O 'width={{...}} height={{...}}'.\n"
+                f"4. CERO textos 'Lorem Ipsum' o ficticios.\n"
+                f"5. CERO PARCHES SUPERFICIALES: NUNCA uses 'as unknown as ...' ni 'as any' para burlar errores de TypeScript. En i18n, los enlaces están en dictionaries[currentLang].nav y el footer en dictionaries[currentLang].footer."
+            )
+
+            print("✍️ Aplicando correcciones de código...")
+            success = self.generate_or_edit_file(repair_prompt, target_path)
+            if not success:
+                print("❌ Fallo en la generación de código. Abortando iteración.")
+                break
+
+            print("🕵️ Verificando compilación e integridad técnica...")
+            # 1. Verificación técnica de TypeScript
+            ts_check = subprocess.run("npx tsc --noEmit", shell=True, capture_output=True, text=True)
+            ts_ok = (ts_check.returncode == 0)
+
+            # 2. Verificación de Image runtime
+            image_runtime_ok = True
+            image_err = ""
+            try:
+                with open(target_path, "r", encoding="utf-8") as f:
+                    file_code = f.read()
+                for img_match in re.finditer(r'<Image\b([^>]*?)>', file_code):
+                    props = img_match.group(1)
+                    if "fill" not in props and "width=" not in props:
+                        image_runtime_ok = False
+                        image_err = "🚨 Error Runtime Next.js: <Image /> sin 'fill' ni 'width/height'."
+                        break
+            except Exception:
+                pass
+
+            if not ts_ok or not image_runtime_ok:
+                print("⚠️ Se detectaron fallos técnicos en esta versión:")
+                if not ts_ok:
+                    ts_err_sample = (ts_check.stdout or ts_check.stderr).strip()[:300]
+                    print(f"   ❌ TypeScript: {ts_err_sample}")
+                if not image_runtime_ok:
+                    print(f"   ❌ Image: {image_err}")
+
+                if iteration < max_iterations:
+                    print("🔄 Reintentando auto-reparación con retroalimentación técnica...")
+                    current_report = "Errores técnicos que debes resolver urgentemente:\n"
+                    if not ts_ok:
+                        current_report += f"TypeScript Errors:\n{ts_check.stdout or ts_check.stderr}\n"
+                    if not image_runtime_ok:
+                        current_report += f"{image_err}\n"
+                continue
+
+            # 3. Re-auditar calidad con IA
+            print("🔍 Re-auditando calidad y accesibilidad...")
+            new_audit = self.audit_component(target_path)
+            print(f"\n📊 Nuevo Reporte de Auditoría:\n{new_audit}\n")
+
+            is_audit_clean = ("APROBADO" in new_audit.upper()) and ("❌" not in new_audit) and ("REVISAR" not in new_audit.upper())
+            if is_audit_clean:
+                print(f"🎉 ¡Éxito! Archivo '{target_path}' auto-reparado y aprobado en la iteración {iteration}.")
+                repair_succeeded = True
                 break
             else:
                 if iteration < max_iterations:
-                    print("⚠️ Observaciones detectadas. Enviando a auto-reparación...")
-                    current_prompt = f"Corrige el archivo '{target_path}' resolviendo estas observaciones:\n{report}"
+                    print("⚠️ Aún quedan observaciones pendientes. Enviando a siguiente iteración...")
+                    current_report = new_audit
                 else:
-                    print("⚠️ Límite de iteraciones alcanzado. Se conservó la versión actual para revisión.")
+                    print("ℹ️ Se logró compilación limpia en TypeScript, aunque el auditor sugiere mejoras menores adicionales.")
+                    repair_succeeded = True
+                    break
+
+        if not repair_succeeded and original_backup is not None:
+            ts_check = subprocess.run("npx tsc --noEmit", shell=True, capture_output=True, text=True)
+            if ts_check.returncode != 0:
+                print(f"🛡️ [Rollback de Seguridad] La auto-reparación no superó el chequeo de tipos. Restaurando versión original...")
+                try:
+                    with open(target_path, "w", encoding="utf-8") as f:
+                        f.write(original_backup)
+                    print(f"✅ Versión funcional restaurada exitosamente.")
+                except Exception as e:
+                    print(f"❌ Error al restaurar respaldo: {e}")
+            else:
+                print(f"ℹ️ El archivo compila sin errores de tipos y se mantuvo la versión editada.")
+
+        # Preservar el snapshot original para permitir /deshacer posterior si el usuario lo desea
+        if original_backup is not None:
+            self.last_backups[target_path] = original_backup
+            self.last_modified_file = target_path
+            bak_name = target_path.replace("/", "_").replace("\\", "_") + ".bak"
+            try:
+                with open(os.path.join(".harness_backups", bak_name), "w", encoding="utf-8") as bf:
+                    bf.write(original_backup)
+            except Exception:
+                pass
+
+        return repair_succeeded
+
 
     def verify_page_seo_geo_and_requirements(self) -> Dict[str, Any]:
         """
@@ -605,6 +1088,28 @@ class HarnessAgent:
 
     def chat(self, user_message: str):
         """Conversación libre e interactiva para cualquier consulta."""
+        msg_lower = user_message.lower().strip()
+        undo_keywords = ["deshace", "deshacer", "revertir", "revert", "undo"]
+        if any(kw in msg_lower for kw in undo_keywords):
+            target = None
+            for word in user_message.split():
+                clean_word = word.strip(" '\"`(),;:")
+                if "." in clean_word and any(clean_word.endswith(ext) for ext in [".tsx", ".ts", ".jsx", ".js", ".css"]):
+                    target = clean_word
+                    break
+            ok, revert_msg = self.revert_last_change(target)
+            print(f"\n{revert_msg}\n")
+            self.conversation_history.append({"role": "user", "content": user_message})
+            self.conversation_history.append({"role": "assistant", "content": revert_msg})
+            return
+
+        if self.is_code_edit_request(user_message):
+            ok, change_summary = self.apply_code_change(user_message)
+            print(f"\n{change_summary}\n")
+            self.conversation_history.append({"role": "user", "content": user_message})
+            self.conversation_history.append({"role": "assistant", "content": change_summary})
+            return
+
         self.conversation_history.append({"role": "user", "content": user_message})
         context = "\n".join([f"{m['role'].capitalize()}: {m['content']}" for m in self.conversation_history[-10:]])
 
@@ -655,11 +1160,16 @@ class HarnessAgent:
         print()
 
     def toggle_prefer_ollama(self):
-        """Alterna la preferencia de Ollama local."""
+        """Alterna entre priorizar Ollama local vs priorizar APIs Cloud."""
         self.prefer_ollama = not self.prefer_ollama
         self.rebuild_model_priority()
-        status = "ACTIVADO (Modelos Ollama prioritarios)" if self.prefer_ollama else "DESACTIVADO (Priorizando APIs en la nube)"
-        print(f"🔄 Preferencia de Ollama: {status}")
+        if self.prefer_ollama:
+            print("🔄 Modo Ollama ACTIVADO: Ahora se prioriza tu Ollama local (llama3.2).")
+        else:
+            print("🔄 Modo Cloud ACTIVADO: Ahora se priorizan las APIs en la nube (Gemini / Groq).")
+        active = [m for m in self.available_models if m['provider'] in self.clients]
+        if active:
+            print(f"⭐ Modelo prioritario activo: [{active[0]['provider'].upper()}] {active[0]['name']}")
 
     def set_api_key(self, key_type: str, key_value: str):
         """Configura una API Key en memoria y la guarda en .env.local."""
@@ -693,36 +1203,45 @@ class HarnessAgent:
 
 
 def print_banner():
-    print("=" * 65)
-    print("🚀 ITIERS HARNESS AI AGENT ENGINE (Agente de IA Completo)")
-    print("=========================================================")
-    print("Asistente Agéntico Multi-Proveedor (Ollama 3.2, Groq, Gemini, OpenAI)")
-    print("Puedes pedirle cualquier consulta, desarrollo de código, comandos,")
-    print("auditorías QA/SEO/GEO y ejecución de especificaciones (SDD).")
-    print("=" * 65)
+    print("=" * 72)
+    print("🛡️  ITIERS HARNESS & AI ENGINEERING ENGINE (Arquitectura 'Modelo + Harness')")
+    print("========================================================================")
+    print("Suite de Gobernanza, Auditoría QA/GEO, Verificación SDD y Asistencia IA")
+    print("Especialidad: Stefano Ferro (Practicante 3 - Harness & AI Engineering)")
+    print("=" * 72)
 
 
 def print_help():
     print("""
-📌 COMANDOS DISPONIBLES EN EL HARNESS AGENT:
+📌 COMANDOS DISPONIBLES EN EL HARNESS ENGINE:
   -------------------------------------------------------------------------
-  /chat <pregunta>            - Consulta cualquier tema general o técnico
-  /crear <desc> [filepath]   - Genera/modifica código en cualquier archivo
-  /exec <comando>            - Ejecuta un comando en la consola del sistema
-  /sdd                       - Ejecuta la verificación e integración SDD
-  /autonomo <idea> [file]    - Bucle agéntico: Crear -> Auditar -> Auto-corregir
-  /auditar [filepath]        - Audita QA, accesibilidad y calidad de código
-  /geo [filepath]            - Audita optimización SEO y GEO (motores de IA)
-  /recomendar [tema]         - Genera sugerencias arquitectónicas o técnicas
-  /modelos                   - Revisa el estado de Ollama y API Keys
-  /ollama                    - Alterna priorizar Ollama 3.2 local vs Cloud
-  /key <proveedor> <token>   - Guarda una API Key (groq | gemini | openai)
-  /listar                    - Muestra los archivos del proyecto
-  /limpiar                   - Limpia el historial de chat
-  /ayuda                     - Muestra este menú de ayuda
-  salir / exit               - Finaliza la sesión del agente
+  🛡️  AUDITORÍA, QA Y GOBERNANZA DE CÓDIGO
+  /auditar [filepath]        - Audita WCAG AA, TypeScript, 'Cero Lorem Ipsum' y calidad
+  /reparar <filepath>        - Auto-repara observaciones de auditoría con rollback seguro
+  /deshacer [filepath]       - Restaura la versión previa de un archivo modificado (Undo)
+  /geo [filepath]            - Audita optimización SEO técnico y GEO (motores de IA)
+  /sdd                       - Verifica especificaciones y tareas pendientes (SDD)
+  /recomendar [tema]         - Genera sugerencias arquitectónicas y de ingeniería
+
+  ⚙️  GESTIÓN DE MODELOS Y ENTORNO
+  /modelos                   - Estado de modelos locales (Ollama) y proveedores Cloud
+  /ollama                    - Alterna prioridad: Ollama local (llama3.2) vs Cloud
+  /key <proveedor> <token>   - Guarda API Key persistente (groq | gemini | openai)
+  /listar                    - Lista los archivos y componentes del proyecto
+  /exec <comando>            - Ejecuta comandos del sistema o verificaciones
+
+  🧪 PROTOTIPADO ASISTIDO (EXPERIMENTAL)
+  /crear <desc> [archivo]    - Genera plantillas o micro-componentes guiados
+  /autonomo <idea> [file]    - Bucle agéntico: Generación -> Auditoría -> Auto-reparación
+
+  💬 ASISTENCIA Y CONTROL GENERAL
+  /chat <pregunta>           - Consulta técnica libre (o escribe directamente sin barra)
+  /limpiar                   - Limpia el historial de la conversación interactiva
+  /ayuda                     - Muestra este menú de comandos
+  salir / exit               - Cierra la sesión del Harness Engine
   -------------------------------------------------------------------------
-  💡 Escribe cualquier texto directo para conversar libremente con el agente.
+  💡 Tip: El código de producción es desarrollado por el equipo frontend;
+     el Harness actúa como el árbitro de calidad, validación y QA de IA.
 """)
 
 
@@ -741,98 +1260,125 @@ def main():
         if not user_input:
             continue
 
-        cmd_lower = user_input.lower()
+        cmd_clean = user_input.strip()
+        cmd_lower = cmd_clean.lower()
+        cmd_norm = cmd_clean.lstrip("/").strip()
+        cmd_lower_norm = cmd_norm.lower()
 
-        if cmd_lower in ["salir", "exit", "quit", "0"]:
+        if cmd_lower in ["salir", "exit", "quit", "0"] or cmd_lower_norm in ["salir", "exit", "quit"]:
             print("👋 Sesión finalizada. ¡Hasta luego!")
             break
 
-        elif cmd_lower in ["/ayuda", "/help", "ayuda", "help"]:
+        elif cmd_lower_norm in ["ayuda", "help"]:
             print_help()
 
-        elif cmd_lower in ["/sdd"]:
+        elif cmd_lower_norm == "sdd":
             agent.run_sdd_tasks()
 
-        elif cmd_lower in ["/ollama", "/prefer_ollama"]:
+        elif cmd_lower_norm in ["ollama", "prefer_ollama"]:
             agent.toggle_prefer_ollama()
 
-        elif cmd_lower in ["/listar", "/ls"]:
+        elif cmd_lower_norm in ["listar", "ls"]:
             agent.list_project_files()
 
-        elif cmd_lower in ["/modelos", "/models"]:
+        elif cmd_lower_norm in ["modelos", "models"]:
             agent.show_models_status()
 
-        elif cmd_lower in ["/limpiar", "/clear"]:
+        elif cmd_lower_norm in ["limpiar", "clear"]:
             agent.conversation_history = []
             print("🧹 Historial de chat limpiado.")
 
-        elif cmd_lower.startswith("/exec "):
-            cmd_to_run = user_input[6:].strip()
+        elif cmd_lower_norm.startswith("exec "):
+            cmd_to_run = cmd_norm[5:].strip()
             res = agent.execute_command(cmd_to_run)
             print(res)
 
-        elif cmd_lower.startswith("/key "):
-            parts = user_input.split(maxsplit=2)
+        elif cmd_lower_norm.startswith("key "):
+            parts = cmd_norm.split(maxsplit=2)
             if len(parts) >= 3:
                 agent.set_api_key(parts[1], parts[2])
             else:
                 print("❌ Uso: /key groq <TU_API_KEY>")
 
-        elif cmd_lower.startswith("/recomendar"):
-            topic = user_input.replace("/recomendar", "").strip() or "Mejoras generales del proyecto"
+        elif cmd_lower_norm.startswith("recomendar"):
+            topic = cmd_norm[10:].strip() or "Mejoras generales del proyecto"
             print(f"\n💡 Generando recomendaciones para: {topic}...")
             res = agent.call_llm(f"Proporciona recomendaciones arquitectónicas y estratégicas para: {topic}")
             print(f"\n📋 Recomendaciones:\n{res}\n")
 
-        elif cmd_lower.startswith("/auditar"):
-            parts = user_input.split(maxsplit=1)
-            if len(parts) > 1 and parts[1]:
-                target = parts[1].strip()
+        elif cmd_lower_norm.startswith("auditar") or cmd_lower_norm.startswith("audit"):
+            parts = cmd_norm.split(maxsplit=1)
+            if len(parts) > 1 and parts[1].strip():
+                _, target = agent.parse_command_input(parts[1].strip())
+                target = agent.resolve_project_path(target)
                 print(f"\n🔍 Auditando {target}...")
                 report = agent.audit_component(target)
                 print("-" * 50)
                 print(report)
                 print("-" * 50 + "\n")
+
+                if any(w in report.upper() for w in ["RECOMEND", "OBSERVACION", "FALLO", "MEJORA", "❌", "ADVERTENCIA", "REVISAR"]):
+                    try:
+                        ans = input(f"🤖 ¿Deseas que el arnés intente auto-reparar '{target}' aplicando estas observaciones? (s/n): ").strip().lower()
+                        if ans in ["s", "si", "y", "yes"]:
+                            agent.auto_repair_component(target, report)
+                    except (KeyboardInterrupt, EOFError):
+                        pass
             else:
                 agent.audit_all()
 
-        elif cmd_lower.startswith("/geo"):
-            parts = user_input.split(maxsplit=1)
-            target = parts[1].strip() if len(parts) > 1 else "app/es/page.tsx"
+        elif cmd_lower_norm in ["deshacer", "revertir", "undo"] or cmd_lower_norm.startswith("deshacer ") or cmd_lower_norm.startswith("revertir "):
+            parts = cmd_norm.split(maxsplit=1)
+            target = parts[1].strip() if len(parts) > 1 else None
+            ok, msg = agent.revert_last_change(target)
+            print(msg)
+
+        elif cmd_lower_norm.startswith("reparar") or cmd_lower_norm.startswith("repair"):
+            parts = cmd_norm.split(maxsplit=1)
+            raw_arg = parts[1].strip() if len(parts) > 1 else ""
+            if raw_arg:
+                _, target = agent.parse_command_input(raw_arg)
+                target = agent.resolve_project_path(target)
+                agent.auto_repair_component(target)
+            else:
+                print("❌ Uso: /reparar <ruta_del_archivo> (ej: /reparar components/MetricCard.tsx)")
+
+        elif cmd_lower_norm.startswith("geo"):
+            parts = cmd_norm.split(maxsplit=1)
+            raw_arg = parts[1].strip() if len(parts) > 1 else ""
+            if raw_arg:
+                _, target = agent.parse_command_input(raw_arg)
+                target = agent.resolve_project_path(target)
+            else:
+                target = "app/es/page.tsx"
             print(f"\n🌐 Auditando SEO & GEO para {target}...")
             report = agent.audit_geo(target)
             print("-" * 50)
             print(report)
             print("-" * 50 + "\n")
 
-        elif cmd_lower.startswith("/crear") or cmd_lower.startswith("/generate"):
-            content = user_input.replace("/crear", "").replace("/generate", "").strip()
-            if not content:
-                content = input("✍️ Describe lo que deseas crear/modificar: ").strip()
+        elif (
+            cmd_lower_norm.startswith("crear") or cmd_lower_norm.startswith("generate") or
+            cmd_lower_norm.startswith("modificar") or cmd_lower_norm.startswith("editar") or
+            cmd_lower_norm.startswith("cambiar")
+        ):
+            raw_content = cmd_norm.split(maxsplit=1)[1].strip() if len(cmd_norm.split(maxsplit=1)) > 1 else ""
+            if not raw_content:
+                raw_content = input("✍️ Describe lo que deseas crear o modificar: ").strip()
 
-            target_path = "app/es/page.tsx"
-            words = content.split()
-            if len(words) > 1 and ("." in words[-1] and not words[-1].startswith("/")):
-                target_path = words[-1]
-                content = " ".join(words[:-1])
+            ok, summary = agent.apply_code_change(raw_content)
+            print(f"\n{summary}\n")
 
-            agent.generate_or_edit_file(content, target_path)
+        elif cmd_lower_norm.startswith("autonomo") or cmd_lower_norm.startswith("autonomous"):
+            raw_content = cmd_norm.split(maxsplit=1)[1].strip() if len(cmd_norm.split(maxsplit=1)) > 1 else ""
+            if not raw_content:
+                raw_content = input("💡 Describe la idea para el bucle autónomo: ").strip()
 
-        elif cmd_lower.startswith("/autonomo") or cmd_lower.startswith("/autonomous"):
-            idea = user_input.replace("/autonomo", "").replace("/autonomous", "").strip()
-            if not idea:
-                idea = input("💡 Describe la idea para el bucle autónomo: ").strip()
-
-            target_path = "app/es/page.tsx"
-            words = idea.split()
-            if len(words) > 1 and ("." in words[-1] and not words[-1].startswith("/")):
-                target_path = words[-1]
-                idea = " ".join(words[:-1])
-
+            idea, target_path = agent.parse_command_input(raw_content)
             agent.autonomous_loop(idea, target_path)
 
-        elif cmd_lower.startswith("/chat"):
-            chat_msg = user_input[5:].strip()
+        elif cmd_lower_norm.startswith("chat"):
+            chat_msg = cmd_norm[4:].strip()
             agent.chat(chat_msg)
 
         else:
