@@ -31,9 +31,10 @@ El proyecto fue desarrollado de manera colaborativa integrando tres áreas de es
    * Accesibilidad universal (WCAG AA), navegación por teclado y optimización de Core Web Vitals.
 
 3. **Practicante 3 — Harness & AI Engineering**: **Stefano Ferro**  
-   * Diseño e integración del motor **AI Harness Engine** en Python (`harness_engine.py`, `sdd_harness.py`, `harness_qa.py`, `recommender_harness.py`).
+   * Diseño e integración del motor **AI Harness Engine** y **Desktop Copilot** en Python (`itiers_copilot.py`, `harness_engine.py`, `sdd_harness.py`, `harness_qa.py`, `recommender_harness.py`).
    * Implementación de Guardrails con esquemas Zod (`lib/harness/guardrails.ts`) para validación de datos de entrada, canalización a WhatsApp y feedback.
    * Automatización del ciclo de desarrollo con suites de verificación y desarrollo guiado por especificaciones (SDD).
+   * Creación del [Manual de Usuario del Harness](MANUAL-USUARIO-HARNESS.md) con guías paso a paso para la suite de control y auditoría.
 
 ---
 
@@ -47,9 +48,11 @@ El proyecto fue desarrollado de manera colaborativa integrando tres áreas de es
 * **Renderizado Markdown**: `react-markdown` para contenido dinámico de respuestas del asistente.
 
 ### AI Engineering & Harness
-* **AI Harness Engine**: Motor Python desacoplado (`harness_engine.py`) con soporte multimodelo (Google Gemini, OpenAI, Groq, Ollama 3.2 local, OpenRouter).
+* **AI Harness Engine**: Motor Python desacoplado (`harness_engine.py`) con soporte multimodelo en cascada (Google Gemini 3.5 Flash, Groq, OpenAI, Ollama 3.2 local offline y OpenRouter).
+* **Itiers AI Copilot & Desktop UI**: Aplicación de escritorio y servidor web local (`itiers_copilot.py` / `Iniciar-Itiers-Copilot.bat`) con dashboard interactivo, auditorías de accesibilidad WCAG AA en tiempo real, auto-reparación asistida y sistema de reversión inmediata (Undo).
 * **SDD Harness**: Pipeline de validación de tareas frente a especificaciones técnicas (`specs/`).
-* **Chatbot Asistente**: Componente interactivo integrado para consultas corporativas y recomendación de servicios.
+* **Chatbot Asistente**: Componente interactivo integrado en la web para consultas corporativas y recomendación de servicios.
+* **Manual de Usuario Dedicado**: Documentación operativa completa en [MANUAL-USUARIO-HARNESS.md](MANUAL-USUARIO-HARNESS.md).
 
 ### Infraestructura & Despliegue
 * **Alojamiento y CI/CD**: [Vercel](https://vercel.com/) con despliegue continuo en la rama `main`.
@@ -109,13 +112,18 @@ itiers-web/
 │   ├── verify-harness.js       # Script Node.js de validación estricta y auditoría
 │   └── verify-harness.sh       # Runner bash para integración en CI/CD
 ├── harness_engine.py           # Motor central del AI Harness Agent
+├── itiers_copilot.py           # Servidor local y aplicación web/escritorio de Itiers Copilot
+├── Iniciar-Itiers-Copilot.bat  # Acceso directo para iniciar Copilot en Windows
+├── Iniciar-Itiers-Copilot.vbs  # Lanzador silencioso en segundo plano para Windows
 ├── harness_qa.py               # Runner de preguntas y respuestas automatizadas
 ├── sdd_harness.py              # Validador de tareas SDD previas al build
 ├── recommender_harness.py      # Motor de recomendación inteligente de servicios
+├── requirements.txt            # Dependencias de Python para la suite de IA
 ├── public/                     # Recursos estáticos (logos, isotipos, favicon)
 ├── package.json                # Dependencias, metadatos y scripts npm
 ├── tsconfig.json               # Configuración de compilación TypeScript estricta
 ├── next.config.ts              # Parámetros y optimizaciones de Next.js
+├── MANUAL-USUARIO-HARNESS.md   # Manual de usuario y guía operativa del AI Harness
 └── README.md                   # Documentación principal del repositorio
 ```
 
@@ -182,18 +190,35 @@ El desarrollo adhiere de forma obligatoria a los siguientes estándares de calid
    cd itiers-web
    ```
 
-2. **Instalar dependencias del proyecto:**
+2. **Instalar dependencias del frontend (Node.js):**
    ```bash
    npm install
    ```
 
-3. **Iniciar el servidor de desarrollo:**
+3. **(Recomendado) Instalar dependencias del AI Harness (Python):**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configurar variables de entorno:**
+   Copia el archivo `.env.local.example` como `.env.local` y define tu clave de IA (`GEMINI_API_KEY`, `GROQ_API_KEY` o usa Ollama local sin clave):
+   ```bash
+   cp .env.local.example .env.local
+   ```
+
+5. **Iniciar el servidor web de desarrollo:**
    ```bash
    npm run dev
    ```
+   Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-4. **Acceder a la aplicación:**
-   Abre tu navegador e ingresa a [http://localhost:3000](http://localhost:3000).
+6. **Iniciar Itiers AI Copilot (Suite de Escritorio):**
+   ```bash
+   npm run copilot
+   ```
+   *(O haz doble clic en `Iniciar-Itiers-Copilot.bat` en Windows. Abrirá automáticamente el dashboard en [http://localhost:8765](http://localhost:8765)).*
+
+> 📖 Para una guía detallada paso a paso sobre el uso del arnés, auditorías QA y comandos CLI, consulta el [Manual de Usuario del Harness](MANUAL-USUARIO-HARNESS.md).
 
 ---
 
@@ -208,8 +233,9 @@ El proyecto cuenta con un conjunto de comandos configurados en `package.json`:
 | `npm run start` | Levanta el servidor de producción compilado localmente. |
 | `npm run lint` | Ejecuta el análisis estático de código con ESLint. |
 | `npm run verify:harness` | Ejecuta la suite de verificación estricta: chequeo de tipos TypeScript (`tsc --noEmit`), escaneo de ausencia de Lorem Ipsum y validación de esquemas Zod. |
+| `npm run copilot` | Inicia la aplicación de escritorio y servidor web interactivo de Itiers AI Copilot en `http://localhost:8765`. |
 | `npm run harness:sdd` | Ejecuta la verificación de tareas de desarrollo guiado por especificaciones con Python. |
-| `npm run harness:qa` | Ejecuta la suite de preguntas y respuestas automatizadas del agente Harness. |
+| `npm run harness:qa` | Ejecuta la suite de preguntas y respuestas automatizadas y auditoría de accesibilidad. |
 | `npm run harness:recommender` | Ejecuta el módulo de recomendación inteligente de servicios de Itiers. |
 
 ---
