@@ -44,7 +44,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ currentLang, theme }
             </div>
           </div>
 
-          <div className="lg:col-span-6 relative w-full max-w-[550px] mx-auto flex justify-center">
+          <div className="lg:col-span-6 relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] mx-auto flex justify-center">
             <Image
               src="/imagen-2da-seccion.png"
               alt="Itiers Data Sense Overview"
