@@ -12,14 +12,16 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  const acceptLanguage = request.headers.get('accept-language')?.toLowerCase() || '';
+
+  const isSpanish = acceptLanguage.startsWith('es') || acceptLanguage.includes('es-') || !acceptLanguage.startsWith('en');
+  const targetLang = isSpanish ? 'es' : 'en';
+
   const response = NextResponse.next();
-
-  const acceptLanguage = request.headers.get('accept-language');
-  const browserLang = acceptLanguage && acceptLanguage.toLowerCase().includes('en') ? 'en' : 'es';
-
   const currentCookie = request.cookies.get('itiers_lang')?.value;
-  if (!currentCookie) {
-    response.cookies.set('itiers_lang', browserLang, { path: '/', maxAge: 31536000 });
+
+  if (currentCookie !== targetLang) {
+    response.cookies.set('itiers_lang', targetLang, { path: '/' });
   }
 
   return response;

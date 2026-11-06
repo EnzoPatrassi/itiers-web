@@ -6,4 +6,3 @@ echo   Iniciando Itiers AI Copilot (Ventana de Escritorio)
 echo ===================================================
 python itiers_copilot.py
 pause
-

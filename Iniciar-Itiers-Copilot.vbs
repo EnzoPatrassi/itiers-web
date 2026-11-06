@@ -6,7 +6,6 @@ Set WshShell = CreateObject("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")
 strPath = fso.GetParentFolderName(WScript.ScriptFullName)
 
-' Cambiar al directorio del proyecto y ejecutar pythonw (sin ventana de consola)
+' Cambiar al directorio del proyecto y ejecutar pythonw
 WshShell.CurrentDirectory = strPath
 WshShell.Run "pythonw.exe itiers_copilot.py", 0, False
-

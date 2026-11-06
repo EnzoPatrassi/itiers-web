@@ -1,256 +1,184 @@
-# Itiers Data Sense — Plataforma Web Corporativa & AI Harness 🚀
+# Itiers — Nueva Página Web Corporativa
 
-[![Next.js 16](https://img.shields.io/badge/Next.js-16.3.4-black?logo=next.js)](https://nextjs.org/)
-[![React 19](https://img.shields.io/badge/React-19.2.8-blue?logo=react)](https://react.dev/)
-[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Zod Guardrails](https://img.shields.io/badge/Validation-Zod_4.x-3068b7)](https://zod.dev/)
-[![WCAG AA](https://img.shields.io/badge/Accessibility-WCAG_AA-green)](#-accesibilidad-wcag-aa-y-performance)
-[![Deploy with Vercel](https://img.shields.io/badge/Deployment-Vercel-black?logo=vercel)](https://vercel.com/)
+¡Bienvenido al repositorio oficial del proyecto de desarrollo de la nueva página web corporativa de **Itiers**! 
 
-Bienvenido al repositorio oficial de la plataforma web corporativa de **Itiers Data Sense**.
+Itiers es una consultora tecnológica especializada con 20 años de trayectoria, dedicada a transformar información cruda en inteligencia estratégica. Nos posicionamos como el puente entre estructuras de datos complejas y la gestión organizacional efectiva, sirviendo a clientes en toda América (con oficinas físicas en Argentina, Chile y Estados Unidos) a través de un modelo de servicio integral que abarca desde productos de datos a medida, gestión de proyectos y staffing profesional, hasta capacitación especializada en tecnologías avanzadas e Inteligencia Artificial Generativa con IBM Watsonx.
 
-**Itiers Data Sense** es una consultora tecnológica con más de 20 años de trayectoria dedicada a transformar el caos de datos en decisiones estratégicas de alto impacto. Brindamos acompañamiento 100% personalizado para desbloquear el valor de la información en toda América, con sedes corporativas en **Mendoza (Argentina)**, **Santiago (Chile)** y **Delaware (Estados Unidos)**.
-
-Este desarrollo integra una interfaz web bilingüe moderna y accesible (WCAG AA), arquitectura de datos desacoplada, marcado semántico JSON-LD para SEO/GEO y un motor **AI Harness Engine** basado en el principio *"Agente = Modelo + Harness"*, desarrollado bajo la metodología de **Desarrollo Guiado por Especificaciones (Specification-Driven Development - SDD)**.
+Este proyecto web está diseñado e implementado por nuestro equipo de 3 practicantes a lo largo de un programa de entrenamiento e integración estructurado de 10 semanas (del 18 de agosto al 27 de octubre de 2026), combinando desarrollo moderno de alto rendimiento, diseño responsivo y optimizaciones de vanguardia para motores de búsqueda tradicionales y basados en IA.
 
 ---
 
-## 👥 Estructura del Equipo y Especialidades
+## Estructura del Equipo y Roles
 
-El proyecto fue desarrollado de manera colaborativa integrando tres áreas de especialidad técnica:
+El desarrollo del proyecto se divide en tres áreas de especialidad que colaboran de manera estrecha:
 
 1. **Practicante 1 — Contenido, SEO & GEO**: **Martín Tomás**  
-   * Arquitectura de la información, redacción técnica y comercial bajo el estándar *"answer-first"*.
-   * Optimización para motores de búsqueda tradicionales (SEO) y motores generativos de IA (Generative Engine Optimization - GEO).
-   * Generación de esquemas de datos estructurados JSON-LD (`ProfessionalService`, sedes multirregionales).
-
+   * *Responsabilidad:* Arquitectura de la información, redacción técnica y comercial bajo el enfoque *"answer-first"*, y optimización tanto para motores de búsqueda tradicionales (SEO) como para generadores de respuesta y agentes de IA (Generative Engine Optimization - GEO).
 2. **Practicante 2 — Desarrollo Web & UX/UI**: **Enzo Patrassi**  
-   * Implementación de la arquitectura frontend con Next.js 16 (App Router) y React 19.
-   * Sistema de diseño responsive y fluido con Tailwind CSS v4, tipografías corporativas (*Comfortaa* y *Nunito*) y modo claro/oscuro.
-   * Accesibilidad universal (WCAG AA), navegación por teclado y optimización de Core Web Vitals.
-
+   * *Responsabilidad:* Implementación del código frontend interactivo, diseño UX/UI accesible (WCAG AA), responsividad multidispositivo, optimización del rendimiento web (Core Web Vitals) y automatización del pipeline de despliegue continuo.
 3. **Practicante 3 — Harness & AI Engineering**: **Stefano Ferro**  
-   * Diseño e integración del motor **AI Harness Engine** y **Desktop Copilot** en Python (`itiers_copilot.py`, `harness_engine.py`, `sdd_harness.py`, `harness_qa.py`, `recommender_harness.py`).
-   * Implementación de Guardrails con esquemas Zod (`lib/harness/guardrails.ts`) para validación de datos de entrada, canalización a WhatsApp y feedback.
-   * Automatización del ciclo de desarrollo con suites de verificación y desarrollo guiado por especificaciones (SDD).
-   * Creación del [Manual de Usuario del Harness](MANUAL-USUARIO-HARNESS.md) con guías paso a paso para la suite de control y auditoría.
+   * *Responsabilidad:* Diseño y desarrollo de los agentes inteligentes que interactúan con la web o aportan valor a los procesos de Itiers bajo la premisa "Agente = Modelo + Harness".
 
 ---
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico Seleccionado
 
-### Frontend & Core
-* **Framework**: [Next.js 16 (App Router)](https://nextjs.org/) con React 19 y TypeScript 5 en modo estricto.
-* **Estilos**: [Tailwind CSS v4](https://tailwindcss.com/) con motor CSS `@theme`, soporte completo de variables corporativas (naranja `#ff4f00`, grises de marca) y paleta para modo oscuro (`dark mode`).
-* **Tipografías**: Google Fonts integradas (`Comfortaa` para títulos y logomarca, `Nunito` para textos de interfaz).
-* **Validación**: [Zod 4](https://zod.dev/) para guardrails de seguridad y tipado en tiempo de ejecución.
-* **Renderizado Markdown**: `react-markdown` para contenido dinámico de respuestas del asistente.
-
-### AI Engineering & Harness
-* **AI Harness Engine**: Motor Python desacoplado (`harness_engine.py`) con soporte multimodelo en cascada (Google Gemini 3.5 Flash, Groq, OpenAI, Ollama 3.2 local offline y OpenRouter).
-* **Itiers AI Copilot & Desktop UI**: Aplicación de escritorio y servidor web local (`itiers_copilot.py` / `Iniciar-Itiers-Copilot.bat`) con dashboard interactivo, auditorías de accesibilidad WCAG AA en tiempo real, auto-reparación asistida y sistema de reversión inmediata (Undo).
-* **SDD Harness**: Pipeline de validación de tareas frente a especificaciones técnicas (`specs/`).
-* **Chatbot Asistente**: Componente interactivo integrado en la web para consultas corporativas y recomendación de servicios.
-* **Manual de Usuario Dedicado**: Documentación operativa completa en [MANUAL-USUARIO-HARNESS.md](MANUAL-USUARIO-HARNESS.md).
-
-### Infraestructura & Despliegue
-* **Alojamiento y CI/CD**: [Vercel](https://vercel.com/) con despliegue continuo en la rama `main`.
-* **Auditoría & Calidad**: Suite de verificación propia (`scripts/verify-harness.js`) para compilación estricta, comprobación de esquemas Zod y regla estricta de *Cero Lorem Ipsum*.
+* **Framework Frontend**: [Next.js 16](https://nextjs.org/) (React 19 framework optimizado con TypeScript 5)
+* **Estilos y Animaciones**: [Tailwind CSS v4](https://tailwindcss.com/) (motor nativo para desarrollo responsivo rápido e interacciones fluidas)
+* **Validación y Guardrails**: [Zod](https://zod.dev/) (esquemas estrictos para runtime safety)
+* **Hosting y Despliegue Continuo (CI/CD)**: [Vercel](https://vercel.com/) (sincronizado con nuestra rama principal)
+* **Control de Versiones y Repositorio**: Git & GitHub
 
 ---
 
-## 📁 Arquitectura del Proyecto (Estructura de Directorios)
+## Arquitectura del Proyecto (Estructura de Directorios)
 
 ```text
 itiers-web/
-├── app/                        # Rutas y páginas de la aplicación (Next.js App Router)
-│   ├── es/                     # Experiencia principal localizada en español
-│   │   ├── layout.tsx          # Metadatos específicos y estructura de la landing
-│   │   └── page.tsx            # Landing Page interactiva modular de Itiers
-│   ├── servicios/              # Ruta dedicada para el catálogo de servicios
-│   │   └── page.tsx            # Vista de servicios con ServiceCard accesible
-│   ├── globals.css             # Estilos globales, variables de color y tokens Tailwind v4
-│   ├── layout.tsx              # Root Layout, tipografías (Comfortaa/Nunito) y JSON-LD
-│   ├── page.tsx                # Redirección inicial hacia /es
-│   ├── robots.ts               # Configuración dinámica de indexación y agentes de IA
-│   └── sitemap.ts              # Sitemap XML dinámico multilingüe
-├── components/                 # Componentes modulares reutilizables (WCAG AA)
-│   ├── Header.tsx              # Barra de navegación, cambio de idioma (ES/EN) y tema
-│   ├── Hero.tsx                # Sección principal con propuesta de valor y CTAs
-│   ├── IntroSection.tsx        # Presentación institucional "Data Sense"
-│   ├── DataAISection.tsx       # Sector infográfico y ciclo de madurez de datos
-│   ├── Services.tsx            # Grid interactivo de las 3 líneas de servicio
-│   ├── ServiceCard.tsx         # Tarjeta semántica accesible para servicios (<article>)
-│   ├── TechnologySection.tsx   # Carrusel visual de tecnologías y plataformas
-│   ├── ImpactCounters.tsx      # Indicadores de trayectoria y proyectos
-│   ├── Testimonials.tsx        # Sección de testimonios y validación comercial
-│   ├── ClientLogos.tsx         # Muestra de clientes y sectores atendidos
-│   ├── ValueProposition.tsx    # Pilares corporativos y filosofía de trabajo
-│   ├── TeamSection.tsx         # Equipo profesional y cultura Itiers
-│   ├── TeamCarousel.tsx        # Carrusel visual de integrantes y roles
-│   ├── ContactSection.tsx      # Formulario de contacto con validación de datos
-│   ├── CareersSection.tsx      # Sección de talento y enlace "Trabajá con nosotros"
-│   ├── CTASection.tsx          # Bloques de llamada a la acción
-│   ├── CtaBanner.tsx           # Banners de conversión hacia WhatsApp y contacto
-│   ├── Chatbot.tsx             # Asistente virtual corporativo interactivo
-│   ├── JsonLd.tsx              # Inyección de Schema.org ProfessionalService
-│   └── Footer.tsx              # Pie de página con información de sedes y contacto
-├── data/                       # Contenidos y localización desacoplados del código
-│   ├── i18n.ts                 # Diccionario completo bilingüe (ES / EN) y tipos
-│   └── mockData.ts             # Almacén de sedes, servicios, testimonios y enlaces
+├── app/                    # Rutas y páginas de la aplicación (App Router de Next.js)
+│   ├── es/                 # Landing page principal corporativa (Español)
+│   ├── servicios/          # Catálogo detallado de las 4 verticales de negocio
+│   ├── layout.tsx          # Estructura e inyección global (con metadatos SEO)
+│   └── page.tsx            # Redirección regional automática
+├── components/             # Componentes modulares reutilizables
+│   ├── Header.tsx          # Navegación y selector de idioma/tema
+│   ├── Hero.tsx            # Portada principal con llamadas a la acción
+│   ├── Chatbot.tsx         # Integración interactiva de WhatsApp con guardrails
+│   ├── Footer.tsx          # Pie de página corporativo bilingüe y sedes
+│   └── ...                 # Componentes visuales adicionales (MetricCard, Services, etc.)
+├── data/                   # Información corporativa y diccionarios i18n
+│   ├── i18n.ts             # Diccionarios bilingües (Español / Inglés)
+│   └── mockData.ts         # Datos estáticos oficiales de Itiers Data Sense
 ├── lib/
-│   └── harness/                # Capa de seguridad y contratos de datos
-│       └── guardrails.ts       # Esquemas de validación Zod (Leads, WhatsApp, JSON-LD)
-├── specs/                      # Fuente única de verdad (Specification-Driven Development)
-│   ├── requirements.md         # Requerimientos funcionales y de contenido
-│   ├── design.md               # Sistema de diseño, contrastes y tokens de marca
-│   ├── i18n.md                 # Matriz de traducción y paridad lingüística
-│   ├── tasks.md                # Lista de tareas y progreso del desarrollo
-│   └── history.md              # Registro cronológico de iteraciones e hitos
-├── scripts/                    # Scripts de soporte y auditoría del sistema
-│   ├── verify-harness.js       # Script Node.js de validación estricta y auditoría
-│   └── verify-harness.sh       # Runner bash para integración en CI/CD
-├── harness_engine.py           # Motor central del AI Harness Agent
-├── itiers_copilot.py           # Servidor local y aplicación web/escritorio de Itiers Copilot
-├── Iniciar-Itiers-Copilot.bat  # Acceso directo para iniciar Copilot en Windows
-├── Iniciar-Itiers-Copilot.vbs  # Lanzador silencioso en segundo plano para Windows
-├── harness_qa.py               # Runner de preguntas y respuestas automatizadas
-├── sdd_harness.py              # Validador de tareas SDD previas al build
-├── recommender_harness.py      # Motor de recomendación inteligente de servicios
-├── requirements.txt            # Dependencias de Python para la suite de IA
-├── public/                     # Recursos estáticos (logos, isotipos, favicon)
-├── package.json                # Dependencias, metadatos y scripts npm
-├── tsconfig.json               # Configuración de compilación TypeScript estricta
-├── next.config.ts              # Parámetros y optimizaciones de Next.js
-├── MANUAL-USUARIO-HARNESS.md   # Manual de usuario y guía operativa del AI Harness
-└── README.md                   # Documentación principal del repositorio
+│   └── harness/
+│       └── guardrails.ts   # Esquemas de validación Zod (WhatsApp, Contact, Schema.org)
+├── specs/                  # Fuente de verdad: especificaciones funcionales y de diseño
+│   ├── requirements.md     # Requerimientos de negocio
+│   ├── design.md           # Manual de marca y tokens de diseño
+│   └── tasks.md            # Planificación y tareas SDD
+├── harness_engine.py       # Motor principal de arnés, validación TypeScript y fallback LLM
+├── itiers_copilot.py       # Interfaz gráfica de escritorio de Itiers Copilot
+├── .env.local              # Archivo local de variables de entorno y API Keys
+├── package.json            # Dependencias, scripts del entorno y metadatos
+└── README.md               # Documentación principal del repositorio
 ```
 
 ---
 
-## 🌟 Funcionalidades Principales
+## Empezando en Local
 
-### 1. Internacionalización Bilingüe Completa (ES / EN)
-* Soporte nativo para Español e Inglés gestionado mediante el almacén tipado en `data/i18n.ts`.
-* Selector de idioma dinámico en el encabezado con detección automática basada en el navegador y persistencia de preferencia mediante cookies (`itiers_lang`).
-
-### 2. Modo Oscuro / Modo Claro (Dark & Light Theme)
-* Soporte completo de alternancia de tema visual con transición suave.
-* Paleta calibrada para garantizar contrastes superiores al estándar WCAG AA en ambos modos, preservando la identidad del naranja Itiers (`#ff4f00`).
-
-### 3. Las Tres Líneas de Servicio Estratégicas
-Presentadas de forma estructurada según la especificación en `specs/requirements.md`:
-* **Ingeniería de Datos**: Arquitectura de datos moderna, Big Data & Data Engineering, Modern Data Warehouse & Data Lakes, modelos de analítica avanzada e Inteligencia Artificial, evolución y mantenimiento de soluciones BI.
-* **Capacitaciones**: Formación práctica en herramientas de BI, interpretación de métricas de negocio, alfabetización digital, Data Storytelling y adopción responsable de IA generativa.
-* **Staffing Especializado**: Asignación ágil on-demand de perfiles técnicos calificados (Data Engineers, Data Analysts, Data Scientists, especialistas BI y arquitectos IA) en células dedicadas o modelos por proyecto.
-
-### 4. Asistente Virtual Inteligente (Chatbot)
-* Asistente conversacional interactivo integrado en la interfaz.
-* Asesora sobre servicios corporativos, orienta a potenciales clientes y canaliza consultas estratégicas hacia el equipo comercial.
-
-### 5. Validación con Guardrails Zod
-* Todos los formularios y transferencias de información se validan estrictamente mediante los esquemas de `lib/harness/guardrails.ts`:
-  * Validación de leads y mensajes de contacto (`LeadContactSchema`).
-  * Validación de canales de WhatsApp con parámetros sanitizados (`WhatsAppChannelSchema`).
-  * Validación estructural del marcado Schema.org (`JsonLdSchema`).
-
-### 6. SEO & GEO Avanzado
-* Marcado semántico JSON-LD `ProfessionalService` estructurado para las 3 sedes internacionales:
-  * **Argentina**: Mendoza (Casa Matriz).
-  * **Chile**: Región Metropolitana, Santiago.
-  * **Estados Unidos**: Wilmington, Delaware.
-* Metadatos dinámicos OpenGraph, Twitter Cards, `robots.ts` adaptado a rastreadores tradicionales y agentes de IA, y `sitemap.ts` multilingüe.
-
----
-
-## ⚡ Accesibilidad (WCAG AA) y Performance
-
-El desarrollo adhiere de forma obligatoria a los siguientes estándares de calidad:
-
-* **HTML5 Semántico**: Empleo de elementos semánticos precisos (`<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<footer>`).
-* **Navegación por Teclado**: Todo elemento interactivo cuenta con `tabIndex`, estados de foco visual de alto contraste (`focus:ring-2 focus:ring-[#ff4f00]`) y soporte para saltos de contenido accesible.
-* **Cero Lorem Ipsum**: Todo texto e información desplegada en el sitio es verídica, aprobada y proviene de las fuentes corporativas documentadas en `specs/`.
-* **Optimización de Medios**: Carga optimizada de imágenes mediante `next/image` con atributos estables de dimensiones y textos alternativos descriptivos para evitar saltos de diseño (CLS).
-
----
-
-## 🚀 Instalación y Puesta en Marcha
+Sigue estos pasos para configurar y levantar el proyecto y la suite de Harness en tu equipo:
 
 ### Prerrequisitos
-* [Node.js](https://nodejs.org/) v18.x o superior instalado.
-* [Git](https://git-scm.com/) configurado en tu equipo.
-* (Opcional para el módulo AI Harness) [Python 3.10+](https://www.python.org/).
+* **Node.js** (v18.x o superior recomendada).
+* **Python** (v3.10 o superior) con dependencias instaladas (`google-genai`, `openai`).
+* Git configurado en tu máquina local.
 
-### Pasos de Instalación
+### Instalación
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/EnzoPatrassi/itiers-web.git
+   git clone https://github.com/ITiers/itiers-landing.git
    cd itiers-web
    ```
 
-2. **Instalar dependencias del frontend (Node.js):**
+2. **Instalar dependencias de Node.js:**
    ```bash
    npm install
    ```
 
-3. **(Recomendado) Instalar dependencias del AI Harness (Python):**
+3. **Instalar dependencias de Python para el Harness:**
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Configurar variables de entorno:**
-   Copia el archivo `.env.local.example` como `.env.local` y define tu clave de IA (`GEMINI_API_KEY`, `GROQ_API_KEY` o usa Ollama local sin clave):
+4. **Configurar el archivo de entorno `.env.local`:**
+   Copia el archivo de plantilla `.env.local.example` a `.env.local`:
    ```bash
    cp .env.local.example .env.local
    ```
+   Agrega tu clave API de Google Gemini en la variable `GEMINI_API_KEY`:
+   ```env
+   GEMINI_API_KEY=tu_clave_real_aqui
+   ```
 
-5. **Iniciar el servidor web de desarrollo:**
+5. **Iniciar el servidor de desarrollo de Next.js:**
    ```bash
    npm run dev
    ```
-   Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+   Abre [http://localhost:3000] en tu navegador para ver la web en vivo.
 
-6. **Iniciar Itiers AI Copilot (Suite de Escritorio):**
+6. **Lanzar la interfaz gráfica de Itiers Copilot:**
+   En una terminal paralela ejecuta:
    ```bash
    npm run copilot
    ```
-   *(O haz doble clic en `Iniciar-Itiers-Copilot.bat` en Windows. Abrirá automáticamente el dashboard en [http://localhost:8765](http://localhost:8765)).*
-
-> 📖 Para una guía detallada paso a paso sobre el uso del arnés, auditorías QA y comandos CLI, consulta el [Manual de Usuario del Harness](MANUAL-USUARIO-HARNESS.md).
+   O bien: `python itiers_copilot.py`.
 
 ---
 
-## 📜 Scripts Disponibles
+## Estándares de Performance y Accesibilidad (Metas del Proyecto)
 
-El proyecto cuenta con un conjunto de comandos configurados en `package.json`:
+Todos los componentes del proyecto deben cumplir estrictamente con los siguientes lineamientos:
 
-| Comando | Descripción |
+### Accesibilidad (WCAG AA)
+* **HTML Semántico**: Uso de etiquetas de HTML5 (`<header>`, `<nav>`, `<main>`, `<article>`, `<footer>`) para optimizar tecnologías asistenciales y rastreadores de IA.
+* **Foco y Navegación por Teclado**: Estados de foco claramente visibles (`focus:ring-2`) para botones, enlaces y campos de formulario.
+* **Textos Alternativos y Atributos ARIA**: Descripciones detalladas en imágenes y etiquetas `aria-*` en elementos interactivos.
+
+### Rendimiento (Core Web Vitals)
+* **Next.js Image Optimization**: Carga optimizada de imágenes con propiedades `fill` o `width/height` declaradas explícitamente.
+* **Animaciones Fluida**: Transiciones ligeras en Tailwind CSS v4 diseñadas para evitar brincos de maquetación (CLS).
+
+---
+
+## Suite de Harness & AI Engineering
+
+Bajo la premisa **"Agente = Modelo + Harness"**, el Harness actúa como la infraestructura de control, validación determinista, auditoría continua de calidad y soporte agéntico para todo el equipo.
+
+### Pilares del Harness de Itiers
+
+1. **Runtime Safety & Guardrails (Zod)**:
+   * Esquemas estrictos en `lib/harness/guardrails.ts`.
+   * Validación automática en runtime de formularios, enlaces a WhatsApp y marcado estructurado JSON-LD Schema.org.
+
+2. **Spec-Driven Development (SDD) & Pre-Build Gate**:
+   * Motor de validación (`sdd_harness.py`) conectado al ciclo de build (`npm run build`).
+   * Valida la sincronización con las especificaciones (`specs/`) y evita que lleguen discrepancias o textos de prueba a producción.
+
+3. **AI QA & Compliance Auditor**:
+   * Auditoría automatizada (`harness_qa.py` y `harness_engine.py`) con soporte multi-proveedor: Google Gemini 3.5 Flash, Groq, OpenAI y Ollama local.
+   * Chequeos de accesibilidad WCAG AA, auditoría SEO/GEO y verificación estricta de "Cero Lorem Ipsum".
+
+4. **Gestión de Modos de Operación**:
+   * **Modo Consulta (Sólo Lectura)**: Permite analizar código y realizar preguntas sobre componentes sin riesgo de alterarlos.
+   * **Modo Edición (Escritura Activa)**: Permite la creación y modificación directa de código con auto-guardado, verificación estricta de TypeScript (`npx tsc --noEmit`) y rollback de seguridad automático.
+
+---
+
+### Tabla de Scripts de Verificación del Harness
+
+| Comando | Función |
 | :--- | :--- |
-| `npm run dev` | Inicia el servidor de desarrollo local de Next.js en el puerto 3000. |
-| `npm run build` | Ejecuta la verificación previa de tareas SDD y compila la versión optimizada para producción. |
-| `npm run start` | Levanta el servidor de producción compilado localmente. |
-| `npm run lint` | Ejecuta el análisis estático de código con ESLint. |
-| `npm run verify:harness` | Ejecuta la suite de verificación estricta: chequeo de tipos TypeScript (`tsc --noEmit`), escaneo de ausencia de Lorem Ipsum y validación de esquemas Zod. |
-| `npm run copilot` | Inicia la aplicación de escritorio y servidor web interactivo de Itiers AI Copilot en `http://localhost:8765`. |
-| `npm run harness:sdd` | Ejecuta la verificación de tareas de desarrollo guiado por especificaciones con Python. |
-| `npm run harness:qa` | Ejecuta la suite de preguntas y respuestas automatizadas y auditoría de accesibilidad. |
-| `npm run harness:recommender` | Ejecuta el módulo de recomendación inteligente de servicios de Itiers. |
+| `npm run verify:harness` | Ejecuta la suite de verificación estricta: TypeScript (`tsc --noEmit`), Cero Lorem Ipsum y Guardrails Zod. |
+| `npm run harness:sdd` | Audita el cumplimiento de especificaciones y tareas pendientes (Spec-Driven Development). |
+| `npm run harness:qa` | Ejecuta la auditoría automatizada de accesibilidad, calidad y SEO/GEO en los componentes. |
+| `npm run harness:recommender` | Genera recomendaciones arquitectónicas y estratégicas para el proyecto. |
+| `npm run copilot` | Inicia la interfaz gráfica de escritorio de Itiers Copilot (`http://localhost:8765`). |
+| `python harness_engine.py` | Inicia la CLI interactiva del Harness Agent Engine (`/auditar`, `/reparar`, `/geo`, `/sdd`, `/deshacer`). |
 
 ---
 
-## 🛡️ Flujo de Trabajo y Calidad (SDD)
+## Cronograma de Entregas y Objetivos Generales
 
-El repositorio sigue la filosofía de **Specification-Driven Development (SDD)**:
-
-1. **Especificación Primero**: Cualquier cambio funcional o de diseño debe registrarse previamente en la carpeta `specs/` (`requirements.md`, `design.md`, `i18n.md`, `tasks.md`).
-2. **Chequeo de Tipos y Guardrails**: Antes de cualquier fusión o despliegue, el código debe aprobar `npm run verify:harness` sin emitir errores de TypeScript ni textos no autorizados.
-3. **Despliegue Continuo**: Las integraciones aprobadas y fusionadas a la rama principal (`main`) se despliegan automáticamente a producción a través de la infraestructura de **Vercel**.
+* **Semanas 1-3 — Fundamentos y Diagnóstico**: Alineación de equipo, definición de stack técnico, maquetación de la arquitectura y despliegue inicial en Vercel.
+* **Semanas 4-8 — Desarrollo Aplicado**: Construcción iterativa de vistas detalladas, optimizaciones y desarrollo de integraciones para los agentes inteligentes.
+* **Semanas 9-10 — Ajustes Finales y Producción**: Auditorías completas de velocidad y accesibilidad, refinamiento de contenidos SEO/GEO y entrega oficial del sitio.
 
 ---
 
 <p align="center">
-  <b>Itiers Data Sense</b> — <i>Transformando el caos de datos en decisiones estratégicas.</i><br>
-  © 2026 Itiers. Todos los derechos reservados.
+  <b>Itiers Data Sense — Plataforma Web Corporativa & AI Harness Suite</b><br>
+  <i>20 Años de Maestría convirtiendo datos complejos en decisiones estratégicas.</i><br>
+  © 2026 Itiers Data Sense. Todos los derechos reservados.
 </p>

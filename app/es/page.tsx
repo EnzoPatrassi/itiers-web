@@ -31,7 +31,7 @@ export default function LandingPage() {
     if (savedLang && (savedLang === 'es' || savedLang === 'en')) {
       setCurrentLang(savedLang);
     } else {
-      const browserLang = navigator.language || (navigator as any).languages[0];
+      const browserLang = navigator.language || navigator.languages?.[0];
       const detectedLang: Locale = browserLang && browserLang.toLowerCase().startsWith('es') ? 'es' : 'en';
       setCurrentLang(detectedLang);
     }
@@ -45,10 +45,15 @@ export default function LandingPage() {
   const isDark = theme === 'dark';
 
   return (
-    <div className={`min-h-screen font-sans antialiased overflow-x-hidden selection:bg-[#ff4f00] selection:text-white transition-colors duration-300 ${isDark ? 'bg-[#1A1A1A] text-white' : 'bg-[#f9f9f9] text-[#4d4d4d]'}`}>
+    <div className={`min-h-screen font-sans antialiased overflow-x-hidden selection:bg-[#ff4f00] selection:text-white transition-colors duration-300 ${isDark ? 'bg-[#0F0F0F] text-white' : 'bg-white text-gray-900'}`}>
       <Header currentLang={currentLang} onLanguageChange={handleLanguageChange} theme={theme} onThemeChange={setTheme} />
 
       <main>
+        {/* Título principal accesible con tipografía Comfortaa y paleta de marca (#ff4f00) */}
+        <h1 className="sr-only font-['Comfortaa',sans-serif] text-[#ff4f00] font-medium text-[50px] leading-[56px] tracking-[-0.02em]">
+          Hacemos que los datos impulsen mejores decisiones y acciones
+        </h1>
+
         {/* 1. Hero banner */}
         <Hero currentLang={currentLang} theme={theme} />
         

@@ -15,14 +15,14 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ currentLang, theme }) => {
   const content = {
     es: {
-      line1: 'Hacemos que los datos',
+      line1: 'Somos Itiers, la empresa de tus sueños',
       line2: 'impulsen mejores',
       highlight: 'decisiones y acciones',
       description: 'Acompañamos a organizaciones a desbloquear el valor de su información con un enfoque 100% personalizado.',
       cta: 'Conversemos',
     },
     en: {
-      line1: 'We make data',
+      line1: 'We are Itiers, your dream company',
       line2: 'drive better',
       highlight: 'decisions and actions',
       description: 'We help organizations unlock the value of their information with a 100% personalized approach.',

@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
 import { Locale } from '@/data/i18n';
@@ -16,8 +14,8 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, theme = 'light' }) 
   const isDark = theme === 'dark';
   
   const tagline = currentLang === 'es' 
-    ? 'Convertimos el caos de datos en decisiones estratégicas con un enfoque personalizado.'
-    : 'We turn data chaos into strategic decisions with a personalized approach.';
+    ? 'Hacemos que los datos impulsen mejores decisiones y acciones'
+    : 'We make data drive better decisions and actions.';
   
   const whatsappChannel = validateWhatsAppConfig(INFO_ITIERS.whatsapp, 'Hola!');
   
